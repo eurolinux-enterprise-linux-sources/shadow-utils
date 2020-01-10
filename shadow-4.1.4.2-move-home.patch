@@ -1,0 +1,73 @@
+diff -up shadow-4.1.4.2/man/usermod.8.move-home shadow-4.1.4.2/man/usermod.8
+--- shadow-4.1.4.2/man/usermod.8.move-home	2009-07-24 03:16:46.000000000 +0200
++++ shadow-4.1.4.2/man/usermod.8	2014-06-05 13:11:49.553730738 +0200
+@@ -54,7 +54,7 @@ The user\'s new login directory\&.
+ .sp
+ If the
+ \fB\-m\fR
+-option is given, the contents of the current home directory will be moved to the new home directory, which is created if it does not already exist\&.
++option is given, the contents of the current home directory will be moved to the new home directory, which is created if it does not already exist\&. If the current home directory does not exist the new home directory will not be created\&.
+ .RE
+ .PP
+ \fB\-e\fR, \fB\-\-expiredate\fR \fIEXPIRE_DATE\fR
+@@ -114,7 +114,7 @@ Move the content of the user\'s home dir
+ This option is only valid in combination with the
+ \fB\-d\fR
+ (or
+-\fB\-\-home\fR) option\&.
++\fB\-\-home\fR) option\&. If the current home directory does not exist the new home directory will not be created\&.
+ .RE
+ .PP
+ \fB\-o\fR, \fB\-\-non\-unique\fR
+diff -up shadow-4.1.4.2/man/usermod.8.xml.move-home shadow-4.1.4.2/man/usermod.8.xml
+--- shadow-4.1.4.2/man/usermod.8.xml.move-home	2009-05-21 14:02:13.000000000 +0200
++++ shadow-4.1.4.2/man/usermod.8.xml	2014-06-05 13:09:59.796160884 +0200
+@@ -108,7 +108,8 @@
+ 	    If the <option>-m</option>
+ 	    option is given, the contents of the current home directory will
+ 	    be moved to the new home directory, which is created if it does
+-	    not already exist.
++	    not already exist. If the current home directory does not exist
++	    the new home directory will not be created.
+ 	  </para>
+ 	</listitem>
+       </varlistentry>
+@@ -215,7 +216,8 @@
+ 	<listitem>
+ 	  <para>
+ 	    Move the content of the user's home directory to the new
+-	    location.
++	    location. If the current home directory does not exist
++	    the new home directory will not be created.
+ 	  </para>
+ 	  <para>
+ 	    This option is only valid in combination with the
+diff -up shadow-4.1.4.2/src/usermod.c.move-home shadow-4.1.4.2/src/usermod.c
+--- shadow-4.1.4.2/src/usermod.c.move-home	2014-06-04 18:05:48.000000000 +0200
++++ shadow-4.1.4.2/src/usermod.c	2014-06-05 10:43:27.553300068 +0200
+@@ -1436,12 +1436,24 @@ static void move_home (void)
+ {
+ 	struct stat sb;
+ 
+-	if (mflg && (stat (user_home, &sb) == 0)) {
++	if (mflg) {
++		if (stat (user_home, &sb) != 0) {
++			fprintf (stderr,
++			         _("%s: The previous home directory (%s) does "
++			           "not exist. Move cannot be completed.\n"),
++			         Prog, user_home);
++			return;
++		}
+ 		/*
+ 		 * Don't try to move it if it is not a directory
+ 		 * (but /dev/null for example).  --marekm
+ 		 */
+ 		if (!S_ISDIR (sb.st_mode)) {
++			fprintf (stderr,
++			         _("%s: The previous home directory (%s) was "
++			           "not a directory. It is not removed and no "
++			           "home directories are created.\n"),
++			         Prog, user_home);
+ 			return;
+ 		}
+ 

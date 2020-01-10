@@ -1,7 +1,7 @@
 Summary: Utilities for managing accounts and shadow password files
 Name: shadow-utils
 Version: 4.1.4.2
-Release: 13%{?dist}
+Release: 19%{?dist}
 Epoch: 2
 URL: http://pkg-shadow.alioth.debian.org/
 Source0: http://pkg-shadow.alioth.debian.org/releases/shadow-%{version}.tar.bz2
@@ -12,16 +12,27 @@ Patch1: shadow-4.1.4.1-goodname.patch
 Patch2: shadow-4.1.4.2-leak.patch
 Patch3: shadow-4.1.4.2-fixes.patch
 Patch4: shadow-4.1.4.2-infoParentDir.patch
-Patch5: shadow-4.1.4.2-semange.patch
 Patch6: shadow-4.1.4.2-uflg.patch
 Patch7: shadow-4.1.4.2-underflow.patch
 Patch8: shadow-4.1.4.2-acl.patch
 Patch9: shadow-4.1.4.2-gshadow.patch
 Patch10: shadow-4.1.4.2-IDs.patch
-Patch11: shadow-4.1.4.2-man.patch
+Patch12: shadow-4.1.4.2-semanage.patch
+Patch13: shadow-4.1.4.2-homeparent.patch
+Patch14: shadow-4.1.4.2-2ndskip.patch
+Patch15: shadow-4.1.4.2-merge-group.patch
+Patch16: shadow-4.1.4.2-user-busy.patch
+Patch17: shadow-4.1.4.2-date-parsing.patch
+Patch18: shadow-4.1.4.2-ingroup.patch
+Patch19: shadow-4.1.4.2-man-nopam.patch
+Patch20: shadow-4.1.4.2-new-spw.patch
+Patch21: shadow-4.1.4.2-move-home.patch
+Patch22: shadow-4.1.4.2-useradd-man.patch
+Patch23: shadow-4.1.4.2-chage-man.patch
 License: BSD and GPLv2+
 Group: System Environment/Base
 BuildRequires: libselinux-devel >= 1.25.2-1
+BuildRequires: libsemanage-devel
 BuildRequires: audit-libs-devel >= 1.6.5
 BuildRequires: libacl-devel libattr-devel
 #BuildRequires: autoconf, automake, libtool, gettext-devel
@@ -49,13 +60,23 @@ are used for managing group accounts.
 %patch2 -p1 -b .leak
 %patch3 -p1 -b .fixes
 %patch4 -p1 -b .infoParentDir
-%patch5 -p1 -b .semange
 %patch6 -p1 -b .uflg
 %patch7 -p1 -b .underflow
 %patch8 -p1 -b .acl
 %patch9 -p1 -b .gshadow
 %patch10 -p1 -b .IDs
-%patch11 -p1 -b .man
+%patch12 -p1 -b .semanage
+%patch13 -p1 -b .homeparent
+%patch14 -p1 -b .2ndskip
+%patch15 -p1 -b .merge-group
+%patch16 -p1 -b .user-busy
+%patch17 -p1 -b .date-parsing
+%patch18 -p1 -b .ingroup
+%patch19 -p1 -b .man-nopam
+%patch20 -p1 -b .new-spw
+%patch21 -p1 -b .move-home
+%patch22 -p1 -b .uadd-man
+%patch23 -p1 -b .chage-man
 
 iconv -f ISO88591 -t utf-8  doc/HOWTO > doc/HOWTO.utf8
 cp -f doc/HOWTO.utf8 doc/HOWTO
@@ -210,6 +231,25 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man8/vigr.8*
 
 %changelog
+* Thu Aug 28 2014 Tomáš Mráz <tmraz@redhat.com> - 2:4.1.4.2-19
+- label the newly created home dir correctly (#955769)
+
+* Mon Jun 23 2014 Tomáš Mráz <tmraz@redhat.com> - 2:4.1.4.2-17
+- mention that chage -d 0 forces password change (#882272)
+
+* Thu Jun 05 2014 Tomáš Mráz <tmraz@redhat.com> - 2:4.1.4.2-16
+- document that parent of a new user's home directory must exist
+- avoid skipping 2nd consecutive failures in pwconv grpconv (#787742)
+- avoid segfault when merging group entries in useradd
+- properly report that userdel found process with user's uid
+- improve date parsing and error detecting in chage
+- avoid full group database scanning in newgrp in most common case
+- mention that PAM is not configured with login.defs in the man page
+- create new shadow entry if missing in usermod (#1016516)
+- report error if usermod asked for moving homedir and it does not
+  exist (#1089666)
+- fix various typos and mistakes in useradd manpage (#907837)
+
 * Tue Aug 02 2011 Peter Vrabec <pvrabec@redhat.com> - 2:4.1.4.2-13
 - fix semanage issues
   Resolves: #639975

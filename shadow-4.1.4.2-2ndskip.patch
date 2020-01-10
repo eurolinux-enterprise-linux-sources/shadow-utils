@@ -1,0 +1,128 @@
+diff -up shadow-4.1.4.2/src/grpconv.c.skipfix shadow-4.1.4.2/src/grpconv.c
+--- shadow-4.1.4.2/src/grpconv.c.skipfix	2008-09-06 13:51:54.000000000 +0100
++++ shadow-4.1.4.2/src/grpconv.c	2012-02-06 14:56:55.303845092 +0000
+@@ -82,12 +82,31 @@ static void fail_exit (int status)
+ 	exit (status);
+ }
+ 
++static char *remove_sgr(char *Prog, char *namp, const char *dbname)
++{
++	if (namp)
++	{
++		if (!sgr_remove (namp)) {
++			/*
++			 * This shouldn't happen (the entry exists) but...
++			 */
++			fprintf (stderr,
++			         _("%s: cannot remove entry '%s' from %s\n"),
++			         Prog, namp, dbname);
++			fail_exit (3);
++		}
++		free(namp);
++	}
++	return NULL;
++}
++
+ int main (int argc, char **argv)
+ {
+ 	const struct group *gr;
+ 	struct group grent;
+ 	const struct sgrp *sg;
+ 	struct sgrp sgent;
++	char *np;
+ 
+ 	if (1 != argc) {
+ 		(void) fputs (_("Usage: grpconv\n"), stderr);
+@@ -128,21 +147,15 @@ int main (int argc, char **argv)
+ 	 * Remove /etc/gshadow entries for groups not in /etc/group.
+ 	 */
+ 	sgr_rewind ();
++	np = NULL;
+ 	while ((sg = sgr_next ()) != NULL) {
+-		if (gr_locate (sg->sg_name) != NULL) {
+-			continue;
+-		}
+-
+-		if (sgr_remove (sg->sg_name) == 0) {
+-			/*
+-			 * This shouldn't happen (the entry exists) but...
+-			 */
+-			fprintf (stderr,
+-			         _("%s: cannot remove entry '%s' from %s\n"),
+-			         Prog, sg->sg_name, sgr_dbname ());
+-			fail_exit (3);
+-		}
++		/* name left over from previous pass ? */
++		np = remove_sgr(Prog, np, sgr_dbname ());
++		/* remember this one, but move to next to avoid double skip problems */
++		if (!gr_locate (sg->sg_name))
++			np = strdup(sg->sg_name);
+ 	}
++	remove_sgr(Prog, np, sgr_dbname ());
+ 
+ 	/*
+ 	 * Update shadow group passwords if non-shadow password is not "x".
+diff -up shadow-4.1.4.2/src/pwconv.c.skipfix shadow-4.1.4.2/src/pwconv.c
+--- shadow-4.1.4.2/src/pwconv.c.skipfix	2009-04-30 22:39:40.000000000 +0100
++++ shadow-4.1.4.2/src/pwconv.c	2012-02-06 14:54:26.268782394 +0000
+@@ -115,12 +115,31 @@ static void fail_exit (int status)
+ 	exit (status);
+ }
+ 
++static char *remove_spw(char *Prog, char *namp, const char *dbname)
++{
++	if (namp)
++	{
++		if (!spw_remove (namp)) {
++			/*
++			 * This shouldn't happen (the entry exists) but...
++			 */
++			fprintf (stderr,
++				 _("%s: cannot remove entry '%s' from %s\n"),
++				 Prog, namp, dbname);
++			fail_exit (E_FAILURE);
++		}
++		free(namp);
++	}
++       return NULL;
++}
++
+ int main (int argc, char **argv)
+ {
+ 	const struct passwd *pw;
+ 	struct passwd pwent;
+ 	const struct spwd *sp;
+ 	struct spwd spent;
++	char *np;
+ 
+ 	if (1 != argc) {
+ 		(void) fputs (_("Usage: pwconv\n"), stderr);
+@@ -163,21 +182,15 @@ int main (int argc, char **argv)
+ 	 * Remove /etc/shadow entries for users not in /etc/passwd.
+ 	 */
+ 	spw_rewind ();
++	np = NULL;
+ 	while ((sp = spw_next ()) != NULL) {
+-		if (pw_locate (sp->sp_namp) != NULL) {
+-			continue;
+-		}
+-
+-		if (spw_remove (sp->sp_namp) == 0) {
+-			/*
+-			 * This shouldn't happen (the entry exists) but...
+-			 */
+-			fprintf (stderr,
+-			         _("%s: cannot remove entry '%s' from %s\n"),
+-			         Prog, sp->sp_namp, spw_dbname ());
+-			fail_exit (E_FAILURE);
+-		}
++		/* name left over from previous pass ? */
++		np = remove_spw(Prog, np, spw_dbname ());
++		/* remember this one, but move to next to avoid double skip problems */
++		if (!pw_locate (sp->sp_namp))
++		    np = strdup(sp->sp_namp);
+ 	}
++	remove_spw(Prog, np, spw_dbname ());
+ 
+ 	/*
+ 	 * Update shadow entries which don't have "x" as pw_passwd. Add any

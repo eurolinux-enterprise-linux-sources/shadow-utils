@@ -1,0 +1,29 @@
+diff -up shadow-4.1.4.2/man/useradd.8.homeparent shadow-4.1.4.2/man/useradd.8
+--- shadow-4.1.4.2/man/useradd.8.homeparent	2014-06-04 13:37:51.000000000 +0200
++++ shadow-4.1.4.2/man/useradd.8	2014-06-04 15:58:48.275627967 +0200
+@@ -55,11 +55,9 @@ The default base directory for the syste
+ \fIHOME_DIR\fR
+ is not specified\&.
+ \fIBASE_DIR\fR
+-is concatenated with the account name to define the home directory\&. If the
+-\fB\-m\fR
+-option is not used,
++is concatenated with the account name to define the home directory\&. The
+ \fIBASE_DIR\fR
+-must exist\&.
++must exist otherwise the home directory cannot be created\&.
+ .sp
+ If this option is not specified,
+ \fBuseradd\fR
+@@ -84,9 +82,9 @@ as the value for the user\'s login direc
+ \fILOGIN\fR
+ name to
+ \fIBASE_DIR\fR
+-and use that as the login directory name\&. The directory
++and use that as the login directory name\&. The parent directory of
+ \fIHOME_DIR\fR
+-does not have to exist but will not be created if it is missing\&.
++must exist otherwise the home directory cannot be created\&.
+ .RE
+ .PP
+ \fB\-D\fR, \fB\-\-defaults\fR

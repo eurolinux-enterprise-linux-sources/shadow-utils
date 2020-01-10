@@ -28,9 +28,9 @@ diff -up shadow-4.1.4.2/man/userdel.8.semange shadow-4.1.4.2/man/userdel.8
  .SH "CONFIGURATION"
  .PP
  The following configuration variables in
-diff -up shadow-4.1.4.2/src/useradd.c.semange shadow-4.1.4.2/src/useradd.c
---- shadow-4.1.4.2/src/useradd.c.semange	2011-08-02 13:54:12.333225959 +0200
-+++ shadow-4.1.4.2/src/useradd.c	2011-08-02 13:54:12.353225890 +0200
+diff -up shadow-4.1.4.2/src/useradd.c.semanage shadow-4.1.4.2/src/useradd.c
+--- shadow-4.1.4.2/src/useradd.c.semanage	2014-08-28 17:13:23.457866240 +0200
++++ shadow-4.1.4.2/src/useradd.c	2014-08-28 17:15:41.362042483 +0200
 @@ -164,6 +164,7 @@ static bool home_added = false;
  #define E_GRP_UPDATE	10	/* can't update group file */
  #define E_HOMEDIR	12	/* can't create home directory */
@@ -82,11 +82,24 @@ diff -up shadow-4.1.4.2/src/useradd.c.semange shadow-4.1.4.2/src/useradd.c
  /*
   * create_home - create the user's home directory
   *
-@@ -2025,7 +1997,30 @@ int main (int argc, char **argv)
- 	close_files ();
+@@ -1833,6 +1805,7 @@ static void create_mail (void)
+  */
+ int main (int argc, char **argv)
+ {
++	int rv = E_SUCCESS;
+ #ifdef ACCT_TOOLS_SETUID
+ #ifdef USE_PAM
+ 	pam_handle_t *pamh = NULL;
+@@ -2004,6 +1977,38 @@ int main (int argc, char **argv)
  
- #ifdef WITH_SELINUX
--	selinux_update_mapping ();
+ 	usr_update ();
+ 
++	close_files ();
++
++	nscd_flush_cache ("passwd");
++	nscd_flush_cache ("group");
++
++#ifdef WITH_SELINUX
 +	if (Zflg && *user_selinux) {
 +		if (is_selinux_enabled () > 0) {
 +			const char *argv[7];
@@ -107,13 +120,32 @@ diff -up shadow-4.1.4.2/src/useradd.c.semange shadow-4.1.4.2/src/useradd.c
 +					      "adding SELinux user mapping",
 +					      user_name, (unsigned int) user_id, 0);
 +	#endif
-+				fail_exit (E_SE_UPDATE);
++				rv = E_SE_UPDATE;
 +			}
 +		}
 +	}
- #endif
++#endif
++
+ 	if (mflg) {
+ 		create_home ();
+ 		if (home_added) {
+@@ -2022,15 +2027,6 @@ int main (int argc, char **argv)
+ 		create_mail ();
+ 	}
  
- 	nscd_flush_cache ("passwd");
+-	close_files ();
+-
+-#ifdef WITH_SELINUX
+-	selinux_update_mapping ();
+-#endif
+-
+-	nscd_flush_cache ("passwd");
+-	nscd_flush_cache ("group");
+-
+-	return E_SUCCESS;
++	return rv;
+ }
+ 
 diff -up shadow-4.1.4.2/src/userdel.c.semange shadow-4.1.4.2/src/userdel.c
 --- shadow-4.1.4.2/src/userdel.c.semange	2009-05-22 12:41:12.000000000 +0200
 +++ shadow-4.1.4.2/src/userdel.c	2011-08-02 13:54:12.354225887 +0200
