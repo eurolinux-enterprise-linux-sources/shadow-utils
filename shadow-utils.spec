@@ -1,7 +1,7 @@
 Summary: Utilities for managing accounts and shadow password files
 Name: shadow-utils
 Version: 4.1.4.2
-Release: 19%{?dist}
+Release: 19%{?dist}.1
 Epoch: 2
 URL: http://pkg-shadow.alioth.debian.org/
 Source0: http://pkg-shadow.alioth.debian.org/releases/shadow-%{version}.tar.bz2
@@ -231,6 +231,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man8/vigr.8*
 
 %changelog
+* Thu Mar 26 2015 Tomáš Mráz <tmraz@redhat.com> - 2:4.1.4.2-19.1
+- allow removal of expiration or last password change dates
+  by using -1 as chage date argument again (#1183638)
+
 * Thu Aug 28 2014 Tomáš Mráz <tmraz@redhat.com> - 2:4.1.4.2-19
 - label the newly created home dir correctly (#955769)
 
