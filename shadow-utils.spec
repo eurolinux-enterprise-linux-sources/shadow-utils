@@ -1,10 +1,10 @@
 Summary: Utilities for managing accounts and shadow password files
 Name: shadow-utils
 Version: 4.1.4.2
-Release: 9%{?dist}
+Release: 13%{?dist}
 Epoch: 2
 URL: http://pkg-shadow.alioth.debian.org/
-Source0: ftp://pkg-shadow.alioth.debian.org/pub/pkg-shadow/shadow-%{version}.tar.bz2
+Source0: http://pkg-shadow.alioth.debian.org/releases/shadow-%{version}.tar.bz2
 Source1: shadow-utils.login.defs 
 Source2: shadow-utils.useradd
 Patch0: shadow-4.1.4.2-redhat.patch
@@ -15,10 +15,15 @@ Patch4: shadow-4.1.4.2-infoParentDir.patch
 Patch5: shadow-4.1.4.2-semange.patch
 Patch6: shadow-4.1.4.2-uflg.patch
 Patch7: shadow-4.1.4.2-underflow.patch
+Patch8: shadow-4.1.4.2-acl.patch
+Patch9: shadow-4.1.4.2-gshadow.patch
+Patch10: shadow-4.1.4.2-IDs.patch
+Patch11: shadow-4.1.4.2-man.patch
 License: BSD and GPLv2+
 Group: System Environment/Base
 BuildRequires: libselinux-devel >= 1.25.2-1
 BuildRequires: audit-libs-devel >= 1.6.5
+BuildRequires: libacl-devel libattr-devel
 #BuildRequires: autoconf, automake, libtool, gettext-devel
 Requires: libselinux >= 1.25.2-1
 Requires: audit-libs >= 1.6.5
@@ -30,7 +35,7 @@ The shadow-utils package includes the necessary programs for
 converting UNIX password files to the shadow password format, plus
 programs for managing user and group accounts. The pwconv command
 converts passwords to the shadow password format. The pwunconv command
-unconverts shadow passwords and generates an npasswd file (a standard
+unconverts shadow passwords and generates a passwd file (a standard
 UNIX password file). The pwck command checks the integrity of password
 and shadow files. The lastlog command prints out the last login times
 for all users. The useradd, userdel, and usermod commands are used for
@@ -47,6 +52,10 @@ are used for managing group accounts.
 %patch5 -p1 -b .semange
 %patch6 -p1 -b .uflg
 %patch7 -p1 -b .underflow
+%patch8 -p1 -b .acl
+%patch9 -p1 -b .gshadow
+%patch10 -p1 -b .IDs
+%patch11 -p1 -b .man
 
 iconv -f ISO88591 -t utf-8  doc/HOWTO > doc/HOWTO.utf8
 cp -f doc/HOWTO.utf8 doc/HOWTO
@@ -59,6 +68,16 @@ cp -f doc/HOWTO.utf8 doc/HOWTO
 #autoconf
 
 %build
+
+%ifarch sparc64
+#sparc64 need big PIE
+export CFLAGS="$RPM_OPT_FLAGS -fPIE"
+export LDFLAGS="-pie -Wl,-z,relro -Wl,-z,now"
+%else
+export CFLAGS="$RPM_OPT_FLAGS -fpie"
+export LDFLAGS="-pie -Wl,-z,relro -Wl,-z,now"
+%endif
+
 %configure \
         --enable-shadowgrp \
         --with-audit \
@@ -141,9 +160,9 @@ find $RPM_BUILD_ROOT%{_mandir} -depth -type d -empty -delete
 for dir in $(ls -1d $RPM_BUILD_ROOT%{_mandir}/{??,??_??}) ; do
     dir=$(echo $dir | sed -e "s|^$RPM_BUILD_ROOT||")
     lang=$(basename $dir)
-    echo "%%lang($lang) $dir" >> shadow.lang
-    echo "%%lang($lang) $dir/man*" >> shadow.lang
-#    echo "%%lang($lang) $dir/man*/*" >> shadow.lang
+#    echo "%%lang($lang) $dir" >> shadow.lang
+#    echo "%%lang($lang) $dir/man*" >> shadow.lang
+    echo "%%lang($lang) $dir/man*/*" >> shadow.lang
 done
 
 %clean
@@ -191,6 +210,31 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man8/vigr.8*
 
 %changelog
+* Tue Aug 02 2011 Peter Vrabec <pvrabec@redhat.com> - 2:4.1.4.2-13
+- fix semanage issues
+  Resolves: #639975
+
+* Wed Jun 29 2011 Peter Vrabec <pvrabec@redhat.com> - 2:4.1.4.2-12
+- add PIE and RELRO flags
+  Resolves: #723921
+
+* Wed Jun 29 2011 Peter Vrabec <pvrabec@redhat.com> - 2:4.1.4.2-11
+- man page fixes
+  Resolves: #696213 #674878
+
+* Tue Jun 28 2011 Peter Vrabec <pvrabec@redhat.com> - 2:4.1.4.2-10
+- support ACLs under skel directory
+- refer to PAM in /etc/login.defs
+- userdel option to remove Linux login <-> SELinux login mapping
+- useradd special exit value if SELinux user mapping is invalid
+- usermod special exit value if SELinux user mapping is invalid
+- fix gshadow functions from shadow utils
+- fix find_new_uid/gid for big UID/GID_MAX
+- don't show users who were not logged in lastlog
+  Resolves: #586796 #629277 #639900 
+  Resolves: #639975 #639976 #667593 #672510
+  Resolves: #693377 #706321
+
 * Wed Feb 23 2011 Peter Vrabec <pvrabec@redhat.com> - 2:4.1.4.2-9
 - faillog application is no longer needed
   Resolves: #675168
