@@ -1,0 +1,146 @@
+diff -up shadow-4.1.5.1/libmisc/find_new_gid.c.redhat shadow-4.1.5.1/libmisc/find_new_gid.c
+--- shadow-4.1.5.1/libmisc/find_new_gid.c.redhat	2015-12-17 13:11:37.440821114 +0100
++++ shadow-4.1.5.1/libmisc/find_new_gid.c	2015-12-17 13:14:23.174737027 +0100
+@@ -59,7 +59,7 @@ int find_new_gid (bool sys_group,
+ 	assert (gid != NULL);
+ 
+ 	if (!sys_group) {
+-		gid_min = (gid_t) getdef_ulong ("GID_MIN", 1000UL);
++		gid_min = (gid_t) getdef_ulong ("GID_MIN", 500UL);
+ 		gid_max = (gid_t) getdef_ulong ("GID_MAX", 60000UL);
+ 		if (gid_max < gid_min) {
+ 			(void) fprintf (stderr,
+@@ -68,8 +68,8 @@ int find_new_gid (bool sys_group,
+ 			return -1;
+ 		}
+ 	} else {
+-		gid_min = (gid_t) getdef_ulong ("SYS_GID_MIN", 101UL);
+-		gid_max = (gid_t) getdef_ulong ("GID_MIN", 1000UL) - 1;
++		gid_min = (gid_t) 1;
++		gid_max = (gid_t) getdef_ulong ("GID_MIN", 500UL) - 1;
+ 		gid_max = (gid_t) getdef_ulong ("SYS_GID_MAX", (unsigned long) gid_max);
+ 		if (gid_max < gid_min) {
+ 			(void) fprintf (stderr,
+@@ -100,6 +100,10 @@ int find_new_gid (bool sys_group,
+ 		return 0;
+ 	}
+ 
++        /* if we did not find free preffered system gid, we start to look for
++         * one in the range assigned to dynamic system IDs */
++        if (sys_group)
++		gid_min = (gid_t) getdef_ulong ("SYS_GID_MIN", 201UL);
+ 
+ 	/*
+ 	 * Search the entire group file,
+diff -up shadow-4.1.5.1/libmisc/find_new_uid.c.redhat shadow-4.1.5.1/libmisc/find_new_uid.c
+--- shadow-4.1.5.1/libmisc/find_new_uid.c.redhat	2015-12-17 13:11:37.441821138 +0100
++++ shadow-4.1.5.1/libmisc/find_new_uid.c	2015-12-17 13:15:25.166201744 +0100
+@@ -59,7 +59,7 @@ int find_new_uid (bool sys_user,
+ 	assert (uid != NULL);
+ 
+ 	if (!sys_user) {
+-		uid_min = (uid_t) getdef_ulong ("UID_MIN", 1000UL);
++		uid_min = (uid_t) getdef_ulong ("UID_MIN", 500UL);
+ 		uid_max = (uid_t) getdef_ulong ("UID_MAX", 60000UL);
+ 		if (uid_max < uid_min) {
+ 			(void) fprintf (stderr,
+@@ -68,8 +68,8 @@ int find_new_uid (bool sys_user,
+ 			return -1;
+ 		}
+ 	} else {
+-		uid_min = (uid_t) getdef_ulong ("SYS_UID_MIN", 101UL);
+-		uid_max = (uid_t) getdef_ulong ("UID_MIN", 1000UL) - 1;
++		uid_min = (uid_t) getdef_ulong ("SYS_UID_MIN", 201UL);
++		uid_max = (uid_t) getdef_ulong ("UID_MIN", 500UL) - 1;
+ 		uid_max = (uid_t) getdef_ulong ("SYS_UID_MAX", (unsigned long) uid_max);
+ 		if (uid_max < uid_min) {
+ 			(void) fprintf (stderr,
+diff -up shadow-4.1.5.1/man/login.defs.d/GID_MAX.xml.redhat shadow-4.1.5.1/man/login.defs.d/GID_MAX.xml
+--- shadow-4.1.5.1/man/login.defs.d/GID_MAX.xml.redhat	2011-11-19 14:06:23.000000000 +0100
++++ shadow-4.1.5.1/man/login.defs.d/GID_MAX.xml	2015-12-17 13:50:50.548038115 +0100
+@@ -39,7 +39,7 @@
+     </para>
+     <para>
+       The default value for <option>GID_MIN</option> (resp.
+-      <option>GID_MAX</option>) is 1000 (resp. 60000).
++      <option>GID_MAX</option>) is 500 (resp. 60000).
+     </para>
+   </listitem>
+ </varlistentry>
+diff -up shadow-4.1.5.1/man/login.defs.d/SYS_GID_MAX.xml.redhat shadow-4.1.5.1/man/login.defs.d/SYS_GID_MAX.xml
+--- shadow-4.1.5.1/man/login.defs.d/SYS_GID_MAX.xml.redhat	2011-11-19 14:07:51.000000000 +0100
++++ shadow-4.1.5.1/man/login.defs.d/SYS_GID_MAX.xml	2015-12-17 13:51:33.115026969 +0100
+@@ -37,7 +37,7 @@
+     </para>
+     <para>
+       The default value for <option>SYS_GID_MIN</option> (resp.
+-      <option>SYS_GID_MAX</option>) is 101 (resp. <option>GID_MIN</option>-1).
++      <option>SYS_GID_MAX</option>) is 201 (resp. <option>GID_MIN</option>-1).
+     </para>
+   </listitem>
+ </varlistentry>
+diff -up shadow-4.1.5.1/man/login.defs.d/SYS_UID_MAX.xml.redhat shadow-4.1.5.1/man/login.defs.d/SYS_UID_MAX.xml
+--- shadow-4.1.5.1/man/login.defs.d/SYS_UID_MAX.xml.redhat	2011-11-19 14:09:14.000000000 +0100
++++ shadow-4.1.5.1/man/login.defs.d/SYS_UID_MAX.xml	2015-12-17 13:51:44.812298703 +0100
+@@ -36,7 +36,7 @@
+     </para>
+     <para>
+       The default value for <option>SYS_UID_MIN</option> (resp.
+-      <option>SYS_UID_MAX</option>) is 101 (resp. <option>UID_MIN</option>-1).
++      <option>SYS_UID_MAX</option>) is 201 (resp. <option>UID_MIN</option>-1).
+     </para>
+   </listitem>
+ </varlistentry>
+diff -up shadow-4.1.5.1/man/login.defs.d/UID_MAX.xml.redhat shadow-4.1.5.1/man/login.defs.d/UID_MAX.xml
+--- shadow-4.1.5.1/man/login.defs.d/UID_MAX.xml.redhat	2011-11-19 14:08:26.000000000 +0100
++++ shadow-4.1.5.1/man/login.defs.d/UID_MAX.xml	2015-12-17 13:51:57.514593785 +0100
+@@ -38,7 +38,7 @@
+     </para>
+     <para>
+       The default value for <option>UID_MIN</option> (resp.
+-      <option>UID_MAX</option>) is 1000 (resp. 60000).
++      <option>UID_MAX</option>) is 500 (resp. 60000).
+     </para>
+   </listitem>
+ </varlistentry>
+diff -up shadow-4.1.5.1/src/useradd.c.redhat shadow-4.1.5.1/src/useradd.c
+--- shadow-4.1.5.1/src/useradd.c.redhat	2012-05-25 13:51:55.000000000 +0200
++++ shadow-4.1.5.1/src/useradd.c	2015-12-17 13:16:58.394404512 +0100
+@@ -93,7 +93,7 @@ const char *Prog;
+ static gid_t def_group = 100;
+ static const char *def_gname = "other";
+ static const char *def_home = "/home";
+-static const char *def_shell = "";
++static const char *def_shell = "/sbin/nologin";
+ static const char *def_template = SKEL_DIR;
+ static const char *def_create_mail_spool = "no";
+ 
+@@ -103,7 +103,7 @@ static const char *def_expire = "";
+ #define	VALID(s)	(strcspn (s, ":\n") == strlen (s))
+ 
+ static const char *user_name = "";
+-static const char *user_pass = "!";
++static const char *user_pass = "!!";
+ static uid_t user_id;
+ static gid_t user_gid;
+ static const char *user_comment = "";
+@@ -1011,9 +1011,9 @@ static void process_flags (int argc, cha
+ 		};
+ 		while ((c = getopt_long (argc, argv,
+ #ifdef WITH_SELINUX
+-		                         "b:c:d:De:f:g:G:hk:K:lmMNop:rR:s:u:UZ:",
++		                         "b:c:d:De:f:g:G:hk:K:lmMnNop:rR:s:u:UZ:",
+ #else				/* !WITH_SELINUX */
+-		                         "b:c:d:De:f:g:G:hk:K:lmMNop:rR:s:u:U",
++		                         "b:c:d:De:f:g:G:hk:K:lmMnNop:rR:s:u:U",
+ #endif				/* !WITH_SELINUX */
+ 		                         long_options, NULL)) != -1) {
+ 			switch (c) {
+@@ -1164,6 +1164,7 @@ static void process_flags (int argc, cha
+ 			case 'M':
+ 				Mflg = true;
+ 				break;
++			case 'n':
+ 			case 'N':
+ 				Nflg = true;
+ 				break;

@@ -32,7 +32,7 @@
 
 #include <config.h>
 
-#ident "$Id: newgrp.c 3034 2009-07-22 13:30:06Z nekral-guest $"
+#ident "$Id: newgrp.c 3458 2011-07-30 01:41:56Z nekral-guest $"
 
 #include <errno.h>
 #include <grp.h>
@@ -48,7 +48,7 @@
 /*
  * Global variables
  */
-char *Prog;
+const char *Prog;
 
 extern char **newenvp;
 extern char **environ;
@@ -282,7 +282,7 @@ static void syslog_sg (const char *name, const char *group)
 	 * receives SIGCHLD from the terminating subshell.  -- JWP
 	 */
 	{
-		pid_t child, pid;
+		pid_t child;
 
 		/* Ignore these signals. The signal handlers will later be
 		 * restored to the default handlers. */
@@ -316,13 +316,15 @@ static void syslog_sg (const char *name, const char *group)
 			int cst = 0;
 			gid_t gid = getgid();
 			struct group *grp = getgrgid (gid);
+			pid_t pid;
 
 			do {
 				errno = 0;
 				pid = waitpid (child, &cst, WUNTRACED);
 				if ((pid == child) && (WIFSTOPPED (cst) != 0)) {
-					/* stop when child stops */
-					kill (getpid (), WSTOPSIG(cst));
+					/* The child (shell) was suspended.
+					 * Suspend sg/newgrp. */
+					kill (getpid (), SIGSTOP);
 					/* wake child when resumed */
 					kill (child, SIGCONT);
 				}
@@ -804,7 +806,7 @@ int main (int argc, char **argv)
 	 */
 	err = shell (prog, initflag ? (char *) 0 : cp, newenvp);
 	exit ((err == ENOENT) ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
-	/* @notreached@ */
+	/*@notreached@*/
       failure:
 
 	/*

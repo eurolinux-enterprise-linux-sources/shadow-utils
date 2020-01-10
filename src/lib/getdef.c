@@ -32,7 +32,7 @@
 
 #include <config.h>
 
-#ident "$Id: getdef.c 2772 2009-04-23 11:46:46Z nekral-guest $"
+#ident "$Id: getdef.c 3095 2010-03-04 18:11:13Z nekral-guest $"
 
 #include "prototypes.h"
 #include "defines.h"
@@ -123,6 +123,11 @@ static struct itemdef def_table[] = {
 #ifdef USE_SYSLOG
 	{"SYSLOG_SG_ENAB", NULL},
 	{"SYSLOG_SU_ENAB", NULL},
+#endif
+#ifdef WITH_TCB
+	{"TCB_AUTH_GROUP", NULL},
+	{"TCB_SYMLINKS", NULL},
+	{"USE_TCB", NULL},
 #endif
 	{NULL, NULL}
 };

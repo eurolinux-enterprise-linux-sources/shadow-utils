@@ -1,44 +1,49 @@
 Summary: Utilities for managing accounts and shadow password files
 Name: shadow-utils
-Version: 4.1.4.2
-Release: 19%{?dist}.1
+Version: 4.1.5.1
+Release: 5%{?dist}
 Epoch: 2
 URL: http://pkg-shadow.alioth.debian.org/
 Source0: http://pkg-shadow.alioth.debian.org/releases/shadow-%{version}.tar.bz2
+Source3: http://pkg-shadow.alioth.debian.org/releases/shadow-%{version}.tar.bz2.sig
 Source1: shadow-utils.login.defs 
 Source2: shadow-utils.useradd
-Patch0: shadow-4.1.4.2-redhat.patch
-Patch1: shadow-4.1.4.1-goodname.patch
-Patch2: shadow-4.1.4.2-leak.patch
-Patch3: shadow-4.1.4.2-fixes.patch
-Patch4: shadow-4.1.4.2-infoParentDir.patch
-Patch6: shadow-4.1.4.2-uflg.patch
-Patch7: shadow-4.1.4.2-underflow.patch
-Patch8: shadow-4.1.4.2-acl.patch
-Patch9: shadow-4.1.4.2-gshadow.patch
-Patch10: shadow-4.1.4.2-IDs.patch
-Patch12: shadow-4.1.4.2-semanage.patch
-Patch13: shadow-4.1.4.2-homeparent.patch
-Patch14: shadow-4.1.4.2-2ndskip.patch
-Patch15: shadow-4.1.4.2-merge-group.patch
-Patch16: shadow-4.1.4.2-user-busy.patch
-Patch17: shadow-4.1.4.2-date-parsing.patch
-Patch18: shadow-4.1.4.2-ingroup.patch
-Patch19: shadow-4.1.4.2-man-nopam.patch
-Patch20: shadow-4.1.4.2-new-spw.patch
-Patch21: shadow-4.1.4.2-move-home.patch
-Patch22: shadow-4.1.4.2-useradd-man.patch
-Patch23: shadow-4.1.4.2-chage-man.patch
+Patch0: shadow-4.1.5.1-redhat.patch
+Patch1: shadow-4.1.5.1-goodname.patch
+Patch2: shadow-4.1.5.1-info-parent-dir.patch
+Patch6: shadow-4.1.5.1-selinux.patch
+Patch7: shadow-4.1.5-2ndskip.patch
+Patch8: shadow-4.1.5.1-backup-mode.patch
+Patch9: shadow-4.1.5.1-merge-group.patch
+Patch10: shadow-4.1.5.1-orig-context.patch
+Patch11: shadow-4.1.5.1-logmsg.patch
+Patch12: shadow-4.1.5.1-errmsg.patch
+Patch13: shadow-4.1.5.1-audit-owner.patch
+Patch14: shadow-4.1.5.1-default-range.patch
+Patch15: shadow-4.1.5.1-manfix.patch
+Patch16: shadow-4.1.5.1-crypt-null.patch
+Patch17: shadow-4.1.5.1-userdel-helpfix.patch
+Patch18: shadow-4.1.5.1-date-parsing.patch
+Patch19: shadow-4.1.5.1-ingroup.patch
+Patch20: shadow-4.1.5.1-move-home.patch
+Patch21: shadow-4.1.5.1-audit-update.patch
+Patch22: shadow-4.1.5.1-semanage.patch
+Patch23: shadow-4.1.5.1-usermod-passwd.patch
+Patch24: shadow-4.1.5.1-revert-chgrp.patch
+
 License: BSD and GPLv2+
 Group: System Environment/Base
 BuildRequires: libselinux-devel >= 1.25.2-1
-BuildRequires: libsemanage-devel
 BuildRequires: audit-libs-devel >= 1.6.5
+BuildRequires: libsemanage-devel
 BuildRequires: libacl-devel libattr-devel
+BuildRequires: gnome-doc-utils docbook-style-xsl gettext
 #BuildRequires: autoconf, automake, libtool, gettext-devel
 Requires: libselinux >= 1.25.2-1
 Requires: audit-libs >= 1.6.5
 Requires: setup
+Requires(pre): coreutils
+Requires(post): coreutils
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
@@ -57,26 +62,26 @@ are used for managing group accounts.
 %setup -q -n shadow-%{version}
 %patch0 -p1 -b .redhat
 %patch1 -p1 -b .goodname
-%patch2 -p1 -b .leak
-%patch3 -p1 -b .fixes
-%patch4 -p1 -b .infoParentDir
-%patch6 -p1 -b .uflg
-%patch7 -p1 -b .underflow
-%patch8 -p1 -b .acl
-%patch9 -p1 -b .gshadow
-%patch10 -p1 -b .IDs
-%patch12 -p1 -b .semanage
-%patch13 -p1 -b .homeparent
-%patch14 -p1 -b .2ndskip
-%patch15 -p1 -b .merge-group
-%patch16 -p1 -b .user-busy
-%patch17 -p1 -b .date-parsing
-%patch18 -p1 -b .ingroup
-%patch19 -p1 -b .man-nopam
-%patch20 -p1 -b .new-spw
-%patch21 -p1 -b .move-home
-%patch22 -p1 -b .uadd-man
-%patch23 -p1 -b .chage-man
+%patch2 -p1 -b .info-parent-dir
+%patch6 -p1 -b .selinux
+%patch7 -p1 -b .2ndskip
+%patch8 -p1 -b .backup-mode
+%patch9 -p1 -b .merge-group
+%patch10 -p1 -b .orig-context
+%patch11 -p1 -b .logmsg
+%patch12 -p1 -b .errmsg
+%patch13 -p1 -b .audit-owner
+%patch14 -p1 -b .default-range
+%patch15 -p1 -b .manfix
+%patch16 -p1 -b .crypt-null
+%patch17 -p1 -b .userdel
+%patch18 -p1 -b .date-parsing
+%patch19 -p1 -b .ingroup
+%patch20 -p1 -b .move-home
+%patch21 -p1 -b .audit-update
+%patch22 -p1 -b .semanage
+%patch23 -p1 -b .usermod-passwd
+%patch24 -p1 -b .revert-chgrp
 
 iconv -f ISO88591 -t utf-8  doc/HOWTO > doc/HOWTO.utf8
 cp -f doc/HOWTO.utf8 doc/HOWTO
@@ -99,8 +104,10 @@ export CFLAGS="$RPM_OPT_FLAGS -fpie"
 export LDFLAGS="-pie -Wl,-z,relro -Wl,-z,now"
 %endif
 
+export LC_ALL=C
 %configure \
         --enable-shadowgrp \
+        --enable-man \
         --with-audit \
         --with-sha-crypt \
         --with-selinux \
@@ -175,9 +182,11 @@ rm $RPM_BUILD_ROOT/%{_mandir}/man5/faillog.*
 rm $RPM_BUILD_ROOT/%{_mandir}/*/man5/faillog.*
 rm $RPM_BUILD_ROOT/%{_mandir}/man8/faillog.*
 rm $RPM_BUILD_ROOT/%{_mandir}/*/man8/faillog.*
+# conflicting with man-pages-pl
+rm $RPM_BUILD_ROOT/%{_mandir}/pl/man3/shadow.*
 
-%find_lang shadow
 find $RPM_BUILD_ROOT%{_mandir} -depth -type d -empty -delete
+%find_lang shadow
 for dir in $(ls -1d $RPM_BUILD_ROOT%{_mandir}/{??,??_??}) ; do
     dir=$(echo $dir | sed -e "s|^$RPM_BUILD_ROOT||")
     lang=$(basename $dir)
@@ -192,7 +201,6 @@ rm -rf $RPM_BUILD_ROOT
 %files -f shadow.lang
 %defattr(-,root,root)
 %doc NEWS doc/HOWTO README
-%dir %{_sysconfdir}/default
 %attr(0644,root,root)   %config(noreplace) %{_sysconfdir}/login.defs
 %attr(0600,root,root)   %config(noreplace) %{_sysconfdir}/default/useradd
 %{_bindir}/sg
@@ -231,7 +239,20 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man8/vigr.8*
 
 %changelog
-* Thu Mar 26 2015 Tomáš Mráz <tmraz@redhat.com> - 2:4.1.4.2-19.1
+* Tue Feb  9 2016 Tomáš Mráz <tmraz@redhat.com> - 2:4.1.5.1-5
+- make failure of usermod -p or usermod -U return 1 properly
+
+* Mon Dec 21 2015 Tomáš Mráz <tmraz@redhat.com> - 2:4.1.5.1-3
+- remove conflicting manual page
+
+* Fri Dec 18 2015 Tomáš Mráz <tmraz@redhat.com> - 2:4.1.5.1-2
+- usermod: make password unlocking compatible with passwd (#951743)
+- usermod: disallow ':' in raw password setting
+
+* Thu Dec 17 2015 Tomáš Mráz <tmraz@redhat.com> - 2:4.1.5.1-1
+- rebase to the version from RHEL-7 to fix auditing and other minor bugs
+
+* Thu Mar 26 2015 Tomáš Mráz <tmraz@redhat.com> - 2:4.1.4.2-20
 - allow removal of expiration or last password change dates
   by using -1 as chage date argument again (#1183638)
 
@@ -427,11 +448,11 @@ rm -rf $RPM_BUILD_ROOT
 * Tue Jun 26 2007 Peter Vrabec <pvrabec@redhat.com> 2:4.0.18.1-16
 - fix "CAVEATS" section of groupadd man page (#245590)
 
-* Tue Jun 06 2007 Peter Vrabec <pvrabec@redhat.com> 2:4.0.18.1-15
+* Wed Jun 06 2007 Peter Vrabec <pvrabec@redhat.com> 2:4.0.18.1-15
 - fix infinitive loop if there are duplicate entries
   in /etc/group (#240915)
 
-* Tue Jun 06 2007 Peter Vrabec <pvrabec@redhat.com> 2:4.0.18.1-14
+* Wed Jun 06 2007 Peter Vrabec <pvrabec@redhat.com> 2:4.0.18.1-14
 - do not run find_new_uid() twice and use getpwuid() to check
   UID uniqueness (#236871)
 
@@ -602,7 +623,7 @@ rm -rf $RPM_BUILD_ROOT
 - fix memory leak, and CPU spinning when grp_update() and 
   duplicate group entries in /etc/group (#151484)
 
-* Mon Mar 29 2005 Peter Vrabec <pvrabec@redhat.com>  2:4.0.7-4
+* Tue Mar 29 2005 Peter Vrabec <pvrabec@redhat.com>  2:4.0.7-4
 - use newgrp binary
 - newgrp don't ask for password if user's default GID = group ID,
   ask for password if there is some in /etc/gshadow 
@@ -712,7 +733,7 @@ rm -rf $RPM_BUILD_ROOT
 * Thu Sep 4 2003 Dan Walsh <dwalsh@redhat.com> 4.0.3-11.sel
 - build with SELinux support
 
-* Fri Jul 28 2003 Dan Walsh <dwalsh@redhat.com> 4.0.3-10
+* Mon Jul 28 2003 Dan Walsh <dwalsh@redhat.com> 4.0.3-10
 - Add SELinux support
 
 * Wed Jun 04 2003 Elliot Lee <sopwith@redhat.com>
@@ -936,7 +957,7 @@ rm -rf $RPM_BUILD_ROOT
 * Thu Nov 06 1997 Cristian Gafton <gafton@redhat.com>
 - added forgot lastlog command to the spec file
 
-* Mon Oct 26 1997 Cristian Gafton <gafton@redhat.com>
+* Mon Oct 27 1997 Cristian Gafton <gafton@redhat.com>
 - obsoletes adduser
 
 * Thu Oct 23 1997 Cristian Gafton <gafton@redhat.com>

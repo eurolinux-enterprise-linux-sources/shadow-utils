@@ -3,7 +3,7 @@
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2001       , Michał Moskal
  * Copyright (c) 2005       , Tomasz Kłoczko
- * Copyright (c) 2007 - 2009, Nicolas François
+ * Copyright (c) 2007 - 2010, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -33,7 +33,7 @@
 
 #include <config.h>
 
-#ident "$Id: groupio.c 2822 2009-04-27 20:18:00Z nekral-guest $"
+#ident "$Id: groupio.c 3296 2011-02-16 20:32:16Z nekral-guest $"
 
 #include <assert.h>
 #include <stdio.h>
@@ -79,6 +79,23 @@ static void *group_parse (const char *line)
 static int group_put (const void *ent, FILE * file)
 {
 	const struct group *gr = ent;
+
+	if (   (NULL == gr)
+	    || (valid_field (gr->gr_name, ":\n") == -1)
+	    || (valid_field (gr->gr_passwd, ":\n") == -1)
+	    || (gr->gr_gid == (gid_t)-1)) {
+		return -1;
+	}
+
+	/* FIXME: fail also if gr->gr_mem == NULL ?*/
+	if (NULL != gr->gr_mem) {
+		size_t i;
+		for (i = 0; NULL != gr->gr_mem[i]; i++) {
+			if (valid_field (gr->gr_mem[i], ",:\n") == -1) {
+				return -1;
+			}
+		}
+	}
 
 	return (putgrent (gr, file) == -1) ? -1 : 0;
 }
@@ -382,15 +399,19 @@ static int split_groups (unsigned int max_members)
 		struct commonio_entry *new;
 		struct group *new_gptr;
 		unsigned int members = 0;
+		unsigned int i;
 
 		/* Check if this group must be split */
-		if (!gr->changed)
+		if (!gr->changed) {
 			continue;
-		if (NULL == gptr)
+		}
+		if (NULL == gptr) {
 			continue;
+		}
 		for (members = 0; NULL != gptr->gr_mem[members]; members++);
-		if (members <= max_members)
+		if (members <= max_members) {
 			continue;
+		}
 
 		new = (struct commonio_entry *) malloc (sizeof *new);
 		if (NULL == new) {
@@ -408,9 +429,23 @@ static int split_groups (unsigned int max_members)
 		new->changed = true;
 
 		/* Enforce the maximum number of members on gptr */
-		gptr->gr_mem[max_members] = NULL;
+		for (i = max_members; NULL != gptr->gr_mem[i]; i++) {
+			free (gptr->gr_mem[i]);
+			gptr->gr_mem[i] = NULL;
+		}
+		/* Shift all the members */
 		/* The number of members in new_gptr will be check later */
-		new_gptr->gr_mem = &new_gptr->gr_mem[max_members];
+		for (i = 0; NULL != new_gptr->gr_mem[i + max_members]; i++) {
+			if (NULL != new_gptr->gr_mem[i]) {
+				free (new_gptr->gr_mem[i]);
+			}
+			new_gptr->gr_mem[i] = new_gptr->gr_mem[i + max_members];
+			new_gptr->gr_mem[i + max_members] = NULL;
+		}
+		for (; NULL != new_gptr->gr_mem[i]; i++) {
+			free (new_gptr->gr_mem[i]);
+			new_gptr->gr_mem[i] = NULL;
+		}
 
 		/* insert the new entry in the list */
 		new->prev = gr;

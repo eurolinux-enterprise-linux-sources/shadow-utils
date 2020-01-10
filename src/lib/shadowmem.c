@@ -33,7 +33,7 @@
 
 #include <config.h>
 
-#ident "$Id: shadowmem.c 2777 2009-04-23 17:43:27Z nekral-guest $"
+#ident "$Id: shadowmem.c 3062 2009-09-07 19:08:10Z nekral-guest $"
 
 #include "prototypes.h"
 #include "defines.h"
@@ -49,13 +49,22 @@
 	if (NULL == sp) {
 		return NULL;
 	}
-	*sp = *spent;
-	sp->sp_namp = strdup (spent->sp_namp);
+	sp->sp_lstchg = spent->sp_lstchg;
+	sp->sp_min    = spent->sp_min;
+	sp->sp_max    = spent->sp_max;
+	sp->sp_warn   = spent->sp_warn;
+	sp->sp_inact  = spent->sp_inact;
+	sp->sp_expire = spent->sp_expire;
+	sp->sp_flag   = spent->sp_flag;
+	sp->sp_namp   = strdup (spent->sp_namp);
 	if (NULL == sp->sp_namp) {
+		free(sp);
 		return NULL;
 	}
 	sp->sp_pwdp = strdup (spent->sp_pwdp);
 	if (NULL == sp->sp_pwdp) {
+		free(sp->sp_namp);
+		free(sp);
 		return NULL;
 	}
 
@@ -65,8 +74,10 @@
 void spw_free (/*@out@*/ /*@only@*/struct spwd *spent)
 {
 	free (spent->sp_namp);
-	memzero (spent->sp_pwdp, strlen (spent->sp_pwdp));
-	free (spent->sp_pwdp);
+	if (NULL != spent->sp_pwdp) {
+		memzero (spent->sp_pwdp, strlen (spent->sp_pwdp));
+		free (spent->sp_pwdp);
+	}
 	free (spent);
 }
 

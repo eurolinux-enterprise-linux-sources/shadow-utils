@@ -35,7 +35,7 @@
 
 #ifdef SHADOWGRP
 
-#ident "$Id: sgroupio.c 2797 2009-04-24 23:32:52Z nekral-guest $"
+#ident "$Id: sgroupio.c 3296 2011-02-16 20:32:16Z nekral-guest $"
 
 #include "prototypes.h"
 #include "defines.h"
@@ -51,7 +51,6 @@
 	if (NULL == sg) {
 		return NULL;
 	}
-	*sg = *sgent;
 	sg->sg_name = strdup (sgent->sg_name);
 	if (NULL == sg->sg_name) {
 		free (sg);
@@ -137,17 +136,20 @@ static void gshadow_free (/*@out@*/ /*@only@*/void *ent)
 
 void sgr_free (/*@out@*/ /*@only@*/struct sgrp *sgent)
 {
+	size_t i;
 	free (sgent->sg_name);
-	memzero (sgent->sg_passwd, strlen (sgent->sg_passwd));
-	free (sgent->sg_passwd);
-	while (NULL != *(sgent->sg_adm)) {
-		free (*(sgent->sg_adm));
-		sgent->sg_adm++;
+	if (NULL != sgent->sg_passwd) {
+		memzero (sgent->sg_passwd, strlen (sgent->sg_passwd));
+		free (sgent->sg_passwd);
 	}
-	while (NULL != *(sgent->sg_mem)) {
-		free (*(sgent->sg_mem));
-		sgent->sg_mem++;
+	for (i = 0; NULL != sgent->sg_adm[i]; i++) {
+		free (sgent->sg_adm[i]);
 	}
+	free (sgent->sg_adm);
+	for (i = 0; NULL != sgent->sg_mem[i]; i++) {
+		free (sgent->sg_mem[i]);
+	}
+	free (sgent->sg_mem);
 	free (sgent);
 }
 
@@ -166,6 +168,32 @@ static void *gshadow_parse (const char *line)
 static int gshadow_put (const void *ent, FILE * file)
 {
 	const struct sgrp *sg = ent;
+
+	if (   (NULL == sg)
+	    || (valid_field (sg->sg_name, ":\n") == -1)
+	    || (valid_field (sg->sg_passwd, ":\n") == -1)) {
+		return -1;
+	}
+
+	/* FIXME: fail also if sg->sg_adm == NULL ?*/
+	if (NULL != sg->sg_adm) {
+		size_t i;
+		for (i = 0; NULL != sg->sg_adm[i]; i++) {
+			if (valid_field (sg->sg_adm[i], ",:\n") == -1) {
+				return -1;
+			}
+		}
+	}
+
+	/* FIXME: fail also if sg->sg_mem == NULL ?*/
+	if (NULL != sg->sg_mem) {
+		size_t i;
+		for (i = 0; NULL != sg->sg_mem[i]; i++) {
+			if (valid_field (sg->sg_mem[i], ",:\n") == -1) {
+				return -1;
+			}
+		}
+	}
 
 	return (putsgent (sg, file) == -1) ? -1 : 0;
 }

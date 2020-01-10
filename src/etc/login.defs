@@ -1,7 +1,7 @@
 #
 # /etc/login.defs - Configuration control definitions for the shadow package.
 #
-#	$Id: login.defs 3038 2009-07-23 20:41:35Z nekral-guest $
+#	$Id: login.defs 3189 2010-03-26 11:53:06Z nekral-guest $
 #
 
 #
@@ -183,7 +183,8 @@ ERASECHAR	0177
 KILLCHAR	025
 #ULIMIT		2097152
 
-# Default initial "umask" value for non-PAM enabled systems.
+# Default initial "umask" value used by login on non-PAM enabled systems.
+# Default "umask" value for pam_umask on PAM enabled systems.
 # UMASK is also used by useradd and newusers to set the mode of new home
 # directories.
 # 022 is the default value, but 027, or even 077, could be considered

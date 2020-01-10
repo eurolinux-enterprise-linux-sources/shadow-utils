@@ -32,7 +32,7 @@
 
 #include <config.h>
 
-#ident "$Id: chowntty.c 2849 2009-04-30 21:08:49Z nekral-guest $"
+#ident "$Id: chowntty.c 3232 2010-08-22 19:13:53Z nekral-guest $"
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -72,7 +72,7 @@ void chown_tty (const struct passwd *info)
 	 */
 
 	if (   (fchown (STDIN_FILENO, info->pw_uid, gid) != 0)
-	    || (fchmod (STDIN_FILENO, getdef_num ("TTYPERM", 0600)) != 0)) {
+	    || (fchmod (STDIN_FILENO, (mode_t)getdef_num ("TTYPERM", 0600)) != 0)) {
 		int err = errno;
 
 		fprintf (stderr,

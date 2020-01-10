@@ -33,7 +33,7 @@
 
 #include <config.h>
 
-#ident "$Id: pwmem.c 2777 2009-04-23 17:43:27Z nekral-guest $"
+#ident "$Id: pwmem.c 3062 2009-09-07 19:08:10Z nekral-guest $"
 
 #include <stdio.h>
 #include "defines.h"
@@ -48,25 +48,41 @@
 	if (NULL == pw) {
 		return NULL;
 	}
-	*pw = *pwent;
+	pw->pw_uid = pwent->pw_uid;
+	pw->pw_gid = pwent->pw_gid;
 	pw->pw_name = strdup (pwent->pw_name);
 	if (NULL == pw->pw_name) {
+		free(pw);
 		return NULL;
 	}
 	pw->pw_passwd = strdup (pwent->pw_passwd);
 	if (NULL == pw->pw_passwd) {
+		free(pw->pw_name);
+		free(pw);
 		return NULL;
 	}
 	pw->pw_gecos = strdup (pwent->pw_gecos);
 	if (NULL == pw->pw_gecos) {
+		free(pw->pw_passwd);
+		free(pw->pw_name);
+		free(pw);
 		return NULL;
 	}
 	pw->pw_dir = strdup (pwent->pw_dir);
 	if (NULL == pw->pw_dir) {
+		free(pw->pw_gecos);
+		free(pw->pw_passwd);
+		free(pw->pw_name);
+		free(pw);
 		return NULL;
 	}
 	pw->pw_shell = strdup (pwent->pw_shell);
 	if (NULL == pw->pw_shell) {
+		free(pw->pw_dir);
+		free(pw->pw_gecos);
+		free(pw->pw_passwd);
+		free(pw->pw_name);
+		free(pw);
 		return NULL;
 	}
 
@@ -76,8 +92,10 @@
 void pw_free (/*@out@*/ /*@only@*/struct passwd *pwent)
 {
 	free (pwent->pw_name);
-	memzero (pwent->pw_passwd, strlen (pwent->pw_passwd));
-	free (pwent->pw_passwd);
+	if (pwent->pw_passwd) {
+		memzero (pwent->pw_passwd, strlen (pwent->pw_passwd));
+		free (pwent->pw_passwd);
+	}
 	free (pwent->pw_gecos);
 	free (pwent->pw_dir);
 	free (pwent->pw_shell);

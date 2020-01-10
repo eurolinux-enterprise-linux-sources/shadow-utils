@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
    Copyright (c) 1991 - 1994, Julianne Frances Haugh
-   Copyright (c) 2007 - 2009, Nicolas François
+   Copyright (c) 2007 - 2011, Nicolas François
    All rights reserved.
   
    Redistribution and use in source and binary forms, with or without
@@ -41,14 +41,39 @@
 <!ENTITY SYS_UID_MAX           SYSTEM "login.defs.d/SYS_UID_MAX.xml">
 <!ENTITY UID_MAX               SYSTEM "login.defs.d/UID_MAX.xml">
 <!ENTITY UMASK                 SYSTEM "login.defs.d/UMASK.xml">
+<!ENTITY TCB_AUTH_GROUP        SYSTEM "login.defs.d/TCB_AUTH_GROUP.xml">
+<!ENTITY TCB_SYMLINKS          SYSTEM "login.defs.d/TCB_SYMLINKS.xml">
+<!ENTITY USE_TCB               SYSTEM "login.defs.d/USE_TCB.xml">
 <!ENTITY USERGROUPS_ENAB       SYSTEM "login.defs.d/USERGROUPS_ENAB.xml">
+<!-- SHADOW-CONFIG-HERE -->
 ]>
 <refentry id='useradd.8'>
-  <!--  $Id: useradd.8.xml 2964 2009-05-21 12:02:12Z nekral-guest $ -->
+  <!--  $Id: useradd.8.xml 3742 2012-05-25 11:45:21Z nekral-guest $ -->
+  <refentryinfo>
+    <author>
+      <firstname>Julianne Frances</firstname>
+      <surname>Haugh</surname>
+      <contrib>Creation, 1991</contrib>
+    </author>
+    <author>
+      <firstname>Thomas</firstname>
+      <surname>Kłoczko</surname>
+      <email>kloczek@pld.org.pl</email>
+      <contrib>shadow-utils maintainer, 2000 - 2007</contrib>
+    </author>
+    <author>
+      <firstname>Nicolas</firstname>
+      <surname>François</surname>
+      <email>nicolas.francois@centraliens.net</email>
+      <contrib>shadow-utils maintainer, 2007 - now</contrib>
+    </author>
+  </refentryinfo>
   <refmeta>
     <refentrytitle>useradd</refentrytitle>
     <manvolnum>8</manvolnum>
     <refmiscinfo class="sectdesc">System Management Commands</refmiscinfo>
+    <refmiscinfo class="source">shadow-utils</refmiscinfo>
+    <refmiscinfo class="version">&SHADOW_UTILS_VERSION;</refmiscinfo>
   </refmeta>
   <refnamediv id='name'>
     <refname>useradd</refname>
@@ -211,7 +236,7 @@
 	    existing group.
 	  </para>
 	  <para>
-	    If not specified, the bahavior of <command>useradd</command>
+	    If not specified, the behavior of <command>useradd</command>
 	    will depend on the <option>USERGROUPS_ENAB</option> variable
 	    in <filename>/etc/login.defs</filename>. If this variable is
 	    set to <replaceable>yes</replaceable> (or
@@ -270,6 +295,9 @@
 	    <filename>/etc/default/useradd</filename> or, by default,
 	    <filename>/etc/skel</filename>.
 	  </para>
+	  <para>
+	    If possible, the ACLs and extended attributes are copied.
+	  </para>
 	</listitem>
       </varlistentry>
       <varlistentry>
@@ -294,11 +322,11 @@
 	    <option>-K </option>
 	    <replaceable>UID_MAX</replaceable>=<replaceable>499</replaceable>
 	  </para>
-	  <para>
+	  <!--para>
 	    Note: <option>-K </option>
 	    <replaceable>UID_MIN</replaceable>=<replaceable>10</replaceable>,<replaceable>UID_MAX</replaceable>=<replaceable>499</replaceable>
 	    doesn't work yet.
-	  </para>
+	  </para-->
 	</listitem>
       </varlistentry>
       <varlistentry>
@@ -326,7 +354,9 @@
 	    will be copied to the home directory.
 	  </para>
 	  <para>
-	    By default, no home directories are created.
+	    By default, if this option is not specified and
+	    <option>CREATE_HOME</option> is not enabled, no home
+	    directories are created.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -370,7 +400,7 @@
 	  <para>Allow the creation of a user account with a duplicate (non-unique) UID.</para>
 	  <para>
 	    This option is only valid in combination with the
-	    <option>-o</option> option.
+	    <option>-u</option> option.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -407,7 +437,7 @@
 	  <para>
 	    System users will be created with no aging information in
 	    <filename>/etc/shadow</filename>, and their numeric
-	    identifiers are choosen in the
+	    identifiers are chosen in the
 	    <option>SYS_UID_MIN</option>-<option>SYS_UID_MAX</option>
 	    range, defined in <filename>/etc/login.defs</filename>, instead of
 	    <option>UID_MIN</option>-<option>UID_MAX</option> (and their
@@ -420,6 +450,19 @@
 	    (<option>CREATE_HOME</option>). You have to specify the
 	    <option>-m</option> options if you want a home directory for a
 	    system account to be created.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
+	  <option>-R</option>, <option>--root</option>
+	  <replaceable>CHROOT_DIR</replaceable>
+	</term>
+	<listitem>
+	  <para>
+	    Apply changes in the <replaceable>CHROOT_DIR</replaceable>
+	    directory and use the configuration files from the
+	    <replaceable>CHROOT_DIR</replaceable> directory.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -448,8 +491,12 @@
 	    The numerical value of the user's ID. This value must be unique,
 	    unless the <option>-o</option> option is used. The value must be
 	    non-negative. The default is to use the smallest ID value
-	    greater than 999 and greater than every other user. Values
-	    between 0 and 999 are typically reserved for system accounts.
+	    greater than or equal to <option>UID_MIN</option> and greater
+	    than every other user.
+	  </para>
+	  <para>
+	    See also the <option>-r</option> option and the
+	    <option>UID_MAX</option> description.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -479,7 +526,7 @@
 	  <para>
 	    The SELinux user for the user's login. The default is to leave this
 	    field blank, which causes the system to select the default SELinux
-	     user.
+	    user.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -554,7 +601,7 @@
 	      the <option>-N/--no-user-group</option> is used or when the
 	      <option>USERGROUPS_ENAB</option> variable is set to
 	      <replaceable>no</replaceable> in
-	      <filename>/etc/login.defs</filename>. The named
+	      <filename>/etc/login.defs</filename>). The named
 	      group must exist, and a numerical group ID must have an
 	      existing entry.
 	    </para>
@@ -634,8 +681,11 @@
       &PASS_WARN_AGE;
       &SYS_GID_MAX; <!-- documents also SYS_GID_MIN -->
       &SYS_UID_MAX; <!-- documents also SYS_UID_MIN -->
+      &TCB_AUTH_GROUP;
+      &TCB_SYMLINKS;
       &UID_MAX; <!-- documents also UID_MIN -->
       &UMASK;
+      &USE_TCB;
       &USERGROUPS_ENAB;
     </variablelist>
   </refsect1>
@@ -748,9 +798,9 @@
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
-	  <term><replaceable>13</replaceable></term>
+	  <term><replaceable>14</replaceable></term>
 	  <listitem>
-	    <para>can't create mail spool</para>
+	    <para>can't update SELinux user mapping</para>
 	  </listitem>
 	</varlistentry>
       </variablelist>

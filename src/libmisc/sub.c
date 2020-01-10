@@ -31,7 +31,7 @@
 
 #include <config.h>
 
-#ident "$Id: sub.c 2849 2009-04-30 21:08:49Z nekral-guest $"
+#ident "$Id: sub.c 3232 2010-08-22 19:13:53Z nekral-guest $"
 
 #include <pwd.h>
 #include <stdio.h>
@@ -66,11 +66,13 @@ void subsystem (const struct passwd *pw)
 	 * must be able to change into it.
 	 */
 
-	if (chdir (pw->pw_dir) || chroot (pw->pw_dir)) {
-		printf (_("Can't change root directory to '%s'\n"),
-			pw->pw_dir);
+	if (   (chdir (pw->pw_dir) != 0)
+	    || (chroot (pw->pw_dir) != 0)) {
+		(void) printf (_("Can't change root directory to '%s'\n"),
+		               pw->pw_dir);
 		SYSLOG ((LOG_WARN, NO_SUBROOT2, pw->pw_dir, pw->pw_name));
 		closelog ();
 		exit (EXIT_FAILURE);
 	}
 }
+

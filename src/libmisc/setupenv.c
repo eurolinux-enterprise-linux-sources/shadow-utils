@@ -2,7 +2,7 @@
  * Copyright (c) 1989 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2001 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2009, Nicolas François
+ * Copyright (c) 2007 - 2010, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -36,7 +36,7 @@
 
 #include <config.h>
 
-#ident "$Id: setupenv.c 3034 2009-07-22 13:30:06Z nekral-guest $"
+#ident "$Id: setupenv.c 3232 2010-08-22 19:13:53Z nekral-guest $"
 
 #include <assert.h>
 #include <sys/types.h>
@@ -74,7 +74,7 @@ static void read_env_file (const char *filename)
 	if (NULL == fp) {
 		return;
 	}
-	while (fgets (buf, sizeof buf, fp) == buf) {
+	while (fgets (buf, (int)(sizeof buf), fp) == buf) {
 		cp = strrchr (buf, '\n');
 		if (NULL == cp) {
 			break;
@@ -200,9 +200,9 @@ static void read_env_file (const char *filename)
 void setup_env (struct passwd *info)
 {
 #ifndef USE_PAM
-	char *envf;
+	const char *envf;
 #endif
-	char *cp;
+	const char *cp;
 
 	/*
 	 * Change the current working directory to be the home directory
@@ -265,7 +265,7 @@ void setup_env (struct passwd *info)
 
 	if (NULL == cp) {
 		/* not specified, use a minimal default */
-		addenv ("PATH=/bin:/usr/bin", NULL);
+		addenv ((info->pw_uid == 0) ? "PATH=/sbin:/bin:/usr/sbin:/usr/bin" : "PATH=/bin:/usr/bin", NULL);
 	} else if (strchr (cp, '=')) {
 		/* specified as name=value (PATH=...) */
 		addenv (cp, NULL);
