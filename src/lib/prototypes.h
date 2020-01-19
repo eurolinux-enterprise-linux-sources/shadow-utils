@@ -35,12 +35,14 @@
  *
  * prototypes of libmisc functions, and private lib functions.
  *
- * $Id: prototypes.h 3656 2012-01-08 16:04:27Z nekral-guest $
+ * $Id$
  *
  */
 
 #ifndef _PROTOTYPES_H
 #define _PROTOTYPES_H
+
+#include <config.h>
 
 #include <sys/stat.h>
 #ifdef USE_UTMPX
@@ -124,7 +126,7 @@ extern int copy_tree (const char *src_root, const char *dst_root,
                       gid_t old_gid, gid_t new_gid);
 
 /* encrypt.c */
-extern /*@exposed@*/char *pw_encrypt (const char *, const char *);
+extern /*@exposed@*//*@null@*/char *pw_encrypt (const char *, const char *);
 
 /* entry.c */
 extern void pw_entry (const char *, struct passwd *);
@@ -149,6 +151,17 @@ extern int find_new_uid (bool sys_user,
                          uid_t *uid,
                          /*@null@*/uid_t const *preferred_uid);
 
+#ifdef ENABLE_SUBIDS
+/* find_new_sub_gids.c */
+extern int find_new_sub_gids (const char *owner,
+			      gid_t *range_start, unsigned long *range_count);
+
+/* find_new_sub_uids.c */
+extern int find_new_sub_uids (const char *owner,
+			      uid_t *range_start, unsigned long *range_count);
+#endif				/* ENABLE_SUBIDS */
+
+
 /* get_gid.c */
 extern int get_gid (const char *gidstr, gid_t *gid);
 
@@ -165,6 +178,9 @@ extern int get_pid (const char *pidstr, pid_t *pid);
 extern int getrange (char *range,
                      unsigned long *min, bool *has_min,
                      unsigned long *max, bool *has_max);
+
+/* gettime.c */
+extern time_t gettime ();
 
 /* get_uid.c */
 extern int get_uid (const char *uidstr, uid_t *uid);
@@ -238,9 +254,9 @@ extern void motd (void);
 /* myname.c */
 extern /*@null@*//*@only@*/struct passwd *get_my_pwent (void);
 
-/* pam_pass_non_interractive.c */
+/* pam_pass_non_interactive.c */
 #ifdef USE_PAM
-extern int do_pam_passwd_non_interractive (const char *pam_service,
+extern int do_pam_passwd_non_interactive (const char *pam_service,
                                            const char *username,
                                            const char* password);
 #endif				/* USE_PAM */
@@ -257,6 +273,21 @@ extern void do_pam_passwd (const char *user, bool silent, bool change_expired);
 
 /* port.c */
 extern bool isttytime (const char *, const char *, time_t);
+
+/* prefix_flag.c */
+extern const char* process_prefix_flag (const char* short_opt, int argc, char **argv);
+extern struct group *prefix_getgrnam(const char *name);
+extern struct group *prefix_getgrgid(gid_t gid);
+extern struct passwd *prefix_getpwuid(uid_t uid);
+extern struct passwd *prefix_getpwnam(const char* name);
+extern struct spwd *prefix_getspnam(const char* name);
+extern struct group *prefix_getgr_nam_gid(const char *grname);
+extern void prefix_setpwent();
+extern struct passwd* prefix_getpwent();
+extern void prefix_endpwent();
+extern void prefix_setgrent();
+extern struct group* prefix_getgrent();
+extern void prefix_endgrent();
 
 /* pwd2spwd.c */
 #ifndef USE_PAM

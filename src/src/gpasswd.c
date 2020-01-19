@@ -32,7 +32,7 @@
 
 #include <config.h>
 
-#ident "$Id: gpasswd.c 3640 2011-11-19 21:51:52Z nekral-guest $"
+#ident "$Id$"
 
 #include <errno.h>
 #include <fcntl.h>
@@ -169,9 +169,8 @@ static RETSIGTYPE catch_signals (int killed)
 	}
 
 	if (0 != killed) {
-		(void) putchar ('\n');
-		(void) fflush (stdout);
-		exit (killed);
+		(void) write (STDOUT_FILENO, "\n", 1);
+		_exit (killed);
 	}
 }
 
@@ -370,7 +369,7 @@ static void open_files (void)
 
 	add_cleanup (log_gpasswd_failure_system, NULL);
 
-	if (gr_open (O_RDWR) == 0) {
+	if (gr_open (O_CREAT | O_RDWR) == 0) {
 		fprintf (stderr,
 		         _("%s: cannot open %s\n"),
 		         Prog, gr_dbname ());
@@ -380,7 +379,7 @@ static void open_files (void)
 
 #ifdef SHADOWGRP
 	if (is_shadowgrp) {
-		if (sgr_open (O_RDWR) == 0) {
+		if (sgr_open (O_CREAT | O_RDWR) == 0) {
 			fprintf (stderr,
 			         _("%s: cannot open %s\n"),
 			         Prog, sgr_dbname ());
@@ -898,6 +897,7 @@ static void change_passwd (struct group *gr)
 	char *cp;
 	static char pass[BUFSIZ];
 	int retries;
+	const char *salt;
 
 	/*
 	 * A new password is to be entered and it must be encrypted, etc.
@@ -938,7 +938,14 @@ static void change_passwd (struct group *gr)
 		exit (1);
 	}
 
-	cp = pw_encrypt (pass, crypt_make_salt (NULL, NULL));
+	salt = crypt_make_salt (NULL, NULL);
+	cp = pw_encrypt (pass, salt);
+	if (NULL == cp) {
+		fprintf (stderr,
+		         _("%s: failed to crypt password with salt '%s': %s\n"),
+		         Prog, salt, strerror (errno));
+		exit (1);
+	}
 	memzero (pass, sizeof pass);
 #ifdef SHADOWGRP
 	if (is_shadowgrp) {

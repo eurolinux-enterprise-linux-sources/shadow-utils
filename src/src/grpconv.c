@@ -36,7 +36,7 @@
  */
 
 #include <config.h>
-#ident "$Id: grpconv.c 3640 2011-11-19 21:51:52Z nekral-guest $"
+#ident "$Id$"
 
 #include <errno.h>
 #include <fcntl.h>
@@ -163,7 +163,7 @@ int main (int argc, char **argv)
 		fail_exit (5);
 	}
 	gr_locked = true;
-	if (gr_open (O_RDWR) == 0) {
+	if (gr_open (O_CREAT | O_RDWR) == 0) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, gr_dbname ());
 		fail_exit (1);
 	}
@@ -198,6 +198,7 @@ int main (int argc, char **argv)
 			         Prog, sg->sg_name, sgr_dbname ());
 			fail_exit (3);
 		}
+		(void) sgr_rewind ();
 	}
 
 	/*

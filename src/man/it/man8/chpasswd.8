@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: chpasswd
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 25/05/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 29/04/2018
 .\"    Manual: Comandi per la gestione del sistema
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: Italian
 .\"
-.TH "CHPASSWD" "8" "25/05/2012" "shadow\-utils 4\&.1\&.5\&.1" "Comandi per la gestione del si"
+.TH "CHPASSWD" "8" "29/04/2018" "shadow\-utils 4\&.6" "Comandi per la gestione del si"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -42,19 +42,19 @@ legge da standard input un elenco di coppie di nomi utente e password e usa ques
 Come impostazione predefinita, si devono fornire password in chiaro che vengono poi cifrate da
 \fBchpasswd\fR\&. Vengono aggiornate, se presenti, anche le informazioni sulla durata delle password\&.
 .PP
-L\*(Aqalgoritmo di cifratura predefinito pu\(`o essere impostato con le variabili
+The default encryption algorithm can be defined for the system with the
 \fBENCRYPT_METHOD\fR
-e
+or
 \fBMD5_CRYPT_ENAB\fR
-in
-/etc/login\&.defs, e pu\(`o essere ulteriormente modificato con le opzioni
+variables of
+/etc/login\&.defs, and can be overwritten with the
 \fB\-e\fR,
-\fB\-m\fR
-o
-\fB\-c\fR\&.
+\fB\-m\fR, or
+\fB\-c\fR
+options\&.
 .PP
 \fBchpasswd\fR
-prima aggiorna tutte le passwor in memoria, e poi scrive tutto su disco se non trova errori per nessun utente\&.
+first updates all the passwords in memory, and then commits all the changes to disk if no errors occurred for any user\&.
 .PP
 Questo comando \(`e appositamente pensato per grossi sistemi in cui si abbia la necessit\(`a di creare molti account nello stesso momento\&.
 .SH "OPZIONI"
@@ -63,7 +63,7 @@ Il comando
 \fBchpasswd\fR
 accetta le seguenti opzioni:
 .PP
-\fB\-c\fR, \fB\-\-crypt\-method\fR\fIMETODO\fR
+\fB\-c\fR, \fB\-\-crypt\-method\fR\ \&\fIMETODO\fR
 .RS 4
 Utilizza il metodo specificato per cifrare le password\&.
 .sp
@@ -97,7 +97,7 @@ Mostra un messaggio di aiuto ed esce\&.
 Usa la cifratura MD5 anzich\('e DES quando le password fornite non sono cifrate\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR \fICHROOT_DIR\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fICHROOT_DIR\fR
 .RS 4
 Effettua le modifiche nella directory
 \fICHROOT_DIR\fR
@@ -105,7 +105,7 @@ e usa i file di configurazione dalla directory
 \fICHROOT_DIR\fR\&.
 .RE
 .PP
-\fB\-s\fR, \fB\-\-sha\-rounds\fR\fICICLI\fR
+\fB\-s\fR, \fB\-\-sha\-rounds\fR\ \&\fICICLI\fR
 .RS 4
 Usa il numero specificato di cicli per cifrare la password\&.
 .sp

@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: useradd
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 2012-05-25
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 2018-04-29
 .\"    Manual: 系统管理命令
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: Chinese Simplified
 .\"
-.TH "USERADD" "8" "2012-05-25" "shadow\-utils 4\&.1\&.5\&.1" "系统管理命令"
+.TH "USERADD" "8" "2018-04-29" "shadow\-utils 4\&.6" "系统管理命令"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -54,10 +54,10 @@ useradd \- 创建一个新用户或更新默认新用户信息
 \fBuseradd\fR
 可以使用的选项有：
 .PP
-\fB\-b\fR, \fB\-\-base\-dir\fR\fIBASE_DIR\fR
+\fB\-b\fR, \fB\-\-base\-dir\fR\ \&\fIBASE_DIR\fR
 .RS 4
 如果没有使用
-\fB\-d\fR\fIHOME_DIR\fR，则使用默认的基目录。\fIBASE_DIR\fR
+\fB\-d\fR\ \&\fIHOME_DIR\fR，则使用默认的基目录。\fIBASE_DIR\fR
 加上账户名就是主目录。如果没有使用
 \fB\-m\fR
 选项，\fIBASE_DIR\fR
@@ -72,12 +72,12 @@ useradd \- 创建一个新用户或更新默认新用户信息
 /home。
 .RE
 .PP
-\fB\-c\fR, \fB\-\-comment\fR\fICOMMENT\fR
+\fB\-c\fR, \fB\-\-comment\fR\ \&\fICOMMENT\fR
 .RS 4
 任何字符串。通常是关于登录的简短描述，当前用于用户全名。
 .RE
 .PP
-\fB\-d\fR, \fB\-\-home\fR\fIHOME_DIR\fR
+\fB\-d\fR, \fB\-\-home\-dir\fR\ \&\fIHOME_DIR\fR
 .RS 4
 将创建新用户，并使用
 \fIHOME_DIR\fR
@@ -94,7 +94,7 @@ useradd \- 创建一个新用户或更新默认新用户信息
 看下边，\(lq更改默认值\(rq子节。
 .RE
 .PP
-\fB\-e\fR, \fB\-\-expiredate\fR\fIEXPIRE_DATE\fR
+\fB\-e\fR, \fB\-\-expiredate\fR\ \&\fIEXPIRE_DATE\fR
 .RS 4
 用户账户将被禁用的日期。日期以
 \fIYYYY\-MM\-DD\fR
@@ -108,7 +108,7 @@ useradd \- 创建一个新用户或更新默认新用户信息
 变量指定的默认过期日期，或者一个空字符串(不过期)。
 .RE
 .PP
-\fB\-f\fR, \fB\-\-inactive\fR\fIINACTIVE\fR
+\fB\-f\fR, \fB\-\-inactive\fR\ \&\fIINACTIVE\fR
 .RS 4
 密码过期后，账户被彻底禁用之前的天数。0 表示立即禁用，\-1 表示禁用这个功能。
 .sp
@@ -120,7 +120,7 @@ useradd \- 创建一个新用户或更新默认新用户信息
 指定的默认禁用周期，或者默认为 \-1。
 .RE
 .PP
-\fB\-g\fR, \fB\-\-gid\fR\fIGROUP\fR
+\fB\-g\fR, \fB\-\-gid\fR\ \&\fIGROUP\fR
 .RS 4
 用户初始登陆组的组名或号码。组名必须已经存在。组号码必须指代已经存在的组。
 .sp
@@ -143,7 +143,7 @@ useradd \- 创建一个新用户或更新默认新用户信息
 变量指定的值，再或者默认是 100。
 .RE
 .PP
-\fB\-G\fR, \fB\-\-groups\fR\fIGROUP1\fR[\fI,GROUP2,\&.\&.\&.\fR[\fI,GROUPN\fR]]]
+\fB\-G\fR, \fB\-\-groups\fR\ \&\fIGROUP1\fR[\fI,GROUP2,\&.\&.\&.\fR[\fI,GROUPN\fR]]]
 .RS 4
 用户还属于的附加组列表。每个组都用逗号隔开，没有中间的空格。这里的组受到了
 \fB\-g\fR
@@ -155,7 +155,7 @@ useradd \- 创建一个新用户或更新默认新用户信息
 现实帮助信息并退出。
 .RE
 .PP
-\fB\-k\fR, \fB\-\-skel\fR\fISKEL_DIR\fR
+\fB\-k\fR, \fB\-\-skel\fR\ \&\fISKEL_DIR\fR
 .RS 4
 骨架目录，包含使用
 \fBuseradd\fR
@@ -176,26 +176,30 @@ useradd \- 创建一个新用户或更新默认新用户信息
 如果可以，也复制 ACL 和扩展属性。
 .RE
 .PP
-\fB\-K\fR, \fB\-\-key\fR\fIKEY\fR=\fIVALUE\fR
+\fB\-K\fR, \fB\-\-key\fR\ \&\fIKEY\fR=\fIVALUE\fR
 .RS 4
-默认覆盖
+Overrides
 /etc/login\&.defs
-(\fBUID_MIN\fR,
+defaults (\fBUID_MIN\fR,
 \fBUID_MAX\fR,
 \fBUMASK\fR,
 \fBPASS_MAX_DAYS\fR
-及其它)。
-例如：\fB\-K \fR\fIPASS_MAX_DAYS\fR=\fI\-1\fR
-可以用于创建一个密码不会过期的系统账户，即使系统账户没有密码。可以指定多个
+and others)\&.
+
+Example:
+\fB\-K\fR\ \&\fIPASS_MAX_DAYS\fR=\fI\-1\fR
+can be used when creating system account to turn off password aging, even though system account has no password at all\&. Multiple
 \fB\-K\fR
-选项，如：\fB\-K \fR\fIUID_MIN\fR=\fI100\fR\fB\-K \fR\fIUID_MAX\fR=\fI499\fR
+options can be specified, e\&.g\&.:
+\fB\-K\fR\ \&\fIUID_MIN\fR=\fI100\fR\ \&
+\fB\-K\fR\ \&\fIUID_MAX\fR=\fI499\fR
 .RE
 .PP
 \fB\-l\fR, \fB\-\-no\-log\-init\fR
 .RS 4
 不要将用户添加到最近登录和登录失败数据库。
 .sp
-默认上，最近登录和登录失败中用户的条目会被重置，以避免重新使用先前删除的用户的条目。
+By default, the user\*(Aqs entries in the lastlog and faillog databases are reset to avoid reusing the entry from a previously deleted user\&.
 .RE
 .PP
 \fB\-m\fR, \fB\-\-create\-home\fR
@@ -209,7 +213,7 @@ useradd \- 创建一个新用户或更新默认新用户信息
 没有启用，不会创建主目录。
 .RE
 .PP
-\fB\-M\fR
+\fB\-M\fR, \fB\-\-no\-create\-home\fR
 .RS 4
 不创建用户主目录，即使系统在
 /etc/login\&.defs
@@ -248,7 +252,7 @@ useradd \- 创建一个新用户或更新默认新用户信息
 选项组合使用才有效。
 .RE
 .PP
-\fB\-p\fR, \fB\-\-password\fR\fIPASSWORD\fR
+\fB\-p\fR, \fB\-\-password\fR\ \&\fIPASSWORD\fR
 .RS 4
 加密了的密码，就像
 \fBcrypt\fR(3)
@@ -273,15 +277,16 @@ range, defined in
 \fBGID\fR
 counterparts for the creation of groups)\&.
 .sp
-注意：\fBuseradd\fR
-不会为这种用户创建主目录，无论
+Note that
+\fBuseradd\fR
+will not create a home directory for such a user, regardless of the default setting in
 /etc/login\&.defs
-(\fBCREATE_HOME\fR) 中是的默认设置是怎样。如果想为要创建的系统账户创建主目录，需要指定
+(\fBCREATE_HOME\fR)\&. You have to specify the
 \fB\-m\fR
-选项。
+options if you want a home directory for a system account to be created\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR\fICHROOT_DIR\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fICHROOT_DIR\fR
 .RS 4
 Apply changes in the
 \fICHROOT_DIR\fR
@@ -290,7 +295,16 @@ directory and use the configuration files from the
 directory\&.
 .RE
 .PP
-\fB\-s\fR, \fB\-\-shell\fR\fISHELL\fR
+\fB\-P\fR, \fB\-\-prefix\fR\ \&\fIPREFIX_DIR\fR
+.RS 4
+Apply changes in the
+\fIPREFIX_DIR\fR
+directory and use the configuration files from the
+\fIPREFIX_DIR\fR
+directory\&. This option does not chroot and is intended for preparing a cross\-compilation target\&. Some limitations: NIS and LDAP users/groups are not verified\&. PAM authentication is using the host files\&. No SELINUX support\&.
+.RE
+.PP
+\fB\-s\fR, \fB\-\-shell\fR\ \&\fISHELL\fR
 .RS 4
 用户的登录 shell 名。默认为留空，让系统根据
 /etc/default/useradd
@@ -299,7 +313,7 @@ directory\&.
 变量选择默认的登录 shell，默认为空字符串。
 .RE
 .PP
-\fB\-u\fR, \fB\-\-uid\fR\fIUID\fR
+\fB\-u\fR, \fB\-\-uid\fR\ \&\fIUID\fR
 .RS 4
 用户 ID 的数字值。此值必须为唯一的，除非使用了
 \fB\-o\fR
@@ -329,7 +343,7 @@ directory\&.
 变量指定。
 .RE
 .PP
-\fB\-Z\fR, \fB\-\-selinux\-user\fR\fISEUSER\fR
+\fB\-Z\fR, \fB\-\-selinux\-user\fR\ \&\fISEUSER\fR
 .RS 4
 用户登陆的 SELinux 用户。默认为留空，这会造成系统选择默认的 SELinux 用户。
 .RE
@@ -342,7 +356,7 @@ directory\&.
 和其它选项配合使用时，\fBuseradd\fR
 将为指定的选项更新默认值。有效的\(lq更改默认值\(rq选项有：
 .PP
-\fB\-b\fR, \fB\-\-base\-dir\fR\fIBASE_DIR\fR
+\fB\-b\fR, \fB\-\-base\-dir\fR\ \&\fIBASE_DIR\fR
 .RS 4
 新用户主目录的路径前缀。如果创建新账户时，没有使用
 \fB\-d\fR
@@ -357,7 +371,7 @@ directory\&.
 选项。
 .RE
 .PP
-\fB\-e\fR, \fB\-\-expiredate\fR\fIEXPIRE_DATE\fR
+\fB\-e\fR, \fB\-\-expiredate\fR\ \&\fIEXPIRE_DATE\fR
 .RS 4
 禁用此用户账户的日期。
 .sp
@@ -368,7 +382,7 @@ directory\&.
 变量。
 .RE
 .PP
-\fB\-f\fR, \fB\-\-inactive\fR\fIINACTIVE\fR
+\fB\-f\fR, \fB\-\-inactive\fR\ \&\fIINACTIVE\fR
 .RS 4
 密码过期到账户被禁用之前的天数。
 .sp
@@ -379,7 +393,7 @@ directory\&.
 变量。
 .RE
 .PP
-\fB\-g\fR, \fB\-\-gid\fR\fIGROUP\fR
+\fB\-g\fR, \fB\-\-gid\fR\ \&\fIGROUP\fR
 .RS 4
 新用户初始组的组名或 ID (使用了
 \fB\-N/\-\-no\-user\-group\fR
@@ -398,7 +412,7 @@ directory\&.
 变量。
 .RE
 .PP
-\fB\-s\fR, \fB\-\-shell\fR\fISHELL\fR
+\fB\-s\fR, \fB\-\-shell\fR\ \&\fISHELL\fR
 .RS 4
 新用户的登录 shell 名。
 .sp
@@ -506,6 +520,52 @@ and
 密码过期之前给出警告的天数。0 表示只有只在过期的当天警告，负值表示不警告。如果没有指定，不会给警告。
 .RE
 .PP
+\fBSUB_GID_MIN\fR (number), \fBSUB_GID_MAX\fR (number), \fBSUB_GID_COUNT\fR (number)
+.RS 4
+If
+/etc/subuid
+exists, the commands
+\fBuseradd\fR
+and
+\fBnewusers\fR
+(unless the user already have subordinate group IDs) allocate
+\fBSUB_GID_COUNT\fR
+unused group IDs from the range
+\fBSUB_GID_MIN\fR
+to
+\fBSUB_GID_MAX\fR
+for each new user\&.
+.sp
+The default values for
+\fBSUB_GID_MIN\fR,
+\fBSUB_GID_MAX\fR,
+\fBSUB_GID_COUNT\fR
+are respectively 100000, 600100000 and 10000\&.
+.RE
+.PP
+\fBSUB_UID_MIN\fR (number), \fBSUB_UID_MAX\fR (number), \fBSUB_UID_COUNT\fR (number)
+.RS 4
+If
+/etc/subuid
+exists, the commands
+\fBuseradd\fR
+and
+\fBnewusers\fR
+(unless the user already have subordinate user IDs) allocate
+\fBSUB_UID_COUNT\fR
+unused user IDs from the range
+\fBSUB_UID_MIN\fR
+to
+\fBSUB_UID_MAX\fR
+for each new user\&.
+.sp
+The default values for
+\fBSUB_UID_MIN\fR,
+\fBSUB_UID_MAX\fR,
+\fBSUB_UID_COUNT\fR
+are respectively 100000, 600100000 and 10000\&.
+.RE
+.PP
 \fBSYS_GID_MAX\fR (number), \fBSYS_GID_MIN\fR (number)
 .RS 4
 \fBuseradd\fR、\fBgroupadd\fR
@@ -608,6 +668,16 @@ and
 包含默认文件的目录。
 .RE
 .PP
+/etc/subgid
+.RS 4
+Per user subordinate group IDs\&.
+.RE
+.PP
+/etc/subuid
+.RS 4
+Per user subordinate user IDs\&.
+.RE
+.PP
 /etc/login\&.defs
 .RS 4
 Shadow 密码套件配置。
@@ -615,7 +685,8 @@ Shadow 密码套件配置。
 .SH "退出值"
 .PP
 \fBuseradd\fR
-可以返回如下值：.PP
+可以返回如下值：
+.PP
 \fI0\fR
 .RS 4
 成功
@@ -677,5 +748,6 @@ can\*(Aqt update SELinux user mapping
 \fBgroupmod\fR(8),
 \fBlogin.defs\fR(5),
 \fBnewusers\fR(8),
+\fBsubgid\fR(5), \fBsubuid\fR(5),
 \fBuserdel\fR(8),
 \fBusermod\fR(8)\&.

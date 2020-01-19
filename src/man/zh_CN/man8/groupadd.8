@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: groupadd
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 2012-05-25
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 2018-04-29
 .\"    Manual: 系统管理命令
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: Chinese Simplified
 .\"
-.TH "GROUPADD" "8" "2012-05-25" "shadow\-utils 4\&.1\&.5\&.1" "系统管理命令"
+.TH "GROUPADD" "8" "2018-04-29" "shadow\-utils 4\&.6" "系统管理命令"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -50,7 +50,7 @@ This option causes the command to simply exit with success status if the specifi
 is turned off)\&.
 .RE
 .PP
-\fB\-g\fR, \fB\-\-gid\fR\fIGID\fR
+\fB\-g\fR, \fB\-\-gid\fR\ \&\fIGID\fR
 .RS 4
 The numerical value of the group\*(Aqs ID\&. This value must be unique, unless the
 \fB\-o\fR
@@ -70,7 +70,7 @@ description\&.
 现实帮助信息并退出。
 .RE
 .PP
-\fB\-K\fR, \fB\-\-key\fR\fIKEY\fR=\fIVALUE\fR
+\fB\-K\fR, \fB\-\-key\fR\ \&\fIKEY\fR=\fIVALUE\fR
 .RS 4
 Overrides
 /etc/login\&.defs
@@ -78,9 +78,9 @@ defaults (GID_MIN, GID_MAX and others)\&. Multiple
 \fB\-K\fR
 options can be specified\&.
 .sp
-示例：\fB\-K \fR\fIGID_MIN\fR=\fI100\fR\fB\-K \fR\fIGID_MAX\fR=\fI499\fR
+示例：\fB\-K\fR\ \&\fIGID_MIN\fR=\fI100\fR\ \&\fB\-K\fR\ \&\fIGID_MAX\fR=\fI499\fR
 .sp
-注意：\fB\-K \fR\fIGID_MIN\fR=\fI10\fR,\fIGID_MAX\fR=\fI499\fR
+注意：\fB\-K\fR\ \&\fIGID_MIN\fR=\fI10\fR,\fIGID_MAX\fR=\fI499\fR
 尚不能工作。
 .RE
 .PP
@@ -89,7 +89,7 @@ options can be specified\&.
 此选项允许添加一个使用非唯一 GID 的组。
 .RE
 .PP
-\fB\-p\fR, \fB\-\-password\fR\fIPASSWORD\fR
+\fB\-p\fR, \fB\-\-password\fR\ \&\fIPASSWORD\fR
 .RS 4
 加密了的密码，就像
 \fBcrypt\fR(3)
@@ -111,13 +111,22 @@ login\&.defs, instead of
 \fBGID_MIN\fR\-\fBGID_MAX\fR\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR\fICHROOT_DIR\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fICHROOT_DIR\fR
 .RS 4
 Apply changes in the
 \fICHROOT_DIR\fR
 directory and use the configuration files from the
 \fICHROOT_DIR\fR
 directory\&.
+.RE
+.PP
+\fB\-P\fR, \fB\-\-prefix\fR\ \&\fIPREFIX_DIR\fR
+.RS 4
+Apply changes in the
+\fIPREFIX_DIR\fR
+directory and use the configuration files from the
+\fIPREFIX_DIR\fR
+directory\&. This option does not chroot and is intended for preparing a cross\-compilation target\&. Some limitations: NIS and LDAP users/groups are not verified\&. PAM authentication is using the host files\&. No SELINUX support\&.
 .RE
 .SH "配置文件"
 .PP
@@ -196,7 +205,8 @@ will deny the group creation request\&.
 .SH "退出值"
 .PP
 \fBgroupadd\fR
-可能以如下值退出：.PP
+可能以如下值退出：
+.PP
 \fI0\fR
 .RS 4
 成功

@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: su
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 25/05/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 29/04/2018
 .\"    Manual: Commandes utilisateur
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: French
 .\"
-.TH "SU" "1" "25/05/2012" "shadow\-utils 4\&.1\&.5\&.1" "Commandes utilisateur"
+.TH "SU" "1" "29/04/2018" "shadow\-utils 4\&.6" "Commandes utilisateur"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -31,25 +31,27 @@
 su \- Changer d\*(Aqidentifiant d\*(Aqutilisateur ou devenir superutilisateur
 .SH "SYNOPSIS"
 .HP \w'\fBsu\fR\ 'u
-\fBsu\fR [\fIoptions\fR] [\fInom_utilisateur\fR]
+\fBsu\fR [\fIoptions\fR] [\fI\-\fR] [\fInom_utilisateur\fR\ [\ \fIargs\fR\ ]]
 .SH "DESCRIPTION"
 .PP
-La commande
+The
 \fBsu\fR
-permet de devenir un autre utilisateur pour la dur\('ee d\*(Aqune session\&. Invoqu\('e sans nom d\*(Aq\fButilisateur\fR, le comportement par d\('efaut de
-\fBsu\fRest de devenir superutilisateur\&. Le param\(`etre optionnel
+command is used to become another user during a login session\&. Invoked without a
+\fBusername\fR,
+\fBsu\fR
+defaults to becoming the superuser\&. The
 \fB\-\fR
-permet d\*(Aqobtenir un environnement similaire \(`a celui que l\*(Aqutilisateur aurait obtenu lors d\*(Aqune connexion directe\&.
+option may be used to provide an environment similar to what the user would expect had the user logged in directly\&. The
+\fB\-c\fR
+option may be used to treat the next argument as a command by most shells\&.
 .PP
-Des param\(`etres suppl\('ementaires peuvent \(^etre fournis apr\(`es le nom de l\*(Aqutilisateur\&. Dans ce cas, ils sont donn\('es \(`a l\*(Aqinterpr\('eteur de commandes de connexion de l\*(Aqutilisateur\&. En particulier, le param\(`etre \(Fo\ \&\fB\-c\fR\ \&\(Fc consid\(`ere que le param\(`etre suivant est une commande pour la plupart des interpr\('eteurs de commandes\&. La commande sera ex\('ecut\('ee par l\*(Aqinterpr\('eteur indiqu\('e dans
-/etc/passwd
-pour l\*(Aqutilisateur cible\&.
-.PP
-Vous pouvez utiliser le param\(`etre
+Options are recognized everywhere in the argument list\&. You can use the
 \fB\-\-\fR
-pour s\('eparer les options de
-\fBsu\fR
-des param\(`etres fournis par l\*(Aqinterpr\('eteur de commandes\&.
+argument to stop option parsing\&. The
+\fB\-\fR
+option is special: it is also recognized after
+\fB\-\-\fR, but has to be placed before
+\fBusername\fR\&.
 .PP
 Un mot de passe sera demand\('e \(`a l\*(Aqutilisateur, si n\('ecessaire\&. Les mots de passe incorrects produisent un message d\*(Aqerreur\&. Toutes les tentatives, r\('eussies ou non, sont enregistr\('ees afin de d\('etecter tout abus du syst\(`eme\&.
 .PP
@@ -73,27 +75,28 @@ Les options applicables \(`a la commande
 \fBsu\fR
 sont\ \&:
 .PP
-\fB\-c\fR, \fB\-\-command\fR \fICOMMANDE\fR
+\fB\-c\fR, \fB\-\-command\fR\ \&\fICOMMANDE\fR
 .RS 4
 Indiquer une commande qui sera invoqu\('ee par l\*(Aqinterpr\('eteur de commandes en utilisant son option
 \fB\-c\fR
 .sp
-La commande ex\('ecut\('ee n\*(Aqaura aucun terminal de contr\(^ole\&. Cette option ne peut pas \(^etre utilis\('ee pour ex\('ecuter des programmes interactifs qui ont besoin d\*(Aqun terminal de contr\(^ole\&.
+The executed command will have no controlling terminal\&. This option cannot be used to execute interactive programs which need a controlling TTY\&.
 .RE
 .PP
 \fB\-\fR, \fB\-l\fR, \fB\-\-login\fR
 .RS 4
 Fournir \(`a l\*(Aqutilisateur un environnement similaire \(`a celui qu\*(Aqil aurait obtenu s\*(Aqil s\*(Aq\('etait connect\('e directement\&.
 .sp
-Lorsque
+When
 \fB\-\fR
-est utilis\('e, il doit \(^etre indiqu\('e comme dernier param\(`etre de
-\fBsu\fR\&. Les autres formes (\fB\-l\fR
-et
-\fB\-\-login\fR) ne pr\('esentent pas cette restriction\&.
+is used, it must be specified before any
+\fBusername\fR\&. For portability it is recommended to use it as last option, before any
+\fBusername\fR\&. The other forms (\fB\-l\fR
+and
+\fB\-\-login\fR) do not have this restriction\&.
 .RE
 .PP
-\fB\-s\fR, \fB\-\-shell\fR \fIINTERPR\('ETEUR\fR
+\fB\-s\fR, \fB\-\-shell\fR\ \&\fIINTERPR\('ETEUR\fR
 .RS 4
 Interpr\('eteur de commande devant \(^etre appel\('e\&.
 .sp

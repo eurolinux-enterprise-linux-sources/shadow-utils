@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: newusers
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 25.05.2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 29.04.2018
 .\"    Manual: Befehle zur Systemverwaltung
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: German
 .\"
-.TH "NEWUSERS" "8" "25.05.2012" "shadow\-utils 4\&.1\&.5\&.1" "Befehle zur Systemverwaltung"
+.TH "NEWUSERS" "8" "29.04.2018" "shadow\-utils 4\&.6" "Befehle zur Systemverwaltung"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -47,9 +47,8 @@ pw_Name:pw_Passwort:pw_uid:pw_gid:pw_gecos:pw_Verz:pw_shell
 .RS 4
 Dies ist der Name des Benutzers\&.
 .sp
-Es kann sich dabei um den Namen eines neuen oder eines existierenden Benutzer (oder eines, der zuvor mit
-\fBnewusers\fR
-erstellt wurde) handeln\&. F\(:ur den Fall, dass der Benutzer bereits vorhanden ist, werden seine Daten ver\(:andert, anderenfalls wird ein neuer Benutzer erstellt\&.
+It can be the name of a new user or the name of an existing user (or a user created before by
+\fBnewusers\fR)\&. In case of an existing user, the user\*(Aqs information will be changed, otherwise a new user will be created\&.
 .RE
 .PP
 \fIpw_Passwort\fR
@@ -61,15 +60,13 @@ Dieses Feld wird verschl\(:usselt und als neuer Wert f\(:ur das verschl\(:usselt
 .RS 4
 Mit diesem Feld wird die UID des Benutzers bestimmt\&.
 .sp
-Wenn dieses Feld leer ist, wird von
-\fBnewusers\fR
-automatisch eine neue (noch freie) UID gew\(:ahlt\&.
+If the field is empty, a new (unused) UID will be defined automatically by
+\fBnewusers\fR\&.
 .sp
 Wenn dieses Feld eine Zahl enth\(:alt, wird sie als UID verwendet\&.
 .sp
-Wenn dieses Feld den Namen eines existierenden Benutzers enth\(:alt (oder eines Benutzers, der zuvor mit
-\fBnewusers\fR
-erstellt wurde), wird die UID des angegebenen Benutzers verwendet\&.
+If this field contains the name of an existing user (or the name of a user created before by
+\fBnewusers\fR), the UID of the specified user will be used\&.
 .sp
 Falls die UID eines bestehenden Benutzers ver\(:andert wird, muss der Eigent\(:umer der Dateien des Benutzers per Hand angepasst werden\&.
 .RE
@@ -156,7 +153,7 @@ bis
 gew\(:ahlt (gleiches gilt f\(:ur die GID bei der Erstellung von Gruppen)\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR\fICHROOT_VERZ\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fICHROOT_VERZ\fR
 .RS 4
 f\(:uhrt die Ver\(:anderungen in dem Verzeichnis
 \fICHROOT_VERZ\fR
@@ -293,6 +290,52 @@ Falls
 \fBSHA_CRYPT_MAX_ROUNDS\fR, wird der h\(:ohere Wert verwendet\&.
 .RE
 .PP
+\fBSUB_GID_MIN\fR (number), \fBSUB_GID_MAX\fR (number), \fBSUB_GID_COUNT\fR (number)
+.RS 4
+If
+/etc/subuid
+exists, the commands
+\fBuseradd\fR
+and
+\fBnewusers\fR
+(unless the user already have subordinate group IDs) allocate
+\fBSUB_GID_COUNT\fR
+unused group IDs from the range
+\fBSUB_GID_MIN\fR
+to
+\fBSUB_GID_MAX\fR
+for each new user\&.
+.sp
+The default values for
+\fBSUB_GID_MIN\fR,
+\fBSUB_GID_MAX\fR,
+\fBSUB_GID_COUNT\fR
+are respectively 100000, 600100000 and 10000\&.
+.RE
+.PP
+\fBSUB_UID_MIN\fR (number), \fBSUB_UID_MAX\fR (number), \fBSUB_UID_COUNT\fR (number)
+.RS 4
+If
+/etc/subuid
+exists, the commands
+\fBuseradd\fR
+and
+\fBnewusers\fR
+(unless the user already have subordinate user IDs) allocate
+\fBSUB_UID_COUNT\fR
+unused user IDs from the range
+\fBSUB_UID_MIN\fR
+to
+\fBSUB_UID_MAX\fR
+for each new user\&.
+.sp
+The default values for
+\fBSUB_UID_MIN\fR,
+\fBSUB_UID_MAX\fR,
+\fBSUB_UID_COUNT\fR
+are respectively 100000, 600100000 and 10000\&.
+.RE
+.PP
 \fBSYS_GID_MAX\fR (Zahl), \fBSYS_GID_MIN\fR (Zahl)
 .RS 4
 der Bereich von Gruppen\-IDs, aus dem die Programme
@@ -384,8 +427,19 @@ sichere Informationen zu den Gruppenkonten
 .RS 4
 Konfiguration der Shadow\-Passwort\-Werkzeugsammlung
 .RE
+.PP
+/etc/subgid
+.RS 4
+Per user subordinate group IDs\&.
+.RE
+.PP
+/etc/subuid
+.RS 4
+Per user subordinate user IDs\&.
+.RE
 .SH "SIEHE AUCH"
 .PP
 \fBlogin.defs\fR(5),
 \fBpasswd\fR(1),
+\fBsubgid\fR(5), \fBsubuid\fR(5),
 \fBuseradd\fR(8)\&.

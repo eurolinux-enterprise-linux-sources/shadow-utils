@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: groupdel
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 25/05/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 29/04/2018
 .\"    Manual: Kommandoer for systemh\(oandtering
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: Danish
 .\"
-.TH "GROUPDEL" "8" "25/05/2012" "shadow\-utils 4\&.1\&.5\&.1" "Kommandoer for systemh\(oandterin"
+.TH "GROUPDEL" "8" "29/04/2018" "shadow\-utils 4\&.6" "Kommandoer for systemh\(oandterin"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -49,12 +49,21 @@ er:
 Vis hj\(aelpeteksten og afslut\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR\fICHROOT_DIR\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fICHROOT_DIR\fR
 .RS 4
 Brug \(aendringer i mappen
 \fICHROOT_DIR\fR
 og brug konfigurationsfilerne fra mappen
 \fICHROOT_DIR\fR\&.
+.RE
+.PP
+\fB\-P\fR, \fB\-\-prefix\fR\ \&\fIPREFIX_DIR\fR
+.RS 4
+Apply changes in the
+\fIPREFIX_DIR\fR
+directory and use the configuration files from the
+\fIPREFIX_DIR\fR
+directory\&. This option does not chroot and is intended for preparing a cross\-compilation target\&. Some limitations: NIS and LDAP users/groups are not verified\&. PAM authentication is using the host files\&. No SELINUX support\&.
 .RE
 .SH "CAVEATS"
 .PP
@@ -124,7 +133,6 @@ can\*(Aqt update group file
 .RE
 .SH "SE OGS\(oA"
 .PP
-
 \fBchfn\fR(1),
 \fBchsh\fR(1),
 \fBpasswd\fR(1),

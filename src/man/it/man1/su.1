@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: su
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 25/05/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 29/04/2018
 .\"    Manual: Comandi utente
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: Italian
 .\"
-.TH "SU" "1" "25/05/2012" "shadow\-utils 4\&.1\&.5\&.1" "Comandi utente"
+.TH "SU" "1" "29/04/2018" "shadow\-utils 4\&.6" "Comandi utente"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -31,29 +31,27 @@
 su \- cambia ID utente o diventa amministratore
 .SH "SINOSSI"
 .HP \w'\fBsu\fR\ 'u
-\fBsu\fR [\fIopzioni\fR] [\fInome\fR]
+\fBsu\fR [\fIopzioni\fR] [\fI\-\fR] [\fInome\fR\ [\ \fIargs\fR\ ]]
 .SH "DESCRIZIONE"
 .PP
+The
 \fBsu\fR
-permette di diventare un altro utente durante una sessione di login\&. Se nessun
-\fBnome\fR
-utente viene specificato,
+command is used to become another user during a login session\&. Invoked without a
+\fBusername\fR,
 \fBsu\fR
-acquisice i privilegi di amministratore\&. L\*(Aqopzione
+defaults to becoming the superuser\&. The
 \fB\-\fR
-pu\(`o essere usata per fornire un ambiente simile a quello che l\*(Aqutente troverebbe se effettuasse il login direttamente\&.
-.PP
-Dopo il nome utente, \(`e possibile specificare argomenti aggiuntivi da passare alla shell di login dell\*(Aqutente\&. In particolare, molti interpreti di comando adottano la convenzione per cui l\*(Aqopzione
+option may be used to provide an environment similar to what the user would expect had the user logged in directly\&. The
 \fB\-c\fR
-seguita da un argomento fa s\(`i che quest\*(Aqultimo sia considerato un comando\&. Il comando viene eseguito dalla shell specificata in
-/etc/passwd
-per l\*(Aqutente di destinazione\&.
+option may be used to treat the next argument as a command by most shells\&.
 .PP
-Si pu\(`o utilizzare
+Options are recognized everywhere in the argument list\&. You can use the
 \fB\-\-\fR
-per separare le opzioni di
-\fBsu\fR
-dagli argomenti passati alla shell\&.
+argument to stop option parsing\&. The
+\fB\-\fR
+option is special: it is also recognized after
+\fB\-\-\fR, but has to be placed before
+\fBusername\fR\&.
 .PP
 All\*(Aqutente viene quindi chiesta la password, se necessario\&. Una password errata viene segnalata da un messaggio d\*(Aqerrore\&. Viene effettuato il log di tutti i tentativi, siano essi riusciti o meno, al fine di rilevare ogni abuso del sistema\&.
 .PP
@@ -77,27 +75,28 @@ Il comando
 \fBsu\fR
 accetta le seguenti opzioni:
 .PP
-\fB\-c\fR, \fB\-\-command\fR\fICOMANDO\fR
+\fB\-c\fR, \fB\-\-command\fR\ \&\fICOMANDO\fR
 .RS 4
 Specifica un comando che verr\(`a invocato dalla shell tramite la sua opzione
 \fB\-c\fR\&.
 .sp
-Il comando eseguito non avr\(`a un terminale di controllo\&. Questa opzione non pu\(`o essere utilizzata per invocare programmi interattivi che richiedono un TTY di controllo\&.
+The executed command will have no controlling terminal\&. This option cannot be used to execute interactive programs which need a controlling TTY\&.
 .RE
 .PP
 \fB\-\fR, \fB\-l\fR, \fB\-\-login\fR
 .RS 4
 Fornisce un ambiente simile a quello che un utente si attende quando effettua direttamente il login\&.
 .sp
-Quando si usa
+When
 \fB\-\fR
-deve essere l\*(Aqultima opzione di
-\fBsu\fR\&. Le altre forme (\fB\-l\fR
-e
-\fB\-\-login\fR) non hanno questo vincolo\&.
+is used, it must be specified before any
+\fBusername\fR\&. For portability it is recommended to use it as last option, before any
+\fBusername\fR\&. The other forms (\fB\-l\fR
+and
+\fB\-\-login\fR) do not have this restriction\&.
 .RE
 .PP
-\fB\-s\fR, \fB\-\-shell\fR\fISHELL\fR
+\fB\-s\fR, \fB\-\-shell\fR\ \&\fISHELL\fR
 .RS 4
 La shell che verr\(`a invocata\&.
 .sp

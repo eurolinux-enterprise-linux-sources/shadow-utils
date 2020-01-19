@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: chage
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 05/25/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 04/29/2018
 .\"    Manual: Polecenia użytkownik\('ow
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: Polish
 .\"
-.TH "CHAGE" "1" "05/25/2012" "shadow\-utils 4\&.1\&.5\&.1" "Polecenia użytkownik\('ow"
+.TH "CHAGE" "1" "04/29/2018" "shadow\-utils 4\&.6" "Polecenia użytkownik\('ow"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -43,12 +43,12 @@ Polecenie
 \fBchage\fR
 posiada następujące opcje:
 .PP
-\fB\-d\fR, \fB\-\-lastday\fR\fIOSTATNI\fR
+\fB\-d\fR, \fB\-\-lastday\fR\ \&\fIOSTATNI\fR
 .RS 4
 Ustawia ilość dni od 1 stycznia 1970 kiedy ha\(/lo by\(/lo ostani raz zmieniane\&. Data ważności może być takze prezekazana w formacie RRRR\-MM\-DD (lub formacie używanym lokalnie)\&.
 .RE
 .PP
-\fB\-E\fR, \fB\-\-expiredate\fR\fIDATA_WAŻN\fR
+\fB\-E\fR, \fB\-\-expiredate\fR\ \&\fIDATA_WAŻN\fR
 .RS 4
 Ustawia datę, począwszy od kt\('orej konto użytkownika nie będzie już dostępne\&.
 \fIDATA_WAŻN\fR
@@ -66,7 +66,7 @@ usuwa ograniczenie ważności konta użytkownika\&.
 Wyświetlenie komunikatu pomocy i zakończenie dzia\(/lania\&.
 .RE
 .PP
-\fB\-I\fR, \fB\-\-inactive\fR\fINIEAKTYWNE\fR
+\fB\-I\fR, \fB\-\-inactive\fR\ \&\fINIEAKTYWNE\fR
 .RS 4
 Opcja ta s\(/luży do ustawiania czasu nieaktywności konta po wygaśnięciu ważności has\(/la, po kt\('orym to czasie konto jest blokowane\&. Parametr
 \fINIEAKTYWNE\fR
@@ -84,13 +84,13 @@ usuwa ograniczenie nieaktywniści konta użytkownika\&.
 Wyświetlenie informacji o terminach ważności konta i has\(/la\&.
 .RE
 .PP
-\fB\-m\fR, \fB\-\-mindays\fR\fIMIN_DNI\fR
+\fB\-m\fR, \fB\-\-mindays\fR\ \&\fIMIN_DNI\fR
 .RS 4
 Utawia minimalną liczbę dni pomiędzy zmianami has\(/la na
 \fIMIN_DAYS\fR\&. Wartość zerowa oznacza, że użytkownik może je zmieniać w dowolnym czasie\&.
 .RE
 .PP
-\fB\-M\fR, \fB\-\-maxdays\fR\fIMAX_DNI\fR
+\fB\-M\fR, \fB\-\-maxdays\fR\ \&\fIMAX_DNI\fR
 .RS 4
 Ustawia maksymalną liczbę dni, przez jakie has\(/lo jest ważne\&. Gdy
 \fIMAX_DNI\fR
@@ -106,7 +106,7 @@ jako
 usuwa sprawdzanie wazności has\(/la\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR \fICHROOT_DIR\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fICHROOT_DIR\fR
 .RS 4
 Apply changes in the
 \fICHROOT_DIR\fR
@@ -115,7 +115,7 @@ directory and use the configuration files from the
 directory\&.
 .RE
 .PP
-\fB\-W\fR, \fB\-\-warndays\fR\fIDNI_OSTRZ\fR
+\fB\-W\fR, \fB\-\-warndays\fR\ \&\fIDNI_OSTRZ\fR
 .RS 4
 Ustawia na
 \fIDNI_OSTRZ\fR

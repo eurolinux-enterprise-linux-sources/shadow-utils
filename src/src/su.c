@@ -2,7 +2,7 @@
  * Copyright (c) 1989 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2000 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2012, Nicolas François
+ * Copyright (c) 2007 - 2013, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -53,7 +53,7 @@
 
 #include <config.h>
 
-#ident "$Id: su.c 3743 2012-05-25 11:51:53Z nekral-guest $"
+#ident "$Id$"
 
 #include <getopt.h>
 #include <grp.h>
@@ -105,6 +105,8 @@ static char caller_name[BUFSIZ];
 static bool change_environment = true;
 
 #ifdef USE_PAM
+static char kill_msg[256];
+static char wait_msg[256];
 static pam_handle_t *pamh = NULL;
 static int caught = 0;
 /* PID of the child, in case it needs to be killed */
@@ -161,8 +163,7 @@ static RETSIGTYPE die (int killed)
 	}
 
 	if (killed != 0) {
-		closelog ();
-		exit (128+killed);
+		_exit (128+killed);
 	}
 }
 
@@ -181,13 +182,12 @@ static bool iswheel (const char *username)
 static RETSIGTYPE kill_child (int unused(s))
 {
 	if (0 != pid_child) {
-		(void) kill (pid_child, SIGKILL);
-		(void) fputs (_(" ...killed.\n"), stderr);
+		(void) kill (-pid_child, SIGKILL);
+		(void) write (STDERR_FILENO, kill_msg, strlen (kill_msg));
 	} else {
-		(void) fputs (_(" ...waiting for child to terminate.\n"),
-		              stderr);
+		(void) write (STDERR_FILENO, wait_msg, strlen (wait_msg));
 	}
-	exit (255);
+	_exit (255);
 }
 #endif				/* USE_PAM */
 
@@ -219,6 +219,22 @@ static /*@noreturn@*/void su_failure (const char *tty, bool su_to_root)
 	}
 	closelog ();
 #endif
+
+#ifdef WITH_AUDIT
+	audit_fd = audit_open ();
+	audit_log_acct_message (audit_fd,
+				AUDIT_USER_ROLE_CHANGE,
+				NULL,    /* Prog. name */
+				"su",
+				('\0' != caller_name[0]) ? caller_name : "???",
+				AUDIT_NO_ID,
+				"localhost",
+				NULL,    /* addr */
+				tty,
+				0);      /* result */
+	close (audit_fd);
+#endif				/* WITH_AUDIT */
+
 	exit (1);
 }
 
@@ -347,6 +363,7 @@ static void prepare_pam_close_session (void)
 			if (   ((pid_t)-1 == pid)
 			    && (EINTR == errno)
 			    && (SIGTSTP == caught)) {
+				caught = 0;
 				/* Except for SIGTSTP, which request to
 				 * stop the child.
 				 * We will SIGSTOP ourself on the next
@@ -362,15 +379,39 @@ static void prepare_pam_close_session (void)
 				/* wake child when resumed */
 				kill (pid, SIGCONT);
 				stop = false;
+			} else if (   (pid_t)-1 != pid) {
+				pid_child = 0;
 			}
 		} while (!stop);
 	}
 
-	if (0 != caught) {
+	if (0 != caught && 0 != pid_child) {
 		(void) fputs ("\n", stderr);
 		(void) fputs (_("Session terminated, terminating shell..."),
 		              stderr);
-		(void) kill (pid_child, caught);
+		(void) kill (-pid_child, caught);
+
+		snprintf (kill_msg, sizeof kill_msg, _(" ...killed.\n"));
+		snprintf (wait_msg, sizeof wait_msg, _(" ...waiting for child to terminate.\n"));
+
+		(void) signal (SIGALRM, kill_child);
+		(void) signal (SIGCHLD, catch_signals);
+		(void) alarm (2);
+
+		sigemptyset (&ourset);
+		if ((sigaddset (&ourset, SIGALRM) != 0)
+		    || (sigprocmask (SIG_BLOCK, &ourset, NULL) != 0)) {
+			fprintf (stderr, _("%s: signal masking malfunction\n"), Prog);
+			kill_child (0);
+		} else {
+			while (0 == waitpid (pid_child, &status, WNOHANG)) {
+				sigsuspend (&ourset);
+			}
+			pid_child = 0;
+			(void) sigprocmask (SIG_UNBLOCK, &ourset, NULL);
+		}
+
+		(void) fputs (_(" ...terminated.\n"), stderr);
 	}
 
 	ret = pam_close_session (pamh, 0);
@@ -382,14 +423,6 @@ static void prepare_pam_close_session (void)
 
 	(void) pam_setcred (pamh, PAM_DELETE_CRED);
 	(void) pam_end (pamh, PAM_SUCCESS);
-
-	if (0 != caught) {
-		(void) signal (SIGALRM, kill_child);
-		(void) alarm (2);
-
-		(void) wait (&status);
-		(void) fputs (_(" ...terminated.\n"), stderr);
-	}
 
 	exit ((0 != WIFEXITED (status)) ? WEXITSTATUS (status)
 	                                : WTERMSIG (status) + 128);
@@ -403,7 +436,7 @@ static void prepare_pam_close_session (void)
 static void usage (int status)
 {
 	(void)
-	fputs (_("Usage: su [options] [LOGIN]\n"
+	fputs (_("Usage: su [options] [-] [username [args]]\n"
 	         "\n"
 	         "Options:\n"
 	         "  -c, --command COMMAND         pass COMMAND to the invoked shell\n"
@@ -413,7 +446,8 @@ static void usage (int status)
 	         "  --preserve-environment        do not reset environment variables, and\n"
 	         "                                keep the same shell\n"
 	         "  -s, --shell SHELL             use SHELL instead of the default in passwd\n"
-	         "\n"), (E_SUCCESS != status) ? stderr : stdout);
+	         "\n"
+	         "If no username is given, assume root.\n"), (E_SUCCESS != status) ? stderr : stdout);
 	exit (status);
 }
 
@@ -423,7 +457,7 @@ static void check_perms_pam (const struct passwd *pw)
 	int ret;
 	ret = pam_authenticate (pamh, 0);
 	if (PAM_SUCCESS != ret) {
-		SYSLOG ((LOG_ERR, "pam_authenticate: %s",
+		SYSLOG (((pw->pw_uid != 0)? LOG_NOTICE : LOG_WARN, "pam_authenticate: %s",
 		         pam_strerror (pamh, ret)));
 		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
 		(void) pam_end (pamh, ret);
@@ -586,7 +620,7 @@ static /*@only@*/struct passwd * check_perms (void)
 	if (NULL == pw) {
 		(void) fprintf (stderr,
 		                _("No passwd entry for user '%s'\n"), name);
-		SYSLOG ((LOG_ERR, "No passwd entry for user '%s'", name));
+		SYSLOG ((LOG_NOTICE, "No passwd entry for user '%s'", name));
 		su_failure (caller_tty, true);
 	}
 
@@ -616,7 +650,7 @@ static /*@only@*/struct passwd * check_perms (void)
 			(void) fprintf (stderr,
 			                _("No passwd entry for user '%s'\n"),
 			                name);
-			SYSLOG ((LOG_ERR,
+			SYSLOG ((LOG_NOTICE,
 			         "No passwd entry for user '%s'", name));
 			su_failure (caller_tty, true);
 		}
@@ -776,23 +810,10 @@ static void process_flags (int argc, char **argv)
 	if ((optind < argc) && (strcmp (argv[optind], "-") == 0)) {
 		fakelogin = true;
 		optind++;
-		if (   (optind < argc)
-		    && (strcmp (argv[optind], "--") == 0)) {
-			optind++;
-		}
 	}
 
-	/*
-	 * The next argument must be either a user ID, or some flag to a
-	 * subshell. Pretty sticky since you can't have an argument which
-	 * doesn't start with a "-" unless you specify the new user name.
-	 * Any remaining arguments will be passed to the user's login shell.
-	 */
-	if ((optind < argc) && ('-' != argv[optind][0])) {
+	if (optind < argc) {
 		STRFCPY (name, argv[optind++]);	/* use this login id */
-		if ((optind < argc) && (strcmp (argv[optind], "--") == 0)) {
-			optind++;
-		}
 	}
 	if ('\0' == name[0]) {		/* use default user */
 		struct passwd *root_pw = getpwnam ("root");
@@ -1073,6 +1094,21 @@ int main (int argc, char **argv)
 		exit (1);
 	}
 #endif				/* !USE_PAM */
+
+#ifdef WITH_AUDIT
+	audit_fd = audit_open ();
+	audit_log_acct_message (audit_fd,
+				AUDIT_USER_ROLE_CHANGE,
+				NULL,    /* Prog. name */
+				"su",
+				('\0' != caller_name[0]) ? caller_name : "???",
+				AUDIT_NO_ID,
+				"localhost",
+				NULL,    /* addr */
+				caller_tty,
+				1);      /* result */
+	close (audit_fd);
+#endif				/* WITH_AUDIT */
 
 	set_environment (pw);
 

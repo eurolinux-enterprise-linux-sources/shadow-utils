@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: groupdel
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 05/25/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 04/29/2018
 .\"    Manual: Polecenia Zarządzania Systemem
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: Polish
 .\"
-.TH "GROUPDEL" "8" "05/25/2012" "shadow\-utils 4\&.1\&.5\&.1" "Polecenia Zarządzania Systemem"
+.TH "GROUPDEL" "8" "04/29/2018" "shadow\-utils 4\&.6" "Polecenia Zarządzania Systemem"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -49,13 +49,22 @@ command are:
 Wyświetlenie komunikatu pomocy i zakończenie dzia\(/lania\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR \fICHROOT_DIR\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fICHROOT_DIR\fR
 .RS 4
 Apply changes in the
 \fICHROOT_DIR\fR
 directory and use the configuration files from the
 \fICHROOT_DIR\fR
 directory\&.
+.RE
+.PP
+\fB\-P\fR, \fB\-\-prefix\fR\ \&\fIPREFIX_DIR\fR
+.RS 4
+Apply changes in the
+\fIPREFIX_DIR\fR
+directory and use the configuration files from the
+\fIPREFIX_DIR\fR
+directory\&. This option does not chroot and is intended for preparing a cross\-compilation target\&. Some limitations: NIS and LDAP users/groups are not verified\&. PAM authentication is using the host files\&. No SELINUX support\&.
 .RE
 .SH "OSTRZEŻENIA"
 .PP
@@ -125,7 +134,6 @@ nie można zaktualizować pliku z grupami
 .RE
 .SH "ZOBACZ TAKŻE"
 .PP
-
 \fBchfn\fR(1),
 \fBchsh\fR(1),
 \fBpasswd\fR(1),

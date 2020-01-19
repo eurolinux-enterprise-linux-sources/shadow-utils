@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: lastlog
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 05/25/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 04/29/2018
 .\"    Manual: Polecenia Zarządzania Systemem
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: Polish
 .\"
-.TH "LASTLOG" "8" "05/25/2012" "shadow\-utils 4\&.1\&.5\&.1" "Polecenia Zarządzania Systemem"
+.TH "LASTLOG" "8" "04/29/2018" "shadow\-utils 4\&.6" "Polecenia Zarządzania Systemem"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -50,10 +50,17 @@ Polecenie
 \fBlastlog\fR
 posiada następujące opcje:
 .PP
-\fB\-b\fR, \fB\-\-before\fR\fIDNI\fR
+\fB\-b\fR, \fB\-\-before\fR\ \&\fIDNI\fR
 .RS 4
 Wyświetlenie rekord\('ow lastlog starszych niż zadana
 \fIDNI\fR\&.
+.RE
+.PP
+\fB\-C\fR, \fB\-\-clear\fR
+.RS 4
+Clear lastlog record of a user\&. This option can be used only together with
+\fB\-u\fR
+(\fB\-\-user\fR))\&.
 .RE
 .PP
 \fB\-h\fR, \fB\-\-help\fR
@@ -61,7 +68,7 @@ Wyświetlenie rekord\('ow lastlog starszych niż zadana
 Wyświetlenie komunikatu pomocy i zakończenie dzia\(/lania\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR \fICHROOT_DIR\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fICHROOT_DIR\fR
 .RS 4
 Apply changes in the
 \fICHROOT_DIR\fR
@@ -70,13 +77,20 @@ directory and use the configuration files from the
 directory\&.
 .RE
 .PP
-\fB\-t\fR, \fB\-\-time\fR\fIDNI\fR
+\fB\-S\fR, \fB\-\-set\fR
+.RS 4
+Set lastlog record of a user to the current time\&. This option can be used only together with
+\fB\-u\fR
+(\fB\-\-user\fR))\&.
+.RE
+.PP
+\fB\-t\fR, \fB\-\-time\fR\ \&\fIDNI\fR
 .RS 4
 Wyświetlenie rekord\('ow lastlog nie starszych niż zadana ilość
 \fIDNI\fR\&.
 .RE
 .PP
-\fB\-u\fR, \fB\-\-user\fR \fILOGIN\fR|\fIRANGE\fR
+\fB\-u\fR, \fB\-\-user\fR\ \&\fILOGIN\fR|\fIRANGE\fR
 .RS 4
 Print the lastlog record of the specified user(s)\&.
 .sp

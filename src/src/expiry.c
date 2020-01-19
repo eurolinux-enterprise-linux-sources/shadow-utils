@@ -32,7 +32,7 @@
 
 #include <config.h>
 
-#ident "$Id: expiry.c 3640 2011-11-19 21:51:52Z nekral-guest $"
+#ident "$Id$"
 
 #include <pwd.h>
 #include <signal.h>
@@ -58,7 +58,7 @@ static void process_flags (int argc, char **argv);
  */
 static RETSIGTYPE catch_signals (unused int sig)
 {
-	exit (10);
+	_exit (10);
 }
 
 /*

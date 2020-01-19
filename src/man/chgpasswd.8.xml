@@ -38,7 +38,7 @@
 ]>
 
 <refentry id='chgpasswd.8'>
-  <!-- $Id: chgpasswd.8.xml 3742 2012-05-25 11:45:21Z nekral-guest $ -->
+  <!-- $Id$ -->
   <refentryinfo>
     <author>
       <firstname>Thomas</firstname>
@@ -92,7 +92,7 @@
     <para>
       The default encryption algorithm can be defined for the system with
       the <option>ENCRYPT_METHOD</option> variable of <filename>/etc/login.defs</filename>,
-      and can be overwiten with the <option>-e</option>,
+      and can be overwritten with the <option>-e</option>,
       <option>-m</option>, or <option>-c</option> options.
     </para>
     <para>
@@ -144,8 +144,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-R</option>, <option>--root</option>
-	  <replaceable>CHROOT_DIR</replaceable>
+	  <option>-R</option>, <option>--root</option>&nbsp;<replaceable>CHROOT_DIR</replaceable>
 	</term>
 	<listitem>
 	  <para>

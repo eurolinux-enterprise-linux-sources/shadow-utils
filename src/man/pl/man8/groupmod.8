@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: groupmod
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 05/25/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 04/29/2018
 .\"    Manual: Polecenia Zarządzania Systemem
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: Polish
 .\"
-.TH "GROUPMOD" "8" "05/25/2012" "shadow\-utils 4\&.1\&.5\&.1" "Polecenia Zarządzania Systemem"
+.TH "GROUPMOD" "8" "04/29/2018" "shadow\-utils 4\&.6" "Polecenia Zarządzania Systemem"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -45,7 +45,7 @@ Polecenie
 \fBgroupmod\fR
 posiada następujące opcje:
 .PP
-\fB\-g\fR, \fB\-\-gid\fR\fIGID\fR
+\fB\-g\fR, \fB\-\-gid\fR\ \&\fIGID\fR
 .RS 4
 The group ID of the given
 \fIGROUP\fR
@@ -77,7 +77,7 @@ from
 Wyświetlenie komunikatu pomocy i zakończenie dzia\(/lania\&.
 .RE
 .PP
-\fB\-a\fR, \fB\-\-append\fR\fINOWA_GRUPA\fR
+\fB\-a\fR, \fB\-\-append\fR\ \&\fINOWA_GRUPA\fR
 .RS 4
 Nazwa grupy zostanie zmieniona z
 \fIGRUPA\fR
@@ -94,25 +94,33 @@ option, allow to change the group
 to a non\-unique value\&.
 .RE
 .PP
-\fB\-p\fR, \fB\-\-password\fR\fIHAS\(/LO\fR
+\fB\-p\fR, \fB\-\-password\fR\ \&\fIHAS\(/LO\fR
 .RS 4
 The encrypted password, as returned by
 \fBcrypt\fR(3)\&.
 .sp
-
 \fBNote:\fR
 This option is not recommended because the password (or encrypted password) will be visible by users listing the processes\&.
 .sp
 You should make sure the password respects the system\*(Aqs password policy\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR \fICHROOT_DIR\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fICHROOT_DIR\fR
 .RS 4
 Apply changes in the
 \fICHROOT_DIR\fR
 directory and use the configuration files from the
 \fICHROOT_DIR\fR
 directory\&.
+.RE
+.PP
+\fB\-P\fR, \fB\-\-prefix\fR\ \&\fIPREFIX_DIR\fR
+.RS 4
+Apply changes in the
+\fIPREFIX_DIR\fR
+directory and use the configuration files from the
+\fIPREFIX_DIR\fR
+directory\&. This option does not chroot and is intended for preparing a cross\-compilation target\&. Some limitations: NIS and LDAP users/groups are not verified\&. PAM authentication is using the host files\&. No SELINUX support\&.
 .RE
 .SH "CONFIGURATION"
 .PP
@@ -163,41 +171,55 @@ kończy dzia\(/lanie z następującymi wartościami kod\('ow zakończenia:
 .PP
 \fI0\fR
 .RS 4
-poprawne zakończenie dzia\(/lania programu
+E_SUCCESS: success
 .RE
 .PP
 \fI2\fR
 .RS 4
-niepoprawna sk\(/ladnia polecenia
+E_USAGE: invalid command syntax
 .RE
 .PP
 \fI3\fR
 .RS 4
-nieprawid\(/lowy argument opcji
+E_BAD_ARG: invalid argument to option
 .RE
 .PP
 \fI4\fR
 .RS 4
-specified group doesn\*(Aqt exist
+E_GID_IN_USE: specified group doesn\*(Aqt exist
 .RE
 .PP
 \fI6\fR
 .RS 4
-specified group doesn\*(Aqt exist
+E_NOTFOUND: specified group doesn\*(Aqt exist
 .RE
 .PP
 \fI9\fR
 .RS 4
-nazwa grupy już jest w użyciu
+E_NAME_IN_USE: group name already in use
 .RE
 .PP
 \fI10\fR
 .RS 4
-nie można zaktualizować pliku z grupami
+E_GRP_UPDATE: can\*(Aqt update group file
+.RE
+.PP
+\fI11\fR
+.RS 4
+E_CLEANUP_SERVICE: can\*(Aqt setup cleanup service
+.RE
+.PP
+\fI12\fR
+.RS 4
+E_PAM_USERNAME: can\*(Aqt determine your username for use with pam
+.RE
+.PP
+\fI13\fR
+.RS 4
+E_PAM_ERROR: pam returned an error, see syslog facility id groupmod for the PAM error message
 .RE
 .SH "ZOBACZ TAKŻE"
 .PP
-
 \fBchfn\fR(1),
 \fBchsh\fR(1),
 \fBpasswd\fR(1),

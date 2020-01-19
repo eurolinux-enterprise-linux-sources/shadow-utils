@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: groupmod
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 25/05/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 29/04/2018
 .\"    Manual: Commandes de gestion du syst\(`eme
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: French
 .\"
-.TH "GROUPMOD" "8" "25/05/2012" "shadow\-utils 4\&.1\&.5\&.1" "Commandes de gestion du syst\(`em"
+.TH "GROUPMOD" "8" "29/04/2018" "shadow\-utils 4\&.6" "Commandes de gestion du syst\(`em"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -45,7 +45,7 @@ Les options disponibles pour la commande
 \fBgroupmod\fR
 sont\ \&:
 .PP
-\fB\-g\fR, \fB\-\-gid\fR \fIGID\fR
+\fB\-g\fR, \fB\-\-gid\fR\ \&\fIGID\fR
 .RS 4
 L\*(Aqidentifiant num\('erique du groupe
 \fIGROUPE\fR
@@ -77,7 +77,7 @@ du fichier
 Afficher un message d\*(Aqaide et quitter\&.
 .RE
 .PP
-\fB\-n\fR, \fB\-\-new\-name\fR \fINOUVEAU_NOM_GROUPE\fR
+\fB\-n\fR, \fB\-\-new\-name\fR\ \&\fINOUVEAU_NOM_GROUPE\fR
 .RS 4
 Le nom du groupe sera modifi\('e de
 \fIGROUPE\fR
@@ -91,7 +91,7 @@ En combinaison avec l\*(Aqoption
 \fB\-g\fR, cette option permet de changer l\*(Aqidentifiant du groupe (\fIGID\fR) vers une valeur d\('ej\(`a utilis\('ee\&.
 .RE
 .PP
-\fB\-p\fR, \fB\-\-password\fR \fIMOT_DE_PASSE\fR
+\fB\-p\fR, \fB\-\-password\fR\ \&\fIMOT_DE_PASSE\fR
 .RS 4
 Mot de passe chiffr\('e, comme renvoy\('e par
 \fBcrypt\fR(3)\&.
@@ -102,12 +102,21 @@ l\*(Aqutilisation de cette option est d\('econseill\('ee car le mot de passe (ou
 Il est n\('ecessaire de v\('erifier si le mot de passe respecte la politique de mots de passe du syst\(`eme\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR \fIR\('EP_CHROOT\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fIR\('EP_CHROOT\fR
 .RS 4
 Appliquer les changements dans le r\('epertoire
 \fIR\('EP_CHROOT\fR
 et utiliser les fichiers de configuration du r\('epertoire
 \fIR\('EP_CHROOT\fR\&.
+.RE
+.PP
+\fB\-P\fR, \fB\-\-prefix\fR\ \&\fIPREFIX_DIR\fR
+.RS 4
+Apply changes in the
+\fIPREFIX_DIR\fR
+directory and use the configuration files from the
+\fIPREFIX_DIR\fR
+directory\&. This option does not chroot and is intended for preparing a cross\-compilation target\&. Some limitations: NIS and LDAP users/groups are not verified\&. PAM authentication is using the host files\&. No SELINUX support\&.
 .RE
 .SH "CONFIGURATION"
 .PP
@@ -158,37 +167,52 @@ retourne les valeurs suivantes en quittant\ \&:
 .PP
 \fI0\fR
 .RS 4
-succ\(`es
+E_SUCCESS: success
 .RE
 .PP
 \fI2\fR
 .RS 4
-erreur de syntaxe
+E_USAGE: invalid command syntax
 .RE
 .PP
 \fI3\fR
 .RS 4
-param\(`etre non valable pour l\*(Aqoption
+E_BAD_ARG: invalid argument to option
 .RE
 .PP
 \fI4\fR
 .RS 4
-le groupe sp\('ecifi\('e n\*(Aqexiste pas
+E_GID_IN_USE: specified group doesn\*(Aqt exist
 .RE
 .PP
 \fI6\fR
 .RS 4
-le groupe sp\('ecifi\('e n\*(Aqexiste pas
+E_NOTFOUND: specified group doesn\*(Aqt exist
 .RE
 .PP
 \fI9\fR
 .RS 4
-nom de groupe d\('ej\(`a utilis\('e
+E_NAME_IN_USE: group name already in use
 .RE
 .PP
 \fI10\fR
 .RS 4
-impossible de mettre \(`a jour le fichier des groupes
+E_GRP_UPDATE: can\*(Aqt update group file
+.RE
+.PP
+\fI11\fR
+.RS 4
+E_CLEANUP_SERVICE: can\*(Aqt setup cleanup service
+.RE
+.PP
+\fI12\fR
+.RS 4
+E_PAM_USERNAME: can\*(Aqt determine your username for use with pam
+.RE
+.PP
+\fI13\fR
+.RS 4
+E_PAM_ERROR: pam returned an error, see syslog facility id groupmod for the PAM error message
 .RE
 .SH "VOIR AUSSI"
 .PP

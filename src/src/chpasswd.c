@@ -32,7 +32,7 @@
 
 #include <config.h>
 
-#ident "$Id: chpasswd.c 3652 2011-12-09 21:31:39Z nekral-guest $"
+#ident "$Id$"
 
 #include <fcntl.h>
 #include <getopt.h>
@@ -313,7 +313,7 @@ static void open_files (void)
 		fail_exit (1);
 	}
 	pw_locked = true;
-	if (pw_open (O_RDWR) == 0) {
+	if (pw_open (O_CREAT | O_RDWR) == 0) {
 		fprintf (stderr,
 		         _("%s: cannot open %s\n"), Prog, pw_dbname ());
 		fail_exit (1);
@@ -328,7 +328,7 @@ static void open_files (void)
 			fail_exit (1);
 		}
 		spw_locked = true;
-		if (spw_open (O_RDWR) == 0) {
+		if (spw_open (O_CREAT | O_RDWR) == 0) {
 			fprintf (stderr,
 			         _("%s: cannot open %s\n"),
 			         Prog, spw_dbname ());
@@ -464,7 +464,7 @@ int main (int argc, char **argv)
 
 #ifdef USE_PAM
 		if (use_pam){
-			if (do_pam_passwd_non_interractive ("chpasswd", name, newpwd) != 0) {
+			if (do_pam_passwd_non_interactive ("chpasswd", name, newpwd) != 0) {
 				fprintf (stderr,
 				         _("%s: (line %d, user %s) password not changed\n"),
 				         Prog, line, name);
@@ -482,6 +482,7 @@ int main (int argc, char **argv)
 		    && (   (NULL == crypt_method)
 		        || (0 != strcmp (crypt_method, "NONE")))) {
 			void *arg = NULL;
+			const char *salt;
 			if (md5flg) {
 				crypt_method = "MD5";
 			}
@@ -490,8 +491,14 @@ int main (int argc, char **argv)
 				arg = &sha_rounds;
 			}
 #endif
-			cp = pw_encrypt (newpwd,
-			                 crypt_make_salt(crypt_method, arg));
+			salt = crypt_make_salt (crypt_method, arg);
+			cp = pw_encrypt (newpwd, salt);
+			if (NULL == cp) {
+				fprintf (stderr,
+				         _("%s: failed to crypt password with salt '%s': %s\n"),
+				         Prog, salt, strerror (errno));
+				fail_exit (1);
+			}
 		}
 
 		/*
@@ -545,7 +552,7 @@ int main (int argc, char **argv)
 		if (NULL != sp) {
 			newsp = *sp;
 			newsp.sp_pwdp = cp;
-			newsp.sp_lstchg = (long) time ((time_t *)NULL) / SCALE;
+			newsp.sp_lstchg = (long) gettime () / SCALE;
 			if (0 == newsp.sp_lstchg) {
 				/* Better disable aging than requiring a
 				 * password change */

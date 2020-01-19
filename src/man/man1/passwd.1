@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: passwd
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 05/25/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 04/29/2018
 .\"    Manual: User Commands
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: English
 .\"
-.TH "PASSWD" "1" "05/25/2012" "shadow\-utils 4\&.1\&.5\&.1" "User Commands"
+.TH "PASSWD" "1" "04/29/2018" "shadow\-utils 4\&.6" "User Commands"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -36,12 +36,12 @@ passwd \- change user password
 .PP
 The
 \fBpasswd\fR
-command changes passwords for user accounts\&. A normal user may only change the password for his/her own account, while the superuser may change the password for any account\&.
+command changes passwords for user accounts\&. A normal user may only change the password for their own account, while the superuser may change the password for any account\&.
 \fBpasswd\fR
 also changes the account or associated password validity period\&.
 .SS "Password Changes"
 .PP
-The user is first prompted for his/her old password, if one is present\&. This password is then encrypted and compared against the stored password\&. The user has only one chance to enter the correct password\&. The superuser is permitted to bypass this step so that forgotten passwords may be changed\&.
+The user is first prompted for their old password, if one is present\&. This password is then encrypted and compared against the stored password\&. The user has only one chance to enter the correct password\&. The superuser is permitted to bypass this step so that forgotten passwords may be changed\&.
 .PP
 After the password has been entered, password aging information is checked to see if the user is permitted to change the password at this time\&. If not,
 \fBpasswd\fR
@@ -96,7 +96,7 @@ System encryption method is based on the NBS DES algorithm\&. More recent method
 .PP
 Compromises in password security normally result from careless password selection or handling\&. For this reason, you should not select a password which appears in a dictionary or which must be written down\&. The password should also not be a proper name, your license number, birth date, or street address\&. Any of these may be used as guesses to violate system security\&.
 .PP
-You can find advices on how to choose a strong password on http://en\&.wikipedia\&.org/wiki/Password_strength
+You can find advice on how to choose a strong password on http://en\&.wikipedia\&.org/wiki/Password_strength
 .SH "OPTIONS"
 .PP
 The options which apply to the
@@ -117,7 +117,7 @@ Delete a user\*(Aqs password (make it empty)\&. This is a quick way to disable a
 .PP
 \fB\-e\fR, \fB\-\-expire\fR
 .RS 4
-Immediately expire an account\*(Aqs password\&. This in effect can force a user to change his/her password at the user\*(Aqs next login\&.
+Immediately expire an account\*(Aqs password\&. This in effect can force a user to change their password at the user\*(Aqs next login\&.
 .RE
 .PP
 \fB\-h\fR, \fB\-\-help\fR
@@ -125,7 +125,7 @@ Immediately expire an account\*(Aqs password\&. This in effect can force a user 
 Display help message and exit\&.
 .RE
 .PP
-\fB\-i\fR, \fB\-\-inactive\fR \fIINACTIVE\fR
+\fB\-i\fR, \fB\-\-inactive\fR\ \&\fIINACTIVE\fR
 .RS 4
 This option is used to disable an account after the password has been expired for a number of days\&. After a user account has had an expired password for
 \fIINACTIVE\fR
@@ -148,10 +148,10 @@ Note that this does not disable the account\&. The user may still be able to log
 Users with a locked password are not allowed to change their password\&.
 .RE
 .PP
-\fB\-n\fR, \fB\-\-mindays\fR \fIMIN_DAYS\fR
+\fB\-n\fR, \fB\-\-mindays\fR\ \&\fIMIN_DAYS\fR
 .RS 4
 Set the minimum number of days between password changes to
-\fIMIN_DAYS\fR\&. A value of zero for this field indicates that the user may change his/her password at any time\&.
+\fIMIN_DAYS\fR\&. A value of zero for this field indicates that the user may change their password at any time\&.
 .RE
 .PP
 \fB\-q\fR, \fB\-\-quiet\fR
@@ -159,14 +159,14 @@ Set the minimum number of days between password changes to
 Quiet mode\&.
 .RE
 .PP
-\fB\-r\fR, \fB\-\-repository\fR \fIREPOSITORY\fR
+\fB\-r\fR, \fB\-\-repository\fR\ \&\fIREPOSITORY\fR
 .RS 4
 change password in
 \fIREPOSITORY\fR
 repository
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR \fICHROOT_DIR\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fICHROOT_DIR\fR
 .RS 4
 Apply changes in the
 \fICHROOT_DIR\fR
@@ -187,17 +187,23 @@ Unlock the password of the named account\&. This option re\-enables a password b
 option)\&.
 .RE
 .PP
-\fB\-w\fR, \fB\-\-warndays\fR \fIWARN_DAYS\fR
+\fB\-w\fR, \fB\-\-warndays\fR\ \&\fIWARN_DAYS\fR
 .RS 4
 Set the number of days of warning before a password change is required\&. The
 \fIWARN_DAYS\fR
-option is the number of days prior to the password expiring that a user will be warned that his/her password is about to expire\&.
+option is the number of days prior to the password expiring that a user will be warned that their password is about to expire\&.
 .RE
 .PP
-\fB\-x\fR, \fB\-\-maxdays\fR \fIMAX_DAYS\fR
+\fB\-x\fR, \fB\-\-maxdays\fR\ \&\fIMAX_DAYS\fR
 .RS 4
 Set the maximum number of days a password remains valid\&. After
 \fIMAX_DAYS\fR, the password is required to be changed\&.
+.sp
+Passing the number
+\fI\-1\fR
+as
+\fIMAX_DAYS\fR
+will remove checking a password\*(Aqs validity\&.
 .RE
 .SH "CAVEATS"
 .PP
@@ -352,7 +358,6 @@ invalid argument to option
 .RE
 .SH "SEE ALSO"
 .PP
-
 \fBchpasswd\fR(8),
 \fBpasswd\fR(5),
 \fBshadow\fR(5),

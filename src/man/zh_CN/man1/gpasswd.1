@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: gpasswd
 .\"    Author: Rafal Maszkowski
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 2012-05-25
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 2018-04-29
 .\"    Manual: 用户命令
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: Chinese Simplified
 .\"
-.TH "GPASSWD" "1" "2012-05-25" "shadow\-utils 4\&.1\&.5\&.1" "用户命令"
+.TH "GPASSWD" "1" "2018-04-29" "shadow\-utils 4\&.6" "用户命令"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -47,7 +47,6 @@ option to define group administrator(s) and the
 \fB\-M\fR
 option to define members\&. They have all rights of group administrators and members\&.
 .PP
-
 \fBgpasswd\fR
 called by
 a group administrator
@@ -71,7 +70,7 @@ Group passwords are an inherent security problem since more than one person is p
 \fBgpasswd\fR
 可以接受的选项有：
 .PP
-\fB\-a\fR, \fB\-\-add\fR\fIuser\fR
+\fB\-a\fR, \fB\-\-add\fR\ \&\fIuser\fR
 .RS 4
 向名为
 \fIgroup\fR
@@ -79,7 +78,7 @@ Group passwords are an inherent security problem since more than one person is p
 \fIuser\fR。
 .RE
 .PP
-\fB\-d\fR, \fB\-\-delete\fR\fIuser\fR
+\fB\-d\fR, \fB\-\-delete\fR\ \&\fIuser\fR
 .RS 4
 从名为
 \fIgroup\fR
@@ -92,7 +91,7 @@ Group passwords are an inherent security problem since more than one person is p
 现实帮助信息并退出。
 .RE
 .PP
-\fB\-Q\fR, \fB\-\-root\fR\fICHROOT_DIR\fR
+\fB\-Q\fR, \fB\-\-root\fR\ \&\fICHROOT_DIR\fR
 .RS 4
 Apply changes in the
 \fICHROOT_DIR\fR
@@ -119,12 +118,12 @@ to join the named
 \fIgroup\fR\&.
 .RE
 .PP
-\fB\-A\fR, \fB\-\-administrators\fR\fIuser\fR,\&.\&.\&.
+\fB\-A\fR, \fB\-\-administrators\fR\ \&\fIuser\fR,\&.\&.\&.
 .RS 4
 设置有管理权限的用户列表。
 .RE
 .PP
-\fB\-M\fR, \fB\-\-members\fR\fIuser\fR,\&.\&.\&.
+\fB\-M\fR, \fB\-\-members\fR\ \&\fIuser\fR,\&.\&.\&.
 .RS 4
 设置组成员列表。
 .RE

@@ -32,7 +32,7 @@
 
 #include <config.h>
 
-#ident "$Id: chfn.c 3576 2011-11-13 16:24:57Z nekral-guest $"
+#ident "$Id$"
 
 #include <fcntl.h>
 #include <pwd.h>
@@ -463,7 +463,7 @@ static void update_gecos (const char *user, char *gecos)
 		fail_exit (E_NOPERM);
 	}
 	pw_locked = true;
-	if (pw_open (O_RDWR) == 0) {
+	if (pw_open (O_CREAT | O_RDWR) == 0) {
 		fprintf (stderr,
 		         _("%s: cannot open %s\n"), Prog, pw_dbname ());
 		fail_exit (E_NOPERM);

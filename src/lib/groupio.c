@@ -33,7 +33,7 @@
 
 #include <config.h>
 
-#ident "$Id: groupio.c 3296 2011-02-16 20:32:16Z nekral-guest $"
+#ident "$Id$"
 
 #include <assert.h>
 #include <stdio.h>
@@ -130,6 +130,9 @@ static /*@owned@*/struct commonio_db group_db = {
 #ifdef WITH_SELINUX
 	NULL,			/* scontext */
 #endif
+	0644,                   /* st_mode */
+	0,                      /* st_uid */
+	0,                      /* st_gid */
 	NULL,			/* head */
 	NULL,			/* tail */
 	NULL,			/* cursor */
@@ -330,13 +333,12 @@ static /*@null@*/struct commonio_entry *merge_group_entries (
 
 	/* Concatenate the 2 lines */
 	new_line_len = strlen (gr1->line) + strlen (gr2->line) +1;
-	new_line = (char *)malloc ((new_line_len + 1) * sizeof(char*));
+	new_line = (char *)malloc (new_line_len + 1);
 	if (NULL == new_line) {
 		errno = ENOMEM;
 		return NULL;
 	}
-	snprintf(new_line, new_line_len, "%s\n%s", gr1->line, gr2->line);
-	new_line[new_line_len] = '\0';
+	snprintf(new_line, new_line_len + 1, "%s\n%s", gr1->line, gr2->line);
 
 	/* Concatenate the 2 list of members */
 	for (i=0; NULL != gptr1->gr_mem[i]; i++);
@@ -353,7 +355,7 @@ static /*@null@*/struct commonio_entry *merge_group_entries (
 			members++;
 		}
 	}
-	new_members = (char **)malloc ( (members+1) * sizeof(char*) );
+	new_members = (char **)calloc ( (members+1), sizeof(char*) );
 	if (NULL == new_members) {
 		free (new_line);
 		errno = ENOMEM;
@@ -362,6 +364,8 @@ static /*@null@*/struct commonio_entry *merge_group_entries (
 	for (i=0; NULL != gptr1->gr_mem[i]; i++) {
 		new_members[i] = gptr1->gr_mem[i];
 	}
+	/* NULL termination enforced by above calloc */
+
 	members = i;
 	for (i=0; NULL != gptr2->gr_mem[i]; i++) {
 		char **pmember = new_members;

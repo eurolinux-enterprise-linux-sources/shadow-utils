@@ -38,11 +38,15 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <dirent.h>
+#include <fcntl.h>
 #include "defines.h"
 #include "prototypes.h"
+#ifdef ENABLE_SUBIDS
+#include "subordinateio.h"
+#endif				/* ENABLE_SUBIDS */
 
 #ifdef __linux__
-static int check_status (const char *sname, uid_t uid);
+static int check_status (const char *name, const char *sname, uid_t uid);
 static int user_busy_processes (const char *name, uid_t uid);
 #else				/* !__linux__ */
 static int user_busy_utmp (const char *name);
@@ -102,7 +106,7 @@ static int user_busy_utmp (const char *name)
 #endif				/* !__linux__ */
 
 #ifdef __linux__
-static int check_status (const char *sname, uid_t uid)
+static int check_status (const char *name, const char *sname, uid_t uid)
 {
 	/* 40: /proc/xxxxxxxxxx/task/xxxxxxxxxx/status + \0 */
 	char status[40];
@@ -125,7 +129,13 @@ static int check_status (const char *sname, uid_t uid)
 			            &ruid, &euid, &suid) == 3) {
 				if (   (ruid == (unsigned long) uid)
 				    || (euid == (unsigned long) uid)
-				    || (suid == (unsigned long) uid)) {
+				    || (suid == (unsigned long) uid)
+#ifdef ENABLE_SUBIDS
+				    || have_sub_uids(name, ruid, 1)
+				    || have_sub_uids(name, euid, 1)
+				    || have_sub_uids(name, suid, 1)
+#endif				/* ENABLE_SUBIDS */
+				   ) {
 					(void) fclose (sfile);
 					return 1;
 				}
@@ -153,14 +163,24 @@ static int user_busy_processes (const char *name, uid_t uid)
 	struct stat sbroot;
 	struct stat sbroot_process;
 
+#ifdef ENABLE_SUBIDS
+	sub_uid_open (O_RDONLY);
+#endif				/* ENABLE_SUBIDS */
+
 	proc = opendir ("/proc");
 	if (proc == NULL) {
 		perror ("opendir /proc");
+#ifdef ENABLE_SUBIDS
+		sub_uid_close();
+#endif
 		return 0;
 	}
 	if (stat ("/", &sbroot) != 0) {
 		perror ("stat (\"/\")");
 		(void) closedir (proc);
+#ifdef ENABLE_SUBIDS
+		sub_uid_close();
+#endif
 		return 0;
 	}
 
@@ -196,8 +216,11 @@ static int user_busy_processes (const char *name, uid_t uid)
 			continue;
 		}
 
-		if (check_status (tmp_d_name, uid) != 0) {
+		if (check_status (name, tmp_d_name, uid) != 0) {
 			(void) closedir (proc);
+#ifdef ENABLE_SUBIDS
+			sub_uid_close();
+#endif
 			fprintf (stderr,
 			         _("%s: user %s is currently used by process %d\n"),
 			         Prog, name, pid);
@@ -216,8 +239,11 @@ static int user_busy_processes (const char *name, uid_t uid)
 				if (tid == pid) {
 					continue;
 				}
-				if (check_status (task_path+6, uid) != 0) {
+				if (check_status (name, task_path+6, uid) != 0) {
 					(void) closedir (proc);
+#ifdef ENABLE_SUBIDS
+					sub_uid_close();
+#endif
 					fprintf (stderr,
 					         _("%s: user %s is currently used by process %d\n"),
 					         Prog, name, pid);
@@ -231,6 +257,9 @@ static int user_busy_processes (const char *name, uid_t uid)
 	}
 
 	(void) closedir (proc);
+#ifdef ENABLE_SUBIDS
+	sub_uid_close();
+#endif				/* ENABLE_SUBIDS */
 	return 0;
 }
 #endif				/* __linux__ */

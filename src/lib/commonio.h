@@ -30,9 +30,9 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/* $Id: commonio.h 3640 2011-11-19 21:51:52Z nekral-guest $ */
-#ifndef _COMMONIO_H
-#define _COMMONIO_H
+/* $Id$ */
+#ifndef COMMONIO_H
+#define COMMONIO_H
 
 #ifdef WITH_SELINUX
 #include <selinux/selinux.h>
@@ -124,6 +124,12 @@ struct commonio_db {
 	/*@null@*/security_context_t scontext;
 #endif
 	/*
+	 * Default permissions and owner for newly created data file.
+         */
+	mode_t st_mode;
+	uid_t st_uid;
+	gid_t st_gid;
+	/*
 	 * Head, tail, current position in linked list.
 	 */
 	/*@owned@*/ /*@null@*/struct commonio_entry *head;
@@ -146,6 +152,9 @@ extern int commonio_lock_nowait (struct commonio_db *, bool log);
 extern int commonio_open (struct commonio_db *, int);
 extern /*@observer@*/ /*@null@*/const void *commonio_locate (struct commonio_db *, const char *);
 extern int commonio_update (struct commonio_db *, const void *);
+#ifdef ENABLE_SUBIDS
+extern int commonio_append (struct commonio_db *, const void *);
+#endif				/* ENABLE_SUBIDS */
 extern int commonio_remove (struct commonio_db *, const char *);
 extern int commonio_rewind (struct commonio_db *);
 extern /*@observer@*/ /*@null@*/const void *commonio_next (struct commonio_db *);

@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: groupmems
 .\"    Author: George Kraft, IV
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 05/25/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 04/29/2018
 .\"    Manual: Polecenia Zarządzania Systemem
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: Polish
 .\"
-.TH "GROUPMEMS" "8" "05/25/2012" "shadow\-utils 4\&.1\&.5\&.1" "Polecenia Zarządzania Systemem"
+.TH "GROUPMEMS" "8" "04/29/2018" "shadow\-utils 4\&.6" "Polecenia Zarządzania Systemem"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -36,7 +36,7 @@ groupmems \- administer members of a user\*(Aqs primary group
 .PP
 The
 \fBgroupmems\fR
-command allows a user to administer his/her own group membership list without the requirement of superuser privileges\&. The
+command allows a user to administer their own group membership list without the requirement of superuser privileges\&. The
 \fBgroupmems\fR
 utility is for systems that configure its users to be in their own name sake primary group (i\&.e\&., guest / guest)\&.
 .PP
@@ -49,9 +49,9 @@ Polecenie
 \fBgroupmems\fR
 posiada następujące opcje:
 .PP
-\fB\-a\fR, \fB\-\-add\fR \fIuser_name\fR
+\fB\-a\fR, \fB\-\-add\fR\ \&\fIuser_name\fR
 .RS 4
-Add an user to the group membership list\&.
+Add a user to the group membership list\&.
 .sp
 If the
 /etc/gshadow
@@ -60,7 +60,7 @@ file exist, and the group has no entry in the
 file, a new entry will be created\&.
 .RE
 .PP
-\fB\-d\fR, \fB\-\-delete\fR \fIuser_name\fR
+\fB\-d\fR, \fB\-\-delete\fR\ \&\fIuser_name\fR
 .RS 4
 Delete a user from the group membership list\&.
 .sp
@@ -75,7 +75,7 @@ file exist, and the group has no entry in the
 file, a new entry will be created\&.
 .RE
 .PP
-\fB\-g\fR, \fB\-\-group\fR \fIgroup_name\fR
+\fB\-g\fR, \fB\-\-group\fR\ \&\fIgroup_name\fR
 .RS 4
 The superuser can specify which group membership list to modify\&.
 .RE
@@ -101,7 +101,7 @@ file exist, and the group has no entry in the
 file, a new entry will be created\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR \fICHROOT_DIR\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fICHROOT_DIR\fR
 .RS 4
 Apply changes in the
 \fICHROOT_DIR\fR

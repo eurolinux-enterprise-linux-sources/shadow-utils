@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: groupmems
 .\"    Author: George Kraft, IV
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 25/05/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 29/04/2018
 .\"    Manual: Comandi per la gestione del sistema
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: Italian
 .\"
-.TH "GROUPMEMS" "8" "25/05/2012" "shadow\-utils 4\&.1\&.5\&.1" "Comandi per la gestione del si"
+.TH "GROUPMEMS" "8" "29/04/2018" "shadow\-utils 4\&.6" "Comandi per la gestione del si"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -49,16 +49,16 @@ Il comando
 \fBgroupmems\fR
 accetta le seguenti opzioni:
 .PP
-\fB\-a\fR, \fB\-\-add\fR \fIuser_name\fR
+\fB\-a\fR, \fB\-\-add\fR\ \&\fIuser_name\fR
 .RS 4
-Aggiunge un utente all\*(Aqelenco di membri del gruppo\&.
+Add a user to the group membership list\&.
 .sp
 Se esiste il file
 /etc/gshadow
 e il gruppo non vi \(`e presente, viene aggiunto\&.
 .RE
 .PP
-\fB\-d\fR, \fB\-\-delete\fR\fIuser_name\fR
+\fB\-d\fR, \fB\-\-delete\fR\ \&\fIuser_name\fR
 .RS 4
 Cancella un utente dall\*(Aqelenco degli utenti del gruppo\&.
 .sp
@@ -70,7 +70,7 @@ Se esiste il file
 e il gruppo non vi \(`e presente, viene aggiunto\&.
 .RE
 .PP
-\fB\-g\fR, \fB\-\-group\fR \fIgroup_name\fR
+\fB\-g\fR, \fB\-\-group\fR\ \&\fIgroup_name\fR
 .RS 4
 Il super utente pu\(`o specificare quale elenco di membri del gruppo modificare\&.
 .RE
@@ -94,7 +94,7 @@ Se esiste il file
 e il gruppo non vi \(`e presente, viene aggiunto\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR \fICHROOT_DIR\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fICHROOT_DIR\fR
 .RS 4
 Effettua le modifiche nella directory
 \fICHROOT_DIR\fR

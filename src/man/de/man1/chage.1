@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: chage
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 25.05.2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 29.04.2018
 .\"    Manual: Dienstprogramme f\(:ur Benutzer
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: German
 .\"
-.TH "CHAGE" "1" "25.05.2012" "shadow\-utils 4\&.1\&.5\&.1" "Dienstprogramme f\(:ur Benutzer"
+.TH "CHAGE" "1" "29.04.2018" "shadow\-utils 4\&.6" "Dienstprogramme f\(:ur Benutzer"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -43,12 +43,12 @@ Die Optionen, die vom Befehl
 \fBchage\fR
 unterst\(:utzt werden, sind:
 .PP
-\fB\-d\fR, \fB\-\-lastday\fR\fILETZTER_TAG\fR
+\fB\-d\fR, \fB\-\-lastday\fR\ \&\fILETZTER_TAG\fR
 .RS 4
 Legt die Anzahl der Tage, gerechnet ab dem 1\&. Januar 1970, fest, seit denen das Passwort das letzte Mal gewechselt wurde\&. Das Datum kann auch im Format JJJJ\-MM\-TT (oder in dem Format, das in Ihrer Region verbreitet ist) angegeben werden\&.
 .RE
 .PP
-\fB\-E\fR, \fB\-\-expiredate\fR\fIVERFALLSDATUM\fR
+\fB\-E\fR, \fB\-\-expiredate\fR\ \&\fIVERFALLSDATUM\fR
 .RS 4
 Setzt das Datum oder die Anzahl der Tage seit dem 1\&. Januar 1970, ab dem auf das Benutzerkonto nicht mehr zugegriffen werden kann\&. Das Datum kann auch im Format JJJJ\-MM\-TT (oder in dem Format, das in Ihrer Region verbreitet ist) angegeben werden\&. Ein Benutzer, dessen Konto gesperrt ist, muss sich mit dem Systemadministrator in Verbindung setzen, ehe er sich wieder am System anmelden kann\&.
 .sp
@@ -64,7 +64,7 @@ angegeben wird, wird das Verfallsdatum f\(:ur das Konto entfernt\&.
 zeigt die Hilfe an und beendet das Programm
 .RE
 .PP
-\fB\-I\fR, \fB\-\-inactive\fR\fIINAKTIV\fR
+\fB\-I\fR, \fB\-\-inactive\fR\ \&\fIINAKTIV\fR
 .RS 4
 Legt die Anzahl der Tage der Unt\(:atigkeit fest, nach denen ein Passwort abgelaufen ist, bevor das Konto gesperrt wird\&. Die Option
 \fIINAKTIV\fR
@@ -82,13 +82,13 @@ angegeben wird, wird die \(:Uberwachung der fehlenden Verwendung des Kontos entf
 zeigt Informationen zur Kontoalterung an
 .RE
 .PP
-\fB\-m\fR, \fB\-\-mindays\fR\fIMIN_TAGE\fR
+\fB\-m\fR, \fB\-\-mindays\fR\ \&\fIMIN_TAGE\fR
 .RS 4
 Setzt die Anzahl von Tagen, die mindestens zwischen zwei \(:Anderungen eines Passworts vergehen m\(:ussen, auf
 \fIMIN_TAGE\fR\&. Ein Wert von Null in diesem Feld bedeutet, dass der Benutzer sein Passwort jederzeit \(:andern darf\&.
 .RE
 .PP
-\fB\-M\fR, \fB\-\-maxdays\fR\fIMAX_TAGE\fR
+\fB\-M\fR, \fB\-\-maxdays\fR\ \&\fIMAX_TAGE\fR
 .RS 4
 Bestimmt die maximale Anzahl von Tagen, die das Passwort g\(:ultig bleibt\&. Wenn
 \fIMAX_TAGE\fR
@@ -105,7 +105,7 @@ als
 angegeben wird, wird der Passwortverfall entfernt\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR\fICHROOT_VERZ\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fICHROOT_VERZ\fR
 .RS 4
 f\(:uhrt die Ver\(:anderungen in dem Verzeichnis
 \fICHROOT_VERZ\fR
@@ -113,7 +113,7 @@ durch und verwendet die Konfigurationsdateien aus dem Verzeichnis
 \fICHROOT_VERZ\fR
 .RE
 .PP
-\fB\-W\fR, \fB\-\-warndays\fR\fIWARN_TAGE\fR
+\fB\-W\fR, \fB\-\-warndays\fR\ \&\fIWARN_TAGE\fR
 .RS 4
 Legt die Anzahl der Tage fest, an denen der Benutzer eine Warnung erh\(:alt, bevor sein Passwort ge\(:andert werden muss\&. Die Option
 \fIWARN_TAGE\fR

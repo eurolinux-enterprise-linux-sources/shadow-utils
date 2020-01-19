@@ -32,7 +32,7 @@
 
 #include <config.h>
 
-#ident "$Id: pwunconv.c 3743 2012-05-25 11:51:53Z nekral-guest $"
+#ident "$Id$"
 
 #include <fcntl.h>
 #include <pwd.h>
@@ -166,7 +166,7 @@ int main (int argc, char **argv)
 		fail_exit (5);
 	}
 	pw_locked = true;
-	if (pw_open (O_RDWR) == 0) {
+	if (pw_open (O_CREAT | O_RDWR) == 0) {
 		fprintf (stderr,
 		         _("%s: cannot open %s\n"),
 		         Prog, pw_dbname ());

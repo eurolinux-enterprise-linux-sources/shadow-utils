@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: usermod
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 25/05/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 29/04/2018
 .\"    Manual: Commandes de gestion du syst\(`eme
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: French
 .\"
-.TH "USERMOD" "8" "25/05/2012" "shadow\-utils 4\&.1\&.5\&.1" "Commandes de gestion du syst\(`em"
+.TH "USERMOD" "8" "29/04/2018" "shadow\-utils 4\&.6" "Commandes de gestion du syst\(`em"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -49,13 +49,13 @@ Ajouter l\*(Aqutilisateur aux groupes suppl\('ementaires\&. N\*(Aqutilisez cette
 \fB\-G\fR\&.
 .RE
 .PP
-\fB\-c\fR, \fB\-\-comment\fR \fICOMMENTAIRE\fR
+\fB\-c\fR, \fB\-\-comment\fR\ \&\fICOMMENTAIRE\fR
 .RS 4
 La nouvelle valeur du champ de commentaire du fichier de mots de passe pour l\*(Aqutilisateur\&. Il est normalement modifi\('e en utilisant l\*(Aqutilitaire
 \fBchfn\fR(1)\&.
 .RE
 .PP
-\fB\-d\fR, \fB\-\-home\fR \fIR\('EP_PERSO\fR
+\fB\-d\fR, \fB\-\-home\fR\ \&\fIHOME_DIR\fR
 .RS 4
 Le nouveau r\('epertoire personnel de l\*(Aqutilisateur\&.
 .sp
@@ -64,7 +64,7 @@ Si l\*(Aqoption
 est fournie, le contenu du r\('epertoire personnel actuel sera d\('eplac\('e dans le nouveau r\('epertoire personnel, qui sera cr\('e\('e si n\('ecessaire\&.
 .RE
 .PP
-\fB\-e\fR, \fB\-\-expiredate\fR \fIDATE_FIN_VALIDIT\('E\fR
+\fB\-e\fR, \fB\-\-expiredate\fR\ \&\fIDATE_FIN_VALIDIT\('E\fR
 .RS 4
 Date \(`a laquelle le compte utilisateur sera d\('esactiv\('e\&. La date est indiqu\('ee dans le format
 \fIAAAA\-MM\-JJ\fR\&.
@@ -79,7 +79,7 @@ Cette option n\('ecessite un fichier
 sera cr\('e\('ee si il n\*(Aqy en avait pas\&.
 .RE
 .PP
-\fB\-f\fR, \fB\-\-inactive\fR \fIDUR\('EE_INACTIVIT\('E\fR
+\fB\-f\fR, \fB\-\-inactive\fR\ \&\fIDUR\('EE_INACTIVIT\('E\fR
 .RS 4
 Nombre de jours suivant la fin de validit\('e d\*(Aqun mot de passe apr\(`es lequel le compte est d\('efinitivement d\('esactiv\('e\&.
 .sp
@@ -91,7 +91,7 @@ Cette option n\('ecessite un fichier
 sera cr\('e\('ee si il n\*(Aqy en avait pas\&.
 .RE
 .PP
-\fB\-g\fR, \fB\-\-gid\fR \fIGROUPE\fR
+\fB\-g\fR, \fB\-\-gid\fR\ \&\fIGROUPE\fR
 .RS 4
 Nom du groupe ou identifiant num\('erique du groupe de connexion initial de l\*(Aqutilisateur\&. Le groupe doit exister\&.
 .sp
@@ -100,7 +100,7 @@ Tout fichier du r\('epertoire personnel de l\*(Aqutilisateur appartenant au grou
 Le groupe propri\('etaire des fichiers en dehors du r\('epertoire personnel de l\*(Aqutilisateur doit \(^etre modifi\('e manuellement\&.
 .RE
 .PP
-\fB\-G\fR, \fB\-\-groups\fR \fIGROUPE1\fR[\fI,GROUPE2,\&.\&.\&.\fR[\fI,GROUPEN\fR]]]
+\fB\-G\fR, \fB\-\-groups\fR\ \&\fIGROUPE1\fR[\fI,GROUPE2,\&.\&.\&.\fR[\fI,GROUPEN\fR]]]
 .RS 4
 Liste de groupes suppl\('ementaires auxquels appartient \('egalement l\*(Aqutilisateur\&. Chaque groupe est s\('epar\('e du suivant par une virgule, sans espace entre eux\&. Les groupes sont soumis aux m\(^emes restrictions que celles de l\*(Aqoption
 \fB\-g\fR\&.
@@ -109,7 +109,7 @@ Si l\*(Aqutilisateur fait actuellement partie d\*(Aqun groupe qui n\*(Aqest pas 
 \fB\-a\fR, qui permet d\*(Aqajouter l\*(Aqutilisateur \(`a la liste actuelle des groupes suppl\('ementaires\&.
 .RE
 .PP
-\fB\-l\fR, \fB\-\-login\fR \fINOUVEAU_LOGIN\fR
+\fB\-l\fR, \fB\-\-login\fR\ \&\fINOUVEAU_LOGIN\fR
 .RS 4
 Le nom de l\*(Aqutilisateur passera de
 \fILOGIN\fR
@@ -149,7 +149,7 @@ En combinaison avec l\*(Aqoption
 \fB\-u\fR, cette option permet de changer l\*(Aqidentifiant utilisateur vers une valeur d\('ej\(`a utilis\('ee\&.
 .RE
 .PP
-\fB\-p\fR, \fB\-\-password\fR \fIMOT_DE_PASSE\fR
+\fB\-p\fR, \fB\-\-password\fR\ \&\fIMOT_DE_PASSE\fR
 .RS 4
 Mot de passe chiffr\('e, comme renvoy\('e par
 \fBcrypt\fR(3)\&.
@@ -160,7 +160,7 @@ l\*(Aqutilisation de cette option est d\('econseill\('ee car le mot de passe (ou
 Il est n\('ecessaire de v\('erifier si le mot de passe respecte la politique de mots de passe du syst\(`eme\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR \fIR\('EP_CHROOT\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fIR\('EP_CHROOT\fR
 .RS 4
 Appliquer les changements dans le r\('epertoire
 \fIR\('EP_CHROOT\fR
@@ -168,12 +168,21 @@ et utiliser les fichiers de configuration du r\('epertoire
 \fIR\('EP_CHROOT\fR\&.
 .RE
 .PP
-\fB\-s\fR, \fB\-\-shell\fR \fIINTERPR\('ETEUR\fR
+\fB\-P\fR, \fB\-\-prefix\fR\ \&\fIPREFIX_DIR\fR
+.RS 4
+Apply changes in the
+\fIPREFIX_DIR\fR
+directory and use the configuration files from the
+\fIPREFIX_DIR\fR
+directory\&. This option does not chroot and is intended for preparing a cross\-compilation target\&. Some limitations: NIS and LDAP users/groups are not verified\&. PAM authentication is using the host files\&. No SELINUX support\&.
+.RE
+.PP
+\fB\-s\fR, \fB\-\-shell\fR\ \&\fIINTERPR\('ETEUR\fR
 .RS 4
 Nom du nouvel interpr\('eteur de commandes initial (\(Fo\ \&login shell\ \&\(Fc) de l\*(Aqutilisateur\&. Si ce champ est vide, le syst\(`eme s\('electionnera l\*(Aqinterpr\('eteur de commandes initial par d\('efaut\&.
 .RE
 .PP
-\fB\-u\fR, \fB\-\-uid\fR \fIUID\fR
+\fB\-u\fR, \fB\-\-uid\fR\ \&\fIUID\fR
 .RS 4
 La valeur num\('erique de l\*(Aqidentifiant de l\*(Aqutilisateur\&.
 .sp
@@ -211,7 +220,67 @@ dans
 /etc/default/useradd)\&.
 .RE
 .PP
-\fB\-Z\fR, \fB\-\-selinux\-user\fR \fIUTILISATEUR_SELINUX\fR
+\fB\-v\fR, \fB\-\-add\-subuids\fR\ \&\fIFIRST\fR\-\fILAST\fR
+.RS 4
+Add a range of subordinate uids to the user\*(Aqs account\&.
+.sp
+This option may be specified multiple times to add multiple ranges to a users account\&.
+.sp
+No checks will be performed with regard to
+\fBSUB_UID_MIN\fR,
+\fBSUB_UID_MAX\fR, or
+\fBSUB_UID_COUNT\fR
+from /etc/login\&.defs\&.
+.RE
+.PP
+\fB\-V\fR, \fB\-\-del\-subuids\fR\ \&\fIFIRST\fR\-\fILAST\fR
+.RS 4
+Remove a range of subordinate uids from the user\*(Aqs account\&.
+.sp
+This option may be specified multiple times to remove multiple ranges to a users account\&. When both
+\fB\-\-del\-subuids\fR
+and
+\fB\-\-add\-subuids\fR
+are specified, the removal of all subordinate uid ranges happens before any subordinate uid range is added\&.
+.sp
+No checks will be performed with regard to
+\fBSUB_UID_MIN\fR,
+\fBSUB_UID_MAX\fR, or
+\fBSUB_UID_COUNT\fR
+from /etc/login\&.defs\&.
+.RE
+.PP
+\fB\-w\fR, \fB\-\-add\-subgids\fR\ \&\fIFIRST\fR\-\fILAST\fR
+.RS 4
+Add a range of subordinate gids to the user\*(Aqs account\&.
+.sp
+This option may be specified multiple times to add multiple ranges to a users account\&.
+.sp
+No checks will be performed with regard to
+\fBSUB_GID_MIN\fR,
+\fBSUB_GID_MAX\fR, or
+\fBSUB_GID_COUNT\fR
+from /etc/login\&.defs\&.
+.RE
+.PP
+\fB\-W\fR, \fB\-\-del\-subgids\fR\ \&\fIFIRST\fR\-\fILAST\fR
+.RS 4
+Remove a range of subordinate gids from the user\*(Aqs account\&.
+.sp
+This option may be specified multiple times to remove multiple ranges to a users account\&. When both
+\fB\-\-del\-subgids\fR
+and
+\fB\-\-add\-subgids\fR
+are specified, the removal of all subordinate gid ranges happens before any subordinate gid range is added\&.
+.sp
+No checks will be performed with regard to
+\fBSUB_GID_MIN\fR,
+\fBSUB_GID_MAX\fR, or
+\fBSUB_GID_COUNT\fR
+from /etc/login\&.defs\&.
+.RE
+.PP
+\fB\-Z\fR, \fB\-\-selinux\-user\fR\ \&\fIUTILISATEUR_SELINUX\fR
 .RS 4
 Le nouvel utilisateur SELinux utilis\('e pour la connexion de l\*(Aqutilisateur\&.
 .sp
@@ -223,9 +292,9 @@ vide \('eliminera l\*(Aqassociation de l\*(Aqutilisateur SELinux pour l\*(Aqutil
 .RE
 .SH "AVERTISSEMENTS"
 .PP
-Il est n\('ecessaire de contr\(^oler que l\*(Aqidentifiant indiqu\('e n\*(Aqa pas de processus en cours d\*(Aqex\('ecution si cette commande est utilis\('ee pour modifier l\*(Aqidentifiant num\('erique de l\*(Aqutilisateur, son identifiant (login) ou son r\('epertoire personnel\&.
+You must make certain that the named user is not executing any processes when this command is being executed if the user\*(Aqs numerical user ID, the user\*(Aqs name, or the user\*(Aqs home directory is being changed\&.
 \fBusermod\fR
-effectue ce contr\(^ole sous Linux mais v\('erifie seulement les informations d\*(Aqutmp sur les autres architectures\&.
+checks this on Linux\&. On other platforms it only uses utmp to check if the user is logged in\&.
 .PP
 Il est n\('ecessaire de changer manuellement le propri\('etaire des fichiers
 \fBcrontab\fR
@@ -280,6 +349,52 @@ Si vous avez besoin de configurer cette limite, vous pouvez utiliser 25\&.
 .sp
 Remarque\ \&: les groupes d\('ecoup\('es ne sont peut\-\(^etre pas pris en charge par tous les outils (m\(^eme dans la suite d\*(Aqoutils Shadow)\&. Vous ne devriez pas utiliser cette variable, sauf si vous en avez vraiment besoin\&.
 .RE
+.PP
+\fBSUB_GID_MIN\fR (number), \fBSUB_GID_MAX\fR (number), \fBSUB_GID_COUNT\fR (number)
+.RS 4
+If
+/etc/subuid
+exists, the commands
+\fBuseradd\fR
+and
+\fBnewusers\fR
+(unless the user already have subordinate group IDs) allocate
+\fBSUB_GID_COUNT\fR
+unused group IDs from the range
+\fBSUB_GID_MIN\fR
+to
+\fBSUB_GID_MAX\fR
+for each new user\&.
+.sp
+The default values for
+\fBSUB_GID_MIN\fR,
+\fBSUB_GID_MAX\fR,
+\fBSUB_GID_COUNT\fR
+are respectively 100000, 600100000 and 10000\&.
+.RE
+.PP
+\fBSUB_UID_MIN\fR (number), \fBSUB_UID_MAX\fR (number), \fBSUB_UID_COUNT\fR (number)
+.RS 4
+If
+/etc/subuid
+exists, the commands
+\fBuseradd\fR
+and
+\fBnewusers\fR
+(unless the user already have subordinate user IDs) allocate
+\fBSUB_UID_COUNT\fR
+unused user IDs from the range
+\fBSUB_UID_MIN\fR
+to
+\fBSUB_UID_MAX\fR
+for each new user\&.
+.sp
+The default values for
+\fBSUB_UID_MIN\fR,
+\fBSUB_UID_MAX\fR,
+\fBSUB_UID_COUNT\fR
+are respectively 100000, 600100000 and 10000\&.
+.RE
 .SH "FICHIERS"
 .PP
 /etc/group
@@ -306,6 +421,16 @@ Informations sur les comptes des utilisateurs\&.
 .RS 4
 Informations s\('ecuris\('ees sur les comptes utilisateurs\&.
 .RE
+.PP
+/etc/subgid
+.RS 4
+Per user subordinate group IDs\&.
+.RE
+.PP
+/etc/subuid
+.RS 4
+Per user subordinate user IDs\&.
+.RE
 .SH "VOIR AUSSI"
 .PP
 \fBchfn\fR(1),
@@ -317,5 +442,6 @@ Informations s\('ecuris\('ees sur les comptes utilisateurs\&.
 \fBgroupdel\fR(8),
 \fBgroupmod\fR(8),
 \fBlogin.defs\fR(5),
+\fBsubgid\fR(5), \fBsubuid\fR(5),
 \fBuseradd\fR(8),
 \fBuserdel\fR(8)\&.

@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: lastlog
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 25.05.2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 29.04.2018
 .\"    Manual: Befehle zur Systemverwaltung
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: German
 .\"
-.TH "LASTLOG" "8" "25.05.2012" "shadow\-utils 4\&.1\&.5\&.1" "Befehle zur Systemverwaltung"
+.TH "LASTLOG" "8" "29.04.2018" "shadow\-utils 4\&.6" "Befehle zur Systemverwaltung"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -50,11 +50,18 @@ Die Optionen, die vom Befehl
 \fBlastlog\fR
 unterst\(:utzt werden, sind:
 .PP
-\fB\-b\fR, \fB\-\-before\fR\fITAGE\fR
+\fB\-b\fR, \fB\-\-before\fR\ \&\fITAGE\fR
 .RS 4
 gibt nur Lastlog\-Eintr\(:age aus, die \(:alter als
 \fITAGE\fR
 sind
+.RE
+.PP
+\fB\-C\fR, \fB\-\-clear\fR
+.RS 4
+Clear lastlog record of a user\&. This option can be used only together with
+\fB\-u\fR
+(\fB\-\-user\fR))\&.
 .RE
 .PP
 \fB\-h\fR, \fB\-\-help\fR
@@ -62,7 +69,7 @@ sind
 zeigt die Hilfe an und beendet das Programm
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR\fICHROOT_VERZ\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fICHROOT_VERZ\fR
 .RS 4
 f\(:uhrt die Ver\(:anderungen in dem Verzeichnis
 \fICHROOT_VERZ\fR
@@ -70,14 +77,21 @@ durch und verwendet die Konfigurationsdateien aus dem Verzeichnis
 \fICHROOT_VERZ\fR
 .RE
 .PP
-\fB\-t\fR, \fB\-\-time\fR\fITAGE\fR
+\fB\-S\fR, \fB\-\-set\fR
+.RS 4
+Set lastlog record of a user to the current time\&. This option can be used only together with
+\fB\-u\fR
+(\fB\-\-user\fR))\&.
+.RE
+.PP
+\fB\-t\fR, \fB\-\-time\fR\ \&\fITAGE\fR
 .RS 4
 gibt nur Lastlog\-Eintr\(:age aus, die neuer als
 \fITAGE\fR
 sind
 .RE
 .PP
-\fB\-u\fR, \fB\-\-user\fR\fILOGIN\fR|\fIMENGE\fR
+\fB\-u\fR, \fB\-\-user\fR\ \&\fILOGIN\fR|\fIMENGE\fR
 .RS 4
 gibt nur die Lastlog\-Eintr\(:age f\(:ur die angegebenen Benutzer aus
 .sp

@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: groupadd
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 25/05/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 29/04/2018
 .\"    Manual: Comandi per la gestione del sistema
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: Italian
 .\"
-.TH "GROUPADD" "8" "25/05/2012" "shadow\-utils 4\&.1\&.5\&.1" "Comandi per la gestione del si"
+.TH "GROUPADD" "8" "29/04/2018" "shadow\-utils 4\&.6" "Comandi per la gestione del si"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -51,7 +51,7 @@ Questa opzione fa s\(`i che il comando esca con esito positivo nel caso che il g
 viene ignorato)\&.
 .RE
 .PP
-"\fB\-g\fR, \fB\-\-gid\fR\fIGID\fR
+"\fB\-g\fR, \fB\-\-gid\fR\ \&\fIGID\fR
 .RS 4
 Il valore numerico dell\*(Aqidentificatore (ID) del gruppo\&. Questo valore deve essere univoco, a meno che non venga usata l\*(Aqopzione
 \fB\-o\fR\&. Il valore deve essere non\-negativo\&. La scelta predefinita \(`e quella di usare il minimo valore di ID maggiore o eguale a
@@ -69,7 +69,7 @@ e la descrizione di
 Mostra un messaggio di aiuto ed esce\&.
 .RE
 .PP
-\fB\-K\fR, \fB\-\-key\fR\fIKEY\fR=\fIVALUE\fR\&.
+\fB\-K\fR, \fB\-\-key\fR\ \&\fIKEY\fR=\fIVALUE\fR\&.
 .RS 4
 Ha la precedenza sui valori predefiniti (GID_MIN, GID_MAX e altri) definiti in
 /etc/login\&.defs\&. Pi\(`u opzioni
@@ -77,10 +77,10 @@ Ha la precedenza sui valori predefiniti (GID_MIN, GID_MAX e altri) definiti in
 possono essere specificate\&.
 .sp
 Esempio:
-\fB\-K \fR\fIGID_MIN\fR=\fI100\fR\fB\-K \fR\fIGID_MAX\fR=\fI499\fR
+\fB\-K\fR\ \&\fIGID_MIN\fR=\fI100\fR\ \&\fB\-K\fR\ \&\fIGID_MAX\fR=\fI499\fR
 .sp
 Nota:
-\fB\-K \fR\fIGID_MIN\fR=\fI10\fR,\fIGID_MAX\fR=\fI499\fR
+\fB\-K\fR\ \&\fIGID_MIN\fR=\fI10\fR,\fIGID_MAX\fR=\fI499\fR
 non funziona ancora\&.
 .RE
 .PP
@@ -89,7 +89,7 @@ non funziona ancora\&.
 Questa opzione permette di aggiungere un gruppo con un GID non univoco\&.
 .RE
 .PP
-\fB\-p\fR, \fB\-\-password\fR\fIPASSWORD\fR
+\fB\-p\fR, \fB\-\-password\fR\ \&\fIPASSWORD\fR
 .RS 4
 La password cifrata, come restituita da
 \fBcrypt\fR(3)\&. Il comportamento predefinito \(`e di disabilitare la password\&.
@@ -111,12 +111,21 @@ login\&.defs, al posto di
 \fBGID_MIN\fR\-\fBGID_MAX\fR\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR \fICHROOT_DIR\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fICHROOT_DIR\fR
 .RS 4
 Effettua le modifiche nella directory
 \fICHROOT_DIR\fR
 e usa i file di configurazione dalla directory
 \fICHROOT_DIR\fR\&.
+.RE
+.PP
+\fB\-P\fR, \fB\-\-prefix\fR\ \&\fIPREFIX_DIR\fR
+.RS 4
+Apply changes in the
+\fIPREFIX_DIR\fR
+directory and use the configuration files from the
+\fIPREFIX_DIR\fR
+directory\&. This option does not chroot and is intended for preparing a cross\-compilation target\&. Some limitations: NIS and LDAP users/groups are not verified\&. PAM authentication is using the host files\&. No SELINUX support\&.
 .RE
 .SH "CONFIGURAZIONE"
 .PP

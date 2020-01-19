@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: faillog
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 05/25/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 04/29/2018
 .\"    Manual: Команды управления системой
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: Russian
 .\"
-.TH "faillog" "8" "05/25/2012" "shadow\-utils 4\&.1\&.5\&.1" "Команды управления системой"
+.TH "faillog" "8" "04/29/2018" "shadow\-utils 4\&.6" "Команды управления системой"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -27,9 +27,9 @@
 .\" -----------------------------------------------------------------
 .\" * MAIN CONTENT STARTS HERE *
 .\" -----------------------------------------------------------------
-.SH "ИМЯ"
+.SH "НАЗВАНИЕ"
 faillog \- показывает записи из файла faillog или задаёт предел неудачных попыток входа в систему
-.SH "СИНОПСИС"
+.SH "СИНТАКСИС"
 .HP \w'\fBfaillog\fR\ 'u
 \fBfaillog\fR [\fIпараметры\fR]
 .SH "ОПИСАНИЕ"
@@ -68,7 +68,7 @@ faillog\&.
 Показать краткую справку и закончить работу\&.
 .RE
 .PP
-\fB\-l\fR, \fB\-\-lock\-secs\fR \fIСЕКУНД\fR
+\fB\-l\fR, \fB\-\-lock\-secs\fR\ \&\fIСЕКУНД\fR
 .RS 4
 Блокировать учётную запись на указанное количество
 \fIСЕКУНД\fR
@@ -78,7 +78,7 @@ faillog\&.
 /var/log/faillog\&.
 .RE
 .PP
-\fB\-m\fR, \fB\-\-maximum\fR \fIМАКС_ЧИСЛО\fR
+\fB\-m\fR, \fB\-\-maximum\fR\ \&\fIМАКС_ЧИСЛО\fR
 .RS 4
 Установить максимальное количество неудачных попыток входа перед блокировкой учётной записи равным
 \fIМАКС_ЧИСЛО\fR\&.
@@ -103,7 +103,7 @@ faillog\&.
 /var/log/faillog\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR \fIКАТ_CHROOT\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fIКАТ_CHROOT\fR
 .RS 4
 Выполнить изменения в каталоге
 \fIКАТ_CHROOT\fR
@@ -111,13 +111,13 @@ faillog\&.
 \fIКАТ_CHROOT\fR\&.
 .RE
 .PP
-\fB\-t\fR, \fB\-\-time\fR \fIДНЕЙ\fR
+\fB\-t\fR, \fB\-\-time\fR\ \&\fIДНЕЙ\fR
 .RS 4
 Показать записи faillog новее чем
 \fIДНЕЙ\fR\&.
 .RE
 .PP
-\fB\-u\fR, \fB\-\-user\fR \fIУЧЁТНАЯ ЗАПИСЬ\fR|\fIДИАПАЗОН\fR
+\fB\-u\fR, \fB\-\-user\fR\ \&\fIУЧЁТНАЯ ЗАПИСЬ\fR|\fIДИАПАЗОН\fR
 .RS 4
 Показать запись faillog или изменить счётчики неудачных попыток и ограничения (если задан параметр
 \fB\-l\fR,

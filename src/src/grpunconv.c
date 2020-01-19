@@ -37,7 +37,7 @@
 
 #include <config.h>
 
-#ident "$Id: grpunconv.c 3726 2012-05-18 19:32:32Z nekral-guest $"
+#ident "$Id$"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -166,7 +166,7 @@ int main (int argc, char **argv)
 		fail_exit (5);
 	}
 	gr_locked = true;
-	if (gr_open (O_RDWR) == 0) {
+	if (gr_open (O_CREAT | O_RDWR) == 0) {
 		fprintf (stderr,
 		         _("%s: cannot open %s\n"), Prog, gr_dbname ());
 		fail_exit (1);

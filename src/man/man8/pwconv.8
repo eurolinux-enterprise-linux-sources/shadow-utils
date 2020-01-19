@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: pwconv
 .\"    Author: Marek Michałkiewicz
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 05/25/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 04/29/2018
 .\"    Manual: System Management Commands
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: English
 .\"
-.TH "PWCONV" "8" "05/25/2012" "shadow\-utils 4\&.1\&.5\&.1" "System Management Commands"
+.TH "PWCONV" "8" "04/29/2018" "shadow\-utils 4\&.6" "System Management Commands"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -92,7 +92,6 @@ and
 \fBgrpconv\fR
 are similar\&. First, entries in the shadowed file which don\*(Aqt exist in the main file are removed\&. Then, shadowed entries which don\*(Aqt have `x\*(Aq as the password in the main file are updated\&. Any missing shadowed entries are added\&. Finally, passwords in the main file are replaced with `x\*(Aq\&. These programs can be used for initial conversion as well to update the shadowed file if the main file is edited by hand\&.
 .PP
-
 \fBpwconv\fR
 will use the values of
 \fIPASS_MIN_DAYS\fR,
@@ -123,7 +122,7 @@ commands are:
 Display help message and exit\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR \fICHROOT_DIR\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fICHROOT_DIR\fR
 .RS 4
 Apply changes in the
 \fICHROOT_DIR\fR
@@ -189,7 +188,6 @@ Shadow password suite configuration\&.
 .RE
 .SH "SEE ALSO"
 .PP
-
 \fBgrpck\fR(8),
 \fBlogin.defs\fR(5),
 \fBpwck\fR(8)\&.

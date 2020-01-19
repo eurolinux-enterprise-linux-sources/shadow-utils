@@ -30,7 +30,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/* $Id: failure.h 2831 2009-04-28 19:19:33Z nekral-guest $ */
+/* $Id$ */
 #ifndef _FAILURE_H_
 #define _FAILURE_H_
 
@@ -69,7 +69,7 @@ extern int failcheck (uid_t uid, struct faillog *fl, bool failed);
 extern void failprint (const struct faillog *);
 
 /*
- * failtmp - update the cummulative failure log
+ * failtmp - update the cumulative failure log
  *
  *	failtmp updates the (struct utmp) formatted failure log which
  *	maintains a record of all login failures.

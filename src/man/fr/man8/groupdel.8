@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: groupdel
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 25/05/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 29/04/2018
 .\"    Manual: Commandes de gestion du syst\(`eme
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: French
 .\"
-.TH "GROUPDEL" "8" "25/05/2012" "shadow\-utils 4\&.1\&.5\&.1" "Commandes de gestion du syst\(`em"
+.TH "GROUPDEL" "8" "29/04/2018" "shadow\-utils 4\&.6" "Commandes de gestion du syst\(`em"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -49,12 +49,21 @@ sont\ \&:
 Afficher un message d\*(Aqaide et quitter\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR \fIR\('EP_CHROOT\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fIR\('EP_CHROOT\fR
 .RS 4
 Appliquer les changements dans le r\('epertoire
 \fIR\('EP_CHROOT\fR
 et utiliser les fichiers de configuration du r\('epertoire
 \fIR\('EP_CHROOT\fR\&.
+.RE
+.PP
+\fB\-P\fR, \fB\-\-prefix\fR\ \&\fIPREFIX_DIR\fR
+.RS 4
+Apply changes in the
+\fIPREFIX_DIR\fR
+directory and use the configuration files from the
+\fIPREFIX_DIR\fR
+directory\&. This option does not chroot and is intended for preparing a cross\-compilation target\&. Some limitations: NIS and LDAP users/groups are not verified\&. PAM authentication is using the host files\&. No SELINUX support\&.
 .RE
 .SH "AVERTISSEMENTS"
 .PP

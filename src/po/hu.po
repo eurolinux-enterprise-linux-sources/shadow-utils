@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2012-05-20 19:52+0200\n"
+"POT-Creation-Date: 2018-04-29 16:46+0000\n"
 "PO-Revision-Date: 2007-11-25 20:56+0100\n"
 "Last-Translator: SZERVÁC Attila <sas@321.hu>\n"
 "Language-Team: Hungarian <gnome@gnome.hu>\n"
@@ -316,13 +316,17 @@ msgstr[0] ""
 "A legutóbbi: %s itt: %s\n"
 
 #, c-format
+msgid ""
+"%s: Invalid configuration: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX "
+"(%lu)\n"
+msgstr ""
+
+#, c-format
 msgid "%s: Invalid configuration: GID_MIN (%lu), GID_MAX (%lu)\n"
 msgstr ""
 
 #, c-format
-msgid ""
-"%s: Invalid configuration: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX "
-"(%lu)\n"
+msgid "%s: Encountered error attempting to use preferred GID: %s\n"
 msgstr ""
 
 #, fuzzy, c-format
@@ -331,16 +335,17 @@ msgid "%s: failed to allocate memory: %s\n"
 msgstr "a postafiók tulajdonosának váltása sikertelen"
 
 #, fuzzy, c-format
-msgid "%s: Can't get unique system GID (no more available GIDs)\n"
+msgid ""
+"%s: Can't get unique system GID (%s). Suppressing additional messages.\n"
 msgstr "%s: nem kérhető le egyedi felhasználói azonosító\n"
+
+#, fuzzy, c-format
+msgid "%s: Can't get unique GID (%s). Suppressing additional messages.\n"
+msgstr "%s: nem szerezhető be egyedi csoportazonosító\n"
 
 #, fuzzy, c-format
 msgid "%s: Can't get unique GID (no more available GIDs)\n"
 msgstr "%s: nem szerezhető be egyedi csoportazonosító\n"
-
-#, c-format
-msgid "%s: Invalid configuration: UID_MIN (%lu), UID_MAX (%lu)\n"
-msgstr ""
 
 #, c-format
 msgid ""
@@ -348,8 +353,21 @@ msgid ""
 "(%lu)\n"
 msgstr ""
 
+#, c-format
+msgid "%s: Invalid configuration: UID_MIN (%lu), UID_MAX (%lu)\n"
+msgstr ""
+
+#, c-format
+msgid "%s: Encountered error attempting to use preferred UID: %s\n"
+msgstr ""
+
 #, fuzzy, c-format
-msgid "%s: Can't get unique system UID (no more available UIDs)\n"
+msgid ""
+"%s: Can't get unique system UID (%s). Suppressing additional messages.\n"
+msgstr "%s: nem kérhető le egyedi felhasználói azonosító\n"
+
+#, fuzzy, c-format
+msgid "%s: Can't get unique UID (%s). Suppressing additional messages.\n"
 msgstr "%s: nem kérhető le egyedi felhasználói azonosító\n"
 
 #, fuzzy, c-format
@@ -437,6 +455,11 @@ msgstr "%s: %s könyvtár nem hozható létre\n"
 
 #, fuzzy, c-format
 #| msgid "%s: cannot create directory %s\n"
+msgid "%s: cannot chdir to chroot directory %s: %s\n"
+msgstr "%s: %s könyvtár nem hozható létre\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
 msgid "%s: unable to chroot to directory %s: %s\n"
 msgstr "%s: %s könyvtár nem hozható létre\n"
 
@@ -507,7 +530,7 @@ msgid ""
 msgstr ""
 
 msgid ""
-"  -M, --maxdays MAX_DAYS        set maximim number of days before password\n"
+"  -M, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
 msgstr ""
 
@@ -777,6 +800,11 @@ msgid "%s: line %d: missing new password\n"
 msgstr "%s: %d. sor: hiányzó új jelszó\n"
 
 #, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: failed to crypt password with salt '%s': %s\n"
+msgstr "%s: a jogosultságok eldobása meghiúsult (%s)\n"
+
+#, fuzzy, c-format
 #| msgid "%s: group %s does not exist\n"
 msgid "%s: line %d: group '%s' does not exist\n"
 msgstr "%s: %s csoport nem létezik\n"
@@ -1043,6 +1071,9 @@ msgstr ""
 msgid "  -r, --system                  create a system account\n"
 msgstr ""
 
+msgid "  -P, --prefix PREFIX_DIR       directory prefix\n"
+msgstr ""
+
 #, fuzzy, c-format
 #| msgid "%s: %s is not a valid group name\n"
 msgid "%s: '%s' is not a valid group name\n"
@@ -1070,6 +1101,16 @@ msgstr "A tag már létezik\n"
 #| msgid "%s: Cannot determine your user name.\n"
 msgid "%s: Cannot setup cleanup service.\n"
 msgstr "%s: A felhasználóneved megállapítása sikertelen\n"
+
+msgid ""
+"  -P, --prefix PREFIX_DIR       prefix directory where are located the /etc/"
+"* files\n"
+msgstr ""
+
+msgid ""
+"  -f, --force                   delete group even if it is the primary group "
+"of a user\n"
+msgstr ""
 
 #, fuzzy, c-format
 #| msgid "%s: cannot rename directory %s to %s\n"
@@ -1288,6 +1329,16 @@ msgid ""
 msgstr ""
 
 msgid ""
+"  -C, --clear                   clear lastlog record of an user (usable only "
+"with -u)\n"
+msgstr ""
+
+msgid ""
+"  -S, --set                     set lastlog record to current time (usable "
+"only with -u)\n"
+msgstr ""
+
+msgid ""
 "  -t, --time DAYS               print only lastlog records more recent than "
 "DAYS\n"
 msgstr ""
@@ -1304,6 +1355,24 @@ msgstr "Felhasználónév          Port     Legutóbb"
 
 msgid "**Never logged in**"
 msgstr "**Sosem lépett be**"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: Failed to update the entry for UID %lu\n"
+msgstr "%s: %s könyvtár nem hozható létre\n"
+
+#, fuzzy, c-format
+#| msgid "%s: can't update password file\n"
+msgid "%s: Failed to update the lastlog file\n"
+msgstr "%s: a jelszófájl frissítése sikertelen\n"
+
+#, c-format
+msgid "%s: Option -C cannot be used together with option -S\n"
+msgstr ""
+
+#, c-format
+msgid "%s: Options -C and -S require option -u to specify the user\n"
+msgstr ""
 
 #, c-format
 msgid "Usage: %s [-p] [name]\n"
@@ -1338,6 +1407,15 @@ msgstr ""
 "\n"
 "[Leválasztás átlépve -- root bejelentkezés engedélyezett]"
 
+#, c-format
+msgid "%s: Cannot possibly work without effective root\n"
+msgstr ""
+
+msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
+msgstr ""
+"Nincs utmp bejegyzés.  Futtasd a \"login\"-t a legalacsonyabb szintű \"sh\"-"
+"ból."
+
 #, fuzzy, c-format
 #| msgid ""
 #| "\n"
@@ -1348,15 +1426,6 @@ msgid ""
 msgstr ""
 "\n"
 "A bejelentkezés %d mp. után elkésett\n"
-
-#, c-format
-msgid "%s: Cannot possibly work without effective root\n"
-msgstr ""
-
-msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
-msgstr ""
-"Nincs utmp bejegyzés.  Futtasd a \"login\"-t a legalacsonyabb szintű \"sh\"-"
-"ból."
 
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
@@ -1434,6 +1503,11 @@ msgstr "Használat: newgrp [-] [csoport]\n"
 msgid "Usage: sg group [[-c] command]\n"
 msgstr "Használat: sg csoport [[-c] parancs]\n"
 
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: failed to crypt password with previous salt: %s\n"
+msgstr "%s: a jogosultságok eldobása meghiúsult (%s)\n"
+
 #, fuzzy
 msgid "Invalid password.\n"
 msgstr "Régi jelszó: "
@@ -1502,6 +1576,20 @@ msgstr "%s: %d. sor: chown sikertelen\n"
 #, c-format
 msgid "%s: line %d: can't update entry\n"
 msgstr "%s: %d. sor: nem tudom frissíteni a bejegyzést\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: failed to prepare new %s entry\n"
+msgstr "%s: a jogosultságok eldobása meghiúsult (%s)\n"
+
+#, fuzzy, c-format
+msgid "%s: can't find subordinate user range\n"
+msgstr "%s: %s létrehozása sikertelen\n"
+
+#, fuzzy, c-format
+#| msgid "%s: can't update group file\n"
+msgid "%s: can't find subordinate group range\n"
+msgstr "%s: nem tudom frissíteni a csoport fájlt\n"
 
 msgid ""
 "  -a, --all                     report password status on all accounts\n"
@@ -1756,12 +1844,6 @@ msgstr "Jelszó hitelesítés átlépve.\n"
 msgid "Please enter your OWN password as authentication.\n"
 msgstr "Add meg SAJÁT jelszavad a hitelesítéshez.\n"
 
-msgid " ...killed.\n"
-msgstr ""
-
-msgid " ...waiting for child to terminate.\n"
-msgstr ""
-
 #, fuzzy, c-format
 #| msgid "%s: cannot lock file %s\n"
 msgid "%s: Cannot fork user shell\n"
@@ -1779,15 +1861,37 @@ msgid "Session terminated, terminating shell..."
 msgstr ""
 
 #, c-format
-msgid "%s: %s\n"
-msgstr "%s: %s\n"
+msgid " ...killed.\n"
+msgstr ""
+
+#, c-format
+msgid " ...waiting for child to terminate.\n"
+msgstr ""
 
 msgid " ...terminated.\n"
 msgstr ""
 
+#, c-format
+msgid "%s: %s\n"
+msgstr "%s: %s\n"
+
 # CHECK!
+#, fuzzy
+#| msgid ""
+#| "Usage: su [options] [LOGIN]\n"
+#| "\n"
+#| "Options:\n"
+#| "  -c, --command COMMAND         pass COMMAND to the invoked shell\n"
+#| "  -h, --help                    display this help message and exit\n"
+#| "  -, -l, --login                make the shell a login shell\n"
+#| "  -m, -p,\n"
+#| "  --preserve-environment        do not reset environment variables, and\n"
+#| "                                keep the same shell\n"
+#| "  -s, --shell SHELL             use SHELL instead of the default in "
+#| "passwd\n"
+#| "\n"
 msgid ""
-"Usage: su [options] [LOGIN]\n"
+"Usage: su [options] [-] [username [args]]\n"
 "\n"
 "Options:\n"
 "  -c, --command COMMAND         pass COMMAND to the invoked shell\n"
@@ -1798,6 +1902,7 @@ msgid ""
 "                                keep the same shell\n"
 "  -s, --shell SHELL             use SHELL instead of the default in passwd\n"
 "\n"
+"If no username is given, assume root.\n"
 msgstr ""
 "Használat: su [kapcsolók] [NÉV]\n"
 "\n"
@@ -2038,6 +2143,11 @@ msgstr "%s: érvénytelen mező: \"%s\"\n"
 msgid "%s: invalid shell '%s'\n"
 msgstr "%s: érvénytelen parancsértelmező: \"%s\"\n"
 
+#, fuzzy, c-format
+#| msgid "%s: cannot rewrite password file\n"
+msgid "%s: -Z cannot be used with --prefix\n"
+msgstr "%s: nem tudom újraírni a jelszófájlt\n"
+
 #, c-format
 msgid "%s: -Z requires SELinux enabled kernel\n"
 msgstr ""
@@ -2050,9 +2160,28 @@ msgstr ""
 msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
 msgstr ""
 
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: failed to reset the tallylog entry of user \"%s\"\n"
+msgstr "%s: %s könyvtár nem hozható létre\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: failed to prepare the new %s entry\n"
+msgstr "%s: a jogosultságok eldobása meghiúsult (%s)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: cannot set SELinux context for home directory %s\n"
+msgstr "%s: %s könyvtár nem hozható létre\n"
+
 #, c-format
 msgid "%s: cannot create directory %s\n"
 msgstr "%s: %s könyvtár nem hozható létre\n"
+
+#, c-format
+msgid "%s: cannot reset SELinux file creation context\n"
+msgstr ""
 
 msgid "Creating mailbox file"
 msgstr "Postafiókfájl létrehozása"
@@ -2096,6 +2225,14 @@ msgstr "%s: %s könyvtár nem hozható létre\n"
 msgid "%s: can't create group\n"
 msgstr "%s: %s létrehozása sikertelen\n"
 
+#, fuzzy, c-format
+msgid "%s: can't create subordinate user IDs\n"
+msgstr "%s: %s létrehozása sikertelen\n"
+
+#, fuzzy, c-format
+msgid "%s: can't create subordinate group IDs\n"
+msgstr "%s: %s létrehozása sikertelen\n"
+
 #, c-format
 msgid ""
 "%s: warning: the home directory already exists.\n"
@@ -2137,6 +2274,11 @@ msgid "%s: group %s is the primary group of another user and is not removed.\n"
 msgstr ""
 "%s: Nem tudom %s csoportot törölni, ami egy másik felhasználó elsődleges "
 "csoportja.\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: cannot remove entry %lu from %s\n"
+msgstr "%s: nem tudom átnevezni %s könyvtárat erre: %s\n"
 
 #, fuzzy, c-format
 #| msgid "%s: invalid home directory '%s'\n"
@@ -2217,7 +2359,7 @@ msgstr ""
 msgid ""
 "  -a, --append                  append the user to the supplemental GROUPS\n"
 "                                mentioned by the -G option without removing\n"
-"                                him/her from other groups\n"
+"                                the user from other groups\n"
 msgstr ""
 
 msgid "  -l, --login NEW_LOGIN         new value of the login name\n"
@@ -2245,6 +2387,18 @@ msgstr ""
 msgid "  -U, --unlock                  unlock the user account\n"
 msgstr ""
 
+msgid "  -v, --add-subuids FIRST-LAST  add range of subordinate uids\n"
+msgstr ""
+
+msgid "  -V, --del-subuids FIRST-LAST  remove range of subordinate uids\n"
+msgstr ""
+
+msgid "  -w, --add-subgids FIRST-LAST  add range of subordinate gids\n"
+msgstr ""
+
+msgid "  -W, --del-subgids FIRST-LAST  remove range of subordinate gids\n"
+msgstr ""
+
 msgid ""
 "  -Z, --selinux-user SEUSER     new SELinux user mapping for the user "
 "account\n"
@@ -2260,6 +2414,16 @@ msgstr ""
 #| msgid "%s: user %s exists\n"
 msgid "%s: user '%s' already exists in %s\n"
 msgstr "%s: %s felhasználó létezik\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid date '%s'\n"
+msgid "%s: invalid subordinate uid range '%s'\n"
+msgstr "%s: érvénytelen dátum: \"%s\"\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid date '%s'\n"
+msgid "%s: invalid subordinate gid range '%s'\n"
+msgstr "%s: érvénytelen dátum: \"%s\"\n"
 
 #, fuzzy, c-format
 #| msgid "%s: cannot open file %s\n"
@@ -2278,6 +2442,10 @@ msgstr "%s: -e és -f árnyék jelszavakat vár\n"
 #| msgid "Member already exists\n"
 msgid "%s: UID '%lu' already exists\n"
 msgstr "A tag már létezik\n"
+
+#, c-format
+msgid "%s: %s does not exist, you cannot use the flags %s or %s\n"
+msgstr ""
 
 #, c-format
 msgid "%s: directory %s exists\n"
@@ -2319,6 +2487,26 @@ msgstr "a postafiók tulajdonosának váltása sikertelen"
 
 msgid "failed to rename mailbox"
 msgstr "a postafiók átnevezése sikertelen"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: failed to remove uid range %lu-%lu from '%s'\n"
+msgstr "%s: a jogosultságok eldobása meghiúsult (%s)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: failed to add uid range %lu-%lu to '%s'\n"
+msgstr "%s: a jogosultságok eldobása meghiúsult (%s)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: failed to remove gid range %lu-%lu from '%s'\n"
+msgstr "%s: a jogosultságok eldobása meghiúsult (%s)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: failed to add gid range %lu-%lu to '%s'\n"
+msgstr "%s: a jogosultságok eldobása meghiúsult (%s)\n"
 
 #, c-format
 msgid ""
@@ -2381,6 +2569,20 @@ msgstr "Nem tudtam zárolni a fájlt"
 
 msgid "Couldn't make backup"
 msgstr "Nem tudtam biztonsági másolatot készíteni"
+
+#, fuzzy, c-format
+#| msgid "%s: %s\n"
+msgid "%s: %s: %s\n"
+msgstr "%s: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: %s not found in /etc/passwd\n"
+msgid "%s: %s returned with status %d\n"
+msgstr "%s: %s nem található a /etc/passwd-ben\n"
+
+#, c-format
+msgid "%s: %s killed by signal %d\n"
+msgstr ""
 
 #, fuzzy
 #| msgid "Unable to open group file\n"
@@ -2753,7 +2955,7 @@ msgstr "%s: érvénytelen alapkönyvtár: \"%s\"\n"
 #~ "GROUPS\n"
 #~ "                                mentioned by the -G option without "
 #~ "removing\n"
-#~ "                                him/her from other groups\n"
+#~ "                                the user from other groups\n"
 #~ "  -h, --help                    display this help message and exit\n"
 #~ "  -l, --login NEW_LOGIN         new value of the login name\n"
 #~ "  -L, --lock                    lock the user account\n"
@@ -3083,9 +3285,6 @@ msgstr "%s: érvénytelen alapkönyvtár: \"%s\"\n"
 #~ msgid "%s: can't rewrite password file\n"
 #~ msgstr "%s: a jelszófájl újraírása sikertelen\n"
 
-#~ msgid "%s: can't update password file\n"
-#~ msgstr "%s: a jelszófájl frissítése sikertelen\n"
-
 #~ msgid "%s: can't update shadow password file\n"
 #~ msgstr "%s: az árnyék jelszófájl frissítése sikertelen\n"
 
@@ -3106,9 +3305,6 @@ msgstr "%s: érvénytelen alapkönyvtár: \"%s\"\n"
 
 #~ msgid "Cannot open the password file.\n"
 #~ msgstr "A jelszófájl nem nyitható meg.\n"
-
-#~ msgid "%s: %s not found in /etc/passwd\n"
-#~ msgstr "%s: %s nem található a /etc/passwd-ben\n"
 
 #~ msgid "Error updating the password entry.\n"
 #~ msgstr "Hiba a jelszó bejegyzés frissítésekor\n"
@@ -3317,9 +3513,6 @@ msgstr "%s: érvénytelen alapkönyvtár: \"%s\"\n"
 #~ msgid "%s: can't update shadow group file\n"
 #~ msgstr "%s: nem tudom frissíteni az árnyék csoport fájlt\n"
 
-#~ msgid "%s: can't update group file\n"
-#~ msgstr "%s: nem tudom frissíteni a csoport fájlt\n"
-
 #~ msgid "%s: can't delete shadow group file\n"
 #~ msgstr "%s: nem tudom törölni az árnyék csoport fájlt\n"
 
@@ -3392,9 +3585,6 @@ msgstr "%s: érvénytelen alapkönyvtár: \"%s\"\n"
 #, fuzzy
 #~ msgid "%s: Out of memory. Cannot update the shadow group database.\n"
 #~ msgstr "%s: elfogyott a memória az update_gshadow során\n"
-
-#~ msgid "%s: cannot rewrite password file\n"
-#~ msgstr "%s: nem tudom újraírni a jelszófájlt\n"
 
 #~ msgid "%s: cannot rewrite shadow password file\n"
 #~ msgstr "%s: nem tudom újraírni az árnyék jelszófájlt\n"

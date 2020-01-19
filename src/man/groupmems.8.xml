@@ -36,7 +36,7 @@
 <!-- SHADOW-CONFIG-HERE -->
 ]>
 <refentry id='groupmems.8'>
-  <!-- $Id: groupmems.8.xml 3742 2012-05-25 11:45:21Z nekral-guest $ -->
+  <!-- $Id$ -->
   <refentryinfo>
     <author>
       <firstname>George</firstname>
@@ -85,7 +85,7 @@
     <title>DESCRIPTION</title>
     <para>
       The <command>groupmems</command> command allows a user to administer
-      his/her own group membership list without the requirement of
+      their own group membership list without the requirement of
       superuser privileges. The <command>groupmems</command> utility is for
       systems that configure its users to be in their own name sake primary
       group (i.e., guest / guest).
@@ -104,9 +104,9 @@
     </para>
     <variablelist remap='IP'>
       <varlistentry>
-	<term><option>-a</option>, <option>--add</option> <replaceable>user_name</replaceable></term>
+	<term><option>-a</option>, <option>--add</option>&nbsp;<replaceable>user_name</replaceable></term>
 	<listitem>
-	  <para>Add an user to the group membership list.</para>
+	  <para>Add a user to the group membership list.</para>
 	  <para condition="gshadow">
 	    If the <filename>/etc/gshadow</filename> file exist, and the
 	    group has no entry in the <filename>/etc/gshadow</filename>
@@ -115,7 +115,7 @@
 	</listitem>
       </varlistentry>
       <varlistentry>
-	<term><option>-d</option>, <option>--delete</option> <replaceable>user_name</replaceable></term>
+	<term><option>-d</option>, <option>--delete</option>&nbsp;<replaceable>user_name</replaceable></term>
 	<listitem>
 	  <para>Delete a user from the group membership list.</para>
 	  <para condition="gshadow">
@@ -131,7 +131,7 @@
 	</listitem>
       </varlistentry>
       <varlistentry>
-	<term><option>-g</option>, <option>--group</option> <replaceable>group_name</replaceable></term>
+	<term><option>-g</option>, <option>--group</option>&nbsp;<replaceable>group_name</replaceable></term>
 	<listitem>
 	  <para>The superuser can specify which group membership
 	    list to modify.
@@ -163,8 +163,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-R</option>, <option>--root</option>
-	  <replaceable>CHROOT_DIR</replaceable>
+	  <option>-R</option>, <option>--root</option>&nbsp;<replaceable>CHROOT_DIR</replaceable>
 	</term>
 	<listitem>
 	  <para>

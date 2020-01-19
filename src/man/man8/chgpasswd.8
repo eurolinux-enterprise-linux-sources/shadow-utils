@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: chgpasswd
 .\"    Author: Thomas Kłoczko <kloczek@pld.org.pl>
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 05/25/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 04/29/2018
 .\"    Manual: System Management Commands
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: English
 .\"
-.TH "CHGPASSWD" "8" "05/25/2012" "shadow\-utils 4\&.1\&.5\&.1" "System Management Commands"
+.TH "CHGPASSWD" "8" "04/29/2018" "shadow\-utils 4\&.6" "System Management Commands"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -38,7 +38,6 @@ The
 \fBchgpasswd\fR
 command reads a list of group name and password pairs from standard input and uses this information to update a set of existing groups\&. Each line is of the format:
 .PP
-
 \fIgroup_name\fR:\fIpassword\fR
 .PP
 By default the supplied password must be in clear\-text, and is encrypted by
@@ -47,7 +46,7 @@ By default the supplied password must be in clear\-text, and is encrypted by
 The default encryption algorithm can be defined for the system with the
 \fBENCRYPT_METHOD\fR
 variable of
-/etc/login\&.defs, and can be overwiten with the
+/etc/login\&.defs, and can be overwritten with the
 \fB\-e\fR,
 \fB\-m\fR, or
 \fB\-c\fR
@@ -82,7 +81,7 @@ Display help message and exit\&.
 Use MD5 encryption instead of DES when the supplied passwords are not encrypted\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR \fICHROOT_DIR\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fICHROOT_DIR\fR
 .RS 4
 Apply changes in the
 \fICHROOT_DIR\fR
@@ -204,7 +203,6 @@ Shadow password suite configuration\&.
 .RE
 .SH "SEE ALSO"
 .PP
-
 \fBgpasswd\fR(1),
 \fBgroupadd\fR(8),
 \fBlogin.defs\fR(5)\&.

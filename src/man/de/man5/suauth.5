@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: suauth
 .\"    Author: Marek Micha\(/lkiewicz
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 25.05.2012
-.\"    Manual: Dateiformate und -konvertierung
-.\"    Source: shadow-utils 4.1.5.1
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 29.04.2018
+.\"    Manual: Dateiformate und konvertierung
+.\"    Source: shadow-utils 4.6
 .\"  Language: German
 .\"
-.TH "SUAUTH" "5" "25.05.2012" "shadow\-utils 4\&.1\&.5\&.1" "Dateiformate und \-konvertieru"
+.TH "SUAUTH" "5" "29.04.2018" "shadow\-utils 4\&.6" "Dateiformate und konvertierung"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -42,7 +42,7 @@ ausgewertet\&. Dadurch kann das Verhalten des Befehls su ver\(:andert werden\&. 
 .RS 4
 .\}
 .nf
-      1) auf welchen Benutzer su gerichtet ist
+      1) the user su is targeting
     
 .fi
 .if n \{\
@@ -68,15 +68,15 @@ Hierbei kann to\-id
 \fIALL\fR, eine Aufz\(:ahlung von Benutzernamen, die durch ein \(Fc,\(Fo getrennt werden, oder
 \fIALL EXCEPT\fR, die von einer Aufz\(:ahlung von Benutzernamen gefolgt werden, die durch ein \(Fc,\(Fo getrennt werden, sein\&.
 .PP
-from\-id hat das gleiche Format wie to\-id mit der Ausnahme, dass zus\(:atzlich
+from\-id is formatted the same as to\-id except the extra word
 \fIGROUP\fR
-zul\(:assig ist\&. Auch
+is recognized\&.
 \fIALL EXCEPT GROUP\fR
-ist zul\(:assig\&. Nach
+is perfectly valid too\&. Following
 \fIGROUP\fR
-werden ein oder mehrere Gruppennamen aufgef\(:uhrt, die durch \(Fc,\(Fo getrennt sind\&. Die Haupt\-ID einer Gruppe reicht nicht aus, sondern ein Eintrag in
+appears one or more group names, delimited by ","\&. It is not sufficient to have primary group id of the relevant group, an entry in
 \fB/etc/group\fR(5)
-ist notwendig\&.
+is necessary\&.
 .PP
 Als Aktion k\(:onnen nur die folgenden Optionen angegeben werden\&.
 .PP

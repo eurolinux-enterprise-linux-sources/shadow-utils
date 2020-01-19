@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: groupadd
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 25/05/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 29/04/2018
 .\"    Manual: Commandes de gestion du syst\(`eme
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: French
 .\"
-.TH "GROUPADD" "8" "25/05/2012" "shadow\-utils 4\&.1\&.5\&.1" "Commandes de gestion du syst\(`em"
+.TH "GROUPADD" "8" "29/04/2018" "shadow\-utils 4\&.6" "Commandes de gestion du syst\(`em"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -51,7 +51,7 @@ Avec cette option, la commande quittera juste avec un \('etat de succ\(`es si le
 est d\('esactiv\('ee)\&.
 .RE
 .PP
-\fB\-g\fR, \fB\-\-gid\fR \fIGID\fR
+\fB\-g\fR, \fB\-\-gid\fR\ \&\fIGID\fR
 .RS 4
 La valeur num\('erique de l\*(Aqidentifiant du groupe (\(Fo\ \&group ID\ \&\(Fc ou GID)\&. Cette valeur doit \(^etre unique, sauf si l\*(Aqoption
 \fB\-o\fR
@@ -70,7 +70,7 @@ et
 Afficher un message d\*(Aqaide et quitter\&.
 .RE
 .PP
-\fB\-K\fR, \fB\-\-key\fR \fICL\('E\fR=\fIVALEUR\fR
+\fB\-K\fR, \fB\-\-key\fR\ \&\fICL\('E\fR=\fIVALEUR\fR
 .RS 4
 Surcharger les valeurs par d\('efaut du fichier
 /etc/login\&.defs
@@ -79,14 +79,10 @@ Surcharger les valeurs par d\('efaut du fichier
 peut \(^etre indiqu\('ee plusieurs fois\&.
 .sp
 Exemple\ \&:
-\fB\-K\fR
-\fIGID_MIN\fR=\fI10\fR
-\fB\-K\fR
-\fIGID_MAX\fR=\fI499\fR
+\fB\-K\fR\ \&\fIGID_MIN\fR=\fI10\fR\ \&\fB\-K\fR\ \&\fIGID_MAX\fR=\fI499\fR
 .sp
 Remarque\ \&:
-\fB\-K\fR
-\fIGID_MIN\fR=\fI10\fR,\fIGID_MAX\fR=\fI499\fR
+\fB\-K\fR\ \&\fIGID_MIN\fR=\fI10\fR,\fIGID_MAX\fR=\fI499\fR
 ne fonctionne pas pour l\*(Aqinstant\&.
 .RE
 .PP
@@ -95,7 +91,7 @@ ne fonctionne pas pour l\*(Aqinstant\&.
 Cette option permet d\*(Aqajouter un groupe avec un identifiant (\(Fo\ \&GID\ \&\(Fc) d\('ej\(`a utilis\('e\&.
 .RE
 .PP
-\fB\-p\fR, \fB\-\-password\fR \fIMOT_DE_PASSE\fR
+\fB\-p\fR, \fB\-\-password\fR\ \&\fIMOT_DE_PASSE\fR
 .RS 4
 Le mot de passe chiffr\('e, comme renvoy\('e par
 \fBcrypt\fR(3)\&. Le comportement par d\('efaut est de d\('esactiver le mot de passe\&.
@@ -116,12 +112,21 @@ login\&.defs, au lieu de
 \fBGID_MIN\fR\-\fBGID_MAX\fR
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR \fIR\('EP_CHROOT\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fIR\('EP_CHROOT\fR
 .RS 4
 Appliquer les changements dans le r\('epertoire
 \fIR\('EP_CHROOT\fR
 et utiliser les fichiers de configuration du r\('epertoire
 \fIR\('EP_CHROOT\fR\&.
+.RE
+.PP
+\fB\-P\fR, \fB\-\-prefix\fR\ \&\fIPREFIX_DIR\fR
+.RS 4
+Apply changes in the
+\fIPREFIX_DIR\fR
+directory and use the configuration files from the
+\fIPREFIX_DIR\fR
+directory\&. This option does not chroot and is intended for preparing a cross\-compilation target\&. Some limitations: NIS and LDAP users/groups are not verified\&. PAM authentication is using the host files\&. No SELINUX support\&.
 .RE
 .SH "CONFIGURATION"
 .PP

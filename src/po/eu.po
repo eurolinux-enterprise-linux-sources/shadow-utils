@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eu\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2012-05-20 19:52+0200\n"
+"POT-Creation-Date: 2018-04-29 16:46+0000\n"
 "PO-Revision-Date: 2011-11-26 19:42+0100\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: Euskara <debian-l10n-eu@lists.debian.org>\n"
@@ -322,13 +322,17 @@ msgstr[1] ""
 "Azkena %s izan zen %s(e)n.\n"
 
 #, c-format
+msgid ""
+"%s: Invalid configuration: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX "
+"(%lu)\n"
+msgstr ""
+
+#, c-format
 msgid "%s: Invalid configuration: GID_MIN (%lu), GID_MAX (%lu)\n"
 msgstr ""
 
 #, c-format
-msgid ""
-"%s: Invalid configuration: SYS_GID_MIN (%lu), GID_MIN (%lu), SYS_GID_MAX "
-"(%lu)\n"
+msgid "%s: Encountered error attempting to use preferred GID: %s\n"
 msgstr ""
 
 #, fuzzy, c-format
@@ -338,17 +342,19 @@ msgstr "huts egin du postontzia jabez aldatzean"
 
 #, fuzzy, c-format
 #| msgid "%s: Can't get unique system UID (no more available UIDs)\n"
-msgid "%s: Can't get unique system GID (no more available GIDs)\n"
+msgid ""
+"%s: Can't get unique system GID (%s). Suppressing additional messages.\n"
 msgstr ""
 "%s: Ezin da sistema UID bakarra lortu (ez dago UID erabilgarri gehiago)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: Can't get unique GID (no more available GIDs)\n"
+msgid "%s: Can't get unique GID (%s). Suppressing additional messages.\n"
+msgstr "%s: Ezin da GID bakarra lortu (ez dago GID erabilgarri gehiago)\n"
 
 #, c-format
 msgid "%s: Can't get unique GID (no more available GIDs)\n"
 msgstr "%s: Ezin da GID bakarra lortu (ez dago GID erabilgarri gehiago)\n"
-
-#, c-format
-msgid "%s: Invalid configuration: UID_MIN (%lu), UID_MAX (%lu)\n"
-msgstr ""
 
 #, c-format
 msgid ""
@@ -357,9 +363,24 @@ msgid ""
 msgstr ""
 
 #, c-format
-msgid "%s: Can't get unique system UID (no more available UIDs)\n"
+msgid "%s: Invalid configuration: UID_MIN (%lu), UID_MAX (%lu)\n"
+msgstr ""
+
+#, c-format
+msgid "%s: Encountered error attempting to use preferred UID: %s\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "%s: Can't get unique system UID (no more available UIDs)\n"
+msgid ""
+"%s: Can't get unique system UID (%s). Suppressing additional messages.\n"
 msgstr ""
 "%s: Ezin da sistema UID bakarra lortu (ez dago UID erabilgarri gehiago)\n"
+
+#, fuzzy, c-format
+#| msgid "%s: Can't get unique UID (no more available UIDs)\n"
+msgid "%s: Can't get unique UID (%s). Suppressing additional messages.\n"
+msgstr "%s: ezin da UID bakarra lortu (ez dago UID erabilgarri gehiago)\n"
 
 #, c-format
 msgid "%s: Can't get unique UID (no more available UIDs)\n"
@@ -444,6 +465,11 @@ msgstr "%s: ezin da %s direktorioa sortu\n"
 
 #, fuzzy, c-format
 #| msgid "%s: cannot create directory %s\n"
+msgid "%s: cannot chdir to chroot directory %s: %s\n"
+msgstr "%s: ezin da %s direktorioa sortu\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
 msgid "%s: unable to chroot to directory %s: %s\n"
 msgstr "%s: ezin da %s direktorioa sortu\n"
 
@@ -523,8 +549,13 @@ msgstr ""
 "  -m, --mindays GUTXI_EGUN      pasahitz aldaketa gutxieneko data\n"
 "                                GUTXI_EGUN-era aldatu\n"
 
+#, fuzzy
+#| msgid ""
+#| "  -M, --maxdays MAX_DAYS        set maximim number of days before "
+#| "password\n"
+#| "                                change to MAX_DAYS\n"
 msgid ""
-"  -M, --maxdays MAX_DAYS        set maximim number of days before password\n"
+"  -M, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
 msgstr ""
 "  -M, --maxdays GEHI_EGUN       pasashitz aldaketa gehienezko data\n"
@@ -799,6 +830,11 @@ msgstr "%s: %d. lerroa: lerro luzegia\n"
 #, c-format
 msgid "%s: line %d: missing new password\n"
 msgstr "%s: %d. lerroa: pasahitz berria falta da\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to remove %s\n"
+msgid "%s: failed to crypt password with salt '%s': %s\n"
+msgstr "%s: huts %s kentzerakoan\n"
 
 #, c-format
 msgid "%s: line %d: group '%s' does not exist\n"
@@ -1085,6 +1121,11 @@ msgstr ""
 msgid "  -r, --system                  create a system account\n"
 msgstr "  -r, --system                  sistema kontu bat sortu\n"
 
+#, fuzzy
+#| msgid "  -Q, --root CHROOT_DIR         directory to chroot into\n"
+msgid "  -P, --prefix PREFIX_DIR       directory prefix\n"
+msgstr "  -r, --remove-password         TALDEaren pasahitaz kendu\n"
+
 #, c-format
 msgid "%s: '%s' is not a valid group name\n"
 msgstr "%s: '%s' ez da baliozko talde-izena\n"
@@ -1109,6 +1150,21 @@ msgstr "%s: '%lu' GIDa badago dagoeneko\n"
 #| msgid "%s: Cannot determine your user name.\n"
 msgid "%s: Cannot setup cleanup service.\n"
 msgstr "%s: Ezin da Erabiltzaile izena zehaztu.\n"
+
+msgid ""
+"  -P, --prefix PREFIX_DIR       prefix directory where are located the /etc/"
+"* files\n"
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "  -r, --reset                   reset the counters of login failures\n"
+msgid ""
+"  -f, --force                   delete group even if it is the primary group "
+"of a user\n"
+msgstr ""
+"  -r, --reset                   saio-hasierako hutsegiteen kontatzailea\n"
+"                                berrezartzeko\n"
 
 #, c-format
 msgid "%s: cannot remove entry '%s' from %s\n"
@@ -1337,6 +1393,26 @@ msgstr ""
 "  -b, --before EGUN             EGUN kopurua baino zaharragoak diren\n"
 "                                erregistroak\n"
 
+#, fuzzy
+#| msgid ""
+#| "  -a, --all                     display faillog records for all users\n"
+msgid ""
+"  -C, --clear                   clear lastlog record of an user (usable only "
+"with -u)\n"
+msgstr ""
+"  -a, --all                     erabiltzaile guztien faillog-en\n"
+"                                erregistroak bistaratzen ditu\n"
+
+#, fuzzy
+#| msgid ""
+#| "  -a, --all                     display faillog records for all users\n"
+msgid ""
+"  -S, --set                     set lastlog record to current time (usable "
+"only with -u)\n"
+msgstr ""
+"  -a, --all                     erabiltzaile guztien faillog-en\n"
+"                                erregistroak bistaratzen ditu\n"
+
 msgid ""
 "  -t, --time DAYS               print only lastlog records more recent than "
 "DAYS\n"
@@ -1358,6 +1434,24 @@ msgstr "Erabiltzaile-izena           Ataka          Azkena"
 
 msgid "**Never logged in**"
 msgstr "**Inoiz ez du saiorik hasi**"
+
+#, fuzzy, c-format
+#| msgid "%s: Failed to get the entry for UID %lu\n"
+msgid "%s: Failed to update the entry for UID %lu\n"
+msgstr "%s: Huts %lu UIDaren sarrera eskuratzean\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
+msgid "%s: Failed to update the lastlog file\n"
+msgstr "%s: huts %lu UIDaren lastlog sarrera berrezartzean: %s\n"
+
+#, c-format
+msgid "%s: Option -C cannot be used together with option -S\n"
+msgstr ""
+
+#, c-format
+msgid "%s: Options -C and -S require option -u to specify the user\n"
+msgstr ""
 
 #, c-format
 msgid "Usage: %s [-p] [name]\n"
@@ -1393,14 +1487,6 @@ msgstr ""
 "[Deskonexioa saltatuta -- root-ek saio-hastea baimenduta.]"
 
 #, c-format
-msgid ""
-"\n"
-"Login timed out after %u seconds.\n"
-msgstr ""
-"\n"
-"Saio-hasiera denboraz kanpo %u segundo igarotakoan.\n"
-
-#, c-format
 msgid "%s: Cannot possibly work without effective root\n"
 msgstr "%s: Ezingo du ziurrenik funtzionatu erro efektibo bat gabe\n"
 
@@ -1408,6 +1494,14 @@ msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
 msgstr ""
 "Ez dago utmp sarrerarik. \"login\" \"sh\" maila baxuenetik exekutatu beharko "
 "zenuke"
+
+#, c-format
+msgid ""
+"\n"
+"Login timed out after %u seconds.\n"
+msgstr ""
+"\n"
+"Saio-hasiera denboraz kanpo %u segundo igarotakoan.\n"
 
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
@@ -1483,6 +1577,11 @@ msgstr "Erabilera: newgrp [-] [taldea]\n"
 msgid "Usage: sg group [[-c] command]\n"
 msgstr "Erabilera: sg taldea [[-c] komandoa]\n"
 
+#, fuzzy, c-format
+#| msgid "%s: failed to remove %s\n"
+msgid "%s: failed to crypt password with previous salt: %s\n"
+msgstr "%s: huts %s kentzerakoan\n"
+
 msgid "Invalid password.\n"
 msgstr "Pasahitz baliogabea.\n"
 
@@ -1549,6 +1648,21 @@ msgstr "%s: %d lerroa: chown %s-ek huts egin du: %s\n"
 #, c-format
 msgid "%s: line %d: can't update entry\n"
 msgstr "%s: %d lerroa: ezin da sarrera eguneratu\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to prepare the new %s entry '%s'\n"
+msgid "%s: failed to prepare new %s entry\n"
+msgstr "%s: huts %s sarrera  berria prestatzean '%s'\n"
+
+#, fuzzy, c-format
+#| msgid "%s: can't create user\n"
+msgid "%s: can't find subordinate user range\n"
+msgstr "%s: ezin da erabiltzailea sortu\n"
+
+#, fuzzy, c-format
+#| msgid "%s: can't create group\n"
+msgid "%s: can't find subordinate group range\n"
+msgstr "%s: ezin da taldea sortu\n"
 
 msgid ""
 "  -a, --all                     report password status on all accounts\n"
@@ -1827,12 +1941,6 @@ msgstr "Pasahitz autentifikazioa saltatuta.\n"
 msgid "Please enter your OWN password as authentication.\n"
 msgstr "Sartu zure pasahitz PROPIOA autentifikazio gisa.\n"
 
-msgid " ...killed.\n"
-msgstr ""
-
-msgid " ...waiting for child to terminate.\n"
-msgstr ""
-
 #, fuzzy, c-format
 #| msgid "%s: Cannot determine your user name.\n"
 msgid "%s: Cannot fork user shell\n"
@@ -1850,14 +1958,36 @@ msgid "Session terminated, terminating shell..."
 msgstr ""
 
 #, c-format
-msgid "%s: %s\n"
-msgstr "%s: %s\n"
+msgid " ...killed.\n"
+msgstr ""
+
+#, c-format
+msgid " ...waiting for child to terminate.\n"
+msgstr ""
 
 msgid " ...terminated.\n"
 msgstr ""
 
+#, c-format
+msgid "%s: %s\n"
+msgstr "%s: %s\n"
+
+#, fuzzy
+#| msgid ""
+#| "Usage: su [options] [LOGIN]\n"
+#| "\n"
+#| "Options:\n"
+#| "  -c, --command COMMAND         pass COMMAND to the invoked shell\n"
+#| "  -h, --help                    display this help message and exit\n"
+#| "  -, -l, --login                make the shell a login shell\n"
+#| "  -m, -p,\n"
+#| "  --preserve-environment        do not reset environment variables, and\n"
+#| "                                keep the same shell\n"
+#| "  -s, --shell SHELL             use SHELL instead of the default in "
+#| "passwd\n"
+#| "\n"
 msgid ""
-"Usage: su [options] [LOGIN]\n"
+"Usage: su [options] [-] [username [args]]\n"
 "\n"
 "Options:\n"
 "  -c, --command COMMAND         pass COMMAND to the invoked shell\n"
@@ -1868,6 +1998,7 @@ msgid ""
 "                                keep the same shell\n"
 "  -s, --shell SHELL             use SHELL instead of the default in passwd\n"
 "\n"
+"If no username is given, assume root.\n"
 msgstr ""
 "Erabilera: su [aukerak] [IZENA]\n"
 "\n"
@@ -2116,6 +2247,10 @@ msgid "%s: invalid shell '%s'\n"
 msgstr "%s: '%s' shell baliogabea\n"
 
 #, c-format
+msgid "%s: -Z cannot be used with --prefix\n"
+msgstr ""
+
+#, c-format
 msgid "%s: -Z requires SELinux enabled kernel\n"
 msgstr "%s: -Z-ek  SELinux gaituriko kernel bat behar du\n"
 
@@ -2127,9 +2262,28 @@ msgstr "%s: huts %lu UIDaren faillog erregistroa berrezartzean: %s\n"
 msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
 msgstr "%s: huts %lu UIDaren lastlog sarrera berrezartzean: %s\n"
 
+#, fuzzy, c-format
+#| msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
+msgid "%s: failed to reset the tallylog entry of user \"%s\"\n"
+msgstr "%s: huts %lu UIDaren faillog erregistroa berrezartzean: %s\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to prepare the new %s entry '%s'\n"
+msgid "%s: failed to prepare the new %s entry\n"
+msgstr "%s: huts %s sarrera  berria prestatzean '%s'\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot create directory %s\n"
+msgid "%s: cannot set SELinux context for home directory %s\n"
+msgstr "%s: ezin da %s direktorioa sortu\n"
+
 #, c-format
 msgid "%s: cannot create directory %s\n"
 msgstr "%s: ezin da %s direktorioa sortu\n"
+
+#, c-format
+msgid "%s: cannot reset SELinux file creation context\n"
+msgstr ""
 
 msgid "Creating mailbox file"
 msgstr "Postakutxa fitxategia sortzen"
@@ -2168,6 +2322,16 @@ msgstr "%s: ezin da %s direktorioa sortu\n"
 
 #, c-format
 msgid "%s: can't create group\n"
+msgstr "%s: ezin da taldea sortu\n"
+
+#, fuzzy, c-format
+#| msgid "%s: can't create user\n"
+msgid "%s: can't create subordinate user IDs\n"
+msgstr "%s: ezin da erabiltzailea sortu\n"
+
+#, fuzzy, c-format
+#| msgid "%s: can't create group\n"
+msgid "%s: can't create subordinate group IDs\n"
 msgstr "%s: ezin da taldea sortu\n"
 
 #, c-format
@@ -2221,6 +2385,11 @@ msgid "%s: group %s is the primary group of another user and is not removed.\n"
 msgstr ""
 "%s: ezin da %s taldea ezabatu beste erabiltzaile baten talde nagusia bait "
 "da.\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot remove entry '%s' from %s\n"
+msgid "%s: cannot remove entry %lu from %s\n"
+msgstr "%s: ezin da '%s' sarrera %s-tik kendu\n"
 
 #, fuzzy, c-format
 #| msgid "%s: %s home directory (%s) not found\n"
@@ -2310,7 +2479,7 @@ msgstr ""
 msgid ""
 "  -a, --append                  append the user to the supplemental GROUPS\n"
 "                                mentioned by the -G option without removing\n"
-"                                him/her from other groups\n"
+"                                the user from other groups\n"
 msgstr ""
 "  -a, --append                  gehitu erabiltzailea -G aukerak zehaztutako "
 "talde\n"
@@ -2347,6 +2516,18 @@ msgstr "  -u, --uid UID                 erabiltzaile kontuaren UID berria\n"
 msgid "  -U, --unlock                  unlock the user account\n"
 msgstr "  -U, --unlock                  erabiltzaile kontua desblokeatu\n"
 
+msgid "  -v, --add-subuids FIRST-LAST  add range of subordinate uids\n"
+msgstr ""
+
+msgid "  -V, --del-subuids FIRST-LAST  remove range of subordinate uids\n"
+msgstr ""
+
+msgid "  -w, --add-subgids FIRST-LAST  add range of subordinate gids\n"
+msgstr ""
+
+msgid "  -W, --del-subgids FIRST-LAST  remove range of subordinate gids\n"
+msgstr ""
+
 #, fuzzy
 #| msgid ""
 #| "  -Z, --selinux-user            new SELinux user mapping for the user "
@@ -2373,6 +2554,16 @@ msgid "%s: user '%s' already exists in %s\n"
 msgstr "%s: '%s' erabiltzailea badago dagoeneko %s-n\n"
 
 #, fuzzy, c-format
+#| msgid "%s: invalid date '%s'\n"
+msgid "%s: invalid subordinate uid range '%s'\n"
+msgstr "%s: '%s' data baliogabea\n"
+
+#, fuzzy, c-format
+#| msgid "%s: invalid date '%s'\n"
+msgid "%s: invalid subordinate gid range '%s'\n"
+msgstr "%s: '%s' data baliogabea\n"
+
+#, fuzzy, c-format
 #| msgid "%s: cannot open %s\n"
 msgid "%s: no options\n"
 msgstr "%s: ezin da %s ireki\n"
@@ -2388,6 +2579,11 @@ msgstr "%s:  -e eta -f aukerek itzalpeko pasahitzak eskatzen dute\n"
 #, c-format
 msgid "%s: UID '%lu' already exists\n"
 msgstr "%s: '%lu' UIDa badago dagoeneko\n"
+
+#, fuzzy, c-format
+#| msgid "%s: %s is not authorized to change the password of %s\n"
+msgid "%s: %s does not exist, you cannot use the flags %s or %s\n"
+msgstr "%s: %s ez dago %s-ren pasahitza aldatzeko baimendurik\n"
 
 #, c-format
 msgid "%s: directory %s exists\n"
@@ -2433,6 +2629,26 @@ msgstr "huts egin du postontzia jabez aldatzean"
 
 msgid "failed to rename mailbox"
 msgstr "huts egin du postontzia izenez aldatzean"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to prepare the new %s entry '%s'\n"
+msgid "%s: failed to remove uid range %lu-%lu from '%s'\n"
+msgstr "%s: huts %s sarrera  berria prestatzean '%s'\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to prepare the new %s entry '%s'\n"
+msgid "%s: failed to add uid range %lu-%lu to '%s'\n"
+msgstr "%s: huts %s sarrera  berria prestatzean '%s'\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to prepare the new %s entry '%s'\n"
+msgid "%s: failed to remove gid range %lu-%lu from '%s'\n"
+msgstr "%s: huts %s sarrera  berria prestatzean '%s'\n"
+
+#, fuzzy, c-format
+#| msgid "%s: failed to prepare the new %s entry '%s'\n"
+msgid "%s: failed to add gid range %lu-%lu to '%s'\n"
+msgstr "%s: huts %s sarrera  berria prestatzean '%s'\n"
 
 #, c-format
 msgid ""
@@ -2488,6 +2704,19 @@ msgstr "Ezin da fitxategia blokeatu"
 
 msgid "Couldn't make backup"
 msgstr "Ezin izan da babeskopiarik egin"
+
+#, fuzzy, c-format
+#| msgid "%s: PAM: %s\n"
+msgid "%s: %s: %s\n"
+msgstr "%s: PAM: %s\n"
+
+#, c-format
+msgid "%s: %s returned with status %d\n"
+msgstr ""
+
+#, c-format
+msgid "%s: %s killed by signal %d\n"
+msgstr ""
 
 #, fuzzy
 #| msgid "failed to rename mailbox"
@@ -2804,7 +3033,7 @@ msgstr "%s: oinarrizko '%s' direktorio baliogabea\n"
 #~ "GROUPS\n"
 #~ "                                mentioned by the -G option without "
 #~ "removing\n"
-#~ "                                him/her from other groups\n"
+#~ "                                the user from other groups\n"
 #~ "  -h, --help                    display this help message and exit\n"
 #~ "  -l, --login NEW_LOGIN         new value of the login name\n"
 #~ "  -L, --lock                    lock the user account\n"

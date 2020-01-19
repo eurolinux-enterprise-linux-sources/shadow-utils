@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: usermod
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 05/25/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 04/29/2018
 .\"    Manual: Polecenia Zarządzania Systemem
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: Polish
 .\"
-.TH "USERMOD" "8" "05/25/2012" "shadow\-utils 4\&.1\&.5\&.1" "Polecenia Zarządzania Systemem"
+.TH "USERMOD" "8" "04/29/2018" "shadow\-utils 4\&.6" "Polecenia Zarządzania Systemem"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -50,13 +50,13 @@ Add the user to the supplementary group(s)\&. Use only with the
 option\&.
 .RE
 .PP
-\fB\-c\fR, \fB\-\-comment\fR\fIKOMENTARZ\fR
+\fB\-c\fR, \fB\-\-comment\fR\ \&\fIKOMENTARZ\fR
 .RS 4
 Nowa wartość pola komentarza dla danego użytkownika w pliku hase\(/l\&. Zwykle jest zmieniana przy pomocy polecenia
 \fBchfn\fR(1)\&.
 .RE
 .PP
-\fB\-d\fR, \fB\-\-home\fR\fIKAT_DOMOWY\fR
+\fB\-d\fR, \fB\-\-home\fR\ \&\fIHOME_DIR\fR
 .RS 4
 The user\*(Aqs new login directory\&.
 .sp
@@ -65,7 +65,7 @@ If the
 option is given, the contents of the current home directory will be moved to the new home directory, which is created if it does not already exist\&.
 .RE
 .PP
-\fB\-e\fR, \fB\-\-expiredate\fR\fIDATA_WAŻN\fR
+\fB\-e\fR, \fB\-\-expiredate\fR\ \&\fIDATA_WAŻN\fR
 .RS 4
 Data, od kt\('orej konto danego użytkownika zostanie wy\(/lączone\&. Data podawana jest w formacie
 \fIMM/DD/RR\fR\&.
@@ -81,7 +81,7 @@ file\&. A
 entry will be created if there were none\&.
 .RE
 .PP
-\fB\-f\fR, \fB\-\-inactive\fR\fINIEAKTYWNE\fR
+\fB\-f\fR, \fB\-\-inactive\fR\ \&\fINIEAKTYWNE\fR
 .RS 4
 The number of days after a password expires until the account is permanently disabled\&.
 .sp
@@ -94,7 +94,7 @@ file\&. A
 entry will be created if there were none\&.
 .RE
 .PP
-\fB\-g\fR, \fB\-\-gid\fR\fIGRUPA\fR
+\fB\-g\fR, \fB\-\-gid\fR\ \&\fIGRUPA\fR
 .RS 4
 The group name or number of the user\*(Aqs new initial login group\&. The group must exist\&.
 .sp
@@ -103,7 +103,7 @@ Any file from the user\*(Aqs home directory owned by the previous primary group 
 The group ownership of files outside of the user\*(Aqs home directory must be fixed manually\&.
 .RE
 .PP
-\fB\-G\fR, \fB\-\-groups\fR\fIGRUPA1\fR[\fI,GRUPA2,\&.\&.\&.\fR[\fI,GRUPAN\fR]]]
+\fB\-G\fR, \fB\-\-groups\fR\ \&\fIGRUPA1\fR[\fI,GRUPA2,\&.\&.\&.\fR[\fI,GRUPAN\fR]]]
 .RS 4
 A list of supplementary groups which the user is also a member of\&. Each group is separated from the next by a comma, with no intervening whitespace\&. The groups are subject to the same restrictions as the group given with the
 \fB\-g\fR
@@ -114,7 +114,7 @@ If the user is currently a member of a group which is not listed, the user will 
 option, which appends the user to the current supplementary group list\&.
 .RE
 .PP
-\fB\-l\fR, \fB\-\-login\fR\fINOWY_LOGIN\fR
+\fB\-l\fR, \fB\-\-login\fR\ \&\fINOWY_LOGIN\fR
 .RS 4
 The name of the user will be changed from
 \fILOGIN\fR
@@ -144,7 +144,6 @@ This option is only valid in combination with the
 (or
 \fB\-\-home\fR) option\&.
 .sp
-
 \fBusermod\fR
 will try to adapt the ownership of the files and to copy the modes, ACL and extended attributes, but manual changes might be needed afterwards\&.
 .RE
@@ -156,19 +155,18 @@ When used with the
 option, this option allows to change the user ID to a non\-unique value\&.
 .RE
 .PP
-\fB\-p\fR, \fB\-\-password\fR\fIHAS\(/LO\fR
+\fB\-p\fR, \fB\-\-password\fR\ \&\fIHAS\(/LO\fR
 .RS 4
 The encrypted password, as returned by
 \fBcrypt\fR(3)\&.
 .sp
-
 \fBNote:\fR
 This option is not recommended because the password (or encrypted password) will be visible by users listing the processes\&.
 .sp
 You should make sure the password respects the system\*(Aqs password policy\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR \fICHROOT_DIR\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fICHROOT_DIR\fR
 .RS 4
 Apply changes in the
 \fICHROOT_DIR\fR
@@ -177,12 +175,21 @@ directory and use the configuration files from the
 directory\&.
 .RE
 .PP
-\fB\-s\fR, \fB\-\-shell\fR\fISHELL\fR
+\fB\-P\fR, \fB\-\-prefix\fR\ \&\fIPREFIX_DIR\fR
+.RS 4
+Apply changes in the
+\fIPREFIX_DIR\fR
+directory and use the configuration files from the
+\fIPREFIX_DIR\fR
+directory\&. This option does not chroot and is intended for preparing a cross\-compilation target\&. Some limitations: NIS and LDAP users/groups are not verified\&. PAM authentication is using the host files\&. No SELINUX support\&.
+.RE
+.PP
+\fB\-s\fR, \fB\-\-shell\fR\ \&\fISHELL\fR
 .RS 4
 Nazwa nowej pow\(/loki (shell) użytkownika\&. Ustawienie tego pola na puste powoduje, że system wybierze domyślną pow\(/lokę logowania\&.
 .RE
 .PP
-\fB\-u\fR, \fB\-\-uid\fR\fIUID\fR
+\fB\-u\fR, \fB\-\-uid\fR\ \&\fIUID\fR
 .RS 4
 The new numerical value of the user\*(Aqs ID\&.
 .sp
@@ -219,7 +226,67 @@ value from
 /etc/default/useradd)\&.
 .RE
 .PP
-\fB\-Z\fR, \fB\-\-selinux\-user\fR \fISEUSER\fR
+\fB\-v\fR, \fB\-\-add\-subuids\fR\ \&\fIFIRST\fR\-\fILAST\fR
+.RS 4
+Add a range of subordinate uids to the user\*(Aqs account\&.
+.sp
+This option may be specified multiple times to add multiple ranges to a users account\&.
+.sp
+No checks will be performed with regard to
+\fBSUB_UID_MIN\fR,
+\fBSUB_UID_MAX\fR, or
+\fBSUB_UID_COUNT\fR
+from /etc/login\&.defs\&.
+.RE
+.PP
+\fB\-V\fR, \fB\-\-del\-subuids\fR\ \&\fIFIRST\fR\-\fILAST\fR
+.RS 4
+Remove a range of subordinate uids from the user\*(Aqs account\&.
+.sp
+This option may be specified multiple times to remove multiple ranges to a users account\&. When both
+\fB\-\-del\-subuids\fR
+and
+\fB\-\-add\-subuids\fR
+are specified, the removal of all subordinate uid ranges happens before any subordinate uid range is added\&.
+.sp
+No checks will be performed with regard to
+\fBSUB_UID_MIN\fR,
+\fBSUB_UID_MAX\fR, or
+\fBSUB_UID_COUNT\fR
+from /etc/login\&.defs\&.
+.RE
+.PP
+\fB\-w\fR, \fB\-\-add\-subgids\fR\ \&\fIFIRST\fR\-\fILAST\fR
+.RS 4
+Add a range of subordinate gids to the user\*(Aqs account\&.
+.sp
+This option may be specified multiple times to add multiple ranges to a users account\&.
+.sp
+No checks will be performed with regard to
+\fBSUB_GID_MIN\fR,
+\fBSUB_GID_MAX\fR, or
+\fBSUB_GID_COUNT\fR
+from /etc/login\&.defs\&.
+.RE
+.PP
+\fB\-W\fR, \fB\-\-del\-subgids\fR\ \&\fIFIRST\fR\-\fILAST\fR
+.RS 4
+Remove a range of subordinate gids from the user\*(Aqs account\&.
+.sp
+This option may be specified multiple times to remove multiple ranges to a users account\&. When both
+\fB\-\-del\-subgids\fR
+and
+\fB\-\-add\-subgids\fR
+are specified, the removal of all subordinate gid ranges happens before any subordinate gid range is added\&.
+.sp
+No checks will be performed with regard to
+\fBSUB_GID_MIN\fR,
+\fBSUB_GID_MAX\fR, or
+\fBSUB_GID_COUNT\fR
+from /etc/login\&.defs\&.
+.RE
+.PP
+\fB\-Z\fR, \fB\-\-selinux\-user\fR\ \&\fISEUSER\fR
 .RS 4
 The new SELinux user for the user\*(Aqs login\&.
 .sp
@@ -233,7 +300,7 @@ will remove the SELinux user mapping for user
 .PP
 You must make certain that the named user is not executing any processes when this command is being executed if the user\*(Aqs numerical user ID, the user\*(Aqs name, or the user\*(Aqs home directory is being changed\&.
 \fBusermod\fR
-checks this on Linux, but only check if the user is logged in according to utmp on other architectures\&.
+checks this on Linux\&. On other platforms it only uses utmp to check if the user is logged in\&.
 .PP
 You must change the owner of any
 \fBcrontab\fR
@@ -289,6 +356,52 @@ If you need to enforce such limit, you can use 25\&.
 .sp
 Note: split groups may not be supported by all tools (even in the Shadow toolsuite)\&. You should not use this variable unless you really need it\&.
 .RE
+.PP
+\fBSUB_GID_MIN\fR (number), \fBSUB_GID_MAX\fR (number), \fBSUB_GID_COUNT\fR (number)
+.RS 4
+If
+/etc/subuid
+exists, the commands
+\fBuseradd\fR
+and
+\fBnewusers\fR
+(unless the user already have subordinate group IDs) allocate
+\fBSUB_GID_COUNT\fR
+unused group IDs from the range
+\fBSUB_GID_MIN\fR
+to
+\fBSUB_GID_MAX\fR
+for each new user\&.
+.sp
+The default values for
+\fBSUB_GID_MIN\fR,
+\fBSUB_GID_MAX\fR,
+\fBSUB_GID_COUNT\fR
+are respectively 100000, 600100000 and 10000\&.
+.RE
+.PP
+\fBSUB_UID_MIN\fR (number), \fBSUB_UID_MAX\fR (number), \fBSUB_UID_COUNT\fR (number)
+.RS 4
+If
+/etc/subuid
+exists, the commands
+\fBuseradd\fR
+and
+\fBnewusers\fR
+(unless the user already have subordinate user IDs) allocate
+\fBSUB_UID_COUNT\fR
+unused user IDs from the range
+\fBSUB_UID_MIN\fR
+to
+\fBSUB_UID_MAX\fR
+for each new user\&.
+.sp
+The default values for
+\fBSUB_UID_MIN\fR,
+\fBSUB_UID_MAX\fR,
+\fBSUB_UID_COUNT\fR
+are respectively 100000, 600100000 and 10000\&.
+.RE
 .SH "PLIKI"
 .PP
 /etc/group
@@ -315,6 +428,16 @@ Informacja o kontach użytkownik\('ow\&.
 .RS 4
 Informacje chronione o użytkownikach\&.
 .RE
+.PP
+/etc/subgid
+.RS 4
+Per user subordinate group IDs\&.
+.RE
+.PP
+/etc/subuid
+.RS 4
+Per user subordinate user IDs\&.
+.RE
 .SH "ZOBACZ TAKŻE"
 .PP
 \fBchfn\fR(1),
@@ -326,5 +449,6 @@ Informacje chronione o użytkownikach\&.
 \fBgroupdel\fR(8),
 \fBgroupmod\fR(8),
 \fBlogin.defs\fR(5),
+\fBsubgid\fR(5), \fBsubuid\fR(5),
 \fBuseradd\fR(8),
 \fBuserdel\fR(8)\&.

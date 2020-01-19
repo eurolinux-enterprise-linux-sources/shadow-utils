@@ -1,7 +1,7 @@
 
 EXTRA_DIST = .indent.pro xgetXXbyYY.c
 
-INCLUDES = -I$(top_srcdir)/lib
+AM_CPPFLAGS = -I$(top_srcdir)/lib
 
 noinst_LIBRARIES = libmisc.a
 
@@ -25,11 +25,16 @@ libmisc_a_SOURCES = \
 	failure.h \
 	find_new_gid.c \
 	find_new_uid.c \
+	find_new_sub_gids.c \
+	find_new_sub_uids.c \
 	getdate.h \
 	getdate.y \
 	getgr_nam_gid.c \
 	getrange.c \
+	gettime.c \
 	hushed.c \
+	idmapping.h \
+	idmapping.c \
 	isexpired.c \
 	limits.c \
 	list.c log.c \
@@ -39,7 +44,8 @@ libmisc_a_SOURCES = \
 	myname.c \
 	obscure.c \
 	pam_pass.c \
-	pam_pass_non_interractive.c \
+	pam_pass_non_interactive.c \
+	prefix_flag.c \
 	pwd2spwd.c \
 	pwdcheck.c \
 	pwd_init.c \

@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: groupadd
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 25.05.2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 29.04.2018
 .\"    Manual: Befehle zur Systemverwaltung
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: German
 .\"
-.TH "GROUPADD" "8" "25.05.2012" "shadow\-utils 4\&.1\&.5\&.1" "Befehle zur Systemverwaltung"
+.TH "GROUPADD" "8" "29.04.2018" "shadow\-utils 4\&.6" "Befehle zur Systemverwaltung"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -52,7 +52,7 @@ verwendet wird und die angegebene GID schon vergeben ist, wird eine andere, eind
 wird nicht beachtet)\&.
 .RE
 .PP
-\fB\-g\fR, \fB\-\-gid\fR\fIGID\fR
+\fB\-g\fR, \fB\-\-gid\fR\ \&\fIGID\fR
 .RS 4
 Der zahlenm\(:a\(ssige Wert der Gruppen\-ID\&. Dieser Wert muss eindeutig sein, sofern nicht die Option
 \fB\-o\fR
@@ -71,17 +71,17 @@ und die Ausf\(:uhrungen zu
 zeigt die Hilfe an und beendet das Programm
 .RE
 .PP
-\fB\-K\fR, \fB\-\-key\fR\fISCHL\(:USSEL\fR=\fIWERT\fR
+\fB\-K\fR, \fB\-\-key\fR\ \&\fISCHL\(:USSEL\fR=\fIWERT\fR
 .RS 4
 \(:Uberschreibt die Standardwerte von
 /etc/login\&.defs
 (GID_MIN, GID_MAX und weitere)\&. Diese Option kann mehrfach verwendet werden\&.
 .sp
 Beispiel:
-\fB\-K \fR\fIGID_MIN\fR=\fI100\fR\fB\-K \fR\fIGID_MAX\fR=\fI499\fR
+\fB\-K\fR\ \&\fIGID_MIN\fR=\fI100\fR\ \&\fB\-K\fR\ \&\fIGID_MAX\fR=\fI499\fR
 .sp
 Hinweis:
-\fB\-K \fR\fIGID_MIN\fR=\fI10\fR,\fIGID_MAX\fR=\fI499\fR
+\fB\-K\fR\ \&\fIGID_MIN\fR=\fI10\fR,\fIGID_MAX\fR=\fI499\fR
 funktioniert noch nicht\&.
 .RE
 .PP
@@ -90,7 +90,7 @@ funktioniert noch nicht\&.
 Diese Option erlaubt es, eine Gruppe mit einer nicht eindeutigen GID zu erstellen\&.
 .RE
 .PP
-\fB\-p\fR, \fB\-\-password\fR\fIPASSWORT\fR
+\fB\-p\fR, \fB\-\-password\fR\ \&\fIPASSWORT\fR
 .RS 4
 Das verschl\(:usselte Passwort, wie es von
 \fBcrypt\fR(3)
@@ -118,12 +118,21 @@ bis
 \fBGID_MAX\fR\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR\fICHROOT_VERZ\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fICHROOT_VERZ\fR
 .RS 4
 f\(:uhrt die Ver\(:anderungen in dem Verzeichnis
 \fICHROOT_VERZ\fR
 durch und verwendet die Konfigurationsdateien aus dem Verzeichnis
 \fICHROOT_VERZ\fR
+.RE
+.PP
+\fB\-P\fR, \fB\-\-prefix\fR\ \&\fIPREFIX_DIR\fR
+.RS 4
+Apply changes in the
+\fIPREFIX_DIR\fR
+directory and use the configuration files from the
+\fIPREFIX_DIR\fR
+directory\&. This option does not chroot and is intended for preparing a cross\-compilation target\&. Some limitations: NIS and LDAP users/groups are not verified\&. PAM authentication is using the host files\&. No SELINUX support\&.
 .RE
 .SH "KONFIGURATION"
 .PP

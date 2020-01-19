@@ -7,9 +7,10 @@ usbindir = ${prefix}/sbin
 suidperms = 4755
 sgidperms = 2755
 
-INCLUDES = \
+AM_CPPFLAGS = \
 	-I${top_srcdir}/lib \
-	-I$(top_srcdir)/libmisc
+	-I$(top_srcdir)/libmisc \
+	-DLOCALEDIR=\"$(datadir)/locale\"
 
 # XXX why are login and su in /bin anyway (other than for
 # historical reasons)?
@@ -25,6 +26,9 @@ INCLUDES = \
 bin_PROGRAMS   = groups login su
 sbin_PROGRAMS  = nologin
 ubin_PROGRAMS  = faillog lastlog chage chfn chsh expiry gpasswd newgrp passwd
+if ENABLE_SUBIDS
+ubin_PROGRAMS += newgidmap newuidmap
+endif
 usbin_PROGRAMS = \
 	chgpasswd \
 	chpasswd \
@@ -49,21 +53,25 @@ usbin_PROGRAMS = \
 noinst_PROGRAMS = id sulogin
 
 suidbins       = su
-suidubins      = chage chfn chsh expiry gpasswd newgrp passwd
+suidubins      = chage chfn chsh expiry gpasswd newgrp
+if !WITH_TCB
+suidubins += passwd
+endif
 if ACCT_TOOLS_SETUID
-	suidubins += chage chgpasswd chpasswd groupadd groupdel groupmod newusers useradd userdel usermod
+suidubins += chgpasswd chpasswd groupadd groupdel groupmod newusers useradd userdel usermod
+endif
+if ENABLE_SUBIDS
+suidubins += newgidmap newuidmap
 endif
 
 if WITH_TCB
-suidubins -= passwd
 shadowsgidubins = passwd
 endif
 
 LDADD          = $(INTLLIBS) \
-		 $(LIBTCB) \
 		 $(top_builddir)/libmisc/libmisc.a \
-		 $(top_builddir)/lib/libshadow.la
-AM_CPPFLAGS    = -DLOCALEDIR=\"$(datadir)/locale\"
+		 $(top_builddir)/lib/libshadow.la \
+		 $(LIBTCB)
 
 if ACCT_TOOLS_SETUID
 LIBPAM_SUID  = $(LIBPAM)
@@ -78,6 +86,8 @@ LIBCRYPT_NOPAM = $(LIBCRYPT)
 endif
 
 chage_LDADD    = $(LDADD) $(LIBPAM_SUID) $(LIBAUDIT) $(LIBSELINUX)
+newuidmap_LDADD    = $(LDADD) $(LIBSELINUX)
+newgidmap_LDADD    = $(LDADD) $(LIBSELINUX)
 chfn_LDADD     = $(LDADD) $(LIBPAM) $(LIBSELINUX) $(LIBCRYPT_NOPAM) $(LIBSKEY) $(LIBMD)
 chgpasswd_LDADD = $(LDADD) $(LIBPAM_SUID) $(LIBSELINUX) $(LIBCRYPT)
 chsh_LDADD     = $(LDADD) $(LIBPAM) $(LIBSELINUX) $(LIBCRYPT_NOPAM) $(LIBSKEY) $(LIBMD)
@@ -90,6 +100,7 @@ groupmod_LDADD = $(LDADD) $(LIBPAM_SUID) $(LIBAUDIT) $(LIBSELINUX)
 grpck_LDADD    = $(LDADD) $(LIBSELINUX)
 grpconv_LDADD  = $(LDADD) $(LIBSELINUX)
 grpunconv_LDADD = $(LDADD) $(LIBSELINUX)
+lastlog_LDADD   = $(LDADD) $(LIBAUDIT)
 login_SOURCES  = \
 	login.c \
 	login_nopam.c
@@ -104,7 +115,7 @@ pwunconv_LDADD = $(LDADD) $(LIBSELINUX)
 su_SOURCES     = \
 	su.c \
 	suauth.c
-su_LDADD       = $(LDADD) $(LIBPAM) $(LIBCRYPT_NOPAM) $(LIBSKEY) $(LIBMD)
+su_LDADD       = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBCRYPT_NOPAM) $(LIBSKEY) $(LIBMD)
 sulogin_LDADD  = $(LDADD) $(LIBCRYPT)
 useradd_LDADD  = $(LDADD) $(LIBPAM_SUID) $(LIBAUDIT) $(LIBSELINUX) $(LIBSEMANAGE) $(LIBACL) $(LIBATTR)
 userdel_LDADD  = $(LDADD) $(LIBPAM_SUID) $(LIBAUDIT) $(LIBSELINUX) $(LIBSEMANAGE)
@@ -116,14 +127,14 @@ install-am: all-am
 	ln -sf newgrp	$(DESTDIR)$(ubindir)/sg
 	ln -sf vipw	$(DESTDIR)$(usbindir)/vigr
 	for i in $(suidbins); do \
-		chmod -f $(suidperms) $(DESTDIR)$(bindir)/$$i; \
+		chmod $(suidperms) $(DESTDIR)$(bindir)/$$i; \
 	done
 	for i in $(suidubins); do \
-		chmod -f $(suidperms) $(DESTDIR)$(ubindir)/$$i; \
+		chmod $(suidperms) $(DESTDIR)$(ubindir)/$$i; \
 	done
 if WITH_TCB
 	for i in $(shadowsgidubins); do \
 		chown root:shadow $(DESTDIR)$(ubindir)/$$i; \
-		chmod -f $(sgidperms) $(DESTDIR)$(ubindir)/$$i; \
+		chmod $(sgidperms) $(DESTDIR)$(ubindir)/$$i; \
 	done
 endif

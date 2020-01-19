@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: chage
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 25/05/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 29/04/2018
 .\"    Manual: Comandi utente
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: Italian
 .\"
-.TH "CHAGE" "1" "25/05/2012" "shadow\-utils 4\&.1\&.5\&.1" "Comandi utente"
+.TH "CHAGE" "1" "29/04/2018" "shadow\-utils 4\&.6" "Comandi utente"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -42,12 +42,12 @@ Il comando
 \fBchage\fR
 accetta le seguenti opzioni:
 .PP
-\fB\-d\fR, \fB\-\-lastday\fR\fIULTIMO_GIORNO\fR
+\fB\-d\fR, \fB\-\-lastday\fR\ \&\fIULTIMO_GIORNO\fR
 .RS 4
 Imposta la data dell\*(Aqultimo cambio della password, espressa come il numero di giorni trascorsi dal 1 gennaio 1970\&. La data pu\(`o anche essere specificata nel formato AAAA\-MM\-GG o nella notazione comunemente usata nel proprio paese\&.
 .RE
 .PP
-\fB\-E\fR, \fB\-\-expiredate\fR\fIDATA_SCADENZA\fR
+\fB\-E\fR, \fB\-\-expiredate\fR\ \&\fIDATA_SCADENZA\fR
 .RS 4
 Imposta la data o il numero di giorni dal 1 gennaio 1970 dal quale l\*(Aqaccount utente non sar\(`a pi\(`u accessibile\&. La data pu\(`o essere inserita nel formato AAAA\-MM\-GG (o il formato pi\(`u comunemente utilizzato nel proprio paese)\&. Un utente il cui account sia bloccato deve contattare l\*(Aqamministratore di sistema prima di poter accedere nuovamente al sistema\&.
 .sp
@@ -62,7 +62,7 @@ come
 Mostra un messaggio di aiuto ed esce\&.
 .RE
 .PP
-\fB\-I\fR, \fB\-\-inactive\fR\fIINATTIVO\fR
+\fB\-I\fR, \fB\-\-inactive\fR\ \&\fIINATTIVO\fR
 .RS 4
 Imposta il numero di giorni di inattivit\(`a dopo la scadenza della password dopo i quali l\*(Aqaccount viene bloccato\&. L\*(Aqopzione
 \fIINATTIVO\fR
@@ -80,13 +80,13 @@ elimina l\*(Aqintervallo di inattivit\(`a dall\*(Aqaccount\&.
 Visualizza le informazioni sulla scadenza dell\*(Aqaccount\&.
 .RE
 .PP
-\fB\-m\fR, \fB\-\-mindays\fR\fIMIN_GIORNI\fR
+\fB\-m\fR, \fB\-\-mindays\fR\ \&\fIMIN_GIORNI\fR
 .RS 4
 Imposta il numero minimo di giorni tra i cambi di password a
 \fIMIN_GIORNI\fR\&. Un valore pari a zero indica che l\*(Aqutente pu\(`o cambiare la propria password in qualsiasi momento\&.
 .RE
 .PP
-\fB\-M\fR, \fB\-\-maxdays\fR\fIMAX_GIORNI\fR
+\fB\-M\fR, \fB\-\-maxdays\fR\ \&\fIMAX_GIORNI\fR
 .RS 4
 Imposta il numero massimo di giorni di validit\(`a di una password\&. Quando la somma di
 \fIMAX_GIORNI\fR
@@ -102,7 +102,7 @@ come
 rimuove il controllo sulla validit\(`a della password\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR \fICHROOT_DIR\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fICHROOT_DIR\fR
 .RS 4
 Effettua le modifiche nella directory
 \fICHROOT_DIR\fR
@@ -110,7 +110,7 @@ e usa i file di configurazione dalla directory
 \fICHROOT_DIR\fR\&.
 .RE
 .PP
-\fB\-W\fR, \fB\-\-warndays\fR\fIAVVISO_GIORNI\fR
+\fB\-W\fR, \fB\-\-warndays\fR\ \&\fIAVVISO_GIORNI\fR
 .RS 4
 Imposta il numero di giorni di preavviso prima che sia obbligatorio cambiare la password\&. L\*(Aqopzione
 \fIAVVISO_GIORNI\fR

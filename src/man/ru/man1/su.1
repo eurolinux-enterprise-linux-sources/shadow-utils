@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: su
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 05/25/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 04/29/2018
 .\"    Manual: Пользовательские команды
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: Russian
 .\"
-.TH "su" "1" "05/25/2012" "shadow\-utils 4\&.1\&.5\&.1" "Пользовательские команды"
+.TH "su" "1" "04/29/2018" "shadow\-utils 4\&.6" "Пользовательские команды"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -27,32 +27,31 @@
 .\" -----------------------------------------------------------------
 .\" * MAIN CONTENT STARTS HERE *
 .\" -----------------------------------------------------------------
-.SH "ИМЯ"
+.SH "НАЗВАНИЕ"
 su \- изменяет ID пользователя или делает его суперпользователем
-.SH "СИНОПСИС"
+.SH "СИНТАКСИС"
 .HP \w'\fBsu\fR\ 'u
-\fBsu\fR [\fIпараметры\fR] [\fIимя_пользователя\fR]
+\fBsu\fR [\fIпараметры\fR] [\fI\-\fR] [\fIимя_пользователя\fR\ [\ \fIargs\fR\ ]]
 .SH "ОПИСАНИЕ"
 .PP
-Программа
+The
 \fBsu\fR
-используется для того, чтобы пользователь мог стать другим пользователем в текущем сеансе\&. Если
+command is used to become another user during a login session\&. Invoked without a
+\fBusername\fR,
 \fBsu\fR
-вызывается без
-\fBимени_пользователя\fR, то это по умолчанию делает пользователя суперпользователем\&. Необязательный параметр
+defaults to becoming the superuser\&. The
 \fB\-\fR
-можно использовать для воссоздания окружения, такого же как если бы настоящий пользователь выполнял вход в систему\&.
-.PP
-После имени пользователя можно указать дополнительные аргументы, которые будут переданы регистрационной оболочке пользователя\&. В частности, аргумент
+option may be used to provide an environment similar to what the user would expect had the user logged in directly\&. The
 \fB\-c\fR
-заставит большинство оболочек считать следующий аргумент как команду\&. Команда будет выполнена оболочкой, указанной в файле
-/etc/passwd, которая является регистрационной для указываемого пользователя\&.
+option may be used to treat the next argument as a command by most shells\&.
 .PP
-Вы можете использовать параметр
+Options are recognized everywhere in the argument list\&. You can use the
 \fB\-\-\fR
-чтобы отделить параметры
-\fBsu\fR
-от параметров, которые передаются оболочке\&.
+argument to stop option parsing\&. The
+\fB\-\fR
+option is special: it is also recognized after
+\fB\-\-\fR, but has to be placed before
+\fBusername\fR\&.
 .PP
 Пользователю предложат ввести пароль, если он задан\&. При неверном пароле возникает сообщение об ошибке\&. Все попытки, удачные и неудачные, протоколируются системой с целью обнаружения злоупотреблений\&.
 .PP
@@ -75,26 +74,28 @@ su \- изменяет ID пользователя или делает его с
 Параметры команды
 \fBsu\fR:
 .PP
-\fB\-c\fR, \fB\-\-command\fR \fIКОМАНДА\fR
+\fB\-c\fR, \fB\-\-command\fR\ \&\fIКОМАНДА\fR
 .RS 4
 Указать команду, которая будет запущена оболочкой в виде параметра для
 \fB\-c\fR\&.
 .sp
-Запускаемая программа не будет иметь управляющего терминала\&. Этот параметр не может быть использован для запуска интерактивных программ, которым требуется управляющий TTY\&.
+The executed command will have no controlling terminal\&. This option cannot be used to execute interactive programs which need a controlling TTY\&.
 .RE
 .PP
 \fB\-\fR, \fB\-l\fR, \fB\-\-login\fR
 .RS 4
 Предоставляет окружение, как если бы пользователь непосредственно регистрировался в системе\&.
 .sp
-Если используется
-\fB\-\fR, то он должен быть задан последним параметром
-\fBsu\fR\&. Другие формы (\fB\-l\fR
-и
-\fB\-\-login\fR) не имеют этого ограничения\&.
+When
+\fB\-\fR
+is used, it must be specified before any
+\fBusername\fR\&. For portability it is recommended to use it as last option, before any
+\fBusername\fR\&. The other forms (\fB\-l\fR
+and
+\fB\-\-login\fR) do not have this restriction\&.
 .RE
 .PP
-\fB\-s\fR, \fB\-\-shell\fR \fIОБОЛОЧКА\fR
+\fB\-s\fR, \fB\-\-shell\fR\ \&\fIОБОЛОЧКА\fR
 .RS 4
 Оболочка, которая будет запущена\&.
 .sp

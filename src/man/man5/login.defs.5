@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: login.defs
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 05/25/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 04/29/2018
 .\"    Manual: File Formats and Conversions
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: English
 .\"
-.TH "LOGIN\&.DEFS" "5" "05/25/2012" "shadow\-utils 4\&.1\&.5\&.1" "File Formats and Conversions"
+.TH "LOGIN\&.DEFS" "5" "04/29/2018" "shadow\-utils 4\&.6" "File Formats and Conversions"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -381,7 +381,6 @@ The minimum number of days allowed between password changes\&. Any password chan
 The number of days warning given before a password expires\&. A zero means warning is given only upon the day of expiration, a negative value means no warning is given\&. If not specified, no warning will be provided\&.
 .RE
 .PP
-
 \fBPASS_MAX_DAYS\fR,
 \fBPASS_MIN_DAYS\fR
 and
@@ -462,6 +461,52 @@ to uid 0 accounts\&. If the group doesn\*(Aqt exist or is empty, no one will be 
 to uid 0\&.
 .RE
 .PP
+\fBSUB_GID_MIN\fR (number), \fBSUB_GID_MAX\fR (number), \fBSUB_GID_COUNT\fR (number)
+.RS 4
+If
+/etc/subuid
+exists, the commands
+\fBuseradd\fR
+and
+\fBnewusers\fR
+(unless the user already have subordinate group IDs) allocate
+\fBSUB_GID_COUNT\fR
+unused group IDs from the range
+\fBSUB_GID_MIN\fR
+to
+\fBSUB_GID_MAX\fR
+for each new user\&.
+.sp
+The default values for
+\fBSUB_GID_MIN\fR,
+\fBSUB_GID_MAX\fR,
+\fBSUB_GID_COUNT\fR
+are respectively 100000, 600100000 and 10000\&.
+.RE
+.PP
+\fBSUB_UID_MIN\fR (number), \fBSUB_UID_MAX\fR (number), \fBSUB_UID_COUNT\fR (number)
+.RS 4
+If
+/etc/subuid
+exists, the commands
+\fBuseradd\fR
+and
+\fBnewusers\fR
+(unless the user already have subordinate user IDs) allocate
+\fBSUB_UID_COUNT\fR
+unused user IDs from the range
+\fBSUB_UID_MIN\fR
+to
+\fBSUB_UID_MAX\fR
+for each new user\&.
+.sp
+The default values for
+\fBSUB_UID_MIN\fR,
+\fBSUB_UID_MAX\fR,
+\fBSUB_UID_COUNT\fR
+are respectively 100000, 600100000 and 10000\&.
+.RE
+.PP
 \fBSYS_GID_MAX\fR (number), \fBSYS_GID_MIN\fR (number)
 .RS 4
 Range of group IDs used for the creation of system groups by
@@ -514,7 +559,6 @@ group, and the permissions will be set to
 By default, the ownership of the terminal is set to the user\*(Aqs primary group and the permissions are set to
 \fI0600\fR\&.
 .sp
-
 \fBTTYGROUP\fR
 can be either the name of a group or a numeric group identifier\&.
 .sp
@@ -552,7 +596,6 @@ value\&.
 .RS 4
 The file mode creation mask is initialized to this value\&. If not specified, the mask will be initialized to 022\&.
 .sp
-
 \fBuseradd\fR
 and
 \fBnewusers\fR
@@ -627,7 +670,6 @@ The following cross references show which programs in the shadow password suite 
 .PP
 chfn
 .RS 4
-
 CHFN_AUTH
 CHFN_RESTRICT
 LOGIN_STRING
@@ -641,7 +683,6 @@ SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS
 .PP
 chpasswd
 .RS 4
-
 ENCRYPT_METHOD MD5_CRYPT_ENAB
 SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS
 .RE
@@ -694,7 +735,6 @@ MAX_MEMBERS_PER_GROUP
 .PP
 login
 .RS 4
-
 CONSOLE
 CONSOLE_GROUPS DEFAULT_HOME
 ENV_HZ ENV_PATH ENV_SUPATH ENV_TZ ENVIRON_FILE
@@ -724,7 +764,7 @@ newusers
 .RS 4
 ENCRYPT_METHOD GID_MAX GID_MIN MAX_MEMBERS_PER_GROUP MD5_CRYPT_ENAB PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE
 SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS
-SYS_GID_MAX SYS_GID_MIN SYS_UID_MAX SYS_UID_MIN UID_MAX UID_MIN UMASK
+SUB_GID_COUNT SUB_GID_MAX SUB_GID_MIN SUB_UID_COUNT SUB_UID_MAX SUB_UID_MIN SYS_GID_MAX SYS_GID_MIN SYS_UID_MAX SYS_UID_MIN UID_MAX UID_MIN UMASK
 .RE
 .PP
 passwd
@@ -745,7 +785,6 @@ PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE
 .PP
 su
 .RS 4
-
 CONSOLE
 CONSOLE_GROUPS DEFAULT_HOME
 ENV_HZ ENVIRON_FILE
@@ -765,7 +804,7 @@ ENV_TZ
 .PP
 useradd
 .RS 4
-CREATE_HOME GID_MAX GID_MIN MAIL_DIR MAX_MEMBERS_PER_GROUP PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE SYS_GID_MAX SYS_GID_MIN SYS_UID_MAX SYS_UID_MIN UID_MAX UID_MIN UMASK
+CREATE_HOME GID_MAX GID_MIN MAIL_DIR MAX_MEMBERS_PER_GROUP PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE SUB_GID_COUNT SUB_GID_MAX SUB_GID_MIN SUB_UID_COUNT SUB_UID_MAX SUB_UID_MIN SYS_GID_MAX SYS_GID_MIN SYS_UID_MAX SYS_UID_MIN UID_MAX UID_MIN UMASK
 .RE
 .PP
 userdel
@@ -779,7 +818,6 @@ MAIL_DIR MAIL_FILE MAX_MEMBERS_PER_GROUP
 .RE
 .SH "SEE ALSO"
 .PP
-
 \fBlogin\fR(1),
 \fBpasswd\fR(1),
 \fBsu\fR(1),

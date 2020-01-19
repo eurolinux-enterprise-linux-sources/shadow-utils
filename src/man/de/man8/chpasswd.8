@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: chpasswd
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 25.05.2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 29.04.2018
 .\"    Manual: Befehle zur Systemverwaltung
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: German
 .\"
-.TH "CHPASSWD" "8" "25.05.2012" "shadow\-utils 4\&.1\&.5\&.1" "Befehle zur Systemverwaltung"
+.TH "CHPASSWD" "8" "29.04.2018" "shadow\-utils 4\&.6" "Befehle zur Systemverwaltung"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -44,21 +44,19 @@ Das Passwort muss standardm\(:a\(ssig im Klartext angegeben werden und von
 \fBchpasswd\fR
 verschl\(:usselt\&. Soweit vorhanden, wird auch das Alter des Passworts aktualisiert\&.
 .PP
-Der standardm\(:a\(ssige Verschl\(:usselungsalgorithmus kann systemweit mit den Variablen
+The default encryption algorithm can be defined for the system with the
 \fBENCRYPT_METHOD\fR
-oder
+or
 \fBMD5_CRYPT_ENAB\fR
-in
-/etc/login\&.defs
-definiert werden\&. Dieser kann mit den Optionen
+variables of
+/etc/login\&.defs, and can be overwritten with the
 \fB\-e\fR,
-\fB\-m\fR
-oder
+\fB\-m\fR, or
 \fB\-c\fR
-\(:uberschrieben werden\&.
+options\&.
 .PP
 \fBchpasswd\fR
-aktualisiert zun\(:achst alle Passw\(:orter im Arbeitsspeicher und schreibt dann die \(:Anderungen auf das Speichermedium, falls keine Fehler aufgetreten sind\&.
+first updates all the passwords in memory, and then commits all the changes to disk if no errors occurred for any user\&.
 .PP
 Dieser Befehl ist f\(:ur den Einsatz in gro\(ssen Umgebungen vorgesehen, in der viele Konten gleichzeitig erstellt werden m\(:ussen\&.
 .SH "OPTIONEN"
@@ -67,7 +65,7 @@ Die Optionen, die vom Befehl
 \fBchpasswd\fR
 unterst\(:utzt werden, sind:
 .PP
-\fB\-c\fR, \fB\-\-crypt\-method\fR\fIMETHODE\fR
+\fB\-c\fR, \fB\-\-crypt\-method\fR\ \&\fIMETHODE\fR
 .RS 4
 Definiert die Methode, mit der die Passw\(:orter verschl\(:usselt werden\&.
 .sp
@@ -102,7 +100,7 @@ zeigt die Hilfe an und beendet das Programm
 werwendet zur Verschl\(:usselung MD5 anstelle von DES, wenn die Passw\(:orter unverschl\(:usselt angegeben werden
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR\fICHROOT_VERZ\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fICHROOT_VERZ\fR
 .RS 4
 f\(:uhrt die Ver\(:anderungen in dem Verzeichnis
 \fICHROOT_VERZ\fR
@@ -110,7 +108,7 @@ durch und verwendet die Konfigurationsdateien aus dem Verzeichnis
 \fICHROOT_VERZ\fR
 .RE
 .PP
-\fB\-s\fR, \fB\-\-sha\-rounds\fR\fIRUNDEN\fR
+\fB\-s\fR, \fB\-\-sha\-rounds\fR\ \&\fIRUNDEN\fR
 .RS 4
 Verwendet die angegebene Anzahl von Runden, um die Passw\(:orter zu verschl\(:usseln\&.
 .sp

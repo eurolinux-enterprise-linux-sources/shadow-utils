@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: useradd
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 25/05/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 29/04/2018
 .\"    Manual: Comandi per la gestione del sistema
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: Italian
 .\"
-.TH "USERADD" "8" "25/05/2012" "shadow\-utils 4\&.1\&.5\&.1" "Comandi per la gestione del si"
+.TH "USERADD" "8" "29/04/2018" "shadow\-utils 4\&.6" "Comandi per la gestione del si"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -57,10 +57,10 @@ Il comando
 \fBuseradd\fR
 accetta le seguenti opzioni:
 .PP
-\fB\-b\fR, \fB\-\-base\-dir\fR\fIBASE_DIR\fR
+\fB\-b\fR, \fB\-\-base\-dir\fR\ \&\fIBASE_DIR\fR
 .RS 4
 La directory base predefinita, nel caso che l\*(Aqopzione
-\fB\-d\fR\fIHOME_DIR\fR
+\fB\-d\fR\ \&\fIHOME_DIR\fR
 non sia specificata\&.
 \fIBASE_DIR\fR
 viene concatenata con il nome dell\*(Aqaccount per definire la directory home\&. Se l\*(Aqopzione
@@ -79,12 +79,12 @@ oppure la costante
 /home\&.
 .RE
 .PP
-\fB\-c\fR, \fB\-\-comment\fR\fICOMMENTO\fR
+\fB\-c\fR, \fB\-\-comment\fR\ \&\fICOMMENTO\fR
 .RS 4
 Un testo qualsiasi\&. Di norma \(`e una breve descrizione del login, ed \(`e attualmente usato come nome completo dell\*(Aqutente\&.
 .RE
 .PP
-\fB\-d\fR, \fB\-\-home\fR\fIHOME_DIR\fR
+\fB\-d\fR, \fB\-\-home\-dir\fR\ \&\fIHOME_DIR\fR
 .RS 4
 Il nuovo utente verr\(`a creato usando
 \fIHOME_DIR\fR
@@ -102,7 +102,7 @@ esista, ma se non ci fosse non verr\(`a creata\&.
 Vedere oltre, la sezione \(FoCambiare i valori predefiniti\(Fc\&.
 .RE
 .PP
-\fB\-e\fR, \fB\-\-expiredate\fR\fIDATA_SCADENZA\fR
+\fB\-e\fR, \fB\-\-expiredate\fR\ \&\fIDATA_SCADENZA\fR
 .RS 4
 La data in cui l\*(Aqaccount dell\*(Aqutente verr\(`a disabilitato\&. La data \(`e specificata nel formato
 \fIAAAA\-MM\-GG\fR\&.
@@ -116,7 +116,7 @@ nel file
 o un campo vuoto (nessuna scadenza)\&.
 .RE
 .PP
-\fB\-f\fR, \fB\-\-inactive\fR\fIINATTIVO\fR
+\fB\-f\fR, \fB\-\-inactive\fR\ \&\fIINATTIVO\fR
 .RS 4
 Il numero di giorni dopo la scadenza della password prima che l\*(Aqaccount venga permanentemente disabilitato\&. Un valore pari a 0 disabilita l\*(Aqaccount non appena la password \(`e scaduta, ed un valore pari a \-1 disabilita questa funzionalit\(`a\&.
 .sp
@@ -129,7 +129,7 @@ del file
 oppure \-1 (con variabile assente)\&.
 .RE
 .PP
-\fB\-g\fR, \fB\-\-gid\fR\fIGRUPPO\fR
+\fB\-g\fR, \fB\-\-gid\fR\ \&\fIGRUPPO\fR
 .RS 4
 Il nome o numero del gruppo di connessione iniziale dell\*(Aqutente\&. Il nome del gruppo deve esistere\&. Un numero di gruppo deve riferirsi ad un gruppo gi\(`a esistente\&.
 .sp
@@ -153,7 +153,7 @@ del file
 o a 100 se non specificato\&.
 .RE
 .PP
-\fB\-G\fR, \fB\-\-groups\fR\fIGRUPPO1\fR[\fI,GRUPPO2,\&.\&.\&.\fR[\fI,GRUPPON\fR]]]
+\fB\-G\fR, \fB\-\-groups\fR\ \&\fIGRUPPO1\fR[\fI,GRUPPO2,\&.\&.\&.\fR[\fI,GRUPPON\fR]]]
 .RS 4
 Una lista di gruppi supplementari di cui l\*(Aqutente \(`e altres\(`i membro\&. Ciascun gruppo \(`e separato dal successivo da una virgola, senza spazi bianchi intermedi\&. I gruppi sono soggetti alle stesse restrizioni del gruppo dato con l\*(Aqopzione
 \fB\-g\fR\&. Il comportamento predefinito \(`e che l\*(Aqutente appartenga solo al gruppo iniziale\&.
@@ -164,7 +164,7 @@ Una lista di gruppi supplementari di cui l\*(Aqutente \(`e altres\(`i membro\&. 
 Mostra un messaggio di aiuto ed esce\&.
 .RE
 .PP
-\fB\-k\fR, \fB\-\-skel\fR\fISKEL_DIR\fR
+\fB\-k\fR, \fB\-\-skel\fR\ \&\fISKEL_DIR\fR
 .RS 4
 La directory \(Foskeleton\(Fc che contiene file e directory da copiare nella directory home dell\*(Aqutente quando viene creata da
 \fBuseradd\fR\&.
@@ -184,32 +184,30 @@ o, altrimenti, vale
 Se possibile vengono copiate le ACL e gli attributi estesi\&.
 .RE
 .PP
-\fB\-K\fR, \fB\-\-key\fR\fIKEY\fR=\fIVALUE\fR\&.
+\fB\-K\fR, \fB\-\-key\fR\ \&\fIKEY\fR=\fIVALUE\fR\&.
 .RS 4
-Forza l\*(Aqimpostazione al di l\(`a di quanto specificato in
+Overrides
 /etc/login\&.defs
-(\fBUID_MIN\fR,
+defaults (\fBUID_MIN\fR,
 \fBUID_MAX\fR,
 \fBUMASK\fR,
 \fBPASS_MAX_DAYS\fR
-e altri)\&.
+and others)\&.
 
-Esempio:
+Example:
+\fB\-K\fR\ \&\fIPASS_MAX_DAYS\fR=\fI\-1\fR
+can be used when creating system account to turn off password aging, even though system account has no password at all\&. Multiple
 \fB\-K\fR
-\fIPASS_MAX_DAYS\fR=\fI\-1\fR
-pu\(`o essere usato durante la creazione di account di sistema per disabilitare la scadenza della password anche se l\*(Aqaccount di sistema non ha affatto la password\&. Possono essere specificate pi\(`u opzioni
-\fB\-K\fR, come in:
-\fB\-K\fR
-\fIUID_MIN\fR=\fI100\fR
-\fB\-K\fR
-\fIUID_MAX\fR=\fI499\fR
+options can be specified, e\&.g\&.:
+\fB\-K\fR\ \&\fIUID_MIN\fR=\fI100\fR\ \&
+\fB\-K\fR\ \&\fIUID_MAX\fR=\fI499\fR
 .RE
 .PP
 \fB\-l\fR, \fB\-\-no\-log\-init\fR
 .RS 4
 Non aggiunge l\*(Aqutente ai database \(Folastlog\(Fc e \(Fofaillog\(Fc\&.
 .sp
-Normalmente i dati utente nei database \(Folastlog\(Fc e \(Fofaillog\(Fc vengono azzerati per evitare di riutilizzare dati di un utente cancellato in precedenza\&.
+By default, the user\*(Aqs entries in the lastlog and faillog databases are reset to avoid reusing the entry from a previously deleted user\&.
 .RE
 .PP
 \fB\-m\fR, \fB\-\-create\-home\fR
@@ -221,7 +219,7 @@ Se questa opzione non viene utilizzata e se non \(`e attiva la voce
 \fBCREATE_HOME\fR, la directory non viene creata\&.
 .RE
 .PP
-\fB\-M\fR
+\fB\-M\fR, \fB\-\-no\-create\-home\fR
 .RS 4
 Non crea la directory home dell\*(Aqutente nonostante la configurazione di sistema in
 /etc/login\&.defs
@@ -257,7 +255,7 @@ Questa opzione \(`e valida solo congiuntamente all\*(Aqopzione
 \fB\-u\fR\&.
 .RE
 .PP
-\fB\-p\fR, \fB\-\-password\fR\fIPASSWORD\fR
+\fB\-p\fR, \fB\-\-password\fR\ \&\fIPASSWORD\fR
 .RS 4
 La password cifrata, come restituita da
 \fBcrypt\fR(3)\&. Il comportamento predefinito \(`e di disabilitare la password\&.
@@ -282,16 +280,16 @@ e con l\*(AqID numerico scelto nell\*(Aqintervallo
 \fBGID\fR
 per la creazione dei gruppi)\&.
 .sp
-Notare che
+Note that
 \fBuseradd\fR
-non creer\(`a la directory home per questi utenti indipendentemente da quanto impostato in
+will not create a home directory for such a user, regardless of the default setting in
 /etc/login\&.defs
-(\fBCREATE_HOME\fR)\&. Si deve specificare l\*(Aqopzione
+(\fBCREATE_HOME\fR)\&. You have to specify the
 \fB\-m\fR
-se si vuole creare la directory home per un account di sistema\&.
+options if you want a home directory for a system account to be created\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR \fICHROOT_DIR\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fICHROOT_DIR\fR
 .RS 4
 Effettua le modifiche nella directory
 \fICHROOT_DIR\fR
@@ -299,7 +297,16 @@ e usa i file di configurazione dalla directory
 \fICHROOT_DIR\fR\&.
 .RE
 .PP
-\fB\-s\fR, \fB\-\-shell\fR\fISHELL\fR
+\fB\-P\fR, \fB\-\-prefix\fR\ \&\fIPREFIX_DIR\fR
+.RS 4
+Apply changes in the
+\fIPREFIX_DIR\fR
+directory and use the configuration files from the
+\fIPREFIX_DIR\fR
+directory\&. This option does not chroot and is intended for preparing a cross\-compilation target\&. Some limitations: NIS and LDAP users/groups are not verified\&. PAM authentication is using the host files\&. No SELINUX support\&.
+.RE
+.PP
+\fB\-s\fR, \fB\-\-shell\fR\ \&\fISHELL\fR
 .RS 4
 Il nome della shell di login dell\*(Aqutente\&. Il comportamento predefinito \(`e di lasciare vuoto questo campo, che fa s\(`i che il sistema selezioni la shell di connessione predefinita tramite la variabile
 \fBSHELL\fR
@@ -307,7 +314,7 @@ in
 /etc/default/useradd, oppure un testo vuoto\&.
 .RE
 .PP
-\fB\-u\fR, \fB\-\-uid\fR\fIUID\fR
+\fB\-u\fR, \fB\-\-uid\fR\ \&\fIUID\fR
 .RS 4
 Il valore numerico dell\*(Aqidentificatore (ID) dell\*(Aqutente\&. Questo valore deve essere univoco, a meno che non venga usata l\*(Aqopzione
 \fB\-o\fR\&. Il valore non deve essere negativo\&. La scelta predefinita \(`e quella di usare il minimo valore di ID maggiore o eguale a
@@ -335,7 +342,7 @@ nel file
 /etc/login\&.defs\&.
 .RE
 .PP
-\fB\-Z\fR, \fB\-\-selinux\-user\fR\fIUTENTESE\fR
+\fB\-Z\fR, \fB\-\-selinux\-user\fR\ \&\fIUTENTESE\fR
 .RS 4
 L\*(Aqutente SELinux per questo login utente\&. Lasciando questo campo vuoto si fa in modo che il sistema selezioni automaticamente l\*(Aqutente SELinux\&.
 .RE
@@ -350,7 +357,7 @@ e altre opzioni,
 \fBuseradd\fR
 aggiorner\(`a i valori predefiniti per le opzioni specificate\&. Le opzioni valide sono:
 .PP
-\fB\-b\fR, \fB\-\-base\-dir\fR\fIBASE_DIR\fR
+\fB\-b\fR, \fB\-\-base\-dir\fR\ \&\fIBASE_DIR\fR
 .RS 4
 Il prefisso del percorso per la directory home del nuovo utente\&. Il nome dell\*(Aqutente verr\(`a aggiunto alla fine di
 \fIBASE_DIR\fR
@@ -364,7 +371,7 @@ del file
 /etc/default/useradd\&.
 .RE
 .PP
-\fB\-e\fR, \fB\-\-expiredate\fR\fIDATA_SCADENZA\fR
+\fB\-e\fR, \fB\-\-expiredate\fR\ \&\fIDATA_SCADENZA\fR
 .RS 4
 La data in cui l\*(Aqaccount dell\*(Aqutente verr\(`a disabilitato\&.
 .sp
@@ -374,7 +381,7 @@ del file
 /etc/default/useradd\&.
 .RE
 .PP
-\fB\-f\fR, \fB\-\-inactive\fR\fIINATTIVO\fR
+\fB\-f\fR, \fB\-\-inactive\fR\ \&\fIINATTIVO\fR
 .RS 4
 Il numero di giorni dopo la scadenza di una password prima che l\*(Aqaccount venga disabilitato\&.
 .sp
@@ -384,7 +391,7 @@ del file
 /etc/default/useradd\&.
 .RE
 .PP
-\fB\-g\fR, \fB\-\-gid\fR\fIGRUPPO\fR
+\fB\-g\fR, \fB\-\-gid\fR\ \&\fIGRUPPO\fR
 .RS 4
 The group name or ID for a new user\*(Aqs initial group (when the
 \fB\-N/\-\-no\-user\-group\fR
@@ -401,7 +408,7 @@ nel file
 /etc/default/useradd\&.
 .RE
 .PP
-\fB\-s\fR, \fB\-\-shell\fR\fISHELL\fR
+\fB\-s\fR, \fB\-\-shell\fR\ \&\fISHELL\fR
 .RS 4
 Il nome della shell di login per il nuovo utente\&.
 .sp
@@ -513,6 +520,52 @@ Il numero minimo di giorni tra due cambiamenti di password\&. Ogni tentativo di 
 Il numero di giorni per i quali un utente va avvisato che la sua password sta per scadere\&. Se zero l\*(Aqutente viene avvisato solo alla scadenza\&. Un valore negativo indica che non si deve avvisare mai\&. Se non specificato allora non c\*(Aq\(`e nessun avviso\&.
 .RE
 .PP
+\fBSUB_GID_MIN\fR (number), \fBSUB_GID_MAX\fR (number), \fBSUB_GID_COUNT\fR (number)
+.RS 4
+If
+/etc/subuid
+exists, the commands
+\fBuseradd\fR
+and
+\fBnewusers\fR
+(unless the user already have subordinate group IDs) allocate
+\fBSUB_GID_COUNT\fR
+unused group IDs from the range
+\fBSUB_GID_MIN\fR
+to
+\fBSUB_GID_MAX\fR
+for each new user\&.
+.sp
+The default values for
+\fBSUB_GID_MIN\fR,
+\fBSUB_GID_MAX\fR,
+\fBSUB_GID_COUNT\fR
+are respectively 100000, 600100000 and 10000\&.
+.RE
+.PP
+\fBSUB_UID_MIN\fR (number), \fBSUB_UID_MAX\fR (number), \fBSUB_UID_COUNT\fR (number)
+.RS 4
+If
+/etc/subuid
+exists, the commands
+\fBuseradd\fR
+and
+\fBnewusers\fR
+(unless the user already have subordinate user IDs) allocate
+\fBSUB_UID_COUNT\fR
+unused user IDs from the range
+\fBSUB_UID_MIN\fR
+to
+\fBSUB_UID_MAX\fR
+for each new user\&.
+.sp
+The default values for
+\fBSUB_UID_MIN\fR,
+\fBSUB_UID_MAX\fR,
+\fBSUB_UID_COUNT\fR
+are respectively 100000, 600100000 and 10000\&.
+.RE
+.PP
 \fBSYS_GID_MAX\fR (numerico), \fBSYS_GID_MIN\fR (numerico)
 .RS 4
 Intervallo di ID di gruppo utilizzato per la creazione di un gruppo di sistema da
@@ -617,6 +670,16 @@ Valori predefiniti per la creazione dell\*(Aqaccount\&.
 Directory contenente i file predefiniti\&.
 .RE
 .PP
+/etc/subgid
+.RS 4
+Per user subordinate group IDs\&.
+.RE
+.PP
+/etc/subuid
+.RS 4
+Per user subordinate user IDs\&.
+.RE
+.PP
 /etc/login\&.defs
 .RS 4
 Configurazione del pacchetto password shadow
@@ -637,5 +700,6 @@ restituisce i seguenti valori:
 \fBgroupmod\fR(8),
 \fBlogin.defs\fR(5),
 \fBnewusers\fR(8),
+\fBsubgid\fR(5), \fBsubuid\fR(5),
 \fBuserdel\fR(8),
 \fBusermod\fR(8)\&.

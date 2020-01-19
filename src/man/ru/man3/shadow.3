@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: shadow
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 05/25/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 04/29/2018
 .\"    Manual: Библиотечные функции
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: Russian
 .\"
-.TH "shadow" "3" "05/25/2012" "shadow\-utils 4\&.1\&.5\&.1" "Библиотечные функции"
+.TH "shadow" "3" "04/29/2018" "shadow\-utils 4\&.6" "Библиотечные функции"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -27,44 +27,34 @@
 .\" -----------------------------------------------------------------
 .\" * MAIN CONTENT STARTS HERE *
 .\" -----------------------------------------------------------------
-.SH "ИМЯ"
+.SH "НАЗВАНИЕ"
 shadow, getspnam \- процедуры для работы с файлом шифрованных паролей
 .SH "СИНТАКСИС"
 .PP
-
 \fI#include <shadow\&.h>\fR
 .PP
-
 \fIstruct spwd *getspent();\fR
 .PP
-
 \fIstruct spwd *getspnam(char\fR
 \fI*name\fR\fI);\fR
 .PP
-
 \fIvoid setspent();\fR
 .PP
-
 \fIvoid endspent();\fR
 .PP
-
 \fIstruct spwd *fgetspent(FILE\fR
 \fI*fp\fR\fI);\fR
 .PP
-
 \fIstruct spwd *sgetspent(char\fR
 \fI*cp\fR\fI);\fR
 .PP
-
 \fIint putspent(struct spwd\fR
 \fI*p,\fR
 \fIФАЙЛ\fR
 \fI*fp\fR\fI);\fR
 .PP
-
 \fIint lckpwdf();\fR
 .PP
-
 \fIint ulckpwdf();\fR
 .SH "ОПИСАНИЕ"
 .PP

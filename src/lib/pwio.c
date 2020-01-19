@@ -33,7 +33,7 @@
 
 #include <config.h>
 
-#ident "$Id: pwio.c 3296 2011-02-16 20:32:16Z nekral-guest $"
+#ident "$Id$"
 
 #include "prototypes.h"
 #include "defines.h"
@@ -105,6 +105,9 @@ static struct commonio_db passwd_db = {
 #ifdef WITH_SELINUX
 	NULL,			/* scontext */
 #endif
+	0644,                   /* st_mode */
+	0,                      /* st_uid */
+	0,                      /* st_gid */
 	NULL,			/* head */
 	NULL,			/* tail */
 	NULL,			/* cursor */

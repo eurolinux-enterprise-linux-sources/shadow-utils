@@ -32,7 +32,7 @@
 
 #include <config.h>
 
-#ident "$Id: getdef.c 3095 2010-03-04 18:11:13Z nekral-guest $"
+#ident "$Id$"
 
 #include "prototypes.h"
 #include "defines.h"
@@ -48,6 +48,32 @@ struct itemdef {
 	/*@null@*/const char *name;	/* name of the item                     */
 	/*@null@*/char *value;		/* value given, or NULL if no value     */
 };
+
+#define PAMDEFS					\
+	{"CHFN_AUTH", NULL},			\
+	{"CHSH_AUTH", NULL},			\
+	{"CRACKLIB_DICTPATH", NULL},		\
+	{"ENV_HZ", NULL},			\
+	{"ENVIRON_FILE", NULL},			\
+	{"ENV_TZ", NULL},			\
+	{"FAILLOG_ENAB", NULL},			\
+	{"FTMP_FILE", NULL},			\
+	{"ISSUE_FILE", NULL},			\
+	{"LASTLOG_ENAB", NULL},			\
+	{"LOGIN_STRING", NULL},			\
+	{"MAIL_CHECK_ENAB", NULL},		\
+	{"MOTD_FILE", NULL},			\
+	{"NOLOGINS_FILE", NULL},		\
+	{"OBSCURE_CHECKS_ENAB", NULL},		\
+	{"PASS_ALWAYS_WARN", NULL},		\
+	{"PASS_CHANGE_TRIES", NULL},		\
+	{"PASS_MAX_LEN", NULL},			\
+	{"PASS_MIN_LEN", NULL},			\
+	{"PORTTIME_CHECKS_ENAB", NULL},		\
+	{"QUOTAS_ENAB", NULL},			\
+	{"SU_WHEEL_ONLY", NULL},		\
+	{"ULIMIT", NULL},
+
 
 #define NUMDEFS	(sizeof(def_table)/sizeof(def_table[0]))
 static struct itemdef def_table[] = {
@@ -81,6 +107,12 @@ static struct itemdef def_table[] = {
 	{"SHA_CRYPT_MAX_ROUNDS", NULL},
 	{"SHA_CRYPT_MIN_ROUNDS", NULL},
 #endif
+	{"SUB_GID_COUNT", NULL},
+	{"SUB_GID_MAX", NULL},
+	{"SUB_GID_MIN", NULL},
+	{"SUB_UID_COUNT", NULL},
+	{"SUB_UID_MAX", NULL},
+	{"SUB_UID_MIN", NULL},
 	{"SULOG_FILE", NULL},
 	{"SU_NAME", NULL},
 	{"SYS_GID_MAX", NULL},
@@ -96,29 +128,7 @@ static struct itemdef def_table[] = {
 	{"USERDEL_CMD", NULL},
 	{"USERGROUPS_ENAB", NULL},
 #ifndef USE_PAM
-	{"CHFN_AUTH", NULL},
-	{"CHSH_AUTH", NULL},
-	{"CRACKLIB_DICTPATH", NULL},
-	{"ENV_HZ", NULL},
-	{"ENVIRON_FILE", NULL},
-	{"ENV_TZ", NULL},
-	{"FAILLOG_ENAB", NULL},
-	{"FTMP_FILE", NULL},
-	{"ISSUE_FILE", NULL},
-	{"LASTLOG_ENAB", NULL},
-	{"LOGIN_STRING", NULL},
-	{"MAIL_CHECK_ENAB", NULL},
-	{"MOTD_FILE", NULL},
-	{"NOLOGINS_FILE", NULL},
-	{"OBSCURE_CHECKS_ENAB", NULL},
-	{"PASS_ALWAYS_WARN", NULL},
-	{"PASS_CHANGE_TRIES", NULL},
-	{"PASS_MAX_LEN", NULL},
-	{"PASS_MIN_LEN", NULL},
-	{"PORTTIME_CHECKS_ENAB", NULL},
-	{"QUOTAS_ENAB", NULL},
-	{"SU_WHEEL_ONLY", NULL},
-	{"ULIMIT", NULL},
+	PAMDEFS
 #endif
 #ifdef USE_SYSLOG
 	{"SYSLOG_SG_ENAB", NULL},
@@ -129,6 +139,15 @@ static struct itemdef def_table[] = {
 	{"TCB_SYMLINKS", NULL},
 	{"USE_TCB", NULL},
 #endif
+	{"FORCE_SHADOW", NULL},
+	{NULL, NULL}
+};
+
+#define NUMKNOWNDEFS	(sizeof(knowndef_table)/sizeof(knowndef_table[0]))
+static struct itemdef knowndef_table[] = {
+#ifdef USE_PAM
+	PAMDEFS
+#endif
 	{NULL, NULL}
 };
 
@@ -136,7 +155,7 @@ static struct itemdef def_table[] = {
 #define LOGINDEFS "/etc/login.defs"
 #endif
 
-static char def_fname[] = LOGINDEFS;	/* login config defs file       */
+static const char* def_fname = LOGINDEFS;	/* login config defs file       */
 static bool def_loaded = false;		/* are defs already loaded?     */
 
 /* local function prototypes */
@@ -391,11 +410,29 @@ static /*@observer@*/ /*@null@*/struct itemdef *def_find (const char *name)
 	 * Item was never found.
 	 */
 
+	for (ptr = knowndef_table; NULL != ptr->name; ptr++) {
+		if (strcmp (ptr->name, name) == 0) {
+			goto out;
+		}
+	}
 	fprintf (stderr,
 	         _("configuration error - unknown item '%s' (notify administrator)\n"),
 	         name);
 	SYSLOG ((LOG_CRIT, "unknown configuration item `%s'", name));
+
+out:
 	return (struct itemdef *) NULL;
+}
+
+/*
+ * setdef_config_file - set the default configuration file path
+ *
+ * must be called prior to any def* calls.
+ */
+
+void setdef_config_file (const char* file)
+{
+	def_fname = file;
 }
 
 /*
@@ -411,21 +448,24 @@ static void def_load (void)
 	char buf[1024], *name, *value, *s;
 
 	/*
+	 * Set the initialized flag.
+	 * (do it early to prevent recursion in putdef_str())
+	 */
+	def_loaded = true;
+
+	/*
 	 * Open the configuration definitions file.
 	 */
 	fp = fopen (def_fname, "r");
 	if (NULL == fp) {
+		if (errno == ENOENT)
+			return;
+
 		int err = errno;
 		SYSLOG ((LOG_CRIT, "cannot open login definitions %s [%s]",
 		         def_fname, strerror (err)));
 		exit (EXIT_FAILURE);
 	}
-
-	/*
-	 * Set the initialized flag.
-	 * (do it early to prevent recursion in putdef_str())
-	 */
-	def_loaded = true;
 
 	/*
 	 * Go through all of the lines in the file.

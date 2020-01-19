@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: newusers
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 25/05/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 29/04/2018
 .\"    Manual: Comandi per la gestione del sistema
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: Italian
 .\"
-.TH "NEWUSERS" "8" "25/05/2012" "shadow\-utils 4\&.1\&.5\&.1" "Comandi per la gestione del si"
+.TH "NEWUSERS" "8" "29/04/2018" "shadow\-utils 4\&.6" "Comandi per la gestione del si"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -47,8 +47,8 @@ pw_name:pw_passwd:pw_uid:pw_gid:pw_gecos:pw_dir:pw_shell
 .RS 4
 Il nome dell\*(Aqutente\&.
 .sp
-Pu\(`o essere il nome di un nuovo utente o di uno gi\(`a esistente (o uno creato precedentemente da
-\fBnewusers\fR)\&. Nel caso di utente gi\(`a esistente le informazioni sull\*(Aqutente verranno aggiornate, altrimenti verr\(`a creato un nuovo utente\&.
+It can be the name of a new user or the name of an existing user (or a user created before by
+\fBnewusers\fR)\&. In case of an existing user, the user\*(Aqs information will be changed, otherwise a new user will be created\&.
 .RE
 .PP
 \fIpw_passwd\fR
@@ -60,13 +60,13 @@ Questo campo verr\(`a cifrato e utilizzato come nuovo valore per la password cif
 .RS 4
 Definisce l\*(AqUID dell\*(Aqutente\&.
 .sp
-Se il campo \(`e vuoto, verr\(`a generato automaticamente un nuovo UID (non utilizzato) da parte di
+If the field is empty, a new (unused) UID will be defined automatically by
 \fBnewusers\fR\&.
 .sp
 Se questo campo contiene un numero, verr\(`a utilizzato come UID\&.
 .sp
-Se questo campo contiene il nome di un utente gi\(`a esistente (o il nome di un utente creato precedentemente da
-\fBnewusers\fR), verr\(`a utilizzato l\*(AqUID dell\*(Aqutente specificato\&.
+If this field contains the name of an existing user (or the name of a user created before by
+\fBnewusers\fR), the UID of the specified user will be used\&.
 .sp
 Se viene cambiato l\*(AqUID di un utente esistente, la propriet\(`a dei file di propriet\(`a dell\*(Aqutente stesso andr\(`a cambiata manualmente\&.
 .RE
@@ -149,7 +149,7 @@ login\&.defs, anzich\('e dell\*(Aqintervallo
 per la creazione dei gruppi)\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR \fICHROOT_DIR\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fICHROOT_DIR\fR
 .RS 4
 Effettua le modifiche nella directory
 \fICHROOT_DIR\fR
@@ -281,6 +281,52 @@ Se
 \fBSHA_CRYPT_MAX_ROUNDS\fR, allora viene utilizzato il maggiore\&.
 .RE
 .PP
+\fBSUB_GID_MIN\fR (number), \fBSUB_GID_MAX\fR (number), \fBSUB_GID_COUNT\fR (number)
+.RS 4
+If
+/etc/subuid
+exists, the commands
+\fBuseradd\fR
+and
+\fBnewusers\fR
+(unless the user already have subordinate group IDs) allocate
+\fBSUB_GID_COUNT\fR
+unused group IDs from the range
+\fBSUB_GID_MIN\fR
+to
+\fBSUB_GID_MAX\fR
+for each new user\&.
+.sp
+The default values for
+\fBSUB_GID_MIN\fR,
+\fBSUB_GID_MAX\fR,
+\fBSUB_GID_COUNT\fR
+are respectively 100000, 600100000 and 10000\&.
+.RE
+.PP
+\fBSUB_UID_MIN\fR (number), \fBSUB_UID_MAX\fR (number), \fBSUB_UID_COUNT\fR (number)
+.RS 4
+If
+/etc/subuid
+exists, the commands
+\fBuseradd\fR
+and
+\fBnewusers\fR
+(unless the user already have subordinate user IDs) allocate
+\fBSUB_UID_COUNT\fR
+unused user IDs from the range
+\fBSUB_UID_MIN\fR
+to
+\fBSUB_UID_MAX\fR
+for each new user\&.
+.sp
+The default values for
+\fBSUB_UID_MIN\fR,
+\fBSUB_UID_MAX\fR,
+\fBSUB_UID_COUNT\fR
+are respectively 100000, 600100000 and 10000\&.
+.RE
+.PP
 \fBSYS_GID_MAX\fR (numerico), \fBSYS_GID_MIN\fR (numerico)
 .RS 4
 Intervallo di ID di gruppo utilizzato per la creazione di un gruppo di sistema da
@@ -367,8 +413,19 @@ Informazioni sicure sugli account di gruppo\&.
 .RS 4
 Configurazione del pacchetto password shadow
 .RE
+.PP
+/etc/subgid
+.RS 4
+Per user subordinate group IDs\&.
+.RE
+.PP
+/etc/subuid
+.RS 4
+Per user subordinate user IDs\&.
+.RE
 .SH "VEDERE ANCHE"
 .PP
 \fBlogin.defs\fR(5),
 \fBpasswd\fR(1),
+\fBsubgid\fR(5), \fBsubuid\fR(5),
 \fBuseradd\fR(8)\&.

@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: chage
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 25/05/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 29/04/2018
 .\"    Manual: Commandes utilisateur
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: French
 .\"
-.TH "CHAGE" "1" "25/05/2012" "shadow\-utils 4\&.1\&.5\&.1" "Commandes utilisateur"
+.TH "CHAGE" "1" "29/04/2018" "shadow\-utils 4\&.6" "Commandes utilisateur"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -43,12 +43,12 @@ Les options disponibles pour la commande
 \fBchage\fR
 sont\ \&:
 .PP
-\fB\-d\fR, \fB\-\-lastday\fR \fIDERNIER_JOUR\fR
+\fB\-d\fR, \fB\-\-lastday\fR\ \&\fIDERNIER_JOUR\fR
 .RS 4
 Configurer le nombre du jour, \(`a compter du 1er\ \&janvier\ \&1970, o\(`u le mot de passe a \('et\('e chang\('e la derni\(`ere fois\&. La date peut aussi \(^etre exprim\('ee dans le format AAAA\-MM\-JJ (ou le format utilis\('e plus commun\('ement dans votre r\('egion)\&.
 .RE
 .PP
-\fB\-E\fR, \fB\-\-expiredate\fR \fIDATE_FIN_VALIDIT\('E\fR
+\fB\-E\fR, \fB\-\-expiredate\fR\ \&\fIDATE_FIN_VALIDIT\('E\fR
 .RS 4
 Configurer la date, ou le nombre de jours \(`a compter du 1er\ \&janvier\ \&1970, \(`a partir de laquelle le compte de l\*(Aqutilisateur ne sera plus accessible\&. La date peut aussi \(^etre exprim\('ee dans le format AAAA\-MM\-JJ (ou le format plus commun\('ement utilis\('e dans votre r\('egion)\&. Un utilisateur dont le compte est bloqu\('e doit contacter l\*(Aqadministrateur syst\(`eme pour pouvoir utiliser \(`a nouveau le syst\(`eme\&.
 .sp
@@ -64,7 +64,7 @@ aura pour effet de supprimer la date de fin de validit\('e\&.
 Afficher un message d\*(Aqaide et quitter\&.
 .RE
 .PP
-\fB\-I\fR, \fB\-\-inactive\fR \fIDUR\('EE_INACTIVIT\('E\fR
+\fB\-I\fR, \fB\-\-inactive\fR\ \&\fIDUR\('EE_INACTIVIT\('E\fR
 .RS 4
 Configurer le nombre de jours d\*(Aqinactivit\('e, apr\(`es qu\*(Aqun mot de passe ait d\('epass\('e la date de fin de validit\('e, avant que le compte ne soit bloqu\('e\&. La valeur
 \fIDUR\('EE_INACTIVIT\('E\fR
@@ -82,13 +82,13 @@ supprime la dur\('ee d\*(Aqinactivit\('e pour un compte\&.
 Afficher les informations sur l\*(Aq\(^age des comptes\&.
 .RE
 .PP
-\fB\-m\fR, \fB\-\-mindays\fR \fIJOURS_MIN\fR
+\fB\-m\fR, \fB\-\-mindays\fR\ \&\fIJOURS_MIN\fR
 .RS 4
 D\('efinir le nombre minimum de jours entre chaque changement de mot de passe \(`a
 \fIMIN_DAYS\fR\&. Une valeur de z\('ero pour ce champ indique que l\*(Aqutilisateur peut changer son mot de passe quand il le souhaite\&.
 .RE
 .PP
-\fB\-M\fR, \fB\-\-maxdays\fR \fIJOURS_MAX\fR
+\fB\-M\fR, \fB\-\-maxdays\fR\ \&\fIJOURS_MAX\fR
 .RS 4
 Configurer le nombre maximum de jours pendant lesquels un mot de passe est valable\&. Quand
 \fIJOURS_MAX\fR
@@ -105,7 +105,7 @@ pour
 supprime la v\('erification de validit\('e\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR \fIR\('EP_CHROOT\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fIR\('EP_CHROOT\fR
 .RS 4
 Appliquer les changements dans le r\('epertoire
 \fIR\('EP_CHROOT\fR
@@ -113,7 +113,7 @@ et utiliser les fichiers de configuration du r\('epertoire
 \fIR\('EP_CHROOT\fR\&.
 .RE
 .PP
-\fB\-W\fR, \fB\-\-warndays\fR \fIDUR\('EE_AVERTISSEMENT\fR
+\fB\-W\fR, \fB\-\-warndays\fR\ \&\fIDUR\('EE_AVERTISSEMENT\fR
 .RS 4
 Configurer le nombre de jours d\*(Aqavertissement avant que le changement de mot de passe ne soit obligatoire\&. La valeur
 \fIDUR\('EE_AVERTISSEMENT\fR

@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: su
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 05/25/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 04/29/2018
 .\"    Manual: User Commands
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: English
 .\"
-.TH "SU" "1" "05/25/2012" "shadow\-utils 4\&.1\&.5\&.1" "User Commands"
+.TH "SU" "1" "04/29/2018" "shadow\-utils 4\&.6" "User Commands"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -31,7 +31,7 @@
 su \- change user ID or become superuser
 .SH "SYNOPSIS"
 .HP \w'\fBsu\fR\ 'u
-\fBsu\fR [\fIoptions\fR] [\fIusername\fR]
+\fBsu\fR [\fIoptions\fR] [\fI\-\fR] [\fIusername\fR\ [\ \fIargs\fR\ ]]
 .SH "DESCRIPTION"
 .PP
 The
@@ -39,21 +39,19 @@ The
 command is used to become another user during a login session\&. Invoked without a
 \fBusername\fR,
 \fBsu\fR
-defaults to becoming the superuser\&. The optional argument
+defaults to becoming the superuser\&. The
 \fB\-\fR
-may be used to provide an environment similar to what the user would expect had the user logged in directly\&.
-.PP
-Additional arguments may be provided after the username, in which case they are supplied to the user\*(Aqs login shell\&. In particular, an argument of
+option may be used to provide an environment similar to what the user would expect had the user logged in directly\&. The
 \fB\-c\fR
-will cause the next argument to be treated as a command by most command interpreters\&. The command will be executed by the shell specified in
-/etc/passwd
-for the target user\&.
+option may be used to treat the next argument as a command by most shells\&.
 .PP
-You can use the
+Options are recognized everywhere in the argument list\&. You can use the
 \fB\-\-\fR
-argument to separate
-\fBsu\fR
-options from the arguments supplied to the shell\&.
+argument to stop option parsing\&. The
+\fB\-\fR
+option is special: it is also recognized after
+\fB\-\-\fR, but has to be placed before
+\fBusername\fR\&.
 .PP
 The user will be prompted for a password, if appropriate\&. Invalid passwords will produce an error message\&. All attempts, both valid and invalid, are logged to detect abuse of the system\&.
 .PP
@@ -77,12 +75,12 @@ The options which apply to the
 \fBsu\fR
 command are:
 .PP
-\fB\-c\fR, \fB\-\-command\fR \fICOMMAND\fR
+\fB\-c\fR, \fB\-\-command\fR\ \&\fICOMMAND\fR
 .RS 4
 Specify a command that will be invoked by the shell using its
 \fB\-c\fR\&.
 .sp
-The executed command will have no controlling terminal\&. This option cannot be used to execute interractive programs which need a controlling TTY\&.
+The executed command will have no controlling terminal\&. This option cannot be used to execute interactive programs which need a controlling TTY\&.
 .RE
 .PP
 \fB\-\fR, \fB\-l\fR, \fB\-\-login\fR
@@ -91,14 +89,14 @@ Provide an environment similar to what the user would expect had the user logged
 .sp
 When
 \fB\-\fR
-is used, it must be specified as the last
-\fBsu\fR
-option\&. The other forms (\fB\-l\fR
+is used, it must be specified before any
+\fBusername\fR\&. For portability it is recommended to use it as last option, before any
+\fBusername\fR\&. The other forms (\fB\-l\fR
 and
 \fB\-\-login\fR) do not have this restriction\&.
 .RE
 .PP
-\fB\-s\fR, \fB\-\-shell\fR \fISHELL\fR
+\fB\-s\fR, \fB\-\-shell\fR\ \&\fISHELL\fR
 .RS 4
 The shell that will be invoked\&.
 .sp

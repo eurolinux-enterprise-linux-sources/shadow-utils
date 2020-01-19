@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: grpck
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 25.05.2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 29.04.2018
 .\"    Manual: Befehle zur Systemverwaltung
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: German
 .\"
-.TH "GRPCK" "8" "25.05.2012" "shadow\-utils 4\&.1\&.5\&.1" "Befehle zur Systemverwaltung"
+.TH "GRPCK" "8" "29.04.2018" "shadow\-utils 4\&.6" "Befehle zur Systemverwaltung"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -139,7 +139,7 @@ im Modus Nur\-Lesen aus\&. Dies hat zur Folge, dass alle Fragen, ob Ver\(:anderu
 beantworteten werden, ohne dass der Benutzer einzugreifen braucht\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR\fICHROOT_VERZ\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fICHROOT_VERZ\fR
 .RS 4
 f\(:uhrt die Ver\(:anderungen in dem Verzeichnis
 \fICHROOT_VERZ\fR
@@ -154,13 +154,12 @@ Ordnet die Eintr\(:age in
 nach der GID\&.
 .RE
 .PP
-By default,
+Standardm\(:a\(ssig arbeitet
 \fBgrpck\fR
-operates on
-/etc/group
-and /etc/gshadow\&. The user may select alternate files with the
-\fIgroup\fR
-and \fIshadow\fR parameters\&.
+mit
+/etc/groupund /etc/gshadow\&. Der Benutzer kann andere Dateien mit
+den Parametern \fIgroup\fR und \fIshadow\fR
+ausw\(:ahlen\&.
 .SH "KONFIGURATION"
 .PP
 Die folgenden Konfigurationsvariablen in

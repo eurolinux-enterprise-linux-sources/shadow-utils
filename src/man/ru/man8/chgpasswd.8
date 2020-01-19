@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: chgpasswd
 .\"    Author: Thomas K\(/loczko <kloczek@pld.org.pl>
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 05/25/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 04/29/2018
 .\"    Manual: Команды управления системой
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: Russian
 .\"
-.TH "chgpasswd" "8" "05/25/2012" "shadow\-utils 4\&.1\&.5\&.1" "Команды управления системой"
+.TH "chgpasswd" "8" "04/29/2018" "shadow\-utils 4\&.6" "Команды управления системой"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -27,9 +27,9 @@
 .\" -----------------------------------------------------------------
 .\" * MAIN CONTENT STARTS HERE *
 .\" -----------------------------------------------------------------
-.SH "ИМЯ"
+.SH "НАЗВАНИЕ"
 chgpasswd \- обновляет пароли групп в пакетном режиме
-.SH "СИНОПСИС"
+.SH "СИНТАКСИС"
 .HP \w'\fBchgpasswd\fR\ 'u
 \fBchgpasswd\fR [\fIпараметры\fR]
 .SH "ОПИСАНИЕ"
@@ -43,14 +43,14 @@ chgpasswd \- обновляет пароли групп в пакетном ре
 По умолчанию, передаваемый пароль должен быть в виде обычного текста и шифруется командой
 \fBchgpasswd\fR\&.
 .PP
-Системный алгоритм шифрования по умолчанию может быть задан в переменной
+The default encryption algorithm can be defined for the system with the
 \fBENCRYPT_METHOD\fR
-в файле
-/etc/login\&.defs, и может быть переопределён параметрами
+variable of
+/etc/login\&.defs, and can be overwritten with the
 \fB\-e\fR,
-\fB\-m\fR
-или
-\fB\-c\fR\&.
+\fB\-m\fR, or
+\fB\-c\fR
+options\&.
 .PP
 Данная команда предназначена для работы в крупных системных средах, где за один раз заводится несколько учётных записей\&.
 .SH "ПАРАМЕТРЫ"
@@ -80,7 +80,7 @@ chgpasswd \- обновляет пароли групп в пакетном ре
 Использовать алгоритм шифрования MD5 вместо DES, если пароли передаются не шифрованными\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR \fIКАТ_CHROOT\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fIКАТ_CHROOT\fR
 .RS 4
 Выполнить изменения в каталоге
 \fIКАТ_CHROOT\fR

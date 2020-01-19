@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: groupmems
 .\"    Author: George Kraft, IV
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 25/05/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 29/04/2018
 .\"    Manual: Commandes de gestion du syst\(`eme
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: French
 .\"
-.TH "GROUPMEMS" "8" "25/05/2012" "shadow\-utils 4\&.1\&.5\&.1" "Commandes de gestion du syst\(`em"
+.TH "GROUPMEMS" "8" "29/04/2018" "shadow\-utils 4\&.6" "Commandes de gestion du syst\(`em"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -49,16 +49,16 @@ Les options disponibles pour la commande
 \fBgroupmems\fR
 sont\ \&:
 .PP
-\fB\-a\fR, \fB\-\-add\fR \fInom_utilisateur\fR
+\fB\-a\fR, \fB\-\-add\fR\ \&\fInom_utilisateur\fR
 .RS 4
-Ajouter un utilisateur \(`a la liste des membres du groupe\&.
+Add a user to the group membership list\&.
 .sp
 Si le fichier
 /etc/gshadow
 existe, et que le groupe n\*(Aqy a pas d\*(Aqentr\('ee, une nouvelle entr\('ee sera cr\('e\('ee\&.
 .RE
 .PP
-\fB\-d\fR, \fB\-\-delete\fR \fInom_utilisateur\fR
+\fB\-d\fR, \fB\-\-delete\fR\ \&\fInom_utilisateur\fR
 .RS 4
 Supprimer un utilisateur de la liste des membres du groupe\&.
 .sp
@@ -71,7 +71,7 @@ Si le fichier
 existe, et que le groupe n\*(Aqy a pas d\*(Aqentr\('ee, une nouvelle entr\('ee sera cr\('e\('ee\&.
 .RE
 .PP
-\fB\-g\fR, \fB\-\-group\fR \fInom_groupe\fR
+\fB\-g\fR, \fB\-\-group\fR\ \&\fInom_groupe\fR
 .RS 4
 Le superutilisateur peut pr\('eciser la liste des membres du groupe \(`a modifier\&.
 .RE
@@ -95,7 +95,7 @@ Si le fichier
 existe, et que le groupe n\*(Aqy a pas d\*(Aqentr\('ee, une nouvelle entr\('ee sera cr\('e\('ee\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR \fIR\('EP_CHROOT\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fIR\('EP_CHROOT\fR
 .RS 4
 Appliquer les changements dans le r\('epertoire
 \fIR\('EP_CHROOT\fR

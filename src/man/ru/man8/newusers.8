@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: newusers
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 05/25/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 04/29/2018
 .\"    Manual: Команды управления системой
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: Russian
 .\"
-.TH "newusers" "8" "05/25/2012" "shadow\-utils 4\&.1\&.5\&.1" "Команды управления системой"
+.TH "newusers" "8" "04/29/2018" "shadow\-utils 4\&.6" "Команды управления системой"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -27,9 +27,9 @@
 .\" -----------------------------------------------------------------
 .\" * MAIN CONTENT STARTS HERE *
 .\" -----------------------------------------------------------------
-.SH "ИМЯ"
+.SH "НАЗВАНИЕ"
 newusers \- обновляет и создаёт новые учётные записи пользователей в пакетном режиме
-.SH "СИНОПСИС"
+.SH "СИНТАКСИС"
 .HP \w'\fBnewusers\fR\ 'u
 \fBnewusers\fR [\fIпараметры\fR] [\fIфайл\fR]
 .SH "ОПИСАНИЕ"
@@ -47,9 +47,8 @@ pw_name:pw_passwd:pw_uid:pw_gid:pw_gecos:pw_dir:pw_shell
 .RS 4
 Имя пользователя\&.
 .sp
-Это может быть имя нового пользователя или имя существующего пользователя (или пользователя, созданного
-\fBnewusers\fR
-ранее)\&. Если пользователь существует, то будет изменена информация о пользователе, или же создаётся новый пользователь\&.
+It can be the name of a new user or the name of an existing user (or a user created before by
+\fBnewusers\fR)\&. In case of an existing user, the user\*(Aqs information will be changed, otherwise a new user will be created\&.
 .RE
 .PP
 \fIpw_passwd\fR
@@ -61,15 +60,13 @@ pw_name:pw_passwd:pw_uid:pw_gid:pw_gecos:pw_dir:pw_shell
 .RS 4
 Это поле используется для определения UID пользователя\&.
 .sp
-Если это поле пусто, то командой
-\fBnewusers\fR
-автоматически определяется новый (неиспользованный) UID\&.
+If the field is empty, a new (unused) UID will be defined automatically by
+\fBnewusers\fR\&.
 .sp
 Если в этом поле указано число, то оно будет использовано в качестве UID\&.
 .sp
-Если в поле содержится имя существующего пользователя (или имя пользователя, созданного
-\fBnewusers\fR
-ранее), то использует UID указанного пользователя\&.
+If this field contains the name of an existing user (or the name of a user created before by
+\fBnewusers\fR), the UID of the specified user will be used\&.
 .sp
 Если изменяется UID существующего пользователя, то у файлов, которыми владел этот пользователь, нужно вручную переопределить владельца\&.
 .RE
@@ -152,7 +149,7 @@ login\&.defs, а не из
 при создании групп)\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR \fIКАТ_CHROOT\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fIКАТ_CHROOT\fR
 .RS 4
 Выполнить изменения в каталоге
 \fIКАТ_CHROOT\fR
@@ -283,6 +280,52 @@ login\&.defs, а не из
 \fBSHA_CRYPT_MAX_ROUNDS\fR, то используется большее значение\&.
 .RE
 .PP
+\fBSUB_GID_MIN\fR (number), \fBSUB_GID_MAX\fR (number), \fBSUB_GID_COUNT\fR (number)
+.RS 4
+If
+/etc/subuid
+exists, the commands
+\fBuseradd\fR
+and
+\fBnewusers\fR
+(unless the user already have subordinate group IDs) allocate
+\fBSUB_GID_COUNT\fR
+unused group IDs from the range
+\fBSUB_GID_MIN\fR
+to
+\fBSUB_GID_MAX\fR
+for each new user\&.
+.sp
+The default values for
+\fBSUB_GID_MIN\fR,
+\fBSUB_GID_MAX\fR,
+\fBSUB_GID_COUNT\fR
+are respectively 100000, 600100000 and 10000\&.
+.RE
+.PP
+\fBSUB_UID_MIN\fR (number), \fBSUB_UID_MAX\fR (number), \fBSUB_UID_COUNT\fR (number)
+.RS 4
+If
+/etc/subuid
+exists, the commands
+\fBuseradd\fR
+and
+\fBnewusers\fR
+(unless the user already have subordinate user IDs) allocate
+\fBSUB_UID_COUNT\fR
+unused user IDs from the range
+\fBSUB_UID_MIN\fR
+to
+\fBSUB_UID_MAX\fR
+for each new user\&.
+.sp
+The default values for
+\fBSUB_UID_MIN\fR,
+\fBSUB_UID_MAX\fR,
+\fBSUB_UID_COUNT\fR
+are respectively 100000, 600100000 and 10000\&.
+.RE
+.PP
 \fBSYS_GID_MAX\fR (число), \fBSYS_GID_MIN\fR (число)
 .RS 4
 Диапазон идентификаторов групп, используемый в программах
@@ -370,8 +413,19 @@ login\&.defs, а не из
 .RS 4
 содержит конфигурацию подсистемы теневых паролей
 .RE
+.PP
+/etc/subgid
+.RS 4
+Per user subordinate group IDs\&.
+.RE
+.PP
+/etc/subuid
+.RS 4
+Per user subordinate user IDs\&.
+.RE
 .SH "СМОТРИТЕ ТАКЖЕ"
 .PP
 \fBlogin.defs\fR(5),
 \fBpasswd\fR(1),
+\fBsubgid\fR(5), \fBsubuid\fR(5),
 \fBuseradd\fR(8)\&.

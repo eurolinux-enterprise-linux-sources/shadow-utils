@@ -33,13 +33,14 @@
 
 #include <config.h>
 
-#ident "$Id: shadowio.c 3296 2011-02-16 20:32:16Z nekral-guest $"
+#ident "$Id$"
 
 #include "prototypes.h"
 #include "defines.h"
 #include <shadow.h>
 #include <stdio.h>
 #include "commonio.h"
+#include "getdef.h"
 #include "shadowio.h"
 #ifdef WITH_TCB
 #include <tcb.h>
@@ -104,6 +105,9 @@ static struct commonio_db shadow_db = {
 #ifdef WITH_SELINUX
 	NULL,			/* scontext */
 #endif				/* WITH_SELINUX */
+	0400,                   /* st_mode */
+	0,                      /* st_uid */
+	0,                      /* st_gid */
 	NULL,			/* head */
 	NULL,			/* tail */
 	NULL,			/* cursor */
@@ -125,6 +129,8 @@ int spw_setdbname (const char *filename)
 
 bool spw_file_present (void)
 {
+	if (getdef_bool ("FORCE_SHADOW"))
+		return true;
 	return commonio_present (&shadow_db);
 }
 

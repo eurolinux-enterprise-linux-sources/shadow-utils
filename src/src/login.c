@@ -32,7 +32,7 @@
 
 #include <config.h>
 
-#ident "$Id: login.c 3743 2012-05-25 11:51:53Z nekral-guest $"
+#ident "$Id$"
 
 #include <errno.h>
 #include <grp.h>
@@ -103,7 +103,7 @@ static bool hflg = false;
 static bool preauth_flag = false;
 
 static bool amroot;
-static unsigned int timeout;
+static char tmsg[256];
 
 /*
  * External identifiers.
@@ -416,8 +416,8 @@ static void init_env (void)
 
 static RETSIGTYPE alarm_handler (unused int sig)
 {
-	fprintf (stderr, _("\nLogin timed out after %u seconds.\n"), timeout);
-	exit (0);
+	write (STDERR_FILENO, tmsg, strlen (tmsg));
+	_exit (0);
 }
 
 #ifdef USE_PAM
@@ -532,6 +532,7 @@ int main (int argc, char **argv)
 	bool is_console;
 #endif
 	int err;
+	unsigned int timeout;
 	const char *cp;
 	const char *tmp;
 	char fromhost[512];
@@ -698,8 +699,10 @@ int main (int argc, char **argv)
 
       top:
 	/* only allow ALARM sec. for login */
-	(void) signal (SIGALRM, alarm_handler);
 	timeout = getdef_unum ("LOGIN_TIMEOUT", ALARM);
+	snprintf (tmsg, sizeof tmsg,
+	          _("\nLogin timed out after %u seconds.\n"), timeout);
+	(void) signal (SIGALRM, alarm_handler);
 	if (timeout > 0) {
 		(void) alarm (timeout);
 	}
@@ -1160,7 +1163,7 @@ int main (int argc, char **argv)
 			 * entries.
 			 * Use the x variants because we need to keep the
 			 * entry for a long time, and there might be other
-			 * getxxyy in between.
+			 * getxxyyy in between.
 			 */
 			pw_free (pwd);
 			pwd = xgetpwnam (username);

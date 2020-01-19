@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: passwd
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 25.05.2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 29.04.2018
 .\"    Manual: Dienstprogramme f\(:ur Benutzer
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: German
 .\"
-.TH "PASSWD" "1" "25.05.2012" "shadow\-utils 4\&.1\&.5\&.1" "Dienstprogramme f\(:ur Benutzer"
+.TH "PASSWD" "1" "29.04.2018" "shadow\-utils 4\&.6" "Dienstprogramme f\(:ur Benutzer"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -95,7 +95,7 @@ Die Sicherheit eines Passworts h\(:angt von der St\(:arke des Verschl\(:usselung
 .PP
 Gefahren f\(:ur die Sicherheit von Passw\(:ortern kommen gew\(:ohnlich von sorgloser Wahl oder Handhabung des Passworts\&. Daher sollten Sie kein Passwort w\(:ahlen, das in einem W\(:orterbuch auftaucht oder das aufgeschrieben werden muss\&. Das Passwort sollte somit kein echter Name, Ihr Autokennzeichen, Geburtstag oder Ihre Adresse sein\&. All das kann dazu verwendet werden, das Passwort zu erraten, und stellt daher eine Gefahr f\(:ur die Sicherheit Ihres Systems dar\&.
 .PP
-Ratschl\(:age, wie Sie ein sicheres Passwort w\(:ahlen, finden Sie unter http://de\&.wikipedia\&.org/wiki/Passwort#Wahl_von_sicheren_Passw\&.C3\&.B6rtern\&.
+You can find advice on how to choose a strong password on http://en\&.wikipedia\&.org/wiki/Password_strength
 .SH "OPTIONEN"
 .PP
 Die Optionen, die vom Befehl
@@ -124,7 +124,7 @@ L\(:asst das Passwort eines Kontos sofort verfallen\&. Im Ergebnis kann damit er
 zeigt die Hilfe an und beendet das Programm
 .RE
 .PP
-\fB\-i\fR, \fB\-\-inactive\fR\fIINAKTIV\fR
+\fB\-i\fR, \fB\-\-inactive\fR\ \&\fIINAKTIV\fR
 .RS 4
 Mit dieser Option wird ein Konto deaktiviert, nachdem das Passwort f\(:ur eine bestimmte Anzahl von Tagen abgelaufen ist\&. Wenn ein Benutzerkonto ein abgelaufenes Passwort f\(:ur l\(:anger als
 \fIINAKTIV\fR
@@ -147,7 +147,7 @@ verwenden; dies setzt das Verfallsdatum des Kontos auf den 2\&. Januar 1970\&.
 Benutzer mit einem gesperrten Passwort k\(:onnen dieses nicht \(:andern\&.
 .RE
 .PP
-\fB\-n\fR, \fB\-\-mindays\fR\fIMIN_TAGE\fR
+\fB\-n\fR, \fB\-\-mindays\fR\ \&\fIMIN_TAGE\fR
 .RS 4
 Setzt die Anzahl von Tagen, die mindestens zwischen zwei \(:Anderungen eines Passworts vergehen m\(:ussen, auf
 \fIMIN_TAGE\fR\&. Ein Wert von Null in diesem Feld bedeutet, dass der Benutzer sein Passwort jederzeit \(:andern darf\&.
@@ -158,13 +158,13 @@ Setzt die Anzahl von Tagen, die mindestens zwischen zwei \(:Anderungen eines Pas
 stiller Modus
 .RE
 .PP
-\fB\-r\fR, \fB\-\-repository\fR\fIDEPOT\fR
+\fB\-r\fR, \fB\-\-repository\fR\ \&\fIDEPOT\fR
 .RS 4
 \(:andert das Passwort im Depot
 \fIDEPOT\fR
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR\fICHROOT_VERZ\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fICHROOT_VERZ\fR
 .RS 4
 f\(:uhrt die Ver\(:anderungen in dem Verzeichnis
 \fICHROOT_VERZ\fR
@@ -184,18 +184,24 @@ Entsperrt das bezeichnete Konto\&. Diese Option reaktiviert ein Konto wieder, in
 verwendet wurde\&.
 .RE
 .PP
-\fB\-w\fR, \fB\-\-warndays\fR\fIWARN_TAGE\fR
+\fB\-w\fR, \fB\-\-warndays\fR\ \&\fIWARN_TAGE\fR
 .RS 4
 Legt die Anzahl der Tage fest, an denen der Benutzer eine Warnung erh\(:alt, bevor sein Passwort ung\(:ultig wird\&. Die Option
 \fIWARN_TAGE\fR
 bezeichnet die Anzahl der Tage, f\(:ur die ein Benutzer vor Verfall seines Passworts gewarnt wird\&.
 .RE
 .PP
-\fB\-x\fR, \fB\-\-maxdays\fR\fIMAX_TAGE\fR
+\fB\-x\fR, \fB\-\-maxdays\fR\ \&\fIMAX_TAGE\fR
 .RS 4
 Bestimmt die maximale Anzahl von Tagen, die das Passwort g\(:ultig bleibt\&. Nach
 \fIMAX_TAGE\fR
 Tagen muss das Passwort ge\(:andert werden\&.
+.sp
+Wenn
+\fI\-1\fR
+als
+\fIMAX_TAGE\fR
+angegeben wird, wird der Passwortverfall entfernt\&.
 .RE
 .SH "WARNUNGEN"
 .PP

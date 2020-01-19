@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: gpasswd
 .\"    Author: Rafal Maszkowski
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 05/25/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 04/29/2018
 .\"    Manual: User Commands
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: English
 .\"
-.TH "GPASSWD" "1" "05/25/2012" "shadow\-utils 4\&.1\&.5\&.1" "User Commands"
+.TH "GPASSWD" "1" "04/29/2018" "shadow\-utils 4\&.6" "User Commands"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -47,7 +47,6 @@ option to define group administrator(s) and the
 \fB\-M\fR
 option to define members\&. They have all rights of group administrators and members\&.
 .PP
-
 \fBgpasswd\fR
 called by
 a group administrator
@@ -72,7 +71,7 @@ The options which apply to the
 \fBgpasswd\fR
 command are:
 .PP
-\fB\-a\fR, \fB\-\-add\fR \fIuser\fR
+\fB\-a\fR, \fB\-\-add\fR\ \&\fIuser\fR
 .RS 4
 Add the
 \fIuser\fR
@@ -80,7 +79,7 @@ to the named
 \fIgroup\fR\&.
 .RE
 .PP
-\fB\-d\fR, \fB\-\-delete\fR \fIuser\fR
+\fB\-d\fR, \fB\-\-delete\fR\ \&\fIuser\fR
 .RS 4
 Remove the
 \fIuser\fR
@@ -93,7 +92,7 @@ from the named
 Display help message and exit\&.
 .RE
 .PP
-\fB\-Q\fR, \fB\-\-root\fR \fICHROOT_DIR\fR
+\fB\-Q\fR, \fB\-\-root\fR\ \&\fICHROOT_DIR\fR
 .RS 4
 Apply changes in the
 \fICHROOT_DIR\fR
@@ -120,12 +119,12 @@ to join the named
 \fIgroup\fR\&.
 .RE
 .PP
-\fB\-A\fR, \fB\-\-administrators\fR \fIuser\fR,\&.\&.\&.
+\fB\-A\fR, \fB\-\-administrators\fR\ \&\fIuser\fR,\&.\&.\&.
 .RS 4
 Set the list of administrative users\&.
 .RE
 .PP
-\fB\-M\fR, \fB\-\-members\fR \fIuser\fR,\&.\&.\&.
+\fB\-M\fR, \fB\-\-members\fR\ \&\fIuser\fR,\&.\&.\&.
 .RS 4
 Set the list of group members\&.
 .RE
@@ -225,7 +224,6 @@ Secure group account information\&.
 .RE
 .SH "SEE ALSO"
 .PP
-
 \fBnewgrp\fR(1),
 \fBgroupadd\fR(8),
 \fBgroupdel\fR(8),

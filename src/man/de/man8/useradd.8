@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: useradd
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 25.05.2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 29.04.2018
 .\"    Manual: Befehle zur Systemverwaltung
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: German
 .\"
-.TH "USERADD" "8" "25.05.2012" "shadow\-utils 4\&.1\&.5\&.1" "Befehle zur Systemverwaltung"
+.TH "USERADD" "8" "29.04.2018" "shadow\-utils 4\&.6" "Befehle zur Systemverwaltung"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -58,10 +58,10 @@ Die Optionen, die vom Befehl
 \fBuseradd\fR
 unterst\(:utzt werden, sind:
 .PP
-\fB\-b\fR, \fB\-\-base\-dir\fR\fIWURZEL_VERZ\fR
+\fB\-b\fR, \fB\-\-base\-dir\fR\ \&\fIWURZEL_VERZ\fR
 .RS 4
 Das standardm\(:a\(ssige Wurzelverzeichnis des Systems, wenn nicht eines mit
-\fB\-d\fR\fIHOME_VERZ\fR
+\fB\-d\fR\ \&\fIHOME_VERZ\fR
 festgelegt wurde\&. Der Name des Home\-Verzeichnisses besteht aus der Verbindung von
 \fIWURZEL_VERZ\fR
 und dem Kontonamen\&. Wenn die Option
@@ -80,12 +80,12 @@ festgelegt wurde, anderenfalls
 /home\&.
 .RE
 .PP
-\fB\-c\fR, \fB\-\-comment\fR\fIKOMMENTAR\fR
+\fB\-c\fR, \fB\-\-comment\fR\ \&\fIKOMMENTAR\fR
 .RS 4
 Eine beliebige Zeichenkette\&. Dies ist f\(:ur gew\(:ohnlich eine kurze Beschreibung des Logins und wird im Moment im Feld f\(:ur den vollst\(:andigen Namen des Benutzers gespeichert\&.
 .RE
 .PP
-\fB\-d\fR, \fB\-\-home\fR\fIHOME_VERZ\fR
+\fB\-d\fR, \fB\-\-home\-dir\fR\ \&\fIHOME_DIR\fR
 .RS 4
 Beim Anlegen des neuen Benutzers wird
 \fIHOME_VERZ\fR
@@ -102,7 +102,7 @@ muss nicht vorhanden sein, sondern wird gegebenenfalls angelegt\&.
 Lesen Sie dazu unten den Abschnitt \(FcDie Standardwerte ver\(:andern\(Fo\&.
 .RE
 .PP
-\fB\-e\fR, \fB\-\-expiredate\fR\fIVERFALLS_DATUM\fR
+\fB\-e\fR, \fB\-\-expiredate\fR\ \&\fIVERFALLS_DATUM\fR
 .RS 4
 Das Datum, an welchem das Benutzerkonto deaktiviert wird\&. Das Datum muss im Format
 \fIJJJJ\-MM\-TT\fR
@@ -117,7 +117,7 @@ in
 bestimmt wurde, anderenfalls eine leere Zeichenkette (kein Verfall)\&.
 .RE
 .PP
-\fB\-f\fR, \fB\-\-inactive\fR\fIINAKTIV\fR
+\fB\-f\fR, \fB\-\-inactive\fR\ \&\fIINAKTIV\fR
 .RS 4
 Die Anzahl von Tagen nach Ablaufen des Passworts bis das Konto dauerhaft deaktiviert wird\&. Ein Wert von 0 deaktiviert das Konto, sobald das Passwort abl\(:auft\&. Ein Wert von \-1 schaltet diese Funktion ab\&.
 .sp
@@ -130,7 +130,7 @@ in
 bestimmt wurde, anderenfalls \-1\&.
 .RE
 .PP
-\fB\-g\fR, \fB\-\-gid\fR\fIGRUPPE\fR
+\fB\-g\fR, \fB\-\-gid\fR\ \&\fIGRUPPE\fR
 .RS 4
 Der Name oder die Nummer der anf\(:anglichen Anmeldegruppe des Benutzers\&. Der Gruppenname muss existieren\&. Die Gruppenzahl muss auf eine bereits vorhandene Gruppe verweisen\&.
 .sp
@@ -139,7 +139,7 @@ Falls nicht definiert, h\(:angt das Verhalten von
 von der Variable
 \fBUSERGROUPS_ENAB\fR
 in
-/etc/default/useradd
+/etc/login\&.defs
 ab\&. Wenn diese Variable auf
 \fIyes\fR
 gesetzt ist (oder auf der Befehlszeile
@@ -155,7 +155,7 @@ in
 definiert wurde, anderenfalls 100\&.
 .RE
 .PP
-\fB\-G\fR, \fB\-\-groups\fR\fIGRUPPE_1\fR[\fI,GRUPPE_2, \&.\&.\&.\fR[\fI,GRUPPE_N\fR]]]
+\fB\-G\fR, \fB\-\-groups\fR\ \&\fIGRUPPE_1\fR[\fI,GRUPPE_2, \&.\&.\&.\fR[\fI,GRUPPE_N\fR]]]
 .RS 4
 Eine Liste der zus\(:atzlichen Gruppen, denen der Benutzer ebenfalls angeh\(:ort\&. Die Gruppen sind durch Kommata ohne Leerzeichen voneinander zu trennen\&. Die Gruppen unterliegen denselben Beschr\(:ankungen wie die Gruppe, die mit der Option
 \fB\-g\fR
@@ -167,7 +167,7 @@ bestimmt wurde\&. Standardm\(:a\(ssig ist der Benutzer nur Mitglied der Ausgangs
 zeigt die Hilfe an und beendet das Programm
 .RE
 .PP
-\fB\-k\fR, \fB\-\-skel\fR\fIGER\(:UST_VERZ\fR
+\fB\-k\fR, \fB\-\-skel\fR\ \&\fIGER\(:UST_VERZ\fR
 .RS 4
 Das Ger\(:ustverzeichnis, das die Dateien und Verzeichnisse enth\(:alt, die in das Home\-Verzeichnis des Benutzers kopiert werden, wenn es von
 \fBuseradd\fR
@@ -188,29 +188,30 @@ festgelegt, anderenfalls ist dieses
 Soweit m\(:oglich, werden die ACLs und erweiterten Attribute kopiert\&.
 .RE
 .PP
-\fB\-K\fR, \fB\-\-key\fR\fISCHL\(:USSEL\fR=\fIWERT\fR
+\fB\-K\fR, \fB\-\-key\fR\ \&\fISCHL\(:USSEL\fR=\fIWERT\fR
 .RS 4
-\(:Uberschreibt die Standardwerte aus
+Overrides
 /etc/login\&.defs
-(\fBUID_MIN\fR,
+defaults (\fBUID_MIN\fR,
 \fBUID_MAX\fR,
 \fBUMASK\fR,
 \fBPASS_MAX_DAYS\fR
-und andere)\&.
+and others)\&.
 
-Beispiel:
-\fB\-K \fR\fIPASS_MAX_TAGE\fR=\fI\-1\fR
-kann eingesetzt werden, wenn ein Systemkonto erstellt wird, um den Verfall des Passworts abzuschalten, selbst wenn das Systemkonto \(:uberhaupt kein Passwort besitzt\&. Die Option
+Example:
+\fB\-K\fR\ \&\fIPASS_MAX_DAYS\fR=\fI\-1\fR
+can be used when creating system account to turn off password aging, even though system account has no password at all\&. Multiple
 \fB\-K\fR
-kann mehrmals verwendet werden, z\&.B\&.:
-\fB\-K \fR\fIUID_MIN\fR=\fI100\fR\fB \-K \fR\fIUID_MAX\fR=\fI499\fR
+options can be specified, e\&.g\&.:
+\fB\-K\fR\ \&\fIUID_MIN\fR=\fI100\fR\ \&
+\fB\-K\fR\ \&\fIUID_MAX\fR=\fI499\fR
 .RE
 .PP
 \fB\-l\fR, \fB\-\-no\-log\-init\fR
 .RS 4
 F\(:ugt den Benutzer nicht zu den Datenbanken lastlog und faillog hinzu\&.
 .sp
-Standardm\(:a\(ssig werden die Benutzereintr\(:age in den Datenbanken lastlog und faillog zur\(:uckgesetzt, um zu vermeiden, dass der Eintrag eines fr\(:uher gel\(:oschten Benutzers verwendet wird\&.
+By default, the user\*(Aqs entries in the lastlog and faillog databases are reset to avoid reusing the entry from a previously deleted user\&.
 .RE
 .PP
 \fB\-m\fR, \fB\-\-create\-home\fR
@@ -224,7 +225,7 @@ Wenn diese Option nicht angegeben wird und
 nicht aktiviert wurde, wird standardm\(:a\(ssig kein Home\-Verzeichnis erstellt\&.
 .RE
 .PP
-\fB\-M\fR
+\fB\-M\fR, \fB\-\-no\-create\-home\fR
 .RS 4
 Erstellt nicht das Home\-Verzeichnis des Benutzers, selbst wenn die systemweite Option
 \fBCREATE_HOME\fR
@@ -266,7 +267,7 @@ Diese Option kann nur in Verbindung mit der Option
 verwendet werden\&.
 .RE
 .PP
-\fB\-p\fR, \fB\-\-password\fR\fIPASSWORT\fR
+\fB\-p\fR, \fB\-\-password\fR\ \&\fIPASSWORT\fR
 .RS 4
 Das verschl\(:usselte Passwort, wie es von
 \fBcrypt\fR(3)
@@ -294,14 +295,16 @@ bis
 \fBUID_MAX\fR
 gew\(:ahlt (gleiches gilt f\(:ur die GID bei der Erstellung von Gruppen)\&.
 .sp
-Beachten Sie, dass
+Note that
 \fBuseradd\fR
-f\(:ur einen solchen Benutzer unabh\(:angig von der Einstellung in
+will not create a home directory for such a user, regardless of the default setting in
 /etc/login\&.defs
-(\fBCREATE_HOME\fR) kein Home\-Verzeichnis erzeugen wird\&.
+(\fBCREATE_HOME\fR)\&. You have to specify the
+\fB\-m\fR
+options if you want a home directory for a system account to be created\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR\fICHROOT_VERZ\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fICHROOT_VERZ\fR
 .RS 4
 f\(:uhrt die Ver\(:anderungen in dem Verzeichnis
 \fICHROOT_VERZ\fR
@@ -309,7 +312,16 @@ durch und verwendet die Konfigurationsdateien aus dem Verzeichnis
 \fICHROOT_VERZ\fR
 .RE
 .PP
-\fB\-s\fR, \fB\-\-shell\fR\fISHELL\fR
+\fB\-P\fR, \fB\-\-prefix\fR\ \&\fIPREFIX_DIR\fR
+.RS 4
+Apply changes in the
+\fIPREFIX_DIR\fR
+directory and use the configuration files from the
+\fIPREFIX_DIR\fR
+directory\&. This option does not chroot and is intended for preparing a cross\-compilation target\&. Some limitations: NIS and LDAP users/groups are not verified\&. PAM authentication is using the host files\&. No SELINUX support\&.
+.RE
+.PP
+\fB\-s\fR, \fB\-\-shell\fR\ \&\fISHELL\fR
 .RS 4
 Der Name der Anmelde\-Shell des Benutzers\&. Standardm\(:a\(ssig wird dieses Feld leer gelassen\&. Das System verwendet dann die Standard\-Anmelde\-Shell, die mit der Variable
 \fBSHELL\fR
@@ -318,7 +330,7 @@ in
 definiert wird, anderenfalls bleibt das Feld leer\&.
 .RE
 .PP
-\fB\-u\fR, \fB\-\-uid\fR\fIUID\fR
+\fB\-u\fR, \fB\-\-uid\fR\ \&\fIUID\fR
 .RS 4
 Der zahlenm\(:a\(ssige Wert der Benutzer\-ID\&. Dieser Wert muss eindeutig sein, sofern nicht die Option
 \fB\-o\fR
@@ -348,7 +360,7 @@ in
 bestimmt\&.
 .RE
 .PP
-\fB\-Z\fR, \fB\-\-selinux\-user\fR\fISE\-BENUTZER\fR
+\fB\-Z\fR, \fB\-\-selinux\-user\fR\ \&\fISE\-BENUTZER\fR
 .RS 4
 Der SELinux\-Benutzer f\(:ur den Benutzer nach seiner Anmeldung\&. Standardm\(:a\(ssig bleibt dieses Feld leer und es wird dem System \(:uberlassen, den SELinux\-Benutzer zu bestimmen\&.
 .RE
@@ -364,7 +376,7 @@ neben der Option
 \fB\-D\fR
 mit weiteren Optionen aufgerufen wird, werden deren Standardwerte entsprechend angepasst\&. Die g\(:ultigen Optionen, um Standardwerte zu \(:andern, sind:
 .PP
-\fB\-b\fR, \fB\-\-base\-dir\fR\fIWURZEL_VERZ\fR
+\fB\-b\fR, \fB\-\-base\-dir\fR\ \&\fIWURZEL_VERZ\fR
 .RS 4
 Das Wurzelverzeichnis des Home\-Verzeichnisses eines neuen Benutzers\&. Der Benutzername wird an
 \fIWURZEL_VERZ\fR
@@ -378,7 +390,7 @@ in
 /etc/default/useradd\&.
 .RE
 .PP
-\fB\-e\fR, \fB\-\-expiredate\fR\fIVERFALLS_DATUM\fR
+\fB\-e\fR, \fB\-\-expiredate\fR\ \&\fIVERFALLS_DATUM\fR
 .RS 4
 das Datum, an dem das Benutzerkonto abgeschaltet wird
 .sp
@@ -388,7 +400,7 @@ in
 /etc/default/useradd\&.
 .RE
 .PP
-\fB\-f\fR, \fB\-\-inactive\fR\fIINAKTIV\fR
+\fB\-f\fR, \fB\-\-inactive\fR\ \&\fIINAKTIV\fR
 .RS 4
 die Anzahl von Tagen nach dem Ablaufen des Passworts bis das Konto deaktiviert wird
 .sp
@@ -398,7 +410,7 @@ in
 /etc/default/useradd\&.
 .RE
 .PP
-\fB\-g\fR, \fB\-\-gid\fR\fIGRUPPE\fR
+\fB\-g\fR, \fB\-\-gid\fR\ \&\fIGRUPPE\fR
 .RS 4
 Der Gruppenname oder die GID f\(:ur die Anfangsgruppe eines neuen Benutzers (wenn
 \fB\-N/\-\-no\-user\-group\fR
@@ -416,7 +428,7 @@ in
 /etc/default/useradd\&.
 .RE
 .PP
-\fB\-s\fR, \fB\-\-shell\fR\fISHELL\fR
+\fB\-s\fR, \fB\-\-shell\fR\ \&\fISHELL\fR
 .RS 4
 der Name der Anmelde\-Shell des neuen Benutzers
 .sp
@@ -531,6 +543,52 @@ Die Mindestanzahl von Tagen, bevor ein Wechsel des Passworts zugelassen wird\&. 
 Die Anzahl von Tagen, an denen der Benutzer vorgewarnt wird, bevor das Passwort verf\(:allt\&. Eine Null bedeutet, dass eine Warnung nur am Tag des Verfalls ausgegeben wird\&. Ein negativer Wert bedeutet, dass keine Vorwarnung erfolgt\&. Falls nicht angegeben, wird keine Vorwarnung ausgegeben\&.
 .RE
 .PP
+\fBSUB_GID_MIN\fR (number), \fBSUB_GID_MAX\fR (number), \fBSUB_GID_COUNT\fR (number)
+.RS 4
+If
+/etc/subuid
+exists, the commands
+\fBuseradd\fR
+and
+\fBnewusers\fR
+(unless the user already have subordinate group IDs) allocate
+\fBSUB_GID_COUNT\fR
+unused group IDs from the range
+\fBSUB_GID_MIN\fR
+to
+\fBSUB_GID_MAX\fR
+for each new user\&.
+.sp
+The default values for
+\fBSUB_GID_MIN\fR,
+\fBSUB_GID_MAX\fR,
+\fBSUB_GID_COUNT\fR
+are respectively 100000, 600100000 and 10000\&.
+.RE
+.PP
+\fBSUB_UID_MIN\fR (number), \fBSUB_UID_MAX\fR (number), \fBSUB_UID_COUNT\fR (number)
+.RS 4
+If
+/etc/subuid
+exists, the commands
+\fBuseradd\fR
+and
+\fBnewusers\fR
+(unless the user already have subordinate user IDs) allocate
+\fBSUB_UID_COUNT\fR
+unused user IDs from the range
+\fBSUB_UID_MIN\fR
+to
+\fBSUB_UID_MAX\fR
+for each new user\&.
+.sp
+The default values for
+\fBSUB_UID_MIN\fR,
+\fBSUB_UID_MAX\fR,
+\fBSUB_UID_COUNT\fR
+are respectively 100000, 600100000 and 10000\&.
+.RE
+.PP
 \fBSYS_GID_MAX\fR (Zahl), \fBSYS_GID_MIN\fR (Zahl)
 .RS 4
 der Bereich von Gruppen\-IDs, aus dem die Programme
@@ -641,6 +699,16 @@ Standardwerte f\(:ur die Erstellung eines Kontos
 Verzeichnis, das die Standarddateien enth\(:alt
 .RE
 .PP
+/etc/subgid
+.RS 4
+Per user subordinate group IDs\&.
+.RE
+.PP
+/etc/subuid
+.RS 4
+Per user subordinate user IDs\&.
+.RE
+.PP
 /etc/login\&.defs
 .RS 4
 Konfiguration der Shadow\-Passwort\-Werkzeugsammlung
@@ -699,7 +767,7 @@ Home\-Verzeichnis kann nicht erstellt werden\&.
 .PP
 \fI14\fR
 .RS 4
-can\*(Aqt update SELinux user mapping
+Die Zuordnung von SELinux\-Benutzern kann nicht aktualisiert werden\&.
 .RE
 .SH "SIEHE AUCH"
 .PP
@@ -712,5 +780,6 @@ can\*(Aqt update SELinux user mapping
 \fBgroupmod\fR(8),
 \fBlogin.defs\fR(5),
 \fBnewusers\fR(8),
+\fBsubgid\fR(5), \fBsubuid\fR(5),
 \fBuserdel\fR(8),
 \fBusermod\fR(8)\&.

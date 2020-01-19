@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: groupmod
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 25.05.2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 29.04.2018
 .\"    Manual: Befehle zur Systemverwaltung
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: German
 .\"
-.TH "GROUPMOD" "8" "25.05.2012" "shadow\-utils 4\&.1\&.5\&.1" "Befehle zur Systemverwaltung"
+.TH "GROUPMOD" "8" "29.04.2018" "shadow\-utils 4\&.6" "Befehle zur Systemverwaltung"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -44,7 +44,7 @@ Die Optionen, die vom Befehl
 \fBgroupmod\fR
 unterst\(:utzt werden, sind:
 .PP
-\fB\-g\fR, \fB\-\-gid\fR\fIGID\fR
+\fB\-g\fR, \fB\-\-gid\fR\ \&\fIGID\fR
 .RS 4
 Die Gruppen\-ID der angegebenen
 \fIGRUPPE\fR
@@ -80,7 +80,7 @@ werden nicht gepr\(:uft\&.
 zeigt die Hilfe an und beendet das Programm
 .RE
 .PP
-\fB\-n\fR, \fB\-\-new\-name\fR\fINEUE_GRUPPE\fR
+\fB\-n\fR, \fB\-\-new\-name\fR\ \&\fINEUE_GRUPPE\fR
 .RS 4
 Der Gruppenname wird vom Namen
 \fIGRUPPE\fR
@@ -97,7 +97,7 @@ verwendet wird, kann mit ihr der Wert der Gruppen\-\fIGID\fR
 auf einen nicht eindeutigen Wert gesetzt werden\&.
 .RE
 .PP
-\fB\-p\fR, \fB\-\-password\fR\fIPASSWORT\fR
+\fB\-p\fR, \fB\-\-password\fR\ \&\fIPASSWORT\fR
 .RS 4
 das verschl\(:usselte Passwort, wie es von
 \fBcrypt\fR(3)
@@ -109,12 +109,21 @@ Diese Option ist nicht empfehlenswert, weil das Passwort (auch wenn es verschl\(
 Sie sollten sicherstellen, dass das Passwort den Passwortrichtlinien des Systems entspricht\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR\fICHROOT_VERZ\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fICHROOT_VERZ\fR
 .RS 4
 f\(:uhrt die Ver\(:anderungen in dem Verzeichnis
 \fICHROOT_VERZ\fR
 durch und verwendet die Konfigurationsdateien aus dem Verzeichnis
 \fICHROOT_VERZ\fR
+.RE
+.PP
+\fB\-P\fR, \fB\-\-prefix\fR\ \&\fIPREFIX_DIR\fR
+.RS 4
+Apply changes in the
+\fIPREFIX_DIR\fR
+directory and use the configuration files from the
+\fIPREFIX_DIR\fR
+directory\&. This option does not chroot and is intended for preparing a cross\-compilation target\&. Some limitations: NIS and LDAP users/groups are not verified\&. PAM authentication is using the host files\&. No SELINUX support\&.
 .RE
 .SH "KONFIGURATION"
 .PP
@@ -165,37 +174,52 @@ gibt beim Beenden folgende Werte zur\(:uck:
 .PP
 \fI0\fR
 .RS 4
-Erfolg
+E_SUCCESS: success
 .RE
 .PP
 \fI2\fR
 .RS 4
-unzul\(:assige Syntax f\(:ur diesen Befehl
+E_USAGE: invalid command syntax
 .RE
 .PP
 \fI3\fR
 .RS 4
-ung\(:ultiges Argument f\(:ur Option
+E_BAD_ARG: invalid argument to option
 .RE
 .PP
 \fI4\fR
 .RS 4
-angegebene Gruppe ist nicht vorhanden
+E_GID_IN_USE: specified group doesn\*(Aqt exist
 .RE
 .PP
 \fI6\fR
 .RS 4
-angegebene Gruppe ist nicht vorhanden
+E_NOTFOUND: specified group doesn\*(Aqt exist
 .RE
 .PP
 \fI9\fR
 .RS 4
-Gruppenname wird schon verwendet
+E_NAME_IN_USE: group name already in use
 .RE
 .PP
 \fI10\fR
 .RS 4
-Die Gruppendatei kann nicht aktualisieren werden\&.
+E_GRP_UPDATE: can\*(Aqt update group file
+.RE
+.PP
+\fI11\fR
+.RS 4
+E_CLEANUP_SERVICE: can\*(Aqt setup cleanup service
+.RE
+.PP
+\fI12\fR
+.RS 4
+E_PAM_USERNAME: can\*(Aqt determine your username for use with pam
+.RE
+.PP
+\fI13\fR
+.RS 4
+E_PAM_ERROR: pam returned an error, see syslog facility id groupmod for the PAM error message
 .RE
 .SH "SIEHE AUCH"
 .PP

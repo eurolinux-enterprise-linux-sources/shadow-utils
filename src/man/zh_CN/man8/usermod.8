@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: usermod
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 2012-05-25
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 2018-04-29
 .\"    Manual: 系统管理命令
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: Chinese Simplified
 .\"
-.TH "USERMOD" "8" "2012-05-25" "shadow\-utils 4\&.1\&.5\&.1" "系统管理命令"
+.TH "USERMOD" "8" "2018-04-29" "shadow\-utils 4\&.6" "系统管理命令"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -48,14 +48,14 @@ usermod \- 修改一个用户账户
 选项一起使用。
 .RE
 .PP
-\fB\-c\fR, \fB\-\-comment\fR\fICOMMENT\fR
+\fB\-c\fR, \fB\-\-comment\fR\ \&\fICOMMENT\fR
 .RS 4
 用户密码文件中注释字段的新值。通常使用
 \fBchfn\fR(1)
 工具对其进行修改。
 .RE
 .PP
-\fB\-d\fR, \fB\-\-home\fR\fIHOME_DIR\fR
+\fB\-d\fR, \fB\-\-home\fR\ \&\fIHOME_DIR\fR
 .RS 4
 用户的新登录目录。
 .sp
@@ -64,7 +64,7 @@ usermod \- 修改一个用户账户
 选项，当前主目录的内容将会移动到新主目录中，如果不存在，则创建。
 .RE
 .PP
-\fB\-e\fR, \fB\-\-expiredate\fR\fIEXPIRE_DATE\fR
+\fB\-e\fR, \fB\-\-expiredate\fR\ \&\fIEXPIRE_DATE\fR
 .RS 4
 用户账户将被禁用的日期。日期以
 \fIYYYY\-MM\-DD\fR
@@ -81,7 +81,7 @@ usermod \- 修改一个用户账户
 项目。
 .RE
 .PP
-\fB\-f\fR, \fB\-\-inactive\fR\fIINACTIVE\fR
+\fB\-f\fR, \fB\-\-inactive\fR\ \&\fIINACTIVE\fR
 .RS 4
 密码过期之后，账户被彻底禁用之前的天数。
 .sp
@@ -94,7 +94,7 @@ usermod \- 修改一个用户账户
 项目。
 .RE
 .PP
-\fB\-g\fR, \fB\-\-gid\fR\fIGROUP\fR
+\fB\-g\fR, \fB\-\-gid\fR\ \&\fIGROUP\fR
 .RS 4
 用户的新初始登录组的组名或数字代号。此组必须存在。
 .sp
@@ -103,7 +103,7 @@ usermod \- 修改一个用户账户
 主目录之外的文件所属的组必须手动修改。
 .RE
 .PP
-\fB\-G\fR, \fB\-\-groups\fR\fIGROUP1\fR[\fI,GROUP2,\&.\&.\&.\fR[\fI,GROUPN\fR]]]
+\fB\-G\fR, \fB\-\-groups\fR\ \&\fIGROUP1\fR[\fI,GROUP2,\&.\&.\&.\fR[\fI,GROUPN\fR]]]
 .RS 4
 用户还属于的附加组列表。组之间使用逗号分隔，没有空格。这些组需要遵守和
 \fB\-g\fR
@@ -114,7 +114,7 @@ usermod \- 修改一个用户账户
 选项修改，这使用户追加到给出的附加组列表中。
 .RE
 .PP
-\fB\-l\fR, \fB\-\-login\fR\fINEW_LOGIN\fR
+\fB\-l\fR, \fB\-\-login\fR\ \&\fINEW_LOGIN\fR
 .RS 4
 用户的名称将会从
 \fILOGIN\fR
@@ -156,7 +156,7 @@ usermod \- 修改一个用户账户
 选项时，可以将用户 ID 改为非唯一的值。
 .RE
 .PP
-\fB\-p\fR, \fB\-\-password\fR\fIPASSWORD\fR
+\fB\-p\fR, \fB\-\-password\fR\ \&\fIPASSWORD\fR
 .RS 4
 已经加密过的密码，就像
 \fBcrypt\fR(3)
@@ -167,7 +167,7 @@ usermod \- 修改一个用户账户
 您应该确保密码符合系统的密码政策。
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR\fICHROOT_DIR\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fICHROOT_DIR\fR
 .RS 4
 Apply changes in the
 \fICHROOT_DIR\fR
@@ -176,12 +176,21 @@ directory and use the configuration files from the
 directory\&.
 .RE
 .PP
-\fB\-s\fR, \fB\-\-shell\fR\fISHELL\fR
+\fB\-P\fR, \fB\-\-prefix\fR\ \&\fIPREFIX_DIR\fR
+.RS 4
+Apply changes in the
+\fIPREFIX_DIR\fR
+directory and use the configuration files from the
+\fIPREFIX_DIR\fR
+directory\&. This option does not chroot and is intended for preparing a cross\-compilation target\&. Some limitations: NIS and LDAP users/groups are not verified\&. PAM authentication is using the host files\&. No SELINUX support\&.
+.RE
+.PP
+\fB\-s\fR, \fB\-\-shell\fR\ \&\fISHELL\fR
 .RS 4
 用户的新登录 shell 的名称。将此字段设置为空会让系统选择默认的登录 shell。
 .RE
 .PP
-\fB\-u\fR, \fB\-\-uid\fR\fIUID\fR
+\fB\-u\fR, \fB\-\-uid\fR\ \&\fIUID\fR
 .RS 4
 用户 ID 的新数值。
 .sp
@@ -222,7 +231,67 @@ directory\&.
 值)。
 .RE
 .PP
-\fB\-Z\fR, \fB\-\-selinux\-user\fR\fISEUSER\fR
+\fB\-v\fR, \fB\-\-add\-subuids\fR\ \&\fIFIRST\fR\-\fILAST\fR
+.RS 4
+Add a range of subordinate uids to the user\*(Aqs account\&.
+.sp
+This option may be specified multiple times to add multiple ranges to a users account\&.
+.sp
+No checks will be performed with regard to
+\fBSUB_UID_MIN\fR,
+\fBSUB_UID_MAX\fR, or
+\fBSUB_UID_COUNT\fR
+from /etc/login\&.defs\&.
+.RE
+.PP
+\fB\-V\fR, \fB\-\-del\-subuids\fR\ \&\fIFIRST\fR\-\fILAST\fR
+.RS 4
+Remove a range of subordinate uids from the user\*(Aqs account\&.
+.sp
+This option may be specified multiple times to remove multiple ranges to a users account\&. When both
+\fB\-\-del\-subuids\fR
+and
+\fB\-\-add\-subuids\fR
+are specified, the removal of all subordinate uid ranges happens before any subordinate uid range is added\&.
+.sp
+No checks will be performed with regard to
+\fBSUB_UID_MIN\fR,
+\fBSUB_UID_MAX\fR, or
+\fBSUB_UID_COUNT\fR
+from /etc/login\&.defs\&.
+.RE
+.PP
+\fB\-w\fR, \fB\-\-add\-subgids\fR\ \&\fIFIRST\fR\-\fILAST\fR
+.RS 4
+Add a range of subordinate gids to the user\*(Aqs account\&.
+.sp
+This option may be specified multiple times to add multiple ranges to a users account\&.
+.sp
+No checks will be performed with regard to
+\fBSUB_GID_MIN\fR,
+\fBSUB_GID_MAX\fR, or
+\fBSUB_GID_COUNT\fR
+from /etc/login\&.defs\&.
+.RE
+.PP
+\fB\-W\fR, \fB\-\-del\-subgids\fR\ \&\fIFIRST\fR\-\fILAST\fR
+.RS 4
+Remove a range of subordinate gids from the user\*(Aqs account\&.
+.sp
+This option may be specified multiple times to remove multiple ranges to a users account\&. When both
+\fB\-\-del\-subgids\fR
+and
+\fB\-\-add\-subgids\fR
+are specified, the removal of all subordinate gid ranges happens before any subordinate gid range is added\&.
+.sp
+No checks will be performed with regard to
+\fBSUB_GID_MIN\fR,
+\fBSUB_GID_MAX\fR, or
+\fBSUB_GID_COUNT\fR
+from /etc/login\&.defs\&.
+.RE
+.PP
+\fB\-Z\fR, \fB\-\-selinux\-user\fR\ \&\fISEUSER\fR
 .RS 4
 用户登陆的 SELinux 用户。
 .sp
@@ -234,8 +303,9 @@ directory\&.
 .RE
 .SH "CAVEATS"
 .PP
-如果要更改用户的数字 ID、用户名或主目录，需要确保允许命令时，用户没有执行任何进程。\fBusermod\fR
-会在 Linux 上进行检查；但是在其它平台上，仅仅根据 utmp 检查用户是否已经登录。
+You must make certain that the named user is not executing any processes when this command is being executed if the user\*(Aqs numerical user ID, the user\*(Aqs name, or the user\*(Aqs home directory is being changed\&.
+\fBusermod\fR
+checks this on Linux\&. On other platforms it only uses utmp to check if the user is logged in\&.
 .PP
 您必须手动更改
 \fBcrontab\fR
@@ -290,6 +360,52 @@ and
 .sp
 注意：分割组可能不受所有工具的支持(甚至在 Shadow 工具集中)。您不应该使用这个变量，除非真的需要。
 .RE
+.PP
+\fBSUB_GID_MIN\fR (number), \fBSUB_GID_MAX\fR (number), \fBSUB_GID_COUNT\fR (number)
+.RS 4
+If
+/etc/subuid
+exists, the commands
+\fBuseradd\fR
+and
+\fBnewusers\fR
+(unless the user already have subordinate group IDs) allocate
+\fBSUB_GID_COUNT\fR
+unused group IDs from the range
+\fBSUB_GID_MIN\fR
+to
+\fBSUB_GID_MAX\fR
+for each new user\&.
+.sp
+The default values for
+\fBSUB_GID_MIN\fR,
+\fBSUB_GID_MAX\fR,
+\fBSUB_GID_COUNT\fR
+are respectively 100000, 600100000 and 10000\&.
+.RE
+.PP
+\fBSUB_UID_MIN\fR (number), \fBSUB_UID_MAX\fR (number), \fBSUB_UID_COUNT\fR (number)
+.RS 4
+If
+/etc/subuid
+exists, the commands
+\fBuseradd\fR
+and
+\fBnewusers\fR
+(unless the user already have subordinate user IDs) allocate
+\fBSUB_UID_COUNT\fR
+unused user IDs from the range
+\fBSUB_UID_MIN\fR
+to
+\fBSUB_UID_MAX\fR
+for each new user\&.
+.sp
+The default values for
+\fBSUB_UID_MIN\fR,
+\fBSUB_UID_MAX\fR,
+\fBSUB_UID_COUNT\fR
+are respectively 100000, 600100000 and 10000\&.
+.RE
 .SH "文件"
 .PP
 /etc/group
@@ -316,6 +432,16 @@ Shadow 密码套件配置。
 .RS 4
 安全用户账户信息。
 .RE
+.PP
+/etc/subgid
+.RS 4
+Per user subordinate group IDs\&.
+.RE
+.PP
+/etc/subuid
+.RS 4
+Per user subordinate user IDs\&.
+.RE
 .SH "参见"
 .PP
 \fBchfn\fR(1),
@@ -327,5 +453,6 @@ Shadow 密码套件配置。
 \fBgroupdel\fR(8),
 \fBgroupmod\fR(8),
 \fBlogin.defs\fR(5),
+\fBsubgid\fR(5), \fBsubuid\fR(5),
 \fBuseradd\fR(8),
 \fBuserdel\fR(8)\&.

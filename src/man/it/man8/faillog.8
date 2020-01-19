@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: faillog
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 25/05/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 29/04/2018
 .\"    Manual: Comandi per la gestione del sistema
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: Italian
 .\"
-.TH "FAILLOG" "8" "25/05/2012" "shadow\-utils 4\&.1\&.5\&.1" "Comandi per la gestione del si"
+.TH "FAILLOG" "8" "29/04/2018" "shadow\-utils 4\&.6" "Comandi per la gestione del si"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -67,7 +67,7 @@ e
 Mostra un messaggio di aiuto ed esce\&.
 .RE
 .PP
-\fB\-l\fR, \fB\-\-lock\-secs\fR\fISEC\fR
+\fB\-l\fR, \fB\-\-lock\-secs\fR\ \&\fISEC\fR
 .RS 4
 Blocca l\*(Aqaccount per
 \fISEC\fR
@@ -77,7 +77,7 @@ Per questa opzione \(`e necessario l\*(Aqaccesso in scrittura a
 /var/log/faillog\&.
 .RE
 .PP
-\fB\-m\fR, \fB\-\-maximum\fR\fIMAX\fR
+\fB\-m\fR, \fB\-\-maximum\fR\ \&\fIMAX\fR
 .RS 4
 Imposta a
 \fIMAX\fR
@@ -103,7 +103,7 @@ Per questa opzione \(`e necessario l\*(Aqaccesso in scrittura a
 /var/log/faillog\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR \fICHROOT_DIR\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fICHROOT_DIR\fR
 .RS 4
 Effettua le modifiche nella directory
 \fICHROOT_DIR\fR
@@ -111,14 +111,14 @@ e usa i file di configurazione dalla directory
 \fICHROOT_DIR\fR\&.
 .RE
 .PP
-\fB\-t\fR, \fB\-\-time\fR\fIGIORNI\fR
+\fB\-t\fR, \fB\-\-time\fR\ \&\fIGIORNI\fR
 .RS 4
 Visualizza le registrazioni faillog pi\(`u recenti di
 \fIGIORNI\fR
 giorni\&.
 .RE
 .PP
-\fB\-u\fR, \fB\-\-user\fR \fILOGIN\fR|\fIINTERVALLO\fR
+\fB\-u\fR, \fB\-\-user\fR\ \&\fILOGIN\fR|\fIINTERVALLO\fR
 .RS 4
 Mostra la registrazione degli accessi falliti o, se sono state usate le opzioni
 \fB\-r\fR,

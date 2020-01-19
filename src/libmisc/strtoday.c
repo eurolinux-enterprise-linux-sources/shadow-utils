@@ -38,7 +38,7 @@
 
 #include <ctype.h>
 
-#ident "$Id: strtoday.c 3169 2010-03-20 10:19:50Z nekral-guest $"
+#ident "$Id$"
 
 #include "defines.h"
 #include "prototypes.h"
@@ -126,7 +126,7 @@ static char *date_formats[] = {
 #else
 /*
  * days and juldays are used to compute the number of days in the
- * current month, and the cummulative number of days in the preceding
+ * current month, and the cumulative number of days in the preceding
  * months.  they are declared so that january is 1, not 0.
  */
 static short days[13] = { 0,

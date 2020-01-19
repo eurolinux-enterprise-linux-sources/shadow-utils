@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: passwd
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 25-05-2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 29-04-2018
 .\"    Manual: Anv\(:andarkommandon
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: Swedish
 .\"
-.TH "PASSWD" "1" "25-05-2012" "shadow\-utils 4\&.1\&.5\&.1" "Anv\(:andarkommandon"
+.TH "PASSWD" "1" "29-04-2018" "shadow\-utils 4\&.6" "Anv\(:andarkommandon"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -36,12 +36,12 @@ passwd \- \(:andra anv\(:andarl\(:osenord
 .PP
 The
 \fBpasswd\fR
-command changes passwords for user accounts\&. A normal user may only change the password for his/her own account, while the superuser may change the password for any account\&.
+command changes passwords for user accounts\&. A normal user may only change the password for their own account, while the superuser may change the password for any account\&.
 \fBpasswd\fR
 also changes the account or associated password validity period\&.
 .SS "L\(:osenords\(:andringar"
 .PP
-The user is first prompted for his/her old password, if one is present\&. This password is then encrypted and compared against the stored password\&. The user has only one chance to enter the correct password\&. The superuser is permitted to bypass this step so that forgotten passwords may be changed\&.
+The user is first prompted for their old password, if one is present\&. This password is then encrypted and compared against the stored password\&. The user has only one chance to enter the correct password\&. The superuser is permitted to bypass this step so that forgotten passwords may be changed\&.
 .PP
 Efter att l\(:osenordet har matats in kontrolleras l\(:osenordets \(oaldringsinformation f\(:or att se om anv\(:andaren till\(oats att \(:andra l\(:osenord f\(:or tillf\(:allet\&. Om inte, nekar
 \fBpasswd\fR
@@ -96,7 +96,7 @@ System encryption method is based on the NBS DES algorithm\&. More recent method
 .PP
 Problem i l\(:osenordss\(:akerheten brukar normalt komma fr\(oan slarvigt valda l\(:osenord eller hantering\&. Av denna anledning b\(:or du inte v\(:alja ett l\(:osenord som finns i en ordbok eller som m\(oaste skrivas ner\&. L\(:osenordet b\(:or heller inte vara ett korrekt namn, ditt personnummer, f\(:odelsedatum eller gatuadress\&. Dessa kan anv\(:andas som gissningar f\(:or att ta sig in i systemet\&.
 .PP
-You can find advices on how to choose a strong password on http://en\&.wikipedia\&.org/wiki/Password_strength
+You can find advice on how to choose a strong password on http://en\&.wikipedia\&.org/wiki/Password_strength
 .SH "FLAGGOR"
 .PP
 Flaggorna som g\(:aller f\(:or kommandot
@@ -125,7 +125,7 @@ L\(:osenordet f\(:or ett konto s\(:atts omedelbart som utg\(oanget\&. Detta kan 
 Visa hj\(:alpmeddelande och avsluta\&.
 .RE
 .PP
-\fB\-i\fR, \fB\-\-inactive\fR\fIINAKTIV\fR
+\fB\-i\fR, \fB\-\-inactive\fR\ \&\fIINAKTIV\fR
 .RS 4
 Denna flagga anv\(:ands f\(:or att inaktivera ett konto efter att l\(:osenordet har varit utg\(oanget i ett antal dagar\&. Efter att ett anv\(:andarkonto har haft ett utg\(oanget l\(:osenord i
 \fIINAKTIV\fR
@@ -148,7 +148,7 @@ Note that this does not disable the account\&. The user may still be able to log
 Users with a locked password are not allowed to change their password\&.
 .RE
 .PP
-\fB\-n\fR, \fB\-\-mindays\fR \fIMIN_DAYS\fR
+\fB\-n\fR, \fB\-\-mindays\fR\ \&\fIMIN_DAYS\fR
 .RS 4
 S\(:atter minimalt antal dagar mellan l\(:osenords\(:andringar till
 \fIMIN_DAGAR\fR\&. Ett nollv\(:arde f\(:or detta f\(:alt betyder att anv\(:andaren kan \(:andra sitt l\(:osenord n\(:ar som helst\&.
@@ -159,14 +159,14 @@ S\(:atter minimalt antal dagar mellan l\(:osenords\(:andringar till
 Tyst l\(:age\&.
 .RE
 .PP
-\fB\-r\fR, \fB\-\-repository\fR\fIF\(:ORR\(oAD\fR
+\fB\-r\fR, \fB\-\-repository\fR\ \&\fIF\(:ORR\(oAD\fR
 .RS 4
 change password in
 \fIREPOSITORY\fR
 repository
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR \fICHROOT_DIR\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fICHROOT_DIR\fR
 .RS 4
 Apply changes in the
 \fICHROOT_DIR\fR
@@ -187,18 +187,24 @@ Unlock the password of the named account\&. This option re\-enables a password b
 option)\&.
 .RE
 .PP
-\fB\-w\fR, \fB\-\-warndays\fR\fIVARN_DAGAR\fR
+\fB\-w\fR, \fB\-\-warndays\fR\ \&\fIVARN_DAGAR\fR
 .RS 4
 S\(:atter antalet dagar f\(:or varning f\(:ore ett l\(:osenord beh\(:over \(:andras\&. Flaggan
 \fIVARN_DAGAR\fR
 \(:ar antalet dagar f\(:ore anv\(:andaren varnas om att l\(:osenordet \(:ar p\(oa v\(:ag att bli utg\(oanget\&.
 .RE
 .PP
-\fB\-x\fR, \fB\-\-maxdays\fR\fIMAX_DAGAR\fR
+\fB\-x\fR, \fB\-\-maxdays\fR\ \&\fIMAX_DAGAR\fR
 .RS 4
 S\(:atter maximalt antal dagar som ett l\(:osenord ska vara giltigt\&. Efter
 \fIMAX_DAGAR\fR
 kr\(:avs det att l\(:osenordet \(:andras\&.
+.sp
+Passing the number
+\fI\-1\fR
+as
+\fIMAX_DAYS\fR
+will remove checking a password\*(Aqs validity\&.
 .RE
 .SH "T\(:ANK P\(oA"
 .PP
@@ -354,7 +360,6 @@ ogiltigt argument till flagga
 .RE
 .SH "SE OCKS\(oA"
 .PP
-
 \fBchpasswd\fR(8),
 \fBpasswd\fR(5),
 \fBshadow\fR(5),

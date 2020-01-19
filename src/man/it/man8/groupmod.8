@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: groupmod
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 25/05/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 29/04/2018
 .\"    Manual: Comandi per la gestione del sistema
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: Italian
 .\"
-.TH "GROUPMOD" "8" "25/05/2012" "shadow\-utils 4\&.1\&.5\&.1" "Comandi per la gestione del si"
+.TH "GROUPMOD" "8" "29/04/2018" "shadow\-utils 4\&.6" "Comandi per la gestione del si"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -45,7 +45,7 @@ Il comando
 \fBgroupmod\fR
 accetta le seguenti opzioni:
 .PP
-"\fB\-g\fR, \fB\-\-gid\fR\fIGID\fR
+"\fB\-g\fR, \fB\-\-gid\fR\ \&\fIGID\fR
 .RS 4
 Verr\(`a modificato l\*(AqID del
 \fIGRUPPO\fR
@@ -77,7 +77,7 @@ definiti in
 Mostra un messaggio di aiuto ed esce\&.
 .RE
 .PP
-\fB\-n\fR, \fB\-\-new\-name\fR\fINUOVO_GRUPPO\fR
+\fB\-n\fR, \fB\-\-new\-name\fR\ \&\fINUOVO_GRUPPO\fR
 .RS 4
 Il nome del gruppo verr\(`a modificato da
 \fIGRUPPO\fR
@@ -93,7 +93,7 @@ Quando \(`e usato con l\*(Aqopzione
 in un valore non univoco\&.
 .RE
 .PP
-\fB\-p\fR, \fB\-\-password\fR\fIPASSWORD\fR
+\fB\-p\fR, \fB\-\-password\fR\ \&\fIPASSWORD\fR
 .RS 4
 La passwird cifrata, cos\(`i come viene restituita da
 \fBcrypt\fR(3)\&.
@@ -104,12 +104,21 @@ questa opzione non \(`e consigliata perch\('e la password (o password cifrata) s
 Ci si deve accertare che la password rispetti le norme delle password del sistema\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR \fICHROOT_DIR\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fICHROOT_DIR\fR
 .RS 4
 Effettua le modifiche nella directory
 \fICHROOT_DIR\fR
 e usa i file di configurazione dalla directory
 \fICHROOT_DIR\fR\&.
+.RE
+.PP
+\fB\-P\fR, \fB\-\-prefix\fR\ \&\fIPREFIX_DIR\fR
+.RS 4
+Apply changes in the
+\fIPREFIX_DIR\fR
+directory and use the configuration files from the
+\fIPREFIX_DIR\fR
+directory\&. This option does not chroot and is intended for preparing a cross\-compilation target\&. Some limitations: NIS and LDAP users/groups are not verified\&. PAM authentication is using the host files\&. No SELINUX support\&.
 .RE
 .SH "CONFIGURAZIONE"
 .PP

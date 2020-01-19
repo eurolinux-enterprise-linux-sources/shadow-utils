@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: passwd
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 25/05/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 29/04/2018
 .\"    Manual: Commandes utilisateur
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: French
 .\"
-.TH "PASSWD" "1" "25/05/2012" "shadow\-utils 4\&.1\&.5\&.1" "Commandes utilisateur"
+.TH "PASSWD" "1" "29/04/2018" "shadow\-utils 4\&.6" "Commandes utilisateur"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -96,7 +96,7 @@ est bas\('ee sur l\*(Aqalgorithme NBS\ \&DES\&. Des m\('ethodes plus r\('ecentes
 .PP
 Les compromissions de la s\('ecurit\('e des mots de passe r\('esultent le plus souvent d\*(Aqune n\('egligence dans le choix du mot de passe, ou lors de son utilisation\&. Pour cette raison, vous ne devez pas s\('electionner de mot de passe apparaissant dans un dictionnaire ou devant \(^etre \('ecrit\&. Le mot de passe ne doit pas non plus \(^etre un nom propre, un num\('ero min\('eralogique, une date de naissance, ou une adresse\&. En effet ceux\-ci pourraient \(^etre devin\('es pour violer la s\('ecurit\('e du syst\(`eme\&.
 .PP
-Vous pouvez trouver des conseils sur la fa\(,con choisir un mot de passe robuste sur http://en\&.wikipedia\&.org/wiki/Password_strength (en anglais)\&.
+You can find advice on how to choose a strong password on http://en\&.wikipedia\&.org/wiki/Password_strength
 .SH "OPTIONS"
 .PP
 Les options disponibles pour la commande
@@ -125,7 +125,7 @@ Annuler imm\('ediatement la validit\('e du mot de passe d\*(Aqun compte\&. Ceci 
 Afficher un message d\*(Aqaide et quitter\&.
 .RE
 .PP
-\fB\-i\fR, \fB\-\-inactive\fR \fIDUR\('EE_INACTIVIT\('E\fR
+\fB\-i\fR, \fB\-\-inactive\fR\ \&\fIDUR\('EE_INACTIVIT\('E\fR
 .RS 4
 Cette option permet de d\('esactiver un compte quelques temps apr\(`es expiration de son mot de passe\&.
 \fIDUR\('EE_INACTIVIT\('E\fR
@@ -148,7 +148,7 @@ Veuillez noter que cela ne d\('esactive pas le compte\&. L\*(Aqutilisateur peut 
 Les utilisateurs avec un mot de passe verrouill\('e ne sont pas autoris\('es \(`a le changer\&.
 .RE
 .PP
-\fB\-n\fR, \fB\-\-mindays\fR \fIJOURS_MIN\fR
+\fB\-n\fR, \fB\-\-mindays\fR\ \&\fIJOURS_MIN\fR
 .RS 4
 D\('efinir le nombre minimum de jours entre chaque changement de mot de passe \(`a
 \fIMIN_DAYS\fR\&. Une valeur de z\('ero pour ce champ indique que l\*(Aqutilisateur peut changer son mot de passe quand il le souhaite\&.
@@ -159,13 +159,13 @@ D\('efinir le nombre minimum de jours entre chaque changement de mot de passe \(
 Mode silencieux\&.
 .RE
 .PP
-\fB\-r\fR, \fB\-\-repository\fR \fIREPOSITORY\fR
+\fB\-r\fR, \fB\-\-repository\fR\ \&\fIREPOSITORY\fR
 .RS 4
 Modifier le mot de passe dans la base
 \fIREPOSITORY\fR
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR \fIR\('EP_CHROOT\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fIR\('EP_CHROOT\fR
 .RS 4
 Appliquer les changements dans le r\('epertoire
 \fIR\('EP_CHROOT\fR
@@ -184,17 +184,23 @@ D\('everrouiller le mot de passe du compte indiqu\('e\&. Cette option r\('eactiv
 \fB\-l\fR)\&.
 .RE
 .PP
-\fB\-w\fR, \fB\-\-warndays\fR \fIDUR\('EE_AVERTISSEMENT\fR
+\fB\-w\fR, \fB\-\-warndays\fR\ \&\fIDUR\('EE_AVERTISSEMENT\fR
 .RS 4
 Configurer le nombre de jours d\*(Aqavertissement avant que le changement de mot de passe ne soit obligatoire\&. La valeur
 \fIDUR\('EE_AVERTISSEMENT\fR
 est le nombre de jours pr\('ec\('edant la fin de validit\('e pendant lesquels un utilisateur sera pr\('evenu que son mot de passe est sur le point d\*(Aqarriver en fin de validit\('e\&.
 .RE
 .PP
-\fB\-x\fR, \fB\-\-maxdays\fR \fIJOURS_MAX\fR
+\fB\-x\fR, \fB\-\-maxdays\fR\ \&\fIJOURS_MAX\fR
 .RS 4
 Configurer le nombre maximum de jours pendant lesquels un mot de passe reste valable\&. Apr\(`es
 \fIJOURS_MAX\fR, le mot de passe devra \(^etre modifi\('e\&.
+.sp
+Une valeur de
+\fI\-1\fR
+pour
+\fIJOURS_MAX\fR
+supprime la v\('erification de validit\('e\&.
 .RE
 .SH "AVERTISSEMENTS"
 .PP

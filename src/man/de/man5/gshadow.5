@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: gshadow
 .\"    Author: Nicolas Fran\(,cois <nicolas.francois@centraliens.net>
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 25.05.2012
-.\"    Manual: Dateiformate und -konvertierung
-.\"    Source: shadow-utils 4.1.5.1
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 29.04.2018
+.\"    Manual: Dateiformate und konvertierung
+.\"    Source: shadow-utils 4.6
 .\"  Language: German
 .\"
-.TH "GSHADOW" "5" "25.05.2012" "shadow\-utils 4\&.1\&.5\&.1" "Dateiformate und \-konvertieru"
+.TH "GSHADOW" "5" "29.04.2018" "shadow\-utils 4\&.6" "Dateiformate und konvertierung"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -54,12 +54,12 @@ Wenn das Passwortfeld eine Zeichenkette enth\(:alt, die kein zul\(:assiges Ergeb
 \fBcrypt\fR(3)
 ist, z\&.B\&. ! oder *, k\(:onnen Benutzer nicht mit einem Unix\-Passwort Zugang zu der Gruppe erhalten, wobei Gruppenmitglieder kein Passwort ben\(:otigen\&.
 .sp
-Das Passwort wird angefordert, wenn ein Benutzer, der nicht Mitglied der Gruppe ist, die Berechtigungen dieser Gruppe erhalten will (vergleiche
+The password is used when a user who is not a member of the group wants to gain the permissions of this group (see
 \fBnewgrp\fR(1))\&.
 .sp
 Dieses Feld kann leer bleiben\&. Dies hat zur Folge, dass nur Gruppenmitglieder von den Rechten der Gruppe Gebrauch machen k\(:onnen\&.
 .sp
-Ein Passwortfeld, das mit einem Ausrufezeichen beginnt, f\(:uhrt dazu, dass das Passwort gesperrt ist\&. Die \(:ubrigen Zeichen sind das Passwort vor der Sperrung\&.
+A password field which starts with an exclamation mark means that the password is locked\&. The remaining characters on the line represent the password field before the password was locked\&.
 .sp
 Dieses Passwort geht den in
 /etc/group

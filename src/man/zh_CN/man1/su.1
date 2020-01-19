@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: su
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 2012-05-25
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 2018-04-29
 .\"    Manual: 用户命令
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: Chinese Simplified
 .\"
-.TH "SU" "1" "2012-05-25" "shadow\-utils 4\&.1\&.5\&.1" "用户命令"
+.TH "SU" "1" "2018-04-29" "shadow\-utils 4\&.6" "用户命令"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -31,27 +31,27 @@
 su \- 更改用户 ID 或成为超级用户
 .SH "大纲"
 .HP \w'\fBsu\fR\ 'u
-\fBsu\fR [\fI选项\fR] [\fI用户名\fR]
+\fBsu\fR [\fI选项\fR] [\fI\-\fR] [\fI用户名\fR\ [\ \fIargs\fR\ ]]
 .SH "描述"
 .PP
+The
 \fBsu\fR
-用于让用户在登录期间变成另外一个用户。后边不带
-\fBusername\fR
-使用时，\fBsu\fR
-默认会变成超级用户。可选的选项
-\fB\-\fR，可以用于提供一个类似于用户直接登录的环境，用户可能期望是这样的。
-.PP
-附加参数可以在用户名之后提供，这时，将会把他们提供给用户的登录 shell。特别地，参数
+command is used to become another user during a login session\&. Invoked without a
+\fBusername\fR,
+\fBsu\fR
+defaults to becoming the superuser\&. The
+\fB\-\fR
+option may be used to provide an environment similar to what the user would expect had the user logged in directly\&. The
 \fB\-c\fR
-将会使下一个参数被多数命令解释器视为命令。这个命令会被
-/etc/passwd
-中为目标用户指定的 shell 执行。
+option may be used to treat the next argument as a command by most shells\&.
 .PP
-您可以使用
+Options are recognized everywhere in the argument list\&. You can use the
 \fB\-\-\fR
-参数将
-\fBsu\fR
-选项和提供给 shell 的参数分隔开来。
+argument to stop option parsing\&. The
+\fB\-\fR
+option is special: it is also recognized after
+\fB\-\-\fR, but has to be placed before
+\fBusername\fR\&.
 .PP
 如果合适，将提示用户输入一个密码。输入无效的密码会产生一个错误消息。所有的尝试，无论成功还是失败，都会被记录，以检测对系统的滥用。
 .PP
@@ -72,29 +72,29 @@ su \- 更改用户 ID 或成为超级用户
 \fBsu\fR
 命令可以接受的选项有：
 .PP
-\fB\-c\fR, \fB\-\-command\fR\fICOMMAND\fR
+\fB\-c\fR, \fB\-\-command\fR\ \&\fICOMMAND\fR
 .RS 4
 通过使用其
 \fB\-c\fR
 选项，指定一个由 shell 运行的命令。
 .sp
-执行的命令将不会拥有控制终端。此选项不能用于执行需要控制 TTY 的交互程序。
+The executed command will have no controlling terminal\&. This option cannot be used to execute interactive programs which need a controlling TTY\&.
 .RE
 .PP
 \fB\-\fR, \fB\-l\fR, \fB\-\-login\fR
 .RS 4
 提供一个类似于用户直接登录的环境，用户可能会希望这样。
 .sp
-使用了
+When
 \fB\-\fR
-时，它必须是
-\fBsu\fR
-的最后一个参数。其它形式(\fB\-l\fR
-和
-\fB\-\-login\fR) 没有这个限制。
+is used, it must be specified before any
+\fBusername\fR\&. For portability it is recommended to use it as last option, before any
+\fBusername\fR\&. The other forms (\fB\-l\fR
+and
+\fB\-\-login\fR) do not have this restriction\&.
 .RE
 .PP
-\fB\-s\fR, \fB\-\-shell\fR\fISHELL\fR
+\fB\-s\fR, \fB\-\-shell\fR\ \&\fISHELL\fR
 .RS 4
 将使用的 shell。
 .sp
@@ -395,7 +395,8 @@ Shadow 密码套件配置。
 返回 255。
 .PP
 \fBsu\fR
-中的某些退出值与执行的命令无关：.PP
+中的某些退出值与执行的命令无关：
+.PP
 \fI0\fR
 .RS 4
 成功 (只有

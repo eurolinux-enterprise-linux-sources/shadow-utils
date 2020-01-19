@@ -42,10 +42,12 @@
 #endif
 
 #include <assert.h>
+#include <sys/types.h>
+#include <sys/socket.h>
 #include <netdb.h>
 #include <stdio.h>
 
-#ident "$Id: utmp.c 3720 2012-05-18 17:57:52Z nekral-guest $"
+#ident "$Id$"
 
 
 /*
@@ -86,7 +88,7 @@ static bool is_my_tty (const char *tty)
  *                    session
  *
  *	The utmp file is scanned for an entry with the same process ID.
- *	The line enterred by the *getty / telnetd, etc. should also match
+ *	The line entered by the *getty / telnetd, etc. should also match
  *	the current terminal.
  *
  *	When an entry is returned by get_current_utmp, and if the utmp

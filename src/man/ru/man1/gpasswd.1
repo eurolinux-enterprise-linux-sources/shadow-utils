@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: gpasswd
 .\"    Author: Rafal Maszkowski
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 05/25/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 04/29/2018
 .\"    Manual: Пользовательские команды
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: Russian
 .\"
-.TH "gpasswd" "1" "05/25/2012" "shadow\-utils 4\&.1\&.5\&.1" "Пользовательские команды"
+.TH "gpasswd" "1" "04/29/2018" "shadow\-utils 4\&.6" "Пользовательские команды"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -27,9 +27,9 @@
 .\" -----------------------------------------------------------------
 .\" * MAIN CONTENT STARTS HERE *
 .\" -----------------------------------------------------------------
-.SH "ИМЯ"
+.SH "НАЗВАНИЕ"
 gpasswd \- управление /etc/group и /etc/gshadow
-.SH "СИНОПСИС"
+.SH "СИНТАКСИС"
 .HP \w'\fBgpasswd\fR\ 'u
 \fBgpasswd\fR [\fIпараметр\fR] \fIгруппа\fR
 .SH "ОПИСАНИЕ"
@@ -69,7 +69,7 @@ gpasswd \- управление /etc/group и /etc/gshadow
 Параметры команды
 \fBgpasswd\fR:
 .PP
-\fB\-a\fR, \fB\-\-add\fR \fIпользователь\fR
+\fB\-a\fR, \fB\-\-add\fR\ \&\fIпользователь\fR
 .RS 4
 Добавить
 \fIпользователя\fR
@@ -77,7 +77,7 @@ gpasswd \- управление /etc/group и /etc/gshadow
 \fIгруппу\fR\&.
 .RE
 .PP
-\fB\-d\fR, \fB\-\-delete\fR \fIпользователь\fR
+\fB\-d\fR, \fB\-\-delete\fR\ \&\fIпользователь\fR
 .RS 4
 Удалить
 \fIпользователя\fR
@@ -90,7 +90,7 @@ gpasswd \- управление /etc/group и /etc/gshadow
 Показать краткую справку и закончить работу\&.
 .RE
 .PP
-\fB\-Q\fR, \fB\-\-root\fR\fIКАТ_CHROOT\fR
+\fB\-Q\fR, \fB\-\-root\fR\ \&\fIКАТ_CHROOT\fR
 .RS 4
 Выполнить изменения в каталоге
 \fIКАТ_CHROOT\fR
@@ -121,7 +121,7 @@ gpasswd \- управление /etc/group и /etc/gshadow
 Задать список администраторов группы\&.
 .RE
 .PP
-\fB\-M\fR, \fB\-\-members\fR \fIпользователь\fR, \&...
+\fB\-M\fR, \fB\-\-members\fR\ \&\fIпользователь\fR, \&...
 .RS 4
 Задать список членов группы\&.
 .RE

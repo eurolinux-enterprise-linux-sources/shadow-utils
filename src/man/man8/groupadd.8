@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: groupadd
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 05/25/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 04/29/2018
 .\"    Manual: System Management Commands
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: English
 .\"
-.TH "GROUPADD" "8" "05/25/2012" "shadow\-utils 4\&.1\&.5\&.1" "System Management Commands"
+.TH "GROUPADD" "8" "04/29/2018" "shadow\-utils 4\&.6" "System Management Commands"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -51,7 +51,7 @@ This option causes the command to simply exit with success status if the specifi
 is turned off)\&.
 .RE
 .PP
-\fB\-g\fR, \fB\-\-gid\fR \fIGID\fR
+\fB\-g\fR, \fB\-\-gid\fR\ \&\fIGID\fR
 .RS 4
 The numerical value of the group\*(Aqs ID\&. This value must be unique, unless the
 \fB\-o\fR
@@ -71,7 +71,7 @@ description\&.
 Display help message and exit\&.
 .RE
 .PP
-\fB\-K\fR, \fB\-\-key\fR \fIKEY\fR=\fIVALUE\fR
+\fB\-K\fR, \fB\-\-key\fR\ \&\fIKEY\fR=\fIVALUE\fR
 .RS 4
 Overrides
 /etc/login\&.defs
@@ -80,12 +80,11 @@ defaults (GID_MIN, GID_MAX and others)\&. Multiple
 options can be specified\&.
 .sp
 Example:
-\fB\-K \fR\fIGID_MIN\fR=\fI100\fR
-\fB\-K \fR\fIGID_MAX\fR=\fI499\fR
+\fB\-K\fR\ \&\fIGID_MIN\fR=\fI100\fR\ \&
+\fB\-K\fR\ \&\fIGID_MAX\fR=\fI499\fR
 .sp
 Note:
-\fB\-K \fR
-\fIGID_MIN\fR=\fI10\fR,\fIGID_MAX\fR=\fI499\fR
+\fB\-K\fR\ \&\fIGID_MIN\fR=\fI10\fR,\fIGID_MAX\fR=\fI499\fR
 doesn\*(Aqt work yet\&.
 .RE
 .PP
@@ -94,12 +93,11 @@ doesn\*(Aqt work yet\&.
 This option permits to add a group with a non\-unique GID\&.
 .RE
 .PP
-\fB\-p\fR, \fB\-\-password\fR \fIPASSWORD\fR
+\fB\-p\fR, \fB\-\-password\fR\ \&\fIPASSWORD\fR
 .RS 4
 The encrypted password, as returned by
 \fBcrypt\fR(3)\&. The default is to disable the password\&.
 .sp
-
 \fBNote:\fR
 This option is not recommended because the password (or encrypted password) will be visible by users listing the processes\&.
 .sp
@@ -117,13 +115,22 @@ login\&.defs, instead of
 \fBGID_MIN\fR\-\fBGID_MAX\fR\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR \fICHROOT_DIR\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fICHROOT_DIR\fR
 .RS 4
 Apply changes in the
 \fICHROOT_DIR\fR
 directory and use the configuration files from the
 \fICHROOT_DIR\fR
 directory\&.
+.RE
+.PP
+\fB\-P\fR, \fB\-\-prefix\fR\ \&\fIPREFIX_DIR\fR
+.RS 4
+Apply changes in the
+\fIPREFIX_DIR\fR
+directory and use the configuration files from the
+\fIPREFIX_DIR\fR
+directory\&. This option does not chroot and is intended for preparing a cross\-compilation target\&. Some limitations: NIS and LDAP users/groups are not verified\&. PAM authentication is using the host files\&. No SELINUX support\&.
 .RE
 .SH "CONFIGURATION"
 .PP

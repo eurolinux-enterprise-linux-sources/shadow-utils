@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: passwd
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 2012-05-25
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 2018-04-29
 .\"    Manual: 用户命令
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: Chinese Simplified
 .\"
-.TH "PASSWD" "1" "2012-05-25" "shadow\-utils 4\&.1\&.5\&.1" "用户命令"
+.TH "PASSWD" "1" "2018-04-29" "shadow\-utils 4\&.6" "用户命令"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -92,7 +92,7 @@ passwd \- 更改用户密码
 .PP
 由于粗心地或处理选择密码，会危及密码的安全。由于这个原因，您不应该选择出现在词典中或者必须要写下来才能记住的密码。密码也不应该是一个名字、许可证号、生日或者街道号。所有这些可以用于猜测来损害系统安全。
 .PP
-您可以在在 http://zh\&.wikipedia\&.org/zh\-cn/密码强度 找到怎样选择强壮密码的建议。
+You can find advice on how to choose a strong password on http://en\&.wikipedia\&.org/wiki/Password_strength
 .SH "选项"
 .PP
 \fBpasswd\fR
@@ -120,7 +120,7 @@ passwd \- 更改用户密码
 现实帮助信息并退出。
 .RE
 .PP
-\fB\-i\fR, \fB\-\-inactive\fR\fIINACTIVE\fR
+\fB\-i\fR, \fB\-\-inactive\fR\ \&\fIINACTIVE\fR
 .RS 4
 此选项用于在密码过期一定天数之后禁用账户。一个用户账户密码已经过期
 \fIINACTIVE\fR
@@ -143,7 +143,7 @@ passwd \- 更改用户密码
 被锁定了密码的用户不允许更改密码。
 .RE
 .PP
-\fB\-n\fR, \fB\-\-mindays\fR\fIMIN_DAYS\fR
+\fB\-n\fR, \fB\-\-mindays\fR\ \&\fIMIN_DAYS\fR
 .RS 4
 在密码更改之间的最小天数设置为
 \fIMIN_DAYS\fR。此字段中的 0 值表示用户可以在任何时间更改其密码。
@@ -154,14 +154,14 @@ passwd \- 更改用户密码
 安静模式。
 .RE
 .PP
-\fB\-r\fR, \fB\-\-repository\fR\fIREPOSITORY\fR
+\fB\-r\fR, \fB\-\-repository\fR\ \&\fIREPOSITORY\fR
 .RS 4
 在
 \fIREPOSITORY\fR
 中更改密码
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR\fICHROOT_DIR\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fICHROOT_DIR\fR
 .RS 4
 Apply changes in the
 \fICHROOT_DIR\fR
@@ -182,16 +182,21 @@ directory\&.
 之前的值)重新启用密码。
 .RE
 .PP
-\fB\-w\fR, \fB\-\-warndays\fR\fIWARN_DAYS\fR
+\fB\-w\fR, \fB\-\-warndays\fR\ \&\fIWARN_DAYS\fR
 .RS 4
 设置在要求更改密码之前警告的天数。\fIWARN_DAYS\fR
 选项是在密码过期之前提前警告的天数。
 .RE
 .PP
-\fB\-x\fR, \fB\-\-maxdays\fR\fIMAX_DAYS\fR
+\fB\-x\fR, \fB\-\-maxdays\fR\ \&\fIMAX_DAYS\fR
 .RS 4
 设置密码仍然有效的最大天数。\fIMAX_DAYS\fR
 之后，密码会要求更改。
+.sp
+\fIMAX_DAYS\fR
+设置为
+\fI\-1\fR
+会移除密码有效性检查。
 .RE
 .SH "CAVEATS"
 .PP
@@ -301,7 +306,8 @@ Shadow 密码套件配置。
 .SH "退出值"
 .PP
 \fBpasswd\fR
-命令退出，并返回如下值：.PP
+命令退出，并返回如下值：
+.PP
 \fI0\fR
 .RS 4
 成功

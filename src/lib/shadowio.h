@@ -30,9 +30,9 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/* $Id: shadowio.h 2783 2009-04-23 21:19:02Z nekral-guest $ */
-#ifndef _SHADOWIO_H
-#define _SHADOWIO_H
+/* $Id$ */
+#ifndef SHADOWIO_H
+#define SHADOWIO_H
 
 #include "defines.h"
 

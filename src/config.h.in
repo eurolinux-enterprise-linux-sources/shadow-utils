@@ -1,4 +1,4 @@
-/* config.h.in.  Generated from configure.in by autoheader.  */
+/* config.h.in.  Generated from configure.ac by autoheader.  */
 
 /* Define if account management tools should be installed setuid and
    authenticate the callers */
@@ -7,6 +7,9 @@
 /* Define to 1 if translation of program messages to the user's native
    language is requested. */
 #undef ENABLE_NLS
+
+/* Define to support the subordinate IDs. */
+#undef ENABLE_SUBIDS
 
 /* Path for faillog file. */
 #undef FAILLOG_FILE
@@ -30,11 +33,11 @@
 /* Define to 1 if you have the <attr/libattr.h> header file. */
 #undef HAVE_ATTR_LIBATTR_H
 
-/* Define to 1 if you have the MacOS X function CFLocaleCopyCurrent in the
+/* Define to 1 if you have the Mac OS X function CFLocaleCopyCurrent in the
    CoreFoundation framework. */
 #undef HAVE_CFLOCALECOPYCURRENT
 
-/* Define to 1 if you have the MacOS X function CFPreferencesCopyAppValue in
+/* Define to 1 if you have the Mac OS X function CFPreferencesCopyAppValue in
    the CoreFoundation framework. */
 #undef HAVE_CFPREFERENCESCOPYAPPVALUE
 
@@ -211,6 +214,9 @@
 
 /* Define to 1 if you have the <rpc/key_prot.h> header file. */
 #undef HAVE_RPC_KEY_PROT_H
+
+/* Define to 1 if you have the `ruserok' function. */
+#undef HAVE_RUSEROK
 
 /* Define to 1 if you have the <security/openpam.h> header file. */
 #undef HAVE_SECURITY_OPENPAM_H
@@ -418,8 +424,7 @@
 /* Path for lastlog file. */
 #undef LASTLOG_FILE
 
-/* Define to the sub-directory in which libtool stores uninstalled libraries.
-   */
+/* Define to the sub-directory where libtool stores uninstalled libraries. */
 #undef LT_OBJDIR
 
 /* Location of system mail spool directory. */
@@ -464,11 +469,17 @@
 /* Define to support the shadow group file. */
 #undef SHADOWGRP
 
-/* PAM converstation to use */
+/* PAM conversation to use */
 #undef SHADOW_PAM_CONVERSATION
 
 /* The default shell. */
 #undef SHELL
+
+/* The size of `gid_t', as computed by sizeof. */
+#undef SIZEOF_GID_T
+
+/* The size of `uid_t', as computed by sizeof. */
+#undef SIZEOF_UID_T
 
 /* Define to support S/Key logins. */
 #undef SKEY

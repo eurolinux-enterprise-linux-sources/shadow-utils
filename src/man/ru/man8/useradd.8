@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: useradd
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 05/25/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 04/29/2018
 .\"    Manual: Команды управления системой
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: Russian
 .\"
-.TH "useradd" "8" "05/25/2012" "shadow\-utils 4\&.1\&.5\&.1" "Команды управления системой"
+.TH "useradd" "8" "04/29/2018" "shadow\-utils 4\&.6" "Команды управления системой"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -27,9 +27,9 @@
 .\" -----------------------------------------------------------------
 .\" * MAIN CONTENT STARTS HERE *
 .\" -----------------------------------------------------------------
-.SH "ИМЯ"
+.SH "НАЗВАНИЕ"
 useradd \- регистрирует нового пользователя или изменяет информацию по умолчанию о новых пользователях
-.SH "СИНОПСИС"
+.SH "СИНТАКСИС"
 .HP \w'\fBuseradd\fR\ 'u
 \fBuseradd\fR [\fIпараметры\fR] \fIУЧЁТНАЯ_ЗАПИСЬ\fR
 .HP \w'\fBuseradd\fR\ 'u
@@ -78,12 +78,12 @@ useradd \- регистрирует нового пользователя или
 (по умолчанию)\&.
 .RE
 .PP
-\fB\-c\fR, \fB\-\-comment\fR \fIКОММЕНТАРИЙ\fR
+\fB\-c\fR, \fB\-\-comment\fR\ \&\fIКОММЕНТАРИЙ\fR
 .RS 4
 Любая текстовая строка\&. Обычно, здесь коротко описывается учётная запись, и в настоящее время используется как поле для имени и фамилии пользователя\&.
 .RE
 .PP
-\fB\-d\fR, \fB\-\-home\fR \fIДОМАШНИЙ_КАТАЛОГ\fR
+\fB\-d\fR, \fB\-\-home\-dir\fR \fIДОМАШНИЙ_КАТАЛОГ\fR
 .RS 4
 Для создаваемого пользователя будет использован каталог
 \fIДОМАШНИЙ_КАТАЛОГ\fR
@@ -114,7 +114,7 @@ useradd \- регистрирует нового пользователя или
 /etc/default/useradd, иначе пустую строку (без устаревания, по умолчанию)\&.
 .RE
 .PP
-\fB\-f\fR, \fB\-\-inactive\fR \fIДНЕЙ\fR
+\fB\-f\fR, \fB\-\-inactive\fR\ \&\fIДНЕЙ\fR
 .RS 4
 Если указано значение 0, то учётная запись блокируется сразу после устаревания пароля, а при значении \-1 данная возможность не используется\&.
 .sp
@@ -127,7 +127,7 @@ useradd \- регистрирует нового пользователя или
 или \-1 (по умолчанию)\&.
 .RE
 .PP
-\fB\-g\fR, \fB\-\-gid\fR \fIГРУППА\fR
+\fB\-g\fR, \fB\-\-gid\fR\ \&\fIГРУППА\fR
 .RS 4
 Имя или числовой идентификатор первичной группы пользователя\&. Группа с таким именем должна существовать\&. Идентификатор группы должен указывать на уже существующую группу\&.
 .sp
@@ -148,7 +148,7 @@ useradd \- регистрирует нового пользователя или
 /etc/default/useradd, или 100 (по умолчанию)\&.
 .RE
 .PP
-\fB\-G\fR, \fB\-\-groups\fR \fIГРУППА1\fR[\fI,ГРУППА2,\&...\fR[\fI,ГРУППАN\fR]]]
+\fB\-G\fR, \fB\-\-groups\fR\ \&\fIГРУППА1\fR[\fI,ГРУППА2,\&...\fR[\fI,ГРУППАN\fR]]]
 .RS 4
 Список дополнительных групп, в которых числится пользователь\&. Перечисление групп осуществляется через запятую, без промежуточных пробелов\&. На указанные группы действуют те же ограничения, что и для группы указанной в параметре
 \fB\-g\fR\&. По умолчанию пользователь входит только в начальную группу\&.
@@ -159,7 +159,7 @@ useradd \- регистрирует нового пользователя или
 Показать краткую справку и закончить работу\&.
 .RE
 .PP
-\fB\-k\fR, \fB\-\-skel\fR \fIКАТАЛОГ_ШАБЛОНОВ\fR
+\fB\-k\fR, \fB\-\-skel\fR\ \&\fIКАТАЛОГ_ШАБЛОНОВ\fR
 .RS 4
 Каталог с шаблонами, который содержит файлы и каталоги для копирования в домашний каталог пользователя при создании домашнего каталога командой
 \fBuseradd\fR\&.
@@ -179,29 +179,30 @@ useradd \- регистрирует нового пользователя или
 Если возможно, выполняется копирование ACL и расширенных атрибутов\&.
 .RE
 .PP
-\fB\-K\fR, \fB\-\-key\fR \fIКЛЮЧ\fR=\fIЗНАЧЕНИЕ\fR
+\fB\-K\fR, \fB\-\-key\fR\ \&\fIКЛЮЧ\fR=\fIЗНАЧЕНИЕ\fR
 .RS 4
-Заменяет значения по умолчанию из файла
+Overrides
 /etc/login\&.defs
-(\fBUID_MIN\fR,
+defaults (\fBUID_MIN\fR,
 \fBUID_MAX\fR,
 \fBUMASK\fR,
 \fBPASS_MAX_DAYS\fR
-и других)\&.
+and others)\&.
 
-Пример:
-\fB\-K \fR\fIPASS_MAX_DAYS\fR=\fI\-1\fR
-можно использовать при создании системной учётной записи, чтобы выключить устаревание пароля, даже если системная учётная запись вообще не имеет пароля\&. Можно указывать параметр
+Example:
+\fB\-K\fR\ \&\fIPASS_MAX_DAYS\fR=\fI\-1\fR
+can be used when creating system account to turn off password aging, even though system account has no password at all\&. Multiple
 \fB\-K\fR
-несколько раз, например:
-\fB\-K \fR\fIUID_MIN\fR=\fI100\fR\fB \-K \fR\fIUID_MAX\fR=\fI499\fR
+options can be specified, e\&.g\&.:
+\fB\-K\fR\ \&\fIUID_MIN\fR=\fI100\fR\ \&
+\fB\-K\fR\ \&\fIUID_MAX\fR=\fI499\fR
 .RE
 .PP
 \fB\-l\fR, \fB\-\-no\-log\-init\fR
 .RS 4
 Не добавлять пользователя в базы данных lastlog и faillog\&.
 .sp
-По умолчанию, записи пользователя в базах данных lastlog и faillog сбрасываются во избежание повторного использования записи, оставшейся от ранее удалённого пользователя\&.
+By default, the user\*(Aqs entries in the lastlog and faillog databases are reset to avoid reusing the entry from a previously deleted user\&.
 .RE
 .PP
 \fB\-m\fR, \fB\-\-create\-home\fR
@@ -214,7 +215,7 @@ option), будут скопированы в домашний каталог\&.
 \fBCREATE_HOME\fR, домашний каталог не создаётся\&.
 .RE
 .PP
-\fB\-M\fR
+\fB\-M\fR, \fB\-\-no\-create\-home\fR
 .RS 4
 Не создавать домашний каталог пользователя, даже если значение системной переменной в файле
 /etc/login\&.defs
@@ -249,7 +250,7 @@ option), будут скопированы в домашний каталог\&.
 \fB\-u\fR\&.
 .RE
 .PP
-\fB\-p\fR, \fB\-\-password\fR \fIПАРОЛЬ\fR
+\fB\-p\fR, \fB\-\-password\fR\ \&\fIПАРОЛЬ\fR
 .RS 4
 Шифрованное значение пароля, которое возвращает функция
 \fBcrypt\fR(3)\&. По умолчанию пароль отключён\&.
@@ -273,15 +274,16 @@ option), будут скопированы в домашний каталог\&.
 \fBGID\fR
 при создании групп)\&.
 .sp
-Заметим, что
+Note that
 \fBuseradd\fR
-не создаёт домашний каталог для данного пользователя независимо от значения по умолчанию в
+will not create a home directory for such a user, regardless of the default setting in
 /etc/login\&.defs
-(\fBCREATE_HOME\fR)\&. Если вы хотите создать домашний каталог для системной учётной записи укажите параметр
-\fB\-m\fR\&.
+(\fBCREATE_HOME\fR)\&. You have to specify the
+\fB\-m\fR
+options if you want a home directory for a system account to be created\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR \fIКАТ_CHROOT\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fIКАТ_CHROOT\fR
 .RS 4
 Выполнить изменения в каталоге
 \fIКАТ_CHROOT\fR
@@ -289,7 +291,16 @@ option), будут скопированы в домашний каталог\&.
 \fIКАТ_CHROOT\fR\&.
 .RE
 .PP
-\fB\-s\fR, \fB\-\-shell\fR \fIОБОЛОЧКА\fR
+\fB\-P\fR, \fB\-\-prefix\fR\ \&\fIPREFIX_DIR\fR
+.RS 4
+Apply changes in the
+\fIPREFIX_DIR\fR
+directory and use the configuration files from the
+\fIPREFIX_DIR\fR
+directory\&. This option does not chroot and is intended for preparing a cross\-compilation target\&. Some limitations: NIS and LDAP users/groups are not verified\&. PAM authentication is using the host files\&. No SELINUX support\&.
+.RE
+.PP
+\fB\-s\fR, \fB\-\-shell\fR\ \&\fIОБОЛОЧКА\fR
 .RS 4
 Имя регистрационной оболочки пользователя\&. По умолчанию это поле пусто, что вызывает выбор регистрационной оболочки по умолчанию согласно значению переменной
 \fBSHELL\fR
@@ -297,7 +308,7 @@ option), будут скопированы в домашний каталог\&.
 /etc/default/useradd, или по умолчанию используется пустая строка\&.
 .RE
 .PP
-\fB\-u\fR, \fB\-\-uid\fR \fIUID\fR
+\fB\-u\fR, \fB\-\-uid\fR\ \&\fIUID\fR
 .RS 4
 Числовое значение идентификатора пользователя (ID)\&. Оно должно быть уникальным, если не используется параметр
 \fB\-o\fR\&. Значение должно быть неотрицательным\&. По умолчанию используется наименьшее значение ID большее или равное
@@ -324,7 +335,7 @@ option), будут скопированы в домашний каталог\&.
 /etc/login\&.defs\&.
 .RE
 .PP
-\fB\-Z\fR, \fB\-\-selinux\-user\fR \fISEUSER\fR
+\fB\-Z\fR, \fB\-\-selinux\-user\fR\ \&\fISEUSER\fR
 .RS 4
 Пользователь SELinux для регистрационной оболочки пользователя\&. По умолчанию это поле пусто, что заставляет систему выбрать пользователя SELinux по умолчанию\&.
 .RE
@@ -363,7 +374,7 @@ option), будут скопированы в домашний каталог\&.
 /etc/default/useradd\&.
 .RE
 .PP
-\fB\-f\fR, \fB\-\-inactive\fR \fIДНЕЙ\fR
+\fB\-f\fR, \fB\-\-inactive\fR\ \&\fIДНЕЙ\fR
 .RS 4
 Число дней, которые должны пройти после устаревания пароля, перед тем как учётная запись будет заблокирована\&.
 .sp
@@ -373,7 +384,7 @@ option), будут скопированы в домашний каталог\&.
 /etc/default/useradd\&.
 .RE
 .PP
-\fB\-g\fR, \fB\-\-gid\fR \fIГРУППА\fR
+\fB\-g\fR, \fB\-\-gid\fR\ \&\fIГРУППА\fR
 .RS 4
 Имя группы или ID новой первичной группы пользователя (если используется
 \fB\-N/\-\-no\-user\-group\fR
@@ -390,7 +401,7 @@ option), будут скопированы в домашний каталог\&.
 /etc/default/useradd\&.
 .RE
 .PP
-\fB\-s\fR, \fB\-\-shell\fR \fIОБОЛОЧКА\fR
+\fB\-s\fR, \fB\-\-shell\fR\ \&\fIОБОЛОЧКА\fR
 .RS 4
 Имя новой регистрационной командной оболочки пользователя\&.
 .sp
@@ -501,6 +512,52 @@ option), будут скопированы в домашний каталог\&.
 Число дней за которое начнёт выдаваться предупреждение об устаревании пароля\&. Нулевое значение означает, что предупреждение выдаётся в день устаревания, при отрицательном значении предупреждение выдаваться не будет\&. Если значение не задано, выдача предупреждения отключается\&.
 .RE
 .PP
+\fBSUB_GID_MIN\fR (number), \fBSUB_GID_MAX\fR (number), \fBSUB_GID_COUNT\fR (number)
+.RS 4
+If
+/etc/subuid
+exists, the commands
+\fBuseradd\fR
+and
+\fBnewusers\fR
+(unless the user already have subordinate group IDs) allocate
+\fBSUB_GID_COUNT\fR
+unused group IDs from the range
+\fBSUB_GID_MIN\fR
+to
+\fBSUB_GID_MAX\fR
+for each new user\&.
+.sp
+The default values for
+\fBSUB_GID_MIN\fR,
+\fBSUB_GID_MAX\fR,
+\fBSUB_GID_COUNT\fR
+are respectively 100000, 600100000 and 10000\&.
+.RE
+.PP
+\fBSUB_UID_MIN\fR (number), \fBSUB_UID_MAX\fR (number), \fBSUB_UID_COUNT\fR (number)
+.RS 4
+If
+/etc/subuid
+exists, the commands
+\fBuseradd\fR
+and
+\fBnewusers\fR
+(unless the user already have subordinate user IDs) allocate
+\fBSUB_UID_COUNT\fR
+unused user IDs from the range
+\fBSUB_UID_MIN\fR
+to
+\fBSUB_UID_MAX\fR
+for each new user\&.
+.sp
+The default values for
+\fBSUB_UID_MIN\fR,
+\fBSUB_UID_MAX\fR,
+\fBSUB_UID_COUNT\fR
+are respectively 100000, 600100000 and 10000\&.
+.RE
+.PP
 \fBSYS_GID_MAX\fR (число), \fBSYS_GID_MIN\fR (число)
 .RS 4
 Диапазон идентификаторов групп, используемый в программах
@@ -606,6 +663,16 @@ option), будут скопированы в домашний каталог\&.
 каталог, содержащий файлы по умолчанию
 .RE
 .PP
+/etc/subgid
+.RS 4
+Per user subordinate group IDs\&.
+.RE
+.PP
+/etc/subuid
+.RS 4
+Per user subordinate user IDs\&.
+.RE
+.PP
 /etc/login\&.defs
 .RS 4
 содержит конфигурацию подсистемы теневых паролей
@@ -677,5 +744,6 @@ can\*(Aqt update SELinux user mapping
 \fBgroupmod\fR(8),
 \fBlogin.defs\fR(5),
 \fBnewusers\fR(8),
+\fBsubgid\fR(5), \fBsubuid\fR(5),
 \fBuserdel\fR(8),
 \fBusermod\fR(8)\&.

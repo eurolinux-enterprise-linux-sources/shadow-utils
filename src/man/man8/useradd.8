@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: useradd
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 05/25/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 04/29/2018
 .\"    Manual: System Management Commands
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: English
 .\"
-.TH "USERADD" "8" "05/25/2012" "shadow\-utils 4\&.1\&.5\&.1" "System Management Commands"
+.TH "USERADD" "8" "04/29/2018" "shadow\-utils 4\&.6" "System Management Commands"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -57,11 +57,10 @@ The options which apply to the
 \fBuseradd\fR
 command are:
 .PP
-\fB\-b\fR, \fB\-\-base\-dir\fR \fIBASE_DIR\fR
+\fB\-b\fR, \fB\-\-base\-dir\fR\ \&\fIBASE_DIR\fR
 .RS 4
 The default base directory for the system if
-\fB\-d\fR
-\fIHOME_DIR\fR
+\fB\-d\fR\ \&\fIHOME_DIR\fR
 is not specified\&.
 \fIBASE_DIR\fR
 is concatenated with the account name to define the home directory\&. If the
@@ -80,12 +79,12 @@ variable in
 by default\&.
 .RE
 .PP
-\fB\-c\fR, \fB\-\-comment\fR \fICOMMENT\fR
+\fB\-c\fR, \fB\-\-comment\fR\ \&\fICOMMENT\fR
 .RS 4
 Any text string\&. It is generally a short description of the login, and is currently used as the field for the user\*(Aqs full name\&.
 .RE
 .PP
-\fB\-d\fR, \fB\-\-home\fR \fIHOME_DIR\fR
+\fB\-d\fR, \fB\-\-home\-dir\fR\ \&\fIHOME_DIR\fR
 .RS 4
 The new user will be created using
 \fIHOME_DIR\fR
@@ -103,7 +102,7 @@ does not have to exist but will not be created if it is missing\&.
 See below, the subsection "Changing the default values"\&.
 .RE
 .PP
-\fB\-e\fR, \fB\-\-expiredate\fR \fIEXPIRE_DATE\fR
+\fB\-e\fR, \fB\-\-expiredate\fR\ \&\fIEXPIRE_DATE\fR
 .RS 4
 The date on which the user account will be disabled\&. The date is specified in the format
 \fIYYYY\-MM\-DD\fR\&.
@@ -116,7 +115,7 @@ variable in
 /etc/default/useradd, or an empty string (no expiry) by default\&.
 .RE
 .PP
-\fB\-f\fR, \fB\-\-inactive\fR \fIINACTIVE\fR
+\fB\-f\fR, \fB\-\-inactive\fR\ \&\fIINACTIVE\fR
 .RS 4
 The number of days after a password expires until the account is permanently disabled\&. A value of 0 disables the account as soon as the password has expired, and a value of \-1 disables the feature\&.
 .sp
@@ -128,7 +127,7 @@ variable in
 /etc/default/useradd, or \-1 by default\&.
 .RE
 .PP
-\fB\-g\fR, \fB\-\-gid\fR \fIGROUP\fR
+\fB\-g\fR, \fB\-\-gid\fR\ \&\fIGROUP\fR
 .RS 4
 The group name or number of the user\*(Aqs initial login group\&. The group name must exist\&. A group number must refer to an already existing group\&.
 .sp
@@ -151,7 +150,7 @@ variable in
 /etc/default/useradd, or 100 by default\&.
 .RE
 .PP
-\fB\-G\fR, \fB\-\-groups\fR \fIGROUP1\fR[\fI,GROUP2,\&.\&.\&.\fR[\fI,GROUPN\fR]]]
+\fB\-G\fR, \fB\-\-groups\fR\ \&\fIGROUP1\fR[\fI,GROUP2,\&.\&.\&.\fR[\fI,GROUPN\fR]]]
 .RS 4
 A list of supplementary groups which the user is also a member of\&. Each group is separated from the next by a comma, with no intervening whitespace\&. The groups are subject to the same restrictions as the group given with the
 \fB\-g\fR
@@ -163,7 +162,7 @@ option\&. The default is for the user to belong only to the initial group\&.
 Display help message and exit\&.
 .RE
 .PP
-\fB\-k\fR, \fB\-\-skel\fR \fISKEL_DIR\fR
+\fB\-k\fR, \fB\-\-skel\fR\ \&\fISKEL_DIR\fR
 .RS 4
 The skeleton directory, which contains files and directories to be copied in the user\*(Aqs home directory, when the home directory is created by
 \fBuseradd\fR\&.
@@ -183,7 +182,7 @@ or, by default,
 If possible, the ACLs and extended attributes are copied\&.
 .RE
 .PP
-\fB\-K\fR, \fB\-\-key\fR \fIKEY\fR=\fIVALUE\fR
+\fB\-K\fR, \fB\-\-key\fR\ \&\fIKEY\fR=\fIVALUE\fR
 .RS 4
 Overrides
 /etc/login\&.defs
@@ -194,21 +193,19 @@ defaults (\fBUID_MIN\fR,
 and others)\&.
 
 Example:
-\fB\-K \fR\fIPASS_MAX_DAYS\fR=\fI\-1\fR
-can be used when creating system account to turn off password ageing, even though system account has no password at all\&. Multiple
+\fB\-K\fR\ \&\fIPASS_MAX_DAYS\fR=\fI\-1\fR
+can be used when creating system account to turn off password aging, even though system account has no password at all\&. Multiple
 \fB\-K\fR
 options can be specified, e\&.g\&.:
-\fB\-K \fR
-\fIUID_MIN\fR=\fI100\fR
-\fB\-K \fR
-\fIUID_MAX\fR=\fI499\fR
+\fB\-K\fR\ \&\fIUID_MIN\fR=\fI100\fR\ \&
+\fB\-K\fR\ \&\fIUID_MAX\fR=\fI499\fR
 .RE
 .PP
 \fB\-l\fR, \fB\-\-no\-log\-init\fR
 .RS 4
 Do not add the user to the lastlog and faillog databases\&.
 .sp
-By default, the user\*(Aqs entries in the lastlog and faillog databases are resetted to avoid reusing the entry from a previously deleted user\&.
+By default, the user\*(Aqs entries in the lastlog and faillog databases are reset to avoid reusing the entry from a previously deleted user\&.
 .RE
 .PP
 \fB\-m\fR, \fB\-\-create\-home\fR
@@ -222,7 +219,7 @@ By default, if this option is not specified and
 is not enabled, no home directories are created\&.
 .RE
 .PP
-\fB\-M\fR
+\fB\-M\fR, \fB\-\-no\-create\-home\fR
 .RS 4
 Do no create the user\*(Aqs home directory, even if the system wide setting from
 /etc/login\&.defs
@@ -258,12 +255,11 @@ This option is only valid in combination with the
 option\&.
 .RE
 .PP
-\fB\-p\fR, \fB\-\-password\fR \fIPASSWORD\fR
+\fB\-p\fR, \fB\-\-password\fR\ \&\fIPASSWORD\fR
 .RS 4
 The encrypted password, as returned by
 \fBcrypt\fR(3)\&. The default is to disable the password\&.
 .sp
-
 \fBNote:\fR
 This option is not recommended because the password (or encrypted password) will be visible by users listing the processes\&.
 .sp
@@ -286,14 +282,14 @@ counterparts for the creation of groups)\&.
 .sp
 Note that
 \fBuseradd\fR
-will not create a home directory for such an user, regardless of the default setting in
+will not create a home directory for such a user, regardless of the default setting in
 /etc/login\&.defs
 (\fBCREATE_HOME\fR)\&. You have to specify the
 \fB\-m\fR
 options if you want a home directory for a system account to be created\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR \fICHROOT_DIR\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fICHROOT_DIR\fR
 .RS 4
 Apply changes in the
 \fICHROOT_DIR\fR
@@ -302,7 +298,16 @@ directory and use the configuration files from the
 directory\&.
 .RE
 .PP
-\fB\-s\fR, \fB\-\-shell\fR \fISHELL\fR
+\fB\-P\fR, \fB\-\-prefix\fR\ \&\fIPREFIX_DIR\fR
+.RS 4
+Apply changes in the
+\fIPREFIX_DIR\fR
+directory and use the configuration files from the
+\fIPREFIX_DIR\fR
+directory\&. This option does not chroot and is intended for preparing a cross\-compilation target\&. Some limitations: NIS and LDAP users/groups are not verified\&. PAM authentication is using the host files\&. No SELINUX support\&.
+.RE
+.PP
+\fB\-s\fR, \fB\-\-shell\fR\ \&\fISHELL\fR
 .RS 4
 The name of the user\*(Aqs login shell\&. The default is to leave this field blank, which causes the system to select the default login shell specified by the
 \fBSHELL\fR
@@ -310,7 +315,7 @@ variable in
 /etc/default/useradd, or an empty string by default\&.
 .RE
 .PP
-\fB\-u\fR, \fB\-\-uid\fR \fIUID\fR
+\fB\-u\fR, \fB\-\-uid\fR\ \&\fIUID\fR
 .RS 4
 The numerical value of the user\*(Aqs ID\&. This value must be unique, unless the
 \fB\-o\fR
@@ -339,7 +344,7 @@ variable in
 /etc/login\&.defs\&.
 .RE
 .PP
-\fB\-Z\fR, \fB\-\-selinux\-user\fR \fISEUSER\fR
+\fB\-Z\fR, \fB\-\-selinux\-user\fR\ \&\fISEUSER\fR
 .RS 4
 The SELinux user for the user\*(Aqs login\&. The default is to leave this field blank, which causes the system to select the default SELinux user\&.
 .RE
@@ -355,7 +360,7 @@ plus other options,
 \fBuseradd\fR
 will update the default values for the specified options\&. Valid default\-changing options are:
 .PP
-\fB\-b\fR, \fB\-\-base\-dir\fR \fIBASE_DIR\fR
+\fB\-b\fR, \fB\-\-base\-dir\fR\ \&\fIBASE_DIR\fR
 .RS 4
 The path prefix for a new user\*(Aqs home directory\&. The user\*(Aqs name will be affixed to the end of
 \fIBASE_DIR\fR
@@ -369,7 +374,7 @@ variable in
 /etc/default/useradd\&.
 .RE
 .PP
-\fB\-e\fR, \fB\-\-expiredate\fR \fIEXPIRE_DATE\fR
+\fB\-e\fR, \fB\-\-expiredate\fR\ \&\fIEXPIRE_DATE\fR
 .RS 4
 The date on which the user account is disabled\&.
 .sp
@@ -379,7 +384,7 @@ variable in
 /etc/default/useradd\&.
 .RE
 .PP
-\fB\-f\fR, \fB\-\-inactive\fR \fIINACTIVE\fR
+\fB\-f\fR, \fB\-\-inactive\fR\ \&\fIINACTIVE\fR
 .RS 4
 The number of days after a password has expired before the account will be disabled\&.
 .sp
@@ -389,7 +394,7 @@ variable in
 /etc/default/useradd\&.
 .RE
 .PP
-\fB\-g\fR, \fB\-\-gid\fR \fIGROUP\fR
+\fB\-g\fR, \fB\-\-gid\fR\ \&\fIGROUP\fR
 .RS 4
 The group name or ID for a new user\*(Aqs initial group (when the
 \fB\-N/\-\-no\-user\-group\fR
@@ -406,7 +411,7 @@ variable in
 /etc/default/useradd\&.
 .RE
 .PP
-\fB\-s\fR, \fB\-\-shell\fR \fISHELL\fR
+\fB\-s\fR, \fB\-\-shell\fR\ \&\fISHELL\fR
 .RS 4
 The name of a new user\*(Aqs login shell\&.
 .sp
@@ -516,6 +521,52 @@ The minimum number of days allowed between password changes\&. Any password chan
 The number of days warning given before a password expires\&. A zero means warning is given only upon the day of expiration, a negative value means no warning is given\&. If not specified, no warning will be provided\&.
 .RE
 .PP
+\fBSUB_GID_MIN\fR (number), \fBSUB_GID_MAX\fR (number), \fBSUB_GID_COUNT\fR (number)
+.RS 4
+If
+/etc/subuid
+exists, the commands
+\fBuseradd\fR
+and
+\fBnewusers\fR
+(unless the user already have subordinate group IDs) allocate
+\fBSUB_GID_COUNT\fR
+unused group IDs from the range
+\fBSUB_GID_MIN\fR
+to
+\fBSUB_GID_MAX\fR
+for each new user\&.
+.sp
+The default values for
+\fBSUB_GID_MIN\fR,
+\fBSUB_GID_MAX\fR,
+\fBSUB_GID_COUNT\fR
+are respectively 100000, 600100000 and 10000\&.
+.RE
+.PP
+\fBSUB_UID_MIN\fR (number), \fBSUB_UID_MAX\fR (number), \fBSUB_UID_COUNT\fR (number)
+.RS 4
+If
+/etc/subuid
+exists, the commands
+\fBuseradd\fR
+and
+\fBnewusers\fR
+(unless the user already have subordinate user IDs) allocate
+\fBSUB_UID_COUNT\fR
+unused user IDs from the range
+\fBSUB_UID_MIN\fR
+to
+\fBSUB_UID_MAX\fR
+for each new user\&.
+.sp
+The default values for
+\fBSUB_UID_MIN\fR,
+\fBSUB_UID_MAX\fR,
+\fBSUB_UID_COUNT\fR
+are respectively 100000, 600100000 and 10000\&.
+.RE
+.PP
 \fBSYS_GID_MAX\fR (number), \fBSYS_GID_MIN\fR (number)
 .RS 4
 Range of group IDs used for the creation of system groups by
@@ -561,7 +612,6 @@ The default value for
 .RS 4
 The file mode creation mask is initialized to this value\&. If not specified, the mask will be initialized to 022\&.
 .sp
-
 \fBuseradd\fR
 and
 \fBnewusers\fR
@@ -618,6 +668,16 @@ Default values for account creation\&.
 /etc/skel/
 .RS 4
 Directory containing default files\&.
+.RE
+.PP
+/etc/subgid
+.RS 4
+Per user subordinate group IDs\&.
+.RE
+.PP
+/etc/subuid
+.RS 4
+Per user subordinate user IDs\&.
 .RE
 .PP
 /etc/login\&.defs
@@ -682,7 +742,6 @@ can\*(Aqt update SELinux user mapping
 .RE
 .SH "SEE ALSO"
 .PP
-
 \fBchfn\fR(1),
 \fBchsh\fR(1),
 \fBpasswd\fR(1),
@@ -692,5 +751,6 @@ can\*(Aqt update SELinux user mapping
 \fBgroupmod\fR(8),
 \fBlogin.defs\fR(5),
 \fBnewusers\fR(8),
+\fBsubgid\fR(5), \fBsubuid\fR(5),
 \fBuserdel\fR(8),
 \fBusermod\fR(8)\&.

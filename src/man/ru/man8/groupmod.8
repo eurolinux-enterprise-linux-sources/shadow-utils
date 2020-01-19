@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: groupmod
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 05/25/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 04/29/2018
 .\"    Manual: Команды управления системой
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: Russian
 .\"
-.TH "groupmod" "8" "05/25/2012" "shadow\-utils 4\&.1\&.5\&.1" "Команды управления системой"
+.TH "groupmod" "8" "04/29/2018" "shadow\-utils 4\&.6" "Команды управления системой"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -27,9 +27,9 @@
 .\" -----------------------------------------------------------------
 .\" * MAIN CONTENT STARTS HERE *
 .\" -----------------------------------------------------------------
-.SH "ИМЯ"
+.SH "НАЗВАНИЕ"
 groupmod \- изменяет определение группы в системе
-.SH "СИНОПСИС"
+.SH "СИНТАКСИС"
 .HP \w'\fBgroupmod\fR\ 'u
 \fBgroupmod\fR [\fIпараметры\fR] \fIГРУППА\fR
 .SH "ОПИСАНИЕ"
@@ -43,7 +43,7 @@ groupmod \- изменяет определение группы в систем
 Параметры команды
 \fBgroupmod\fR:
 .PP
-\fB\-g\fR, \fB\-\-gid\fR \fIGID\fR
+\fB\-g\fR, \fB\-\-gid\fR\ \&\fIGID\fR
 .RS 4
 Имя группы будет изменено с
 \fIГРУППА\fR
@@ -76,7 +76,7 @@ groupmod \- изменяет определение группы в систем
 Показать краткую справку и закончить работу\&.
 .RE
 .PP
-\fB\-n\fR, \fB\-\-new\-name\fR \fIНОВАЯ_ГРУППА\fR
+\fB\-n\fR, \fB\-\-new\-name\fR\ \&\fIНОВАЯ_ГРУППА\fR
 .RS 4
 Имя группы будет изменено с
 \fIГРУППА\fR
@@ -93,7 +93,7 @@ groupmod \- изменяет определение группы в систем
 группы не уникальным значением\&.
 .RE
 .PP
-\fB\-p\fR, \fB\-\-password\fR \fIПАРОЛЬ\fR
+\fB\-p\fR, \fB\-\-password\fR\ \&\fIПАРОЛЬ\fR
 .RS 4
 Шифрованное значение пароля, которое возвращает функция
 \fBcrypt\fR(3)\&.
@@ -104,12 +104,21 @@ groupmod \- изменяет определение группы в систем
 Вы должны проверить, что пароль соответствует политике системных паролей\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR \fIКАТ_CHROOT\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fIКАТ_CHROOT\fR
 .RS 4
 Выполнить изменения в каталоге
 \fIКАТ_CHROOT\fR
 и использовать файлы настройки из каталога
 \fIКАТ_CHROOT\fR\&.
+.RE
+.PP
+\fB\-P\fR, \fB\-\-prefix\fR\ \&\fIPREFIX_DIR\fR
+.RS 4
+Apply changes in the
+\fIPREFIX_DIR\fR
+directory and use the configuration files from the
+\fIPREFIX_DIR\fR
+directory\&. This option does not chroot and is intended for preparing a cross\-compilation target\&. Some limitations: NIS and LDAP users/groups are not verified\&. PAM authentication is using the host files\&. No SELINUX support\&.
 .RE
 .SH "НАСТРОЙКА"
 .PP
@@ -159,37 +168,52 @@ groupmod \- изменяет определение группы в систем
 .PP
 \fI0\fR
 .RS 4
-успешное выполнение
+E_SUCCESS: success
 .RE
 .PP
 \fI2\fR
 .RS 4
-ошибка в параметрах команды
+E_USAGE: invalid command syntax
 .RE
 .PP
 \fI3\fR
 .RS 4
-недопустимое значение параметра
+E_BAD_ARG: invalid argument to option
 .RE
 .PP
 \fI4\fR
 .RS 4
-указанная группа не существует
+E_GID_IN_USE: specified group doesn\*(Aqt exist
 .RE
 .PP
 \fI6\fR
 .RS 4
-указанная группа не существует
+E_NOTFOUND: specified group doesn\*(Aqt exist
 .RE
 .PP
 \fI9\fR
 .RS 4
-такое имя группы уже используется
+E_NAME_IN_USE: group name already in use
 .RE
 .PP
 \fI10\fR
 .RS 4
-не удалось изменить файл групп
+E_GRP_UPDATE: can\*(Aqt update group file
+.RE
+.PP
+\fI11\fR
+.RS 4
+E_CLEANUP_SERVICE: can\*(Aqt setup cleanup service
+.RE
+.PP
+\fI12\fR
+.RS 4
+E_PAM_USERNAME: can\*(Aqt determine your username for use with pam
+.RE
+.PP
+\fI13\fR
+.RS 4
+E_PAM_ERROR: pam returned an error, see syslog facility id groupmod for the PAM error message
 .RE
 .SH "СМОТРИТЕ ТАКЖЕ"
 .PP

@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: limits
 .\"    Author: Luca Berra
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 25/05/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 29/04/2018
 .\"    Manual: Formats et conversions de fichiers
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: French
 .\"
-.TH "LIMITS" "5" "25/05/2012" "shadow\-utils 4\&.1\&.5\&.1" "Formats et conversions de fich"
+.TH "LIMITS" "5" "29/04/2018" "shadow\-utils 4\&.6" "Formats et conversions de fich"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -41,12 +41,10 @@ Par d\('efaut, aucun quota (aucune limite) n\*(Aqest impos\('e \(`a \(Fo\ \&root
 .PP
 Chaque ligne d\('ecrit une limite pour un utilisateur, elle est de la forme suivante\ \&:
 .PP
-
 \fIutilisateur LISTE_DE_LIMITES\fR
 .PP
 ou sous la forme\ \&:
 .PP
-
 \fI@groupe LISTE_DE_LIMITES\fR
 .PP
 O\(`u
@@ -96,7 +94,7 @@ D\ \&: taille maximale du segment de donn\('ees d\*(Aqun programme (en kilo octe
 .sp -1
 .IP \(bu 2.3
 .\}
-F\ \&: taille maximale des fichiers (en kilo octets)
+F: maximum file size (KB)
 .RE
 .sp
 .RS 4
@@ -240,10 +238,11 @@ valable\&. Pour faciliter la lecture, les entr\('ees suivantes sont \('equivalen
 .RE
 .\}
 .PP
-Attention\ \&: tout ce qui suit
-\fIutilisateur\fR
-est consid\('er\('e comme une limite de cha\(^ine\&. Les commentaires ne sont pas autoris\('es\&. Une cha\(^ine de limites non valable sera rejet\('ee (non utilis\('ee) par le programme
-\fBlogin\fR\&.
+Be aware that after
+\fIusername\fR
+the rest of the line is considered a limit string, thus comments are not allowed\&. An invalid limits string will be rejected (not considered) by the
+\fBlogin\fR
+program\&.
 .PP
 L\*(Aqentr\('ee par d\('efaut est repr\('esent\('ee par un utilisateur d\('enomm\('e \(Fo\ \&\fI*\fR\ \&\(Fc\&. Si plusieurs entr\('ees par d\('efaut sont pr\('esentes dans le fichier de limites, alors seule la derni\(`ere sera prise en compte\&.
 .PP
@@ -251,11 +250,11 @@ Les limites pr\('ecis\('ees sous la forme \(Fo\ \&\fI@groupe\fR\ \&\(Fc s\*(Aqap
 \fIgroupe\fR
 pr\('ecis\('e\&.
 .PP
-Si plusieurs lignes avec des limites pour un utilisateur existent, seule la premi\(`ere ligne pour cet utilisateur sera prise en compte\&.
+If more than one line with limits for a user exist, only the first line for this user will be considered\&.
 .PP
-Si aucune ligne n\*(Aqest pr\('ecis\('ee pour l\*(Aqutilisateur, la derni\(`ere ligne
-\fI@groupe\fR
-correspondant \(`a un groupe auquel l\*(Aqutilisateur appartient sera prise en compte, ou la derni\(`ere ligne avec les limites par d\('efaut si aucun groupe ne contient l\*(Aqutilisateur\&.
+If no lines are specified for a user, the last
+\fI@group\fR
+line matching a group whose the user is a member of will be considered, or the last line with default limits if no groups contain the user\&.
 .PP
 Un simple tiret \(Fo\ \&\fI\-\fR\ \&\(Fc sera suffisant pour d\('esactiver toute limite \(`a un utilisateur,
 .PP

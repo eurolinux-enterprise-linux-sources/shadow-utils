@@ -50,7 +50,7 @@
 <!-- SHADOW-CONFIG-HERE -->
 ]>
 <refentry id='su.1'>
-  <!--  $Id: su.1.xml 3742 2012-05-25 11:45:21Z nekral-guest $ -->
+  <!--  $Id$ -->
   <refentryinfo>
     <author>
       <firstname>Julianne Frances</firstname>
@@ -85,12 +85,16 @@
     <cmdsynopsis>
       <command>su</command>
       <arg choice='opt'>
-	<replaceable>options</replaceable>
+          <replaceable>options</replaceable>
       </arg>
       <arg choice='opt'>
-	<arg choice='plain'>
-	  <replaceable>username</replaceable>
-	</arg>
+          <replaceable>-</replaceable>
+      </arg>
+      <arg choice='opt'>
+          <replaceable>username</replaceable>
+          <arg choice='opt'>
+              <replaceable>args</replaceable>
+          </arg>
       </arg>
     </cmdsynopsis>
   </refsynopsisdiv>
@@ -98,26 +102,21 @@
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
     <para>
-      The <command>su</command> command is used to become another user during
-      a login session. Invoked without a <option>username</option>, 
-      <command>su</command> defaults to
-      becoming the superuser. The optional argument <option>-</option> may
-      be used to provide an environment similar to what the user would
-      expect had the user logged in directly.
+      The <command>su</command> command is used to become another user during a
+      login session. Invoked without a <option>username</option>,
+      <command>su</command> defaults to becoming the superuser. The
+      <option>-</option> option may be used to provide an environment similar
+      to what the user would expect had the user logged in directly. The
+      <option>-c</option> option may be used to treat the next argument as a
+      command by most shells.
     </para>
 
     <para>
-      Additional arguments may be provided after the username, in which case
-      they are supplied to the user's login shell. In particular, an
-      argument of <option>-c</option> will cause the next argument to be
-      treated as a command by most command interpreters. The command will be
-      executed by the shell specified in <filename>/etc/passwd</filename>
-      for the target user.
-    </para>
-
-    <para>
-      You can use the <option>--</option> argument to separate
-      <command>su</command> options from the arguments supplied to the shell.
+      Options are recognized everywhere in the argument list. You can use the
+      <option>--</option> argument to stop option parsing. The
+      <option>-</option> option is special: it is also recognized after
+      <option>--</option>, but has to be placed before
+      <option>username</option>.
     </para>
 
     <para>The user will be prompted for a password, if appropriate. Invalid
@@ -148,8 +147,7 @@
     <variablelist remap='IP'>
       <varlistentry>
 	<term>
-	  <option>-c</option>, <option>--command</option>
-	  <replaceable>COMMAND</replaceable>
+	  <option>-c</option>, <option>--command</option>&nbsp;<replaceable>COMMAND</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -158,7 +156,7 @@
 	  </para>
 	  <para>
 	    The executed command will have no controlling terminal. This
-	    option cannot be used to execute interractive programs which
+	    option cannot be used to execute interactive programs which
 	    need a controlling TTY.
 	    <!-- This avoids TTY hijacking when su is used to lower
 	         privileges -->
@@ -175,23 +173,24 @@
 	    the user logged in directly.
 	  </para>
 	  <para>
-	    When <option>-</option> is used, it must be specified as the last
-	    <command>su</command> option.
-	    The other forms (<option>-l</option> and <option>--login</option>)
+	    When <option>-</option> is used, it must be specified before any
+	    <option>username</option>.  For portability it is recommended
+	    to use it as last option, before any
+	    <option>username</option>.  The other forms
+	    (<option>-l</option> and <option>--login</option>)
 	    do not have this restriction.
 	  </para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-s</option>, <option>--shell</option>
-	  <replaceable>SHELL</replaceable>
+	  <option>-s</option>, <option>--shell</option>&nbsp;<replaceable>SHELL</replaceable>
 	</term>
 	<listitem>
 	  <para>The shell that will be invoked.</para>
 	  <para>
 	    The invoked shell is chosen from (highest priority first):
-	    <!--This should be an orderedlist, but lists inside another
+	    <!--This should be an ordered list, but lists inside another
 	        list does not work well with current docbook.
 	        - nekral - 2009.06.03 -->
 	    <variablelist>

@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: chpasswd
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 05/25/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 04/29/2018
 .\"    Manual: System Management Commands
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: English
 .\"
-.TH "CHPASSWD" "8" "05/25/2012" "shadow\-utils 4\&.1\&.5\&.1" "System Management Commands"
+.TH "CHPASSWD" "8" "04/29/2018" "shadow\-utils 4\&.6" "System Management Commands"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -38,7 +38,6 @@ The
 \fBchpasswd\fR
 command reads a list of user name and password pairs from standard input and uses this information to update a group of existing users\&. Each line is of the format:
 .PP
-
 \fIuser_name\fR:\fIpassword\fR
 .PP
 By default the passwords must be supplied in clear\-text, and are encrypted by
@@ -49,15 +48,14 @@ The default encryption algorithm can be defined for the system with the
 or
 \fBMD5_CRYPT_ENAB\fR
 variables of
-/etc/login\&.defs, and can be overwitten with the
+/etc/login\&.defs, and can be overwritten with the
 \fB\-e\fR,
 \fB\-m\fR, or
 \fB\-c\fR
 options\&.
 .PP
-
 \fBchpasswd\fR
-first updates all the passwords in memory, and then commits all the changes to disk if no errors occured for any user\&.
+first updates all the passwords in memory, and then commits all the changes to disk if no errors occurred for any user\&.
 .PP
 This command is intended to be used in a large system environment where many accounts are created at a single time\&.
 .SH "OPTIONS"
@@ -66,7 +64,7 @@ The options which apply to the
 \fBchpasswd\fR
 command are:
 .PP
-\fB\-c\fR, \fB\-\-crypt\-method\fR \fIMETHOD\fR
+\fB\-c\fR, \fB\-\-crypt\-method\fR\ \&\fIMETHOD\fR
 .RS 4
 Use the specified method to encrypt the passwords\&.
 .sp
@@ -99,7 +97,7 @@ Display help message and exit\&.
 Use MD5 encryption instead of DES when the supplied passwords are not encrypted\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR \fICHROOT_DIR\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fICHROOT_DIR\fR
 .RS 4
 Apply changes in the
 \fICHROOT_DIR\fR
@@ -108,7 +106,7 @@ directory and use the configuration files from the
 directory\&.
 .RE
 .PP
-\fB\-s\fR, \fB\-\-sha\-rounds\fR \fIROUNDS\fR
+\fB\-s\fR, \fB\-\-sha\-rounds\fR\ \&\fIROUNDS\fR
 .RS 4
 Use the specified number of rounds to encrypt the passwords\&.
 .sp
@@ -208,7 +206,6 @@ Shadow password suite configuration\&.
 .RE
 .SH "SEE ALSO"
 .PP
-
 \fBpasswd\fR(1),
 \fBnewusers\fR(8),
 \fBlogin.defs\fR(5),

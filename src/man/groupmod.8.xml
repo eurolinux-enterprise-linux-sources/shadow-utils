@@ -34,7 +34,7 @@
 <!-- SHADOW-CONFIG-HERE -->
 ]>
 <refentry id='groupmod.8'>
-  <!-- $Id: groupmod.8.xml 3742 2012-05-25 11:45:21Z nekral-guest $ -->
+  <!-- $Id$ -->
   <refentryinfo>
     <author>
       <firstname>Julianne Frances</firstname>
@@ -94,7 +94,7 @@
     <variablelist remap='IP'>
       <varlistentry>
 	<term>
-	  <option>-g</option>, <option>--gid</option> <replaceable>GID</replaceable>
+	  <option>-g</option>, <option>--gid</option>&nbsp;<replaceable>GID</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -133,8 +133,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-n</option>, <option>--new-name</option>
-	  <replaceable>NEW_GROUP</replaceable>
+	  <option>-n</option>, <option>--new-name</option>&nbsp;<replaceable>NEW_GROUP</replaceable>
 	</term>
 	<listitem>
 	  <para> 
@@ -156,8 +155,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-p</option>, <option>--password</option>
-	  <replaceable>PASSWORD</replaceable>
+	  <option>-p</option>, <option>--password</option>&nbsp;<replaceable>PASSWORD</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -178,14 +176,30 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-R</option>, <option>--root</option>
-	  <replaceable>CHROOT_DIR</replaceable>
+	  <option>-R</option>, <option>--root</option>&nbsp;<replaceable>CHROOT_DIR</replaceable>
 	</term>
 	<listitem>
 	  <para>
 	    Apply changes in the <replaceable>CHROOT_DIR</replaceable>
 	    directory and use the configuration files from the
 	    <replaceable>CHROOT_DIR</replaceable> directory.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
+	  <option>-P</option>, <option>--prefix</option>&nbsp;<replaceable>PREFIX_DIR</replaceable>
+	</term>
+	<listitem>
+	  <para>
+	    Apply changes in the <replaceable>PREFIX_DIR</replaceable>
+	    directory and use the configuration files from the
+	    <replaceable>PREFIX_DIR</replaceable> directory.
+		This option does not chroot and is intended for preparing 
+		a cross-compilation target.
+		Some limitations: NIS and LDAP users/groups are not verified.
+		PAM authentication is using the host files.
+		No SELINUX support.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -242,43 +256,61 @@
 	<varlistentry>
 	  <term><replaceable>0</replaceable></term>
 	  <listitem>
-	    <para>success</para>
+	    <para>E_SUCCESS: success</para>
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
 	  <term><replaceable>2</replaceable></term>
 	  <listitem>
-	    <para>invalid command syntax</para>
+	    <para>E_USAGE: invalid command syntax</para>
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
 	  <term><replaceable>3</replaceable></term>
 	  <listitem>
-	    <para>invalid argument to option</para>
+	    <para>E_BAD_ARG: invalid argument to option</para>
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
 	  <term><replaceable>4</replaceable></term>
 	  <listitem>
-	    <para>specified group doesn't exist</para>
+	    <para>E_GID_IN_USE: specified group doesn't exist</para>
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
 	  <term><replaceable>6</replaceable></term>
 	  <listitem>
-	    <para>specified group doesn't exist</para>
+	    <para>E_NOTFOUND: specified group doesn't exist</para>
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
 	  <term><replaceable>9</replaceable></term>
 	  <listitem>
-	    <para>group name already in use</para>
+	    <para>E_NAME_IN_USE: group name already in use</para>
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
 	  <term><replaceable>10</replaceable></term>
 	  <listitem>
-	    <para>can't update group file</para>
+	    <para>E_GRP_UPDATE: can't update group file</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><replaceable>11</replaceable></term>
+	  <listitem>
+	    <para>E_CLEANUP_SERVICE: can't setup cleanup service</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><replaceable>12</replaceable></term>
+	  <listitem>
+	    <para>E_PAM_USERNAME: can't determine your username for use with pam</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><replaceable>13</replaceable></term>
+	  <listitem>
+	    <para>E_PAM_ERROR: pam returned an error, see syslog facility id groupmod for the PAM error message</para>
 	  </listitem>
 	</varlistentry>
       </variablelist>

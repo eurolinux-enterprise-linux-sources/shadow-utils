@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: groupmems
 .\"    Author: George Kraft, IV
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 25.05.2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 29.04.2018
 .\"    Manual: Befehle zur Systemverwaltung
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: German
 .\"
-.TH "GROUPMEMS" "8" "25.05.2012" "shadow\-utils 4\&.1\&.5\&.1" "Befehle zur Systemverwaltung"
+.TH "GROUPMEMS" "8" "29.04.2018" "shadow\-utils 4\&.6" "Befehle zur Systemverwaltung"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -49,16 +49,16 @@ Die Optionen, die vom Befehl
 \fBgroupmems\fR
 unterst\(:utzt werden, sind:
 .PP
-\fB\-a\fR, \fB\-\-add\fR\fIBenutzer_Name\fR
+\fB\-a\fR, \fB\-\-add\fR\ \&\fIBenutzer_Name\fR
 .RS 4
-F\(:ugt einen Benutzer der Mitgliederliste der Gruppe hinzu\&.
+Add a user to the group membership list\&.
 .sp
 Wenn die Datei
 /etc/gshadow
 vorhanden ist, die Gruppe darin aber keinen Eintrag hat, wird ein solcher erstellt\&.
 .RE
 .PP
-\fB\-d\fR, \fB\-\-delete\fR\fIBenutzer_Name\fR
+\fB\-d\fR, \fB\-\-delete\fR\ \&\fIBenutzer_Name\fR
 .RS 4
 L\(:oscht einen Benutzer aus der Mitgliederliste der Gruppe\&.
 .sp
@@ -71,7 +71,7 @@ Wenn die Datei
 vorhanden ist, die Gruppe darin aber keinen Eintrag hat, wird ein solcher erstellt\&.
 .RE
 .PP
-\fB\-g\fR, \fB\-\-group\fR\fIGruppen_Name\fR
+\fB\-g\fR, \fB\-\-group\fR\ \&\fIGruppen_Name\fR
 .RS 4
 Root kann eine Gruppen bestimmen, deren Mitgliederliste er bearbeiten will\&.
 .RE
@@ -95,7 +95,7 @@ Wenn die Datei
 vorhanden ist, die Gruppe darin aber keinen Eintrag hat, wird ein solcher erstellt\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR\fICHROOT_VERZ\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fICHROOT_VERZ\fR
 .RS 4
 f\(:uhrt die Ver\(:anderungen in dem Verzeichnis
 \fICHROOT_VERZ\fR

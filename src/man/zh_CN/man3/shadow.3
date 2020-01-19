@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: shadow
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 2012-05-25
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 2018-04-29
 .\"    Manual: 库函数调用
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: Chinese Simplified
 .\"
-.TH "SHADOW" "3" "2012-05-25" "shadow\-utils 4\&.1\&.5\&.1" "库函数调用"
+.TH "SHADOW" "3" "2018-04-29" "shadow\-utils 4\&.6" "库函数调用"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -31,40 +31,30 @@
 shadow, getspnam \- 加密密码文件工具函数
 .SH "SYNTAX"
 .PP
-
 \fI#include <shadow\&.h>\fR
 .PP
-
 \fIstruct spwd *getspent();\fR
 .PP
-
 \fIstruct spwd *getspnam(char\fR
 \fI*name\fR\fI);\fR
 .PP
-
 \fIvoid setspent();\fR
 .PP
-
 \fIvoid endspent();\fR
 .PP
-
 \fIstruct spwd *fgetspent(FILE\fR
 \fI*fp\fR\fI);\fR
 .PP
-
 \fIstruct spwd *sgetspent(char\fR
 \fI*cp\fR\fI);\fR
 .PP
-
 \fIint putspent(struct spwd\fR
 \fI*p,\fR
 \fIFILE\fR
 \fI*fp\fR\fI);\fR
 .PP
-
 \fIint lckpwdf();\fR
 .PP
-
 \fIint ulckpwdf();\fR
 .SH "描述"
 .PP
@@ -197,7 +187,6 @@ sp_flag \- reserved for future use
 .RE
 .SH "描述"
 .PP
-
 \fIgetspent\fR,
 \fIgetspname\fR,
 \fIfgetspent\fR, and

@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: login.access
 .\"    Author: Marek Michałkiewicz
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 05/25/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 04/29/2018
 .\"    Manual: File Formats and Conversions
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: English
 .\"
-.TH "LOGIN\&.ACCESS" "5" "05/25/2012" "shadow\-utils 4\&.1\&.5\&.1" "File Formats and Conversions"
+.TH "LOGIN\&.ACCESS" "5" "04/29/2018" "shadow\-utils 4\&.6" "File Formats and Conversions"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -41,7 +41,6 @@ is scanned for the first entry that matches the (user, host) combination, or, in
 .PP
 Each line of the login access control table has three fields separated by a ":" character:
 .PP
-
 \fIpermission\fR:\fIusers\fR:\fIorigins\fR
 .PP
 The first field should be a "\fI+\fR" (access granted) or "\fI\-\fR" (access denied) character\&. The second field should be a list of one or more login names, group names, or
@@ -65,5 +64,4 @@ Shadow password suite configuration\&.
 .RE
 .SH "SEE ALSO"
 .PP
-
 \fBlogin\fR(1)\&.

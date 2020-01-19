@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: limits
 .\"    Author: Luca Berra
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 05/25/2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 04/29/2018
 .\"    Manual: File Formats and Conversions
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: English
 .\"
-.TH "LIMITS" "5" "05/25/2012" "shadow\-utils 4\&.1\&.5\&.1" "File Formats and Conversions"
+.TH "LIMITS" "5" "04/29/2018" "shadow\-utils 4\&.6" "File Formats and Conversions"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -41,12 +41,10 @@ By default no quota is imposed on \*(Aqroot\*(Aq\&. In fact, there is no way to 
 .PP
 Each line describes a limit for a user in the form:
 .PP
-
 \fIuser LIMITS_STRING\fR
 .PP
 or in the form:
 .PP
-
 \fI@group LIMITS_STRING\fR
 .PP
 The
@@ -96,7 +94,7 @@ D: max data size (KB)
 .sp -1
 .IP \(bu 2.3
 .\}
-F: maximum filesize (KB)
+F: maximum file size (KB)
 .RE
 .sp
 .RS 4
@@ -241,7 +239,7 @@ is a valid
 .PP
 Be aware that after
 \fIusername\fR
-the rest of the line is considered a limit string, thus comments are not allowed\&. A invalid limits string will be rejected (not considered) by the
+the rest of the line is considered a limit string, thus comments are not allowed\&. An invalid limits string will be rejected (not considered) by the
 \fBlogin\fR
 program\&.
 .PP
@@ -253,9 +251,9 @@ entries in your
 The limits specified in the form "\fI@group\fR" apply to the members of the specified
 \fIgroup\fR\&.
 .PP
-If more than one line with limits for an user exist, only the first line for this user will be considered\&.
+If more than one line with limits for a user exist, only the first line for this user will be considered\&.
 .PP
-If no lines are specified for an user, the last
+If no lines are specified for a user, the last
 \fI@group\fR
 line matching a group whose the user is a member of will be considered, or the last line with default limits if no groups contain the user\&.
 .PP
@@ -271,7 +269,6 @@ Also, please note that all limit settings are set PER LOGIN\&. They are not glob
 .RE
 .SH "SEE ALSO"
 .PP
-
 \fBlogin\fR(1),
 \fBsetpriority\fR(2),
 \fBsetrlimit\fR(2)\&.

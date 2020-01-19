@@ -32,7 +32,7 @@
 
 #include <config.h>
 
-#ident "$Id: commonio.c 3727 2012-05-18 19:44:53Z nekral-guest $"
+#ident "$Id$"
 
 #include "defines.h"
 #include <assert.h>
@@ -301,15 +301,12 @@ static int create_backup (const char *backup, FILE * fp)
 	struct utimbuf ub;
 	FILE *bkfp;
 	int c;
-	mode_t mask;
 
 	if (fstat (fileno (fp), &sb) != 0) {
 		return -1;
 	}
 
-	mask = umask (077);
-	bkfp = fopen (backup, "w");
-	(void) umask (mask);
+	bkfp = fopen_set_perms (backup, "w", &sb);
 	if (NULL == bkfp) {
 		return -1;
 	}
@@ -378,28 +375,48 @@ bool commonio_present (const struct commonio_db *db)
 
 int commonio_lock_nowait (struct commonio_db *db, bool log)
 {
-	char file[1024];
-	char lock[1024];
+	char* file = NULL;
+	char* lock = NULL;
+	size_t lock_file_len;
+	size_t file_len;
+	int err;
 
 	if (db->locked) {
 		return 1;
 	}
-
-	snprintf (file, sizeof file, "%s.%lu",
+	file_len = strlen(db->filename) + 11;/* %lu max size */
+	lock_file_len = strlen(db->filename) + 6; /* sizeof ".lock" */
+	file = (char*)malloc(file_len);
+	if(file == NULL) {
+		err = ENOMEM;
+		goto cleanup_ENOMEM;
+	}
+	lock = (char*)malloc(lock_file_len);
+	if(lock == NULL) {
+		err = ENOMEM;
+		goto cleanup_ENOMEM;
+	}
+	snprintf (file, file_len, "%s.%lu",
 	          db->filename, (unsigned long) getpid ());
-	snprintf (lock, sizeof lock, "%s.lock", db->filename);
+	snprintf (lock, lock_file_len, "%s.lock", db->filename);
 	if (do_lock_file (file, lock, log) != 0) {
 		db->locked = true;
 		lock_count++;
-		return 1;
+		err = 1;
 	}
-	return 0;
+cleanup_ENOMEM:
+	if(file)
+		free(file);
+	if(lock)
+		free(lock);
+	return err;
 }
 
 
 int commonio_lock (struct commonio_db *db)
 {
-#ifdef HAVE_LCKPWDF
+/*#ifdef HAVE_LCKPWDF*/ /* not compatible with prefix option*/
+#if 0
 	/*
 	 * only if the system libc has a real lckpwdf() - the one from
 	 * lockpw.c calls us and would cause infinite recursion!
@@ -754,16 +771,16 @@ commonio_sort (struct commonio_db *db, int (*cmp) (const void *, const void *))
 	for (ptr = db->head;
 	        (NULL != ptr)
 #if KEEP_NIS_AT_END
-	     && (NULL != ptr->line)
-	     && (   ('+' != ptr->line[0])
-	         && ('-' != ptr->line[0]))
+	     && ((NULL == ptr->line)
+	         || (('+' != ptr->line[0])
+	             && ('-' != ptr->line[0])))
 #endif
 	     ;
 	     ptr = ptr->next) {
 		n++;
 	}
 #if KEEP_NIS_AT_END
-	if ((NULL != ptr) && (NULL != ptr->line)) {
+	if (NULL != ptr) {
 		nis = ptr;
 	}
 #endif
@@ -968,11 +985,10 @@ int commonio_close (struct commonio_db *db)
 	} else {
 		/*
 		 * Default permissions for new [g]shadow files.
-		 * (passwd and group always exist...)
 		 */
-		sb.st_mode = 0400;
-		sb.st_uid = 0;
-		sb.st_gid = 0;
+		sb.st_mode = db->st_mode;
+		sb.st_uid = db->st_uid;
+		sb.st_gid = db->st_gid;
 	}
 
 	snprintf (buf, sizeof buf, "%s+", db->filename);
@@ -1081,6 +1097,7 @@ int commonio_update (struct commonio_db *db, const void *eptr)
 	if (NULL != p) {
 		if (next_entry_by_name (db, p->next, db->ops->getname (eptr)) != NULL) {
 			fprintf (stderr, _("Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"), db->ops->getname (eptr), db->filename);
+			db->ops->free (nentry);
 			return 0;
 		}
 		db->ops->free (p->eptr);
@@ -1113,6 +1130,38 @@ int commonio_update (struct commonio_db *db, const void *eptr)
 	return 1;
 }
 
+#ifdef ENABLE_SUBIDS
+int commonio_append (struct commonio_db *db, const void *eptr)
+{
+	struct commonio_entry *p;
+	void *nentry;
+
+	if (!db->isopen || db->readonly) {
+		errno = EINVAL;
+		return 0;
+	}
+	nentry = db->ops->dup (eptr);
+	if (NULL == nentry) {
+		errno = ENOMEM;
+		return 0;
+	}
+	/* new entry */
+	p = (struct commonio_entry *) malloc (sizeof *p);
+	if (NULL == p) {
+		db->ops->free (nentry);
+		errno = ENOMEM;
+		return 0;
+	}
+
+	p->eptr = nentry;
+	p->line = NULL;
+	p->changed = true;
+	add_one_entry (db, p);
+
+	db->changed = true;
+	return 1;
+}
+#endif				/* ENABLE_SUBIDS */
 
 void commonio_del_entry (struct commonio_db *db, const struct commonio_entry *p)
 {

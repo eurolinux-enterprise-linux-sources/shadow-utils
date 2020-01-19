@@ -32,7 +32,7 @@
 
 #include <config.h>
 
-#ident "$Id: passwd.c 3710 2012-02-13 20:32:00Z nekral-guest $"
+#ident "$Id$"
 
 #include <errno.h>
 #include <fcntl.h>
@@ -218,6 +218,7 @@ static int new_password (const struct passwd *pw)
 {
 	char *clear;		/* Pointer to clear text */
 	char *cipher;		/* Pointer to cipher text */
+	const char *salt;	/* Pointer to new salt */
 	char *cp;		/* Pointer to getpass() response */
 	char orig[200];		/* Original password */
 	char pass[200];		/* New password */
@@ -242,6 +243,18 @@ static int new_password (const struct passwd *pw)
 		}
 
 		cipher = pw_encrypt (clear, crypt_passwd);
+
+		if (NULL == cipher) {
+			strzero (clear);
+			fprintf (stderr,
+			         _("%s: failed to crypt password with previous salt: %s\n"),
+			         Prog, strerror (errno));
+			SYSLOG ((LOG_INFO,
+			         "Failed to crypt password with previous salt of user '%s'",
+			         pw->pw_name));
+			return -1;
+		}
+
 		if (strcmp (cipher, crypt_passwd) != 0) {
 			strzero (clear);
 			strzero (cipher);
@@ -348,8 +361,16 @@ static int new_password (const struct passwd *pw)
 	/*
 	 * Encrypt the password, then wipe the cleartext password.
 	 */
-	cp = pw_encrypt (pass, crypt_make_salt (NULL, NULL));
+	salt = crypt_make_salt (NULL, NULL);
+	cp = pw_encrypt (pass, salt);
 	memzero (pass, sizeof pass);
+
+	if (NULL == cp) {
+		fprintf (stderr,
+		         _("%s: failed to crypt password with salt '%s': %s\n"),
+		         Prog, salt, strerror (errno));
+		return -1;
+	}
 
 #ifdef HAVE_LIBCRACK_HIST
 	HistUpdate (pw->pw_name, crypt_passwd);
@@ -552,7 +573,7 @@ static void update_noshadow (void)
 		exit (E_PWDBUSY);
 	}
 	pw_locked = true;
-	if (pw_open (O_RDWR) == 0) {
+	if (pw_open (O_CREAT | O_RDWR) == 0) {
 		(void) fprintf (stderr,
 		                _("%s: cannot open %s\n"),
 		                Prog, pw_dbname ());
@@ -606,7 +627,7 @@ static void update_shadow (void)
 		exit (E_PWDBUSY);
 	}
 	spw_locked = true;
-	if (spw_open (O_RDWR) == 0) {
+	if (spw_open (O_CREAT | O_RDWR) == 0) {
 		(void) fprintf (stderr,
 		                _("%s: cannot open %s\n"),
 		                Prog, spw_dbname ());
@@ -647,7 +668,7 @@ static void update_shadow (void)
 	}
 #ifndef USE_PAM
 	if (do_update_age) {
-		nsp->sp_lstchg = (long) time ((time_t *) 0) / SCALE;
+		nsp->sp_lstchg = (long) gettime () / SCALE;
 		if (0 == nsp->sp_lstchg) {
 			/* Better disable aging than requiring a password
 			 * change */

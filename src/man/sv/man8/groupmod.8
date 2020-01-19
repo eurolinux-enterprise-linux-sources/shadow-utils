@@ -1,13 +1,13 @@
 '\" t
 .\"     Title: groupmod
 .\"    Author: Julianne Frances Haugh
-.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 25-05-2012
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
+.\"      Date: 29-04-2018
 .\"    Manual: Systemhanteringskommandon
-.\"    Source: shadow-utils 4.1.5.1
+.\"    Source: shadow-utils 4.6
 .\"  Language: Swedish
 .\"
-.TH "GROUPMOD" "8" "25-05-2012" "shadow\-utils 4\&.1\&.5\&.1" "Systemhanteringskommandon"
+.TH "GROUPMOD" "8" "29-04-2018" "shadow\-utils 4\&.6" "Systemhanteringskommandon"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -45,7 +45,7 @@ Flaggorna som g\(:aller f\(:or kommandot
 \fBgroupmod\fR
 \(:ar:
 .PP
-\fB\-g\fR, \fB\-\-gid\fR\fIGID\fR
+\fB\-g\fR, \fB\-\-gid\fR\ \&\fIGID\fR
 .RS 4
 The group ID of the given
 \fIGROUP\fR
@@ -77,7 +77,7 @@ from
 Visa hj\(:alpmeddelande och avsluta\&.
 .RE
 .PP
-\fB\-n\fR, \fB\-\-new\-name\fR\fINY_GRUPP\fR
+\fB\-n\fR, \fB\-\-new\-name\fR\ \&\fINY_GRUPP\fR
 .RS 4
 The name of the group will be changed from
 \fIGROUP\fR
@@ -95,25 +95,33 @@ option, allow to change the group
 to a non\-unique value\&.
 .RE
 .PP
-\fB\-p\fR, \fB\-\-password\fR\fIL\(:OSENORD\fR
+\fB\-p\fR, \fB\-\-password\fR\ \&\fIL\(:OSENORD\fR
 .RS 4
 Det krypterade l\(:osenordet, som returneras av
 \fBcrypt\fR(3)\&.
 .sp
-
 \fBNote:\fR
 This option is not recommended because the password (or encrypted password) will be visible by users listing the processes\&.
 .sp
 You should make sure the password respects the system\*(Aqs password policy\&.
 .RE
 .PP
-\fB\-R\fR, \fB\-\-root\fR \fICHROOT_DIR\fR
+\fB\-R\fR, \fB\-\-root\fR\ \&\fICHROOT_DIR\fR
 .RS 4
 Apply changes in the
 \fICHROOT_DIR\fR
 directory and use the configuration files from the
 \fICHROOT_DIR\fR
 directory\&.
+.RE
+.PP
+\fB\-P\fR, \fB\-\-prefix\fR\ \&\fIPREFIX_DIR\fR
+.RS 4
+Apply changes in the
+\fIPREFIX_DIR\fR
+directory and use the configuration files from the
+\fIPREFIX_DIR\fR
+directory\&. This option does not chroot and is intended for preparing a cross\-compilation target\&. Some limitations: NIS and LDAP users/groups are not verified\&. PAM authentication is using the host files\&. No SELINUX support\&.
 .RE
 .SH "CONFIGURATION"
 .PP
@@ -164,41 +172,55 @@ avslutas med f\(:oljande v\(:arden:
 .PP
 \fI0\fR
 .RS 4
-lyckad
+E_SUCCESS: success
 .RE
 .PP
 \fI2\fR
 .RS 4
-ogiltig kommandosyntax
+E_USAGE: invalid command syntax
 .RE
 .PP
 \fI3\fR
 .RS 4
-ogiltigt argument till flagga
+E_BAD_ARG: invalid argument to option
 .RE
 .PP
 \fI4\fR
 .RS 4
-angiven grupp finns inte
+E_GID_IN_USE: specified group doesn\*(Aqt exist
 .RE
 .PP
 \fI6\fR
 .RS 4
-angiven grupp finns inte
+E_NOTFOUND: specified group doesn\*(Aqt exist
 .RE
 .PP
 \fI9\fR
 .RS 4
-gruppnamnet anv\(:ands redan
+E_NAME_IN_USE: group name already in use
 .RE
 .PP
 \fI10\fR
 .RS 4
-kan inte uppdatera gruppfilen
+E_GRP_UPDATE: can\*(Aqt update group file
+.RE
+.PP
+\fI11\fR
+.RS 4
+E_CLEANUP_SERVICE: can\*(Aqt setup cleanup service
+.RE
+.PP
+\fI12\fR
+.RS 4
+E_PAM_USERNAME: can\*(Aqt determine your username for use with pam
+.RE
+.PP
+\fI13\fR
+.RS 4
+E_PAM_ERROR: pam returned an error, see syslog facility id groupmod for the PAM error message
 .RE
 .SH "SE OCKS\(oA"
 .PP
-
 \fBchfn\fR(1),
 \fBchsh\fR(1),
 \fBpasswd\fR(1),
