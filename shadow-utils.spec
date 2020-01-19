@@ -1,7 +1,7 @@
 Summary: Utilities for managing accounts and shadow password files
 Name: shadow-utils
 Version: 4.1.5.1
-Release: 24%{?dist}
+Release: 25%{?dist}
 Epoch: 2
 URL: http://pkg-shadow.alioth.debian.org/
 Source0: http://pkg-shadow.alioth.debian.org/releases/shadow-%{version}.tar.bz2
@@ -35,6 +35,7 @@ Patch25: shadow-4.1.5.1-lastlog-unexpire.patch
 Patch26: shadow-4.1.5.1-chgrp-guard.patch
 Patch27: shadow-4.1.5.1-selinux-perms.patch
 Patch28: shadow-4.1.5.1-null-tm.patch
+Patch29: shadow-4.1.5.1-long-entry.patch
 
 License: BSD and GPLv2+
 Group: System Environment/Base
@@ -92,6 +93,7 @@ are used for managing group accounts.
 %patch26 -p1 -b .chgrp-guard
 %patch27 -p1 -b .selinux-perms
 %patch28 -p1 -b .null-tm
+%patch29 -p1 -b .long-entry
 
 iconv -f ISO88591 -t utf-8  doc/HOWTO > doc/HOWTO.utf8
 cp -f doc/HOWTO.utf8 doc/HOWTO
@@ -249,6 +251,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man8/vigr.8*
 
 %changelog
+* Tue Apr 24 2018 Tomáš Mráz <tmraz@redhat.com> - 2:4.1.5.1-25
+- prevent creating users ".." or "." or with all numeric usernames (#1373645)
+- raise limit for passwd and shadow entry length but also prevent
+  writing longer entries (#1422497)
+- consider also supplementary group membership in newgrp (#1425078)
+
 * Tue Jun 28 2016 Tomáš Mráz <tmraz@redhat.com> - 2:4.1.5.1-24
 - useradd: fix typo in japanese translation (#1202629)
 
