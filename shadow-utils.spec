@@ -1,7 +1,7 @@
 Summary: Utilities for managing accounts and shadow password files
 Name: shadow-utils
 Version: 4.1.5.1
-Release: 18%{?dist}
+Release: 24%{?dist}
 Epoch: 2
 URL: http://pkg-shadow.alioth.debian.org/
 Source0: http://pkg-shadow.alioth.debian.org/releases/shadow-%{version}.tar.bz2
@@ -28,6 +28,13 @@ Patch18: shadow-4.1.5.1-date-parsing.patch
 Patch19: shadow-4.1.5.1-ingroup.patch
 Patch20: shadow-4.1.5.1-move-home.patch
 Patch21: shadow-4.1.5.1-audit-update.patch
+Patch22: shadow-4.1.5.1-ja-translation.patch
+Patch23: shadow-4.1.5.1-usermod-passwd.patch
+Patch24: shadow-4.1.5.1-id-alloc.patch
+Patch25: shadow-4.1.5.1-lastlog-unexpire.patch
+Patch26: shadow-4.1.5.1-chgrp-guard.patch
+Patch27: shadow-4.1.5.1-selinux-perms.patch
+Patch28: shadow-4.1.5.1-null-tm.patch
 
 License: BSD and GPLv2+
 Group: System Environment/Base
@@ -35,6 +42,7 @@ BuildRequires: libselinux-devel >= 1.25.2-1
 BuildRequires: audit-libs-devel >= 1.6.5
 BuildRequires: libsemanage-devel
 BuildRequires: libacl-devel libattr-devel
+BuildRequires: gnome-doc-utils docbook-style-xsl gettext
 #BuildRequires: autoconf, automake, libtool, gettext-devel
 Requires: libselinux >= 1.25.2-1
 Requires: audit-libs >= 1.6.5
@@ -77,6 +85,13 @@ are used for managing group accounts.
 %patch19 -p1 -b .ingroup
 %patch20 -p1 -b .move-home
 %patch21 -p1 -b .audit-update
+%patch22 -p1 -b .ja-translation
+%patch23 -p1 -b .usermod-passwd
+%patch24 -p1 -b .id-alloc
+%patch25 -p1 -b .unexpire
+%patch26 -p1 -b .chgrp-guard
+%patch27 -p1 -b .selinux-perms
+%patch28 -p1 -b .null-tm
 
 iconv -f ISO88591 -t utf-8  doc/HOWTO > doc/HOWTO.utf8
 cp -f doc/HOWTO.utf8 doc/HOWTO
@@ -99,8 +114,10 @@ export CFLAGS="$RPM_OPT_FLAGS -fpie"
 export LDFLAGS="-pie -Wl,-z,relro -Wl,-z,now"
 %endif
 
+export LC_ALL=C
 %configure \
         --enable-shadowgrp \
+        --enable-man \
         --with-audit \
         --with-sha-crypt \
         --with-selinux \
@@ -108,6 +125,8 @@ export LDFLAGS="-pie -Wl,-z,relro -Wl,-z,now"
         --without-libpam \
         --disable-shared \
         --with-group-name-max-length=32
+# update the japanese translation
+(cd po; make ja.gmo)
 make
 
 %install
@@ -230,6 +249,26 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man8/vigr.8*
 
 %changelog
+* Tue Jun 28 2016 Tomáš Mráz <tmraz@redhat.com> - 2:4.1.5.1-24
+- useradd: fix typo in japanese translation (#1202629)
+
+* Tue Jun 14 2016 Tomáš Mráz <tmraz@redhat.com> - 2:4.1.5.1-23
+- guard for localtime() and gmtime() failure (#1341167)
+
+* Mon May 30 2016 Tomáš Mráz <tmraz@redhat.com> - 2:4.1.5.1-22
+- chpasswd: add selinux_check_access() call (#1336902)
+
+* Wed May  4 2016 Tomáš Mráz <tmraz@redhat.com> - 2:4.1.5.1-20
+- usermod: guard against unsafe change of ownership of
+  special home directories (#1225560)
+
+* Thu Apr 28 2016 Tomáš Mráz <tmraz@redhat.com> - 2:4.1.5.1-19
+- documentation fixes (#1292820)
+- usermod: make password unlocking compatible with passwd (#1185425)
+- usermod: disallow ':' in raw password setting (#1292815)
+- improve the gid and uid allocation mechanism (#1279321)
+- lastlog: add options to unexpire unused accounts (#1285547)
+
 * Tue Nov 25 2014 Tomáš Mráz <tmraz@redhat.com> - 2:4.1.5.1-18
 - properly audit modification of gshadow
 
